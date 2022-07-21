@@ -15,6 +15,7 @@
 		540D2E472889733A00DBB512 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E462889733A00DBB512 /* ProfileView.swift */; };
 		540D2E492889734800DBB512 /* ThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E482889734800DBB512 /* ThreadView.swift */; };
 		540D2E4B288974B900DBB512 /* CreateThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E4A288974B900DBB512 /* CreateThreadView.swift */; };
+		540D2E4D2889775600DBB512 /* CreateCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E4C2889775600DBB512 /* CreateCommentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		540D2E462889733A00DBB512 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		540D2E482889734800DBB512 /* ThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadView.swift; sourceTree = "<group>"; };
 		540D2E4A288974B900DBB512 /* CreateThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThreadView.swift; sourceTree = "<group>"; };
+		540D2E4C2889775600DBB512 /* CreateCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +82,10 @@
 			isa = PBXGroup;
 			children = (
 				540D2E432889731A00DBB512 /* FirstView.swift */,
+				540D2E462889733A00DBB512 /* ProfileView.swift */,
 				540D2E4A288974B900DBB512 /* CreateThreadView.swift */,
 				540D2E482889734800DBB512 /* ThreadView.swift */,
-				540D2E462889733A00DBB512 /* ProfileView.swift */,
+				540D2E4C2889775600DBB512 /* CreateCommentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				540D2E38288971AE00DBB512 /* ContentView.swift in Sources */,
 				540D2E442889731A00DBB512 /* FirstView.swift in Sources */,
 				540D2E36288971AE00DBB512 /* MeetingsApp.swift in Sources */,
+				540D2E4D2889775600DBB512 /* CreateCommentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
