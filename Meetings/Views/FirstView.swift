@@ -18,11 +18,8 @@ struct FirstView: View {
         NavigationView {
             
             List {
-//                NavigationLink(destination: ThreadView()) {
-//                    Text("hello")
-//                }
                 ForEach(threadsViewModel.threads) { thread in
-                    Text(thread.title)
+                    ThreadRow(thread: thread)
                 }
             }
             
