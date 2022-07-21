@@ -10,6 +10,7 @@ import SwiftUI
 struct FirstView: View {
     
     @State private var isShowProfileView = false
+    @State private var isShowCreateThreadView = false
     
     var body: some View {
         NavigationView {
@@ -20,6 +21,10 @@ struct FirstView: View {
             
             .sheet(isPresented: $isShowProfileView) {
                 ProfileView()
+            }
+            
+            .sheet(isPresented: $isShowCreateThreadView) {
+                CreateThreadView()
             }
             
             .navigationTitle("threads")
@@ -36,7 +41,7 @@ struct FirstView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        
+                        isShowCreateThreadView.toggle()
                     }) {
                         Image(systemName: "plus")
                             .font(.title3)
