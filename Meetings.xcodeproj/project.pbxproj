@@ -20,6 +20,9 @@
 		540D2E522889797F00DBB512 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 540D2E512889797F00DBB512 /* FirebaseFirestore */; };
 		540D2E542889797F00DBB512 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 540D2E532889797F00DBB512 /* FirebaseStorage */; };
 		540D2E5628897DA500DBB512 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 540D2E5528897DA500DBB512 /* GoogleService-Info.plist */; };
+		540D2E592889811000DBB512 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E582889811000DBB512 /* Thread.swift */; };
+		540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */; };
+		540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E60288985CB00DBB512 /* ThreadRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		540D2E4A288974B900DBB512 /* CreateThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThreadView.swift; sourceTree = "<group>"; };
 		540D2E4C2889775600DBB512 /* CreateCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentView.swift; sourceTree = "<group>"; };
 		540D2E5528897DA500DBB512 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		540D2E582889811000DBB512 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
+		540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsViewModel.swift; sourceTree = "<group>"; };
+		540D2E60288985CB00DBB512 /* ThreadRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,9 @@
 				540D2E35288971AE00DBB512 /* MeetingsApp.swift */,
 				540D2E37288971AE00DBB512 /* ContentView.swift */,
 				540D2E452889732000DBB512 /* Views */,
+				540D2E5D288985A100DBB512 /* Components */,
+				540D2E57288980FD00DBB512 /* Entities */,
+				540D2E5A288982D900DBB512 /* ViewModels */,
 				540D2E39288971AF00DBB512 /* Assets.xcassets */,
 				540D2E3B288971AF00DBB512 /* Preview Content */,
 			);
@@ -97,6 +106,30 @@
 				540D2E4C2889775600DBB512 /* CreateCommentView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		540D2E57288980FD00DBB512 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				540D2E582889811000DBB512 /* Thread.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		540D2E5A288982D900DBB512 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		540D2E5D288985A100DBB512 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				540D2E60288985CB00DBB512 /* ThreadRow.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,7 +217,10 @@
 				540D2E38288971AE00DBB512 /* ContentView.swift in Sources */,
 				540D2E442889731A00DBB512 /* FirstView.swift in Sources */,
 				540D2E36288971AE00DBB512 /* MeetingsApp.swift in Sources */,
+				540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */,
 				540D2E4D2889775600DBB512 /* CreateCommentView.swift in Sources */,
+				540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */,
+				540D2E592889811000DBB512 /* Thread.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
