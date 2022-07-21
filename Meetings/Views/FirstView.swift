@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FirstView: View {
     
+    @ObservedObject private var threadsViewModel = ThreadsViewModel()
+    
     @State private var isShowProfileView = false
     @State private var isShowCreateThreadView = false
     
@@ -16,8 +18,11 @@ struct FirstView: View {
         NavigationView {
             
             List {
-                NavigationLink(destination: ThreadView()) {
-                    Text("hello")
+//                NavigationLink(destination: ThreadView()) {
+//                    Text("hello")
+//                }
+                ForEach(threadsViewModel.threads) { thread in
+                    Text(thread.title)
                 }
             }
             
