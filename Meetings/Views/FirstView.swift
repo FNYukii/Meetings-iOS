@@ -16,7 +16,9 @@ struct FirstView: View {
         NavigationView {
             
             List {
-                Text("HELLO")
+                NavigationLink(destination: ThreadView()) {
+                    Text("hello")
+                }
             }
             
             .sheet(isPresented: $isShowProfileView) {
