@@ -27,9 +27,19 @@ struct FirstView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
+                        isShowProfileView.toggle()
+                    }) {
+                        Image(systemName: "person.crop.circle")
+                            .font(.title2)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
                         
                     }) {
-                        
+                        Image(systemName: "plus")
+                            .font(.title3)
                     }
                 }
             }
