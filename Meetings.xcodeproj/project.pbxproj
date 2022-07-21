@@ -19,6 +19,7 @@
 		540D2E502889797F00DBB512 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 540D2E4F2889797F00DBB512 /* FirebaseAuth */; };
 		540D2E522889797F00DBB512 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 540D2E512889797F00DBB512 /* FirebaseFirestore */; };
 		540D2E542889797F00DBB512 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 540D2E532889797F00DBB512 /* FirebaseStorage */; };
+		540D2E5628897DA500DBB512 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 540D2E5528897DA500DBB512 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		540D2E482889734800DBB512 /* ThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadView.swift; sourceTree = "<group>"; };
 		540D2E4A288974B900DBB512 /* CreateThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThreadView.swift; sourceTree = "<group>"; };
 		540D2E4C2889775600DBB512 /* CreateCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentView.swift; sourceTree = "<group>"; };
+		540D2E5528897DA500DBB512 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		540D2E34288971AE00DBB512 /* Meetings */ = {
 			isa = PBXGroup;
 			children = (
+				540D2E5528897DA500DBB512 /* GoogleService-Info.plist */,
 				540D2E35288971AE00DBB512 /* MeetingsApp.swift */,
 				540D2E37288971AE00DBB512 /* ContentView.swift */,
 				540D2E452889732000DBB512 /* Views */,
@@ -164,6 +167,7 @@
 			files = (
 				540D2E3D288971AF00DBB512 /* Preview Assets.xcassets in Resources */,
 				540D2E3A288971AF00DBB512 /* Assets.xcassets in Resources */,
+				540D2E5628897DA500DBB512 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
