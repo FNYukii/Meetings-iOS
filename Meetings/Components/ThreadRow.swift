@@ -13,18 +13,16 @@ struct ThreadRow: View {
     
     var body: some View {
         
-        NavigationLink(destination: ThreadView()) {
+        VStack(alignment: .leading) {
+            Text(thread.title)
+                .fontWeight(.bold)
             
-            VStack(alignment: .leading) {
-                Text(thread.title)
-                    .fontWeight(.bold)
-                
-                Text("hello")
-                    .foregroundColor(.secondary)
-                Text("1 Comments")
-                    .foregroundColor(.secondary)
-            }
-            
+            Text("hello")
+                .foregroundColor(.secondary)
+            Text("1 Comments")
+                .foregroundColor(.secondary)
         }
+        .background( NavigationLink("", destination: ThreadView()).opacity(0))
+        
     }
 }
