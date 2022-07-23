@@ -27,8 +27,11 @@ struct ProfileListWhenNotSignedIn: View {
                 Button("sign_in_to_start") {
                     isShowSignInView.toggle()
                 }
-                .buttonStyle(.borderedProminent)
-                .cornerRadius(.infinity)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 48)
+                .background(Color.accentColor)
+                .foregroundColor(.white)
+                .cornerRadius(48)
                 
                 Button("create_new_account") {
                     isShowSignUpView.toggle()
