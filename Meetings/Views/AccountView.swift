@@ -55,7 +55,7 @@ struct AccountView: View {
                 SignInView()
             }
 
-            .navigationTitle("profile")
+            .navigationTitle("account")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
