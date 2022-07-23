@@ -14,12 +14,24 @@ struct ThreadRow: View {
     var body: some View {
         
         VStack(alignment: .leading) {
-            Text(thread.title)
-                .fontWeight(.bold)
             
-            Text("hello")
-                .foregroundColor(.secondary)
-            Text("1 Comments")
+            HStack {
+                Text(thread.title)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+                
+                Spacer()
+                
+                Menu {
+                    
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .foregroundColor(.secondary)
+                        .padding(.vertical, 6)
+                }
+            }
+            
+            Text("0 Comments")
                 .foregroundColor(.secondary)
         }
         .background( NavigationLink("", destination: ThreadView()).opacity(0))
