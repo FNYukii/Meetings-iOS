@@ -24,8 +24,8 @@ struct SignUpView: View {
             Form {
                 Section {
                     TextField("email", text: $email)
-                    TextField("password", text: $password1)
-                    TextField("check_password", text: $password2)
+                    SecureField("password", text: $password1)
+                    SecureField("check_password", text: $password2)
                 }
                 
                 Section {
