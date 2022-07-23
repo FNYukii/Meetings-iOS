@@ -16,7 +16,7 @@ struct User: Identifiable {
     init(document: DocumentSnapshot) {
         self.id = document.documentID
         self.displayName = document.get("displayName") as! String
-        self.userTag = document.get("userName") as! String
+        self.userTag = document.get("userTag") as! String
         self.iconUrl = document.get("iconPath") as? String
     }
 }

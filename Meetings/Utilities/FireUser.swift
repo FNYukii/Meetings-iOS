@@ -9,7 +9,21 @@ import Firebase
 
 class FireUser {
     
-//    static func readUser(userId: String, completion: (()))
+    static func readUser(userId: String, completion: ((User?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(userId)
+            .getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let user = User(document: document)
+                    print("HELLO! Success! Read 1 User.")
+                    completion?(user)
+                } else {
+                    print("HELLO! Fail! User identified as \(userId) does not exist.")
+                    completion?(nil)
+                }
+            }
+    }
     
     static func createUser(userId: String, displayName: String, userTag: String, iconPath: String?) {
         let db = Firestore.firestore()

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ProfileListWhenSignedIn: View {
     
-    @State private var icon: UIImage? = nil
-    @State private var displayName: String? = nil
-    @State private var userTag: String? = nil
+    @State private var displayName: String = ""
+    @State private var userTag: String = ""
+    @State private var iconUrl: String? = nil
+    @State private var isUserLoaded = false
     
     var body: some View {
         List {
@@ -20,14 +21,14 @@ struct ProfileListWhenSignedIn: View {
                     Text("display_name")
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text("Appleman")
+                    Text(displayName)
                 }
                 
                 HStack {
                     Text("user_tag")
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text("Apple-man-12")
+                    Text(userTag)
                 }
             }
             
@@ -37,8 +38,19 @@ struct ProfileListWhenSignedIn: View {
                 }
             }
         }
-        .onAppear {
-            
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        if !isUserLoaded {
+            FireUser.readUser(userId: FireAuth.uid()!) { user in
+                if let user = user {
+                    self.displayName = user.displayName
+                    self.userTag = user.userTag
+                    self.iconUrl = user.iconUrl
+                    self.isUserLoaded = true
+                }
+            }
         }
     }
 }
