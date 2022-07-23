@@ -43,6 +43,7 @@ struct CommentRow: View {
                 }
                 
                 Text(comment.text)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }
