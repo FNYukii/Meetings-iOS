@@ -24,6 +24,8 @@ struct ProfileView: View {
                 if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
                     VStack {
                         Text("signed in")
+                            .fontWeight(.bold)
+                        Text("uid: \(FireAuth.userId()!)")
                         Button("sign_out") {
                             FireAuth.signOut()
                         }
