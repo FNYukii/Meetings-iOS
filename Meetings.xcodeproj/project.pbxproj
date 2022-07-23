@@ -32,6 +32,7 @@
 		5410EA8D288BE42D00F4A29B /* ProfileListWhenSignedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA8C288BE42D00F4A29B /* ProfileListWhenSignedIn.swift */; };
 		5410EA8F288BE50000F4A29B /* ProfileListWhenNotSignedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA8E288BE50000F4A29B /* ProfileListWhenNotSignedIn.swift */; };
 		5410EA91288BEA3900F4A29B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA90288BEA3900F4A29B /* User.swift */; };
+		5410EA93288C280F00F4A29B /* FireThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA92288C280F00F4A29B /* FireThread.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		5410EA8C288BE42D00F4A29B /* ProfileListWhenSignedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListWhenSignedIn.swift; sourceTree = "<group>"; };
 		5410EA8E288BE50000F4A29B /* ProfileListWhenNotSignedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListWhenNotSignedIn.swift; sourceTree = "<group>"; };
 		5410EA90288BEA3900F4A29B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5410EA92288C280F00F4A29B /* FireThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireThread.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			children = (
 				5410EA80288BBBC600F4A29B /* FireAuth.swift */,
 				5410EA86288BC71E00F4A29B /* FireUser.swift */,
+				5410EA92288C280F00F4A29B /* FireThread.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */,
 				5410EA83288BBD5900F4A29B /* SignInStateViewModel.swift in Sources */,
 				540D2E592889811000DBB512 /* Thread.swift in Sources */,
+				5410EA93288C280F00F4A29B /* FireThread.swift in Sources */,
 				5410EA89288BCF7600F4A29B /* SignInView.swift in Sources */,
 				5410EA91288BEA3900F4A29B /* User.swift in Sources */,
 			);
