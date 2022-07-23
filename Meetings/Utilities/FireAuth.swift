@@ -17,7 +17,7 @@ class FireAuth {
         return false
     }
     
-    static func userId() -> String? {
+    static func uid() -> String? {
         let user = Auth.auth().currentUser
         if let user = user {
             return user.uid
