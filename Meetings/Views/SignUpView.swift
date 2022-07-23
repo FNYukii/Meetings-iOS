@@ -34,7 +34,7 @@ struct SignUpView: View {
                 }
             }
             
-            .navigationTitle("sign_in")
+            .navigationTitle("sign_up")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

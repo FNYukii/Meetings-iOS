@@ -27,6 +27,7 @@
 		5410EA83288BBD5900F4A29B /* SignInStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA82288BBD5900F4A29B /* SignInStateViewModel.swift */; };
 		5410EA85288BC00C00F4A29B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA84288BC00C00F4A29B /* SignUpView.swift */; };
 		5410EA87288BC71E00F4A29B /* FireUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA86288BC71E00F4A29B /* FireUser.swift */; };
+		5410EA89288BCF7600F4A29B /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA88288BCF7600F4A29B /* SignInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		5410EA82288BBD5900F4A29B /* SignInStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStateViewModel.swift; sourceTree = "<group>"; };
 		5410EA84288BC00C00F4A29B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5410EA86288BC71E00F4A29B /* FireUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireUser.swift; sourceTree = "<group>"; };
+		5410EA88288BCF7600F4A29B /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				540D2E432889731A00DBB512 /* FirstView.swift */,
 				540D2E462889733A00DBB512 /* ProfileView.swift */,
 				5410EA84288BC00C00F4A29B /* SignUpView.swift */,
+				5410EA88288BCF7600F4A29B /* SignInView.swift */,
 				540D2E4A288974B900DBB512 /* CreateThreadView.swift */,
 				540D2E482889734800DBB512 /* ThreadView.swift */,
 				540D2E4C2889775600DBB512 /* CreateCommentView.swift */,
@@ -245,6 +248,7 @@
 				540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */,
 				5410EA83288BBD5900F4A29B /* SignInStateViewModel.swift in Sources */,
 				540D2E592889811000DBB512 /* Thread.swift in Sources */,
+				5410EA89288BCF7600F4A29B /* SignInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

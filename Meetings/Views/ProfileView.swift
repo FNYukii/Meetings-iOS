@@ -13,6 +13,7 @@ struct ProfileView: View {
     
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     
+    @State private var isShowSignUpView = false
     @State private var isShowSignInView = false
     
     var body: some View {
@@ -32,17 +33,24 @@ struct ProfileView: View {
                 if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
                     VStack {
                         Text("welcome")
+                        
                         Button("sign_up") {
+                            isShowSignUpView.toggle()
+                        }
+                        
+                        Button("sign_in") {
                             isShowSignInView.toggle()
                         }
                     }
-                    
                 }
-                
+            }
+            
+            .sheet(isPresented: $isShowSignUpView) {
+                SignUpView()
             }
             
             .sheet(isPresented: $isShowSignInView) {
-                SignUpView()
+                SignInView()
             }
 
             .navigationTitle("profile")
