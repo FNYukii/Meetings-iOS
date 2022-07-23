@@ -12,15 +12,17 @@ struct CommentRow: View {
     let comment: Comment
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             
+            // Icon
             Image(systemName: "person.crop.circle")
                 .resizable()
                 .frame(width: 40, height: 40)
                 .foregroundColor(.secondary)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 
+                // Header
                 HStack {
                     Text("Ayaka")
                         .fontWeight(.bold)
@@ -42,8 +44,20 @@ struct CommentRow: View {
                     }
                 }
                 
+                // Text
                 Text(comment.text)
                     .fixedSize(horizontal: false, vertical: true)
+                
+                // Reaction Bar
+                HStack {
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "heart")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .padding(.top, 4)
             }
         }
     }
