@@ -27,7 +27,7 @@ struct FirstView: View {
             .listStyle(PlainListStyle())
             
             .sheet(isPresented: $isShowProfileView) {
-                ProfileView()
+                AccountView()
             }
             
             .sheet(isPresented: $isShowCreateThreadView) {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct AccountView: View {
     
     @Environment(\.dismiss) private var dismiss
     
