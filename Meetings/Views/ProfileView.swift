@@ -11,35 +11,23 @@ struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    
     var body: some View {
         NavigationView {
             
-            List {
+            Group {
                 
-                Section {
-                    HStack {
-                        Text("display_name")
-                            .foregroundColor(.secondary)
-                        Spacer()
-                        Text("Appleman")
-                    }
-                    
-                    HStack {
-                        Text("user_tag")
-                            .foregroundColor(.secondary)
-                        Spacer()
-                        Text("Apple-man-12")
-                    }
+                if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
+                    ProfileListWhenSignedIn()
                 }
                 
-                Section {
-                    NavigationLink(destination: AccountView()) {
-                        Text("account_setting")
-                    }
+                if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
+                    ProfileListWhenNotSignedIn()
                 }
                 
             }
-
+            
             .navigationTitle("profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

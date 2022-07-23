@@ -19,7 +19,7 @@ struct AccountView: View {
                     Text("email")
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text(FireAuth.userEmail()!)
+                    Text(FireAuth.userEmail() != nil ? FireAuth.userEmail()! : "")
                 }
                 
                 HStack {
