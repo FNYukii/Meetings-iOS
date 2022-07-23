@@ -11,6 +11,8 @@ struct CommentRow: View {
     
     let comment: Comment
     
+    @State private var user: User? = nil
+    
     var body: some View {
         HStack(alignment: .top) {
             
@@ -24,11 +26,22 @@ struct CommentRow: View {
                 
                 // Header
                 HStack {
-                    Text("Ayaka")
-                        .fontWeight(.bold)
                     
-                    Text("AyakaSan12")
-                        .foregroundColor(.secondary)
+                    if user == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 80)
+                        
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 80)
+                    }
+                    
+                    if user != nil {
+                        Text(user!.displayName)
+                            .fontWeight(.bold)
+                        
+                        Text(user!.userTag)
+                            .foregroundColor(.secondary)
+                    }
                     
                     EditDate.HowManyAgoText(from: comment.createdAt)
                         .foregroundColor(.secondary)
@@ -62,6 +75,16 @@ struct CommentRow: View {
                     .buttonStyle(BorderlessButtonStyle())
                 }
                 .padding(.top, 4)
+            }
+        }
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        // Commentを追加したUserを読み取り
+        if user == nil {
+            FireUser.readUser(userId: comment.userId) { user in
+                self.user = user
             }
         }
     }
