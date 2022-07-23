@@ -9,13 +9,21 @@ import SwiftUI
 
 struct ThreadView: View {
     
+    private let thread: Thread
+    
+    @ObservedObject private var commentsViewModel: CommentsViewModel
     @State private var isShowCreateCommentView = false
     
-    let thread: Thread
-    
+    init(thread: Thread) {
+        self.thread = thread
+        self.commentsViewModel = CommentsViewModel(threadId: thread.id)
+    }
+
     var body: some View {
         List {
-            
+            ForEach(commentsViewModel.comments) { comment in
+                Text(comment.text)
+            }
         }
         
         .sheet(isPresented: $isShowCreateCommentView) {
