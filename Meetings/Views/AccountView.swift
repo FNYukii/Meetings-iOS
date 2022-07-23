@@ -19,32 +19,46 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             
-            Group {
+            ZStack {
                 
-                if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
-                    VStack {
-                        Text("signed in")
-                            .fontWeight(.bold)
-                        Text("uid: \(FireAuth.userId()!)")
-                        Button("sign_out") {
-                            FireAuth.signOut()
+                List {
+                    if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
+                        Section {
+                            HStack {
+                                Text("email")
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Text(FireAuth.userEmail()!)
+                            }
+                        }
+                        
+                        Section {
+                            Button("sign_out") {
+                                FireAuth.signOut()
+                            }
+                            .foregroundColor(.red)
+                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
                 }
                 
                 if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
                     VStack {
-                        Text("welcome")
+                        Text("sign_in_to_start_using_this_app")
+                            .foregroundColor(.secondary)
                         
-                        Button("sign_up") {
-                            isShowSignUpView.toggle()
-                        }
-                        
-                        Button("sign_in") {
+                        Button("sign_in_to_start") {
                             isShowSignInView.toggle()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .cornerRadius(.infinity)
+                        
+                        Button("create_new_account") {
+                            isShowSignUpView.toggle()
                         }
                     }
                 }
+                
             }
             
             .sheet(isPresented: $isShowSignUpView) {

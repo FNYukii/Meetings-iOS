@@ -34,7 +34,7 @@ struct SignUpView: View {
                 }
             }
             
-            .navigationTitle("sign_up")
+            .navigationTitle("new_account")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -49,7 +49,7 @@ struct SignUpView: View {
                         }
                         dismiss()
                     }) {
-                        Text("done")
+                        Text("create")
                             .fontWeight(.bold)
                     }
                     .disabled(email.isEmpty || password1.isEmpty || password1 != password2 || displayName.isEmpty || userTag.isEmpty)
