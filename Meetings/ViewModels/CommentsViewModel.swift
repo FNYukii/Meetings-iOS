@@ -1,43 +1,46 @@
 //
-//  ThreadsViewModel.swift
+//  CommentsViewModel.swift
 //  Meetings
 //
-//  Created by Yu on 2022/07/21.
+//  Created by Yu on 2022/07/23.
 //
 
+import Foundation
 import Firebase
 import SwiftUI
 
-class ThreadsViewModel: ObservableObject {
+class CommentsViewModel: ObservableObject {
     
-    @Published var threads: [Thread] = []
+    @Published var comments: [Comment] = []
     @Published var isLoaded = false
     
-    init() {
+    init(threadId: String) {
+        
         let db = Firestore.firestore()
-        db.collection("threads")
-            .order(by: "createdAt", descending: true)
+        db.collection("comments")
+            .whereField("threadId", isEqualTo: threadId)
+            .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
                 // エラー処理
                 guard let snapshot = snapshot else {
                     print("HELLO! Fail! Error fetching snapshots: \(error!)")
                     return
                 }
-                print("HELLO! Success! Read \(snapshot.documents.count) Threads.")
+                print("HELLO! Success! Read \(snapshot.documents.count) Comments.")
                 
-                // Threads
-                var threads: [Thread] = []
+                // Comments
+                var comments: [Comment] = []
                 snapshot.documents.forEach { document in
-                    let thread = Thread(document: document)
-                    threads.append(thread)
+                    let comment = Comment(document: document)
+                    comments.append(comment)
                 }
                 
                 // プロパティに反映
                 withAnimation {
-                    self.threads = threads
+                    self.comments = comments
                     self.isLoaded = true
                 }
             }
     }
-    
+        
 }
