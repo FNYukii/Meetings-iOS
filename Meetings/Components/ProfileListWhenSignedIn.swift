@@ -20,15 +20,32 @@ struct ProfileListWhenSignedIn: View {
                 HStack {
                     Text("display_name")
                         .foregroundColor(.secondary)
+                    
                     Spacer()
-                    Text(displayName)
+                    
+                    if isUserLoaded {
+                        Text(displayName)
+                    }
+                    
+                    if !isUserLoaded {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    }
                 }
                 
                 HStack {
                     Text("user_tag")
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text(userTag)
+                    
+                    if isUserLoaded {
+                        Text(userTag)
+                    }
+                    
+                    if !isUserLoaded {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    }
                 }
             }
             
