@@ -11,24 +11,27 @@ struct ThreadView: View {
     
     @State private var isShowCreateCommentView = false
     
+    let thread: Thread
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        
-            .sheet(isPresented: $isShowCreateCommentView) {
-                CreateCommentView()
-            }
+        List {
             
-            .navigationTitle("hello")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        isShowCreateCommentView.toggle()
-                    }) {
-                        Image(systemName: "square.and.pencil")
-                    }
+        }
+        
+        .sheet(isPresented: $isShowCreateCommentView) {
+            CreateCommentView(threadId: thread.id)
+        }
+        
+        .navigationTitle(thread.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isShowCreateCommentView.toggle()
+                }) {
+                    Image(systemName: "square.and.pencil")
                 }
             }
-        
+        }
     }
 }
