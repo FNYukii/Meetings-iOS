@@ -11,11 +11,13 @@ struct CreateThreadView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @State private var title = ""
+    
     var body: some View {
         NavigationView {
             
             Form {
-                
+                TextField("title", text: $title)
             }
             
             .navigationTitle("new_thread")
@@ -26,13 +28,16 @@ struct CreateThreadView: View {
                         dismiss()
                     }
                 }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        FireThread.createThread(title: title)
                         dismiss()
                     }) {
                         Text("create")
                             .fontWeight(.bold)
                     }
+                    .disabled(title.isEmpty)
                 }
             }
         }
