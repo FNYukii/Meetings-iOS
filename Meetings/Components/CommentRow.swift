@@ -30,7 +30,7 @@ struct CommentRow: View {
                     Text("AyakaSan12")
                         .foregroundColor(.secondary)
                     
-                    Text("12h")
+                    EditDate.HowManyAgoText(from: comment.createdAt)
                         .foregroundColor(.secondary)
                     
                     Spacer()

@@ -38,6 +38,7 @@
 		5410EA9B288C379200F4A29B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9A288C379200F4A29B /* Comment.swift */; };
 		5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9C288C380300F4A29B /* CommentsViewModel.swift */; };
 		5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9E288C3C6800F4A29B /* CommentRow.swift */; };
+		5410EAA1288C453200F4A29B /* EditDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EAA0288C453200F4A29B /* EditDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		5410EA9A288C379200F4A29B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		5410EA9C288C380300F4A29B /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		5410EA9E288C3C6800F4A29B /* CommentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRow.swift; sourceTree = "<group>"; };
+		5410EAA0288C453200F4A29B /* EditDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				5410EA86288BC71E00F4A29B /* FireUser.swift */,
 				5410EA92288C280F00F4A29B /* FireThread.swift */,
 				5410EA94288C2E8E00F4A29B /* FireComment.swift */,
+				5410EAA0288C453200F4A29B /* EditDate.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				540D2E38288971AE00DBB512 /* ContentView.swift in Sources */,
 				540D2E442889731A00DBB512 /* FirstView.swift in Sources */,
 				540D2E36288971AE00DBB512 /* MeetingsApp.swift in Sources */,
+				5410EAA1288C453200F4A29B /* EditDate.swift in Sources */,
 				5410EA8D288BE42D00F4A29B /* ProfileListWhenSignedIn.swift in Sources */,
 				5410EA95288C2E8E00F4A29B /* FireComment.swift in Sources */,
 				5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */,
