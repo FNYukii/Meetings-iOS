@@ -21,6 +21,13 @@ struct AccountView: View {
                     Spacer()
                     Text(FireAuth.userEmail()!)
                 }
+                
+                HStack {
+                    Text("password")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text("kjflakjfldkajl")
+                }
             }
             
             Section {
