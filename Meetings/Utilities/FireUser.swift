@@ -9,6 +9,8 @@ import Firebase
 
 class FireUser {
     
+//    static func readUser(userId: String, completion: (()))
+    
     static func createUser(userId: String, displayName: String, userTag: String, iconPath: String?) {
         let db = Firestore.firestore()
         db.collection("users")

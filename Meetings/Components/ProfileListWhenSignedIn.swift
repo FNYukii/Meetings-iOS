@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ProfileListWhenSignedIn: View {
+    
+    @State private var icon: UIImage? = nil
+    @State private var displayName: String? = nil
+    @State private var userTag: String? = nil
+    
     var body: some View {
         List {
             Section {
@@ -31,6 +36,9 @@ struct ProfileListWhenSignedIn: View {
                     Text("account_setting")
                 }
             }
+        }
+        .onAppear {
+            
         }
     }
 }
