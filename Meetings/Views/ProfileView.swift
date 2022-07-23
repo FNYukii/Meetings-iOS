@@ -17,7 +17,6 @@ struct ProfileView: View {
         NavigationView {
             
             Group {
-                
                 if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
                     ProfileListWhenSignedIn()
                 }
@@ -25,7 +24,6 @@ struct ProfileView: View {
                 if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
                     ProfileListWhenNotSignedIn()
                 }
-                
             }
             
             .navigationTitle("profile")
