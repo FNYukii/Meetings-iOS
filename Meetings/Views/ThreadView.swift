@@ -20,11 +20,15 @@ struct ThreadView: View {
     }
 
     var body: some View {
+        
         List {
             ForEach(commentsViewModel.comments) { comment in
-                Text(comment.text)
+                CommentRow(comment: comment)
             }
+            .listRowSeparator(.hidden, edges: .top)
+            .listRowSeparator(.visible, edges: .bottom)
         }
+        .listStyle(PlainListStyle())
         
         .sheet(isPresented: $isShowCreateCommentView) {
             CreateCommentView(threadId: thread.id)
