@@ -10,6 +10,7 @@ import SwiftUI
 struct FirstView: View {
     
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
+    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     
     @State private var isShowProfileView = false
     @State private var isShowCreateThreadView = false
@@ -53,6 +54,7 @@ struct FirstView: View {
                         Image(systemName: "plus")
                             .font(.title3)
                     }
+                    .disabled(!signInStateViewModel.isSignedIn)
                 }
             }
         }
