@@ -42,7 +42,7 @@ struct ThreadRow: View {
             Text("0 Comments")
                 .foregroundColor(.secondary)
         }
-        .background( NavigationLink("", destination: ThreadView()).opacity(0))
+        .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
             Button("delete_thread", role: .destructive) {

@@ -11,11 +11,14 @@ struct CreateCommentView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    let threadId: String
+    @State private var text = ""
+    
     var body: some View {
         NavigationView {
             
             Form {
-                
+                MyTextEditor(hintText: Text("text"), text: $text)
             }
             
             .navigationTitle("new_comment")
@@ -26,8 +29,10 @@ struct CreateCommentView: View {
                         dismiss()
                     }
                 }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        FireComment.createComment(threadId: threadId, text: text)
                         dismiss()
                     }) {
                         Text("add")
