@@ -51,10 +51,13 @@ struct CommentRow: View {
                 // Reaction Bar
                 HStack {
                     Button(action: {
-                        
+                        print("HELLO! Like")
                     }) {
-                        Image(systemName: "heart")
-                            .foregroundColor(.secondary)
+                        HStack {
+                            Image(systemName: "heart")
+                            Text("4")
+                        }
+                        .foregroundColor(.secondary)
                     }
                 }
                 .padding(.top, 4)
