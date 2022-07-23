@@ -21,7 +21,12 @@ struct ProfileView: View {
             Group {
                 
                 if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
-                    Text("signed in")
+                    VStack {
+                        Text("signed in")
+                        Button("sign_out") {
+                            FireAuth.signOut()
+                        }
+                    }
                 }
                 
                 if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
