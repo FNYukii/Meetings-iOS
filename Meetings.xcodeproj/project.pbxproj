@@ -35,6 +35,7 @@
 		5410EA93288C280F00F4A29B /* FireThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA92288C280F00F4A29B /* FireThread.swift */; };
 		5410EA95288C2E8E00F4A29B /* FireComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA94288C2E8E00F4A29B /* FireComment.swift */; };
 		5410EA97288C2FCC00F4A29B /* MyTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA96288C2FCC00F4A29B /* MyTextEditor.swift */; };
+		5410EA9B288C379200F4A29B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9A288C379200F4A29B /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		5410EA92288C280F00F4A29B /* FireThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireThread.swift; sourceTree = "<group>"; };
 		5410EA94288C2E8E00F4A29B /* FireComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireComment.swift; sourceTree = "<group>"; };
 		5410EA96288C2FCC00F4A29B /* MyTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextEditor.swift; sourceTree = "<group>"; };
+		5410EA9A288C379200F4A29B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +141,9 @@
 		540D2E57288980FD00DBB512 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				540D2E582889811000DBB512 /* Thread.swift */,
 				5410EA90288BEA3900F4A29B /* User.swift */,
+				540D2E582889811000DBB512 /* Thread.swift */,
+				5410EA9A288C379200F4A29B /* Comment.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				540D2E4B288974B900DBB512 /* CreateThreadView.swift in Sources */,
+				5410EA9B288C379200F4A29B /* Comment.swift in Sources */,
 				5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */,
 				5410EA8F288BE50000F4A29B /* ProfileListWhenNotSignedIn.swift in Sources */,
 				540D2E472889733A00DBB512 /* AccountView.swift in Sources */,
