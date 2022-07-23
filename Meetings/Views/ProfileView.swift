@@ -11,13 +11,23 @@ struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    
     var body: some View {
         NavigationView {
             
-            List {
+            Group {
+                
+                if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
+                    Text("signed in")
+                }
+                
+                if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
+                    Text("welcome")
+                }
                 
             }
-            
+
             .navigationTitle("profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
