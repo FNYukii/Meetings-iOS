@@ -44,6 +44,9 @@ struct SignUpView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        FireAuth.signUp(email: email, password: password1) { uid in
+                            FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, iconPath: nil)
+                        }
                         dismiss()
                     }) {
                         Text("done")
