@@ -32,7 +32,6 @@ struct SignUpView: View {
                     TextField("display_name", text: $displayName)
                     TextField("user_tag", text: $userTag)
                 }
-                
             }
             
             .navigationTitle("sign_in")
@@ -50,6 +49,7 @@ struct SignUpView: View {
                         Text("done")
                             .fontWeight(.bold)
                     }
+                    .disabled(email.isEmpty || password1.isEmpty || password1 != password2 || displayName.isEmpty || userTag.isEmpty)
                 }
             }
         }
