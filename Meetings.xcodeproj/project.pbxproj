@@ -23,6 +23,7 @@
 		540D2E592889811000DBB512 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E582889811000DBB512 /* Thread.swift */; };
 		540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */; };
 		540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E60288985CB00DBB512 /* ThreadRow.swift */; };
+		5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA80288BBBC600F4A29B /* FireAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		540D2E582889811000DBB512 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsViewModel.swift; sourceTree = "<group>"; };
 		540D2E60288985CB00DBB512 /* ThreadRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadRow.swift; sourceTree = "<group>"; };
+		5410EA80288BBBC600F4A29B /* FireAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				540D2E5D288985A100DBB512 /* Components */,
 				540D2E57288980FD00DBB512 /* Entities */,
 				540D2E5A288982D900DBB512 /* ViewModels */,
+				5410EA7F288BBB9600F4A29B /* Utilities */,
 				540D2E39288971AF00DBB512 /* Assets.xcassets */,
 				540D2E3B288971AF00DBB512 /* Preview Content */,
 			);
@@ -130,6 +133,14 @@
 				540D2E60288985CB00DBB512 /* ThreadRow.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		5410EA7F288BBB9600F4A29B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5410EA80288BBBC600F4A29B /* FireAuth.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				540D2E4B288974B900DBB512 /* CreateThreadView.swift in Sources */,
+				5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */,
 				540D2E472889733A00DBB512 /* ProfileView.swift in Sources */,
 				540D2E492889734800DBB512 /* ThreadView.swift in Sources */,
 				540D2E38288971AE00DBB512 /* ContentView.swift in Sources */,
