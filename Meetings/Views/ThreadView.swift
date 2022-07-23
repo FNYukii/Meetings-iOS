@@ -12,6 +12,7 @@ struct ThreadView: View {
     private let thread: Thread
     
     @ObservedObject private var commentsViewModel: CommentsViewModel
+    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     @State private var isShowCreateCommentView = false
     
     init(thread: Thread) {
@@ -43,6 +44,7 @@ struct ThreadView: View {
                 }) {
                     Image(systemName: "square.and.pencil")
                 }
+                .disabled(!signInStateViewModel.isSignedIn)
             }
         }
     }
