@@ -12,11 +12,4 @@ struct Thread: Identifiable {
     let createdAt: Date
     let userId: String
     let title: String
-    
-    init(document: QueryDocumentSnapshot) {
-        self.id = document.documentID
-        self.createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
-        self.userId = document.get("userId") as! String
-        self.title = document.get("title") as! String
-    }
 }

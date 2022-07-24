@@ -28,7 +28,7 @@ class ThreadsViewModel: ObservableObject {
                 // Threads
                 var threads: [Thread] = []
                 snapshot.documents.forEach { document in
-                    let thread = Thread(document: document)
+                    let thread = FireThread.toThread(document: document)
                     threads.append(thread)
                 }
                 
