@@ -66,9 +66,9 @@ struct CommentRow: View {
                     Button(action: {
                         print("HELLO! Like")
                     }) {
-                        HStack {
+                        HStack(spacing: 2) {
                             Image(systemName: "heart")
-                            Text("4")
+                            Text("0")
                         }
                         .foregroundColor(.secondary)
                     }
