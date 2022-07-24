@@ -25,13 +25,14 @@ class FireUser {
             }
     }
     
-    static func createUser(userId: String, displayName: String, userTag: String, iconPath: String?) {
+    static func createUser(userId: String, displayName: String, userTag: String, introduction: String, iconPath: String?) {
         let db = Firestore.firestore()
         db.collection("users")
             .document(userId)
             .setData([
                 "displayName": displayName,
                 "userTag": userTag,
+                "introduction": introduction,
                 "iconPath": iconPath as Any,
             ]) { err in
                 if let err = err {

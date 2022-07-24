@@ -30,7 +30,7 @@ struct ProfileView: View {
                 
                 VStack(alignment: .leading) {
                     
-                    // When loading
+                    // ProgressView
                     if user == nil {
                         Color.secondary.opacity(0.2)
                             .frame(width: 80)
@@ -51,9 +51,19 @@ struct ProfileView: View {
             }
             .listRowSeparator(.hidden, edges: .all)
             
+            // ProgressView
+            if user == nil {
+                Color.secondary.opacity(0.2)
+                    .frame(width: 200)
+                    .listRowSeparator(.hidden, edges: .all)
+            }
+            
             // Introduction
-            Text("Hello. My beautiful world.")
-                .listRowSeparator(.hidden, edges: .all)
+            if user != nil {
+                Text(user!.introduction)
+                    .listRowSeparator(.hidden, edges: .all)
+            }
+            
         }
         .listStyle(.plain)
         
@@ -85,7 +95,7 @@ struct ProfileView: View {
             }
         }
         
-        .onAppear(perform: load)
+//        .onAppear(perform: load)
     }
     
     private func load() {
