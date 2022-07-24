@@ -14,12 +14,4 @@ struct Comment: Identifiable {
     let userId: String
     let threadId: String
     let text: String
-    
-    init(document: QueryDocumentSnapshot) {
-        self.id = document.documentID
-        self.createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
-        self.userId = document.get("userId") as! String
-        self.threadId = document.get("threadId") as! String
-        self.text = document.get("text") as! String
-    }
 }

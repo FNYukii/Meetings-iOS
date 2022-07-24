@@ -17,7 +17,9 @@ struct CommentRow: View {
     @State private var isShowProfileView = false
     
     // States
+//    let isShowThreadTitle: Bool
     @State private var user: User? = nil
+    @State private var thread: Thread? = nil
     @State private var isShowDialog = false
         
     var body: some View {
@@ -120,5 +122,10 @@ struct CommentRow: View {
                 self.user = user
             }
         }
+        
+        // Commentが追加されたThreadを読み取り
+//        if isShowThreadTitle && thread == nil {
+//            
+//        }
     }
 }

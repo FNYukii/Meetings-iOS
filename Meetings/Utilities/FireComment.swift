@@ -9,6 +9,17 @@ import Firebase
 
 class FireComment {
     
+    static func toComment(document: QueryDocumentSnapshot) -> Comment {
+        let id = document.documentID
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
+        let userId = document.get("userId") as! String
+        let threadId = document.get("threadId") as! String
+        let text = document.get("text") as! String
+        
+        let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text)
+        return comment
+    }
+    
     static func readComments(threadId: String, completion: (([Comment]) -> Void)?) {
         // ドキュメント読み取り
         let db = Firestore.firestore()
@@ -26,7 +37,7 @@ class FireComment {
                 // Comments
                 var comments: [Comment] = []
                 for document in querySnapshot!.documents {
-                    let comment = Comment(document: document)
+                    let comment = toComment(document: document)
                     comments.append(comment)
                 }
                 
@@ -51,7 +62,7 @@ class FireComment {
                 // Comments
                 var comments: [Comment] = []
                 for document in querySnapshot!.documents {
-                    let comment = Comment(document: document)
+                    let comment = toComment(document: document)
                     comments.append(comment)
                 }
                 

@@ -9,13 +9,24 @@ import Firebase
 
 class FireUser {
     
+    static func toUser(document: DocumentSnapshot) -> User {
+        let id = document.documentID
+        let displayName = document.get("displayName") as! String
+        let userTag = document.get("userTag") as! String
+        let introduction = document.get("introduction") as! String
+        let iconUrl = document.get("iconPath") as? String
+        
+        let user = User(id: id, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl)
+        return user
+    }
+    
     static func readUser(userId: String, completion: ((User?) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("users")
             .document(userId)
             .getDocument { (document, error) in
                 if let document = document, document.exists {
-                    let user = User(document: document)
+                    let user = toUser(document: document)
                     print("HELLO! Success! Read 1 User.")
                     completion?(user)
                 } else {
