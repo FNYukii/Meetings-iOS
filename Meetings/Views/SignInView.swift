@@ -42,7 +42,7 @@ struct SignInView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
     
 }

@@ -41,6 +41,6 @@ struct CreateThreadView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
 }

@@ -42,7 +42,7 @@ struct CreateCommentView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
     
 }

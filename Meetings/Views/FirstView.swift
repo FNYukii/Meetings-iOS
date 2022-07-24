@@ -28,7 +28,7 @@ struct FirstView: View {
                 .listRowSeparator(.hidden, edges: .top)
                 .listRowSeparator(.visible, edges: .bottom)
             }
-            .listStyle(PlainListStyle())
+            .listStyle(.plain)
             
             .sheet(isPresented: $isShowSignInView) {
                 SignInView()
@@ -84,6 +84,6 @@ struct FirstView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
 }

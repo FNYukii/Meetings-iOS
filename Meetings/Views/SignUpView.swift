@@ -16,6 +16,7 @@ struct SignUpView: View {
     @State private var password2 = ""
     @State private var displayName = ""
     @State private var userTag = ""
+    @State private var introduction = ""
     @State private var icon: UIImage? = nil
     
     var body: some View {
@@ -32,6 +33,10 @@ struct SignUpView: View {
                     TextField("display_name", text: $displayName)
                     TextField("user_tag", text: $userTag)
                 }
+                
+                Section {
+                    MyTextEditor(hintText: Text("introduction"), text: $introduction)
+                }
             }
             
             .navigationTitle("new_account")
@@ -45,7 +50,7 @@ struct SignUpView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         FireAuth.signUp(email: email, password: password1) { uid in
-                            FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, iconPath: nil)
+                            FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconPath: nil)
                         }
                         dismiss()
                     }) {
@@ -56,6 +61,6 @@ struct SignUpView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
 }

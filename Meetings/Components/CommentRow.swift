@@ -91,7 +91,7 @@ struct CommentRow: View {
                         }
                         .foregroundColor(.secondary)
                     }
-                    .buttonStyle(BorderlessButtonStyle())
+                    .buttonStyle(.borderless)
                 }
                 .padding(.top, 4)
             }

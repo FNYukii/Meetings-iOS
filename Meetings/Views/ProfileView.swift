@@ -9,32 +9,63 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    // User ID to show
     let userId: String
     
+    // User to show
+    @State private var user: User? = nil
+    
+    // Navigation to views
     @State private var isShowAccountView = false
     
     var body: some View {
         List {
-            // Header
+            // Header Row
             HStack(alignment: .top) {
+                
+                // Icon
                 Image(systemName: "person.crop.circle")
                     .resizable()
                     .frame(width: 40, height: 40)
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading) {
-                    Text("Ayaka")
-                        .fontWeight(.bold)
                     
-                    Text("AyakaSan12")
-                        .foregroundColor(.secondary)
+                    // Progress View
+                    if user == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 80, height: 16)
+                        
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 80, height: 16)
+                    }
+                    
+                    // DisplayName, userTag
+                    if user != nil {
+                        Text(user!.displayName)
+                            .fontWeight(.bold)
+                        
+                        Text(user!.userTag)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
-            .listRowSeparator(.hidden, edges: .all)
+            .listRowSeparator(.hidden)
             
-            // Introduction
-            Text("Hello. My beautiful world.")
-                .listRowSeparator(.hidden, edges: .all)
+            // Introduction Row
+            Group {
+                // Progress View
+                if user == nil {
+                    Color.secondary.opacity(0.2)
+                        .frame(width: 200, height: 16)
+                }
+                
+                // Introduction
+                if user != nil {
+                    Text(user!.introduction)
+                }
+            }
+            .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         
@@ -42,7 +73,7 @@ struct ProfileView: View {
             AccountView()
         }
         
-        .navigationTitle("profile")
+        .navigationTitle(user != nil ? user!.displayName : "profile")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -65,7 +96,16 @@ struct ProfileView: View {
                 }
             }
         }
+        
+        .onAppear(perform: load)
     }
     
-    
+    private func load() {
+        // Userを読み取る
+        if user == nil {
+            FireUser.readUser(userId: userId) { user in
+                self.user = user
+            }
+        }
+    }
 }
