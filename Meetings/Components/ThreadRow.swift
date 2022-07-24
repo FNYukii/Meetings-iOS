@@ -56,7 +56,7 @@ struct ThreadRow: View {
             // Comments
             if isCommentsLoaded {
                 ForEach(comments) { comment in
-                    CommentRow(comment: comment, isDisableShowingProfileView: false, isShowThreadTitle: false)
+                    CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
                 }
             }
             

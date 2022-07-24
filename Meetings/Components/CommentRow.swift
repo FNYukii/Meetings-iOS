@@ -12,12 +12,13 @@ struct CommentRow: View {
     // Comment to show
     let comment: Comment
     
-    // Navigation
+    // Navigations
     let isDisableShowingProfileView: Bool
     @State private var isShowProfileView = false
+    let isAbleShowingThreadView: Bool
+    @State private var isShowThreadView = false
     
     // States
-    let isShowThreadTitle: Bool
     @State private var user: User? = nil
     @State private var thread: Thread? = nil
     @State private var isShowDialog = false
@@ -98,16 +99,29 @@ struct CommentRow: View {
                 .padding(.top, 4)
                 
                 // Thread Title Row
-                if isShowThreadTitle && thread != nil {
-                    Text(thread!.title)
-                        .foregroundColor(.secondary)
+                if isAbleShowingThreadView && thread != nil {
+                    Button(action: {
+                        isShowThreadView.toggle()
+                    }) {
+                        Text(thread!.title)
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.borderless)
                 }
                 
-                // NavigationLink
+                // NavigationLink to ProfileView
                 NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
                     EmptyView()
                 }
                 .hidden()
+                
+                // NavigationLink to ThreadView
+                if thread != nil {
+                    NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                }
             }
         }
         .onAppear(perform: load)
@@ -130,7 +144,7 @@ struct CommentRow: View {
         }
         
         // Commentが追加されたThreadを読み取り
-        if isShowThreadTitle && thread == nil {
+        if isAbleShowingThreadView && thread == nil {
             FireThread.readThread(threadId: comment.threadId) { thread in
                 self.thread = thread
             }

@@ -26,7 +26,7 @@ struct ThreadView: View {
         
         List {
             ForEach(commentsViewModel.comments) { comment in
-                CommentRow(comment: comment, isDisableShowingProfileView: false, isShowThreadTitle: false)
+                CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
             }
             .listRowSeparator(.hidden, edges: .top)
             .listRowSeparator(.visible, edges: .bottom)
