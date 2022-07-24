@@ -35,7 +35,7 @@ struct ThreadView: View {
             .listRowSeparator(.hidden, edges: .top)
             .listRowSeparator(.visible, edges: .bottom)
         }
-        .listStyle(PlainListStyle())
+        .listStyle(.plain)
         
         NavigationLink(destination: ProfileView(userId: selectedUserId), isActive: $isShowProfileView) {
             EmptyView()

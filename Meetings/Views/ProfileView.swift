@@ -49,19 +49,19 @@ struct ProfileView: View {
                     }
                 }
             }
-            .listRowSeparator(.hidden, edges: .all)
+            .listRowSeparator(.hidden)
             
             // ProgressView
             if user == nil {
                 Color.secondary.opacity(0.2)
                     .frame(width: 200)
-                    .listRowSeparator(.hidden, edges: .all)
+                    .listRowSeparator(.hidden)
             }
             
             // Introduction
             if user != nil {
                 Text(user!.introduction)
-                    .listRowSeparator(.hidden, edges: .all)
+                    .listRowSeparator(.hidden)
             }
             
         }
@@ -95,7 +95,7 @@ struct ProfileView: View {
             }
         }
         
-//        .onAppear(perform: load)
+        .onAppear(perform: load)
     }
     
     private func load() {
