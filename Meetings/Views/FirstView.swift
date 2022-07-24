@@ -58,13 +58,13 @@ struct FirstView: View {
                             Button(action: {
                                 isShowSignInView.toggle()
                             }) {
-                                Label("sign_in", systemImage: "")
+                                Label("sign_in", systemImage: "ipad.and.arrow.forward")
                             }
                             
                             Button(action: {
                                 isShowSignUpView.toggle()
                             }) {
-                                Label("sign_up", systemImage: "")
+                                Label("sign_up", systemImage: "square.and.pencil")
                             }
                         } label: {
                             Image(systemName: "ellipsis")
