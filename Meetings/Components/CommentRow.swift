@@ -109,26 +109,33 @@ struct CommentRow: View {
                             .frame(width: 40, height: 16)
                     }
                     
-                    // Like button
-                    if likedUserIds != nil {
+                    // Like button when not liked
+                    if likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
                         Button(action: {
-                            // Like
-                            if FireAuth.isSignedIn() && !likedUserIds!.contains(FireAuth.uid()!) {
-                                FireUser.likeComment(commentId: comment.id)
-                                loadLikedUserIds()
-                            }
-                            
-                            // Unlike
-                            if FireAuth.isSignedIn() && likedUserIds!.contains(FireAuth.uid()! ) {
-                                FireUser.unlikeComment(commentId: comment.id)
-                                loadLikedUserIds()
-                            }
+                            FireUser.likeComment(commentId: comment.id)
+                            loadLikedUserIds()
                         }) {
                             HStack(spacing: 2) {
-                                Image(systemName: FireAuth.isSignedIn() && likedUserIds!.contains(FireAuth.uid()!) ? "heart.fill" : "heart")
+                                Image(systemName: "heart")
                                 Text("\(likedUserIds!.count)")
                             }
-                            .foregroundColor(FireAuth.isSignedIn() && likedUserIds!.contains(FireAuth.uid()!) ? .red : .secondary)
+                            .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.borderless)
+                        .disabled(!FireAuth.isSignedIn())
+                    }
+                    
+                    // Like button when liked
+                    if likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
+                        Button(action: {
+                            FireUser.unlikeComment(commentId: comment.id)
+                            loadLikedUserIds()
+                        }) {
+                            HStack(spacing: 2) {
+                                Image(systemName: "heart.fill")
+                                Text("\(likedUserIds!.count)")
+                            }
+                            .foregroundColor(.red)
                         }
                         .buttonStyle(.borderless)
                         .disabled(!FireAuth.isSignedIn())
