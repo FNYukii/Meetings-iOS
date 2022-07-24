@@ -129,10 +129,10 @@
 			children = (
 				540D2E37288971AE00DBB512 /* ContentView.swift */,
 				540D2E432889731A00DBB512 /* FirstView.swift */,
-				5410EA8A288BDF8B00F4A29B /* ProfileView.swift */,
-				540D2E462889733A00DBB512 /* AccountView.swift */,
 				5410EA84288BC00C00F4A29B /* SignUpView.swift */,
 				5410EA88288BCF7600F4A29B /* SignInView.swift */,
+				5410EA8A288BDF8B00F4A29B /* ProfileView.swift */,
+				540D2E462889733A00DBB512 /* AccountView.swift */,
 				540D2E4A288974B900DBB512 /* CreateThreadView.swift */,
 				540D2E482889734800DBB512 /* ThreadView.swift */,
 				540D2E4C2889775600DBB512 /* CreateCommentView.swift */,
