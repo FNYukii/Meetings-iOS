@@ -70,7 +70,7 @@ struct ProfileView: View {
             
             // Comments Row
             ForEach(comments) { comment in
-                Text(comment.text)
+                CommentRow(comment: comment)
             }
         }
         .listStyle(.plain)

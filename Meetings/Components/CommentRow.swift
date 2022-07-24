@@ -13,7 +13,7 @@ struct CommentRow: View {
     let comment: Comment
     
     // Navigation
-    @State var isShowProfileView = false
+    @State private var isShowProfileView = false
     
     // States
     @State private var user: User? = nil
