@@ -20,6 +20,7 @@ struct CommentRow: View {
     
     // States
     @State private var user: User? = nil
+    @State private var likedUsers: [User]? = nil
     @State private var thread: Thread? = nil
     @State private var isShowDialog = false
         
@@ -102,19 +103,19 @@ struct CommentRow: View {
                 // Reaction Row
                 HStack {
                     // Progress view
-                    if user == nil {
+                    if likedUsers == nil {
                         Color.secondary.opacity(0.2)
                             .frame(width: 40, height: 16)
                     }
                     
                     // Like button
-                    if user != nil {
+                    if likedUsers != nil {
                         Button(action: {
                             print("HELLO! Like")
                         }) {
                             HStack(spacing: 2) {
                                 Image(systemName: "heart")
-                                Text("0")
+                                Text("\(likedUsers!.count)")
                             }
                             .foregroundColor(.secondary)
                         }
@@ -181,6 +182,13 @@ struct CommentRow: View {
         if isAbleShowingThreadView && thread == nil {
             FireThread.readThread(threadId: comment.threadId) { thread in
                 self.thread = thread
+            }
+        }
+        
+        // コメントをいいねしたユーザーを読み取り
+        if likedUsers == nil {
+            FireUser.readLikedUsers(commentId: comment.id) { users in
+                self.likedUsers = users
             }
         }
     }

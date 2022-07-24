@@ -45,7 +45,7 @@ class FireUser {
             }
     }
     
-    static func readUsersLikesComment(commentId: String, completion: (([User]) -> Void)?) {
+    static func readLikedUsers(commentId: String, completion: (([User]) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("users")
             .whereField("likes", arrayContains: commentId)
