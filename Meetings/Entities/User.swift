@@ -13,4 +13,5 @@ struct User: Identifiable {
     let userTag: String
     let introduction: String
     let iconUrl: String?
+    let likes: [String]
 }
