@@ -15,8 +15,9 @@ class FireUser {
         let userTag = document.get("userTag") as! String
         let introduction = document.get("introduction") as! String
         let iconUrl = document.get("iconPath") as? String
+        let likes = document.get("likes") as! [String]
         
-        let user = User(id: id, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl)
+        let user = User(id: id, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl, likes: likes)
         return user
     }
     
@@ -45,6 +46,7 @@ class FireUser {
                 "userTag": userTag,
                 "introduction": introduction,
                 "iconPath": iconPath as Any,
+                "likes": []
             ]) { err in
                 if let err = err {
                     print("HELLO! Fail! Error writing User: \(err)")
