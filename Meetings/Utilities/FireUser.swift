@@ -45,7 +45,7 @@ class FireUser {
             }
     }
     
-    static func readLikedUsers(commentId: String, completion: (([User]) -> Void)?) {
+    static func readLikedUserIds(commentId: String, completion: (([String]?) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("users")
             .whereField("likes", arrayContains: commentId)
@@ -53,7 +53,7 @@ class FireUser {
                 // エラー処理
                 if let err = err {
                     print("Error getting documents: \(err)")
-                    completion?([])
+                    completion?(nil)
                     return
                 }
                 print("HELLO! Success! Read \(querySnapshot!.count) Users.")
@@ -65,8 +65,15 @@ class FireUser {
                     users.append(user)
                 }
                 
+                // User IDs
+                var userIds: [String] = []
+                users.forEach { user in
+                    let userId = user.id
+                    userIds.append(userId)
+                }
+                
                 // Return
-                completion?(users)
+                completion?(userIds)
             }
     }
     

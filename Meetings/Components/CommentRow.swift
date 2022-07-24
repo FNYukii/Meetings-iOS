@@ -20,7 +20,7 @@ struct CommentRow: View {
     
     // States
     @State private var user: User? = nil
-    @State private var likedUsers: [User]? = nil
+    @State private var likedUserIds: [String]? = nil
     @State private var thread: Thread? = nil
     @State private var isShowDialog = false
         
@@ -104,23 +104,32 @@ struct CommentRow: View {
                 // Reaction Row
                 HStack {
                     // Progress view
-                    if likedUsers == nil {
+                    if likedUserIds == nil {
                         Color.secondary.opacity(0.2)
                             .frame(width: 40, height: 16)
                     }
                     
                     // Like button
-                    if likedUsers != nil {
+                    if likedUserIds != nil {
                         Button(action: {
-                            print("HELLO! Like")
+                            // Like
+                            if FireAuth.isSignedIn() && !likedUserIds!.contains(FireAuth.uid()!) {
+                                FireUser.likeComment(commentId: comment.id)
+                            }
+                            
+                            // Unlike
+                            if FireAuth.isSignedIn() && likedUserIds!.contains(FireAuth.uid()! ) {
+                                FireUser.unlikeComment(commentId: comment.id)
+                            }
                         }) {
                             HStack(spacing: 2) {
-                                Image(systemName: "heart")
-                                Text("\(likedUsers!.count)")
+                                Image(systemName: FireAuth.isSignedIn() && likedUserIds!.contains(FireAuth.uid()!) ? "heart.fill" : "heart")
+                                Text("\(likedUserIds!.count)")
                             }
-                            .foregroundColor(.secondary)
+                            .foregroundColor(FireAuth.isSignedIn() && likedUserIds!.contains(FireAuth.uid()!) ? .red : .secondary)
                         }
                         .buttonStyle(.borderless)
+                        .disabled(!FireAuth.isSignedIn())
                     }
                 }
                 .padding(.top, 4)
@@ -187,9 +196,9 @@ struct CommentRow: View {
         }
         
         // コメントをいいねしたユーザーを読み取り
-        if likedUsers == nil {
-            FireUser.readLikedUsers(commentId: comment.id) { users in
-                self.likedUsers = users
+        if likedUserIds == nil {
+            FireUser.readLikedUserIds(commentId: comment.id) { userIds in
+                self.likedUserIds = userIds
             }
         }
     }
