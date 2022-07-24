@@ -9,37 +9,45 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
-    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    let userId: String
     
     var body: some View {
-        NavigationView {
-            
-            Group {
-                if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
-                    ProfileListWhenSignedIn()
-                }
+        List {
+            // Header
+            HStack(alignment: .top) {
+                Image(systemName: "person.crop.circle")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.secondary)
                 
-                if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
-                    ProfileListWhenNotSignedIn()
+                VStack(alignment: .leading) {
+                    Text("Ayaka")
+                        .fontWeight(.bold)
+                    
+                    Text("AyakaSan12")
+                        .foregroundColor(.secondary)
                 }
             }
+            .listRowSeparator(.hidden, edges: .all)
             
-            .navigationTitle("profile")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("done")
-                            .fontWeight(.bold)
-                    }
+            // Introduction
+            Text("Hello. My beautiful world.")
+                .listRowSeparator(.hidden, edges: .all)            
+        }
+        .listStyle(.plain)
+        
+        .navigationTitle("profile")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    
+                }) {
+                    Image(systemName: "ellipsis")
+                        .font(.title2)
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     

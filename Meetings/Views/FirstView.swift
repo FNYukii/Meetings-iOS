@@ -27,10 +27,6 @@ struct FirstView: View {
             }
             .listStyle(PlainListStyle())
             
-            .sheet(isPresented: $isShowProfileView) {
-                ProfileView()
-            }
-            
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()
             }
@@ -39,9 +35,7 @@ struct FirstView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        isShowProfileView.toggle()
-                    }) {
+                    NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
                         Image(systemName: "person.crop.circle")
                             .font(.title2)
                     }
