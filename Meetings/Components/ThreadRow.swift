@@ -50,7 +50,7 @@ struct ThreadRow: View {
             }
             
             // Message
-            Text("0 Comments")
+            Text("More 2 Comments")
                 .foregroundColor(.secondary)
         }
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
