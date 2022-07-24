@@ -41,9 +41,22 @@ struct ThreadRow: View {
                 }
             }
             
+            // ProgressView
+            if !isCommentsLoaded {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .padding(.bottom)
+                    Spacer()
+                }
+            }
+            
             // Comments
-            ForEach(comments) { comment in
-                CommentRow(comment: comment)
+            if isCommentsLoaded {
+                ForEach(comments) { comment in
+                    CommentRow(comment: comment)
+                }
             }
             
             // 0 Comment Message
@@ -53,7 +66,6 @@ struct ThreadRow: View {
             }
         }
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
-        .onAppear(perform: load)
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
             Button("delete_thread", role: .destructive) {
@@ -62,6 +74,8 @@ struct ThreadRow: View {
         } message: {
             Text("are_you_sure_you_want_to_delete_this_thread")
         }
+        
+        .onAppear(perform: load)
     }
     
     private func load() {
