@@ -115,11 +115,13 @@ struct CommentRow: View {
                             // Like
                             if FireAuth.isSignedIn() && !likedUserIds!.contains(FireAuth.uid()!) {
                                 FireUser.likeComment(commentId: comment.id)
+                                loadLikedUserIds()
                             }
                             
                             // Unlike
                             if FireAuth.isSignedIn() && likedUserIds!.contains(FireAuth.uid()! ) {
                                 FireUser.unlikeComment(commentId: comment.id)
+                                loadLikedUserIds()
                             }
                         }) {
                             HStack(spacing: 2) {
@@ -197,7 +199,13 @@ struct CommentRow: View {
         
         // コメントをいいねしたユーザーを読み取り
         if likedUserIds == nil {
-            FireUser.readLikedUserIds(commentId: comment.id) { userIds in
+            loadLikedUserIds()
+        }
+    }
+    
+    private func loadLikedUserIds() {
+        FireUser.readLikedUserIds(commentId: comment.id) { userIds in
+            withAnimation {
                 self.likedUserIds = userIds
             }
         }
