@@ -9,11 +9,12 @@ import SwiftUI
 
 struct FirstView: View {
     
+    // States
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     
-    @State private var isShowProfileView = false
-    @State private var isShowCreateThreadView = false
+    // Navigation to x
+    @State var isShowCreateThreadView = false
     
     var body: some View {
         NavigationView {
@@ -26,6 +27,8 @@ struct FirstView: View {
                 .listRowSeparator(.visible, edges: .bottom)
             }
             .listStyle(PlainListStyle())
+            
+            
             
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()

@@ -9,10 +9,14 @@ import SwiftUI
 
 struct CommentRow: View {
     
+    // Comment to show
     let comment: Comment
+    
+    // Navigation to ProfileView
     @Binding var isShowProfileView: Bool
     @Binding var selectedUserId: String
     
+    // States
     @State private var user: User? = nil
     @State private var isShowDialog = false
         

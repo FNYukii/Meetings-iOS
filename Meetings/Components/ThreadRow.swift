@@ -9,14 +9,17 @@ import SwiftUI
 
 struct ThreadRow: View {
     
+    // Thread to show
     let thread: Thread
     
+    // States
     @State private var comments: [Comment] = []
     @State private var isCommentsLoaded = false
     @State private var isShowDialog = false
     
-//    @State private var isShowProfileView = false
-//    @State private var selectedUserId = ""
+    // Navigation to ProfileView
+    @State var isShowProfileView = false
+    @State var selectedUserId = ""
     
     var body: some View {
         
@@ -55,19 +58,23 @@ struct ThreadRow: View {
             }
             
             // Comments
-//            if isCommentsLoaded {
-//                ForEach(comments) { comment in
-//                    CommentRow(comment: comment, isShowProfileView: $isShowProfileView, selectedUserId: $selectedUserId)
-//                }
-//            }
+            if isCommentsLoaded {
+                ForEach(comments) { comment in
+                    CommentRow(comment: comment, isShowProfileView: $isShowProfileView, selectedUserId: $selectedUserId)
+                }
+            }
             
             // 0 Comment Message
             if isCommentsLoaded && comments.count == 0 {
                 Text("0_Comments")
                     .foregroundColor(.secondary)
             }
+            
+            NavigationLink(destination: ProfileView(userId: selectedUserId), isActive: $isShowProfileView) {
+                EmptyView()
+            }
+            .hidden()
         }
-        .padding(.bottom)
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {

@@ -17,7 +17,7 @@ struct ThreadView: View {
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     @State private var isShowCreateCommentView = false
     
-    // Navigate to ProfileView
+    // Navigation to ProfileView
     @State var isShowProfileView = false
     @State var selectedUserId = ""
     
