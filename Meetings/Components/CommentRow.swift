@@ -27,7 +27,7 @@ struct CommentRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             
-            // Icon
+            // Icon Column
             Button (action: {
                 isShowProfileView.toggle()
             }) {
@@ -40,6 +40,7 @@ struct CommentRow: View {
             .buttonStyle(.borderless)
             .disabled(isDisableShowingProfileView)
             
+            // Detail Column
             VStack(alignment: .leading, spacing: 4) {
                 
                 // Header Row
