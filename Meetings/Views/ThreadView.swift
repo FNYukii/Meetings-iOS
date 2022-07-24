@@ -12,6 +12,7 @@ struct ThreadView: View {
     private let thread: Thread
     
     @ObservedObject private var commentsViewModel: CommentsViewModel
+    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     @State private var isShowCreateCommentView = false
     
     init(thread: Thread) {
@@ -20,11 +21,15 @@ struct ThreadView: View {
     }
 
     var body: some View {
+        
         List {
             ForEach(commentsViewModel.comments) { comment in
-                Text(comment.text)
+                CommentRow(comment: comment)
             }
+            .listRowSeparator(.hidden, edges: .top)
+            .listRowSeparator(.visible, edges: .bottom)
         }
+        .listStyle(PlainListStyle())
         
         .sheet(isPresented: $isShowCreateCommentView) {
             CreateCommentView(threadId: thread.id)
@@ -39,6 +44,7 @@ struct ThreadView: View {
                 }) {
                     Image(systemName: "square.and.pencil")
                 }
+                .disabled(!signInStateViewModel.isSignedIn)
             }
         }
     }

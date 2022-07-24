@@ -38,6 +38,7 @@ struct CreateCommentView: View {
                         Text("add")
                             .fontWeight(.bold)
                     }
+                    .disabled(text.isEmpty)
                 }
             }
         }
