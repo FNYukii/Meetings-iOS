@@ -70,7 +70,7 @@ struct ProfileView: View {
             
             // Comments Row
             ForEach(comments) { comment in
-                CommentRow(comment: comment, isDisableShowingProfileView: true)
+                CommentRow(comment: comment, isDisableShowingProfileView: true, isShowThreadTitle: true)
             }
         }
         .listStyle(.plain)

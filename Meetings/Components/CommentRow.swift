@@ -17,7 +17,7 @@ struct CommentRow: View {
     @State private var isShowProfileView = false
     
     // States
-//    let isShowThreadTitle: Bool
+    let isShowThreadTitle: Bool
     @State private var user: User? = nil
     @State private var thread: Thread? = nil
     @State private var isShowDialog = false
@@ -39,7 +39,7 @@ struct CommentRow: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 
-                // Header
+                // Header Row
                 HStack {
                     
                     if user == nil {
@@ -78,11 +78,11 @@ struct CommentRow: View {
                     }
                 }
                 
-                // Text
+                // Text Row
                 Text(comment.text)
                     .fixedSize(horizontal: false, vertical: true)
                 
-                // Reaction Bar
+                // Reaction Row
                 HStack {
                     Button(action: {
                         print("HELLO! Like")
@@ -97,11 +97,17 @@ struct CommentRow: View {
                 }
                 .padding(.top, 4)
                 
+                // Thread Title Row
+                if isShowThreadTitle && thread != nil {
+                    Text(thread!.title)
+                        .foregroundColor(.secondary)
+                }
+                
+                // NavigationLink
                 NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
                     EmptyView()
                 }
                 .hidden()
-                
             }
         }
         .onAppear(perform: load)
@@ -124,8 +130,10 @@ struct CommentRow: View {
         }
         
         // Commentが追加されたThreadを読み取り
-//        if isShowThreadTitle && thread == nil {
-//            
-//        }
+        if isShowThreadTitle && thread == nil {
+            FireThread.readThread(threadId: comment.threadId) { thread in
+                self.thread = thread
+            }
+        }
     }
 }

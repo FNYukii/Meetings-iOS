@@ -29,7 +29,7 @@ class FireThread {
         return thread
     }
     
-    static func readThread(threadId: String, completion: ((Thread) -> Void)?) {
+    static func readThread(threadId: String, completion: ((Thread?) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("threads")
             .document(threadId)
@@ -37,17 +37,19 @@ class FireThread {
                 // エラー処理
                 if let error = error {
                     print("HELLO! Fail! Error reading Thread. \(error)")
+                    completion?(nil)
                     return
                 }
                 if !document!.exists {
                     print("HELLO! Fail! Thread not found.")
+                    completion?(nil)
                     return
                 }
                 print("HELLO! Success! Read 1 Thread.")
                 
                 // Return
-//                let thread = Thread(document: document!)
-//                completion?(thread)
+                let thread = toThread(document: document!)
+                completion?(thread)
             }
     }
     
