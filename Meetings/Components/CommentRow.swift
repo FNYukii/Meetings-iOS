@@ -13,6 +13,7 @@ struct CommentRow: View {
     let comment: Comment
     
     // Navigation
+    let isDisableShowingProfileView: Bool
     @State private var isShowProfileView = false
     
     // States
@@ -32,6 +33,7 @@ struct CommentRow: View {
                     .foregroundColor(.secondary)
             }
             .buttonStyle(.borderless)
+            .disabled(isDisableShowingProfileView)
             
             VStack(alignment: .leading, spacing: 4) {
                 
