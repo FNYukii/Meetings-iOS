@@ -9,11 +9,12 @@ import SwiftUI
 
 struct FirstView: View {
     
+    // States
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     
-    @State private var isShowProfileView = false
-    @State private var isShowCreateThreadView = false
+    // Navigation to x
+    @State var isShowCreateThreadView = false
     
     var body: some View {
         NavigationView {
@@ -27,9 +28,7 @@ struct FirstView: View {
             }
             .listStyle(PlainListStyle())
             
-            .sheet(isPresented: $isShowProfileView) {
-                ProfileView()
-            }
+            
             
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()
@@ -39,9 +38,7 @@ struct FirstView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        isShowProfileView.toggle()
-                    }) {
+                    NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
                         Image(systemName: "person.crop.circle")
                             .font(.title2)
                     }

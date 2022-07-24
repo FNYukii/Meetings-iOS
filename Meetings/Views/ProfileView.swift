@@ -9,37 +9,62 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @Environment(\.dismiss) private var dismiss
+    let userId: String
     
-    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    @State private var isShowAccountView = false
     
     var body: some View {
-        NavigationView {
-            
-            Group {
-                if signInStateViewModel.isLoaded && signInStateViewModel.isSignedIn {
-                    ProfileListWhenSignedIn()
-                }
+        List {
+            // Header
+            HStack(alignment: .top) {
+                Image(systemName: "person.crop.circle")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.secondary)
                 
-                if signInStateViewModel.isLoaded && !signInStateViewModel.isSignedIn {
-                    ProfileListWhenNotSignedIn()
+                VStack(alignment: .leading) {
+                    Text("Ayaka")
+                        .fontWeight(.bold)
+                    
+                    Text("AyakaSan12")
+                        .foregroundColor(.secondary)
                 }
             }
+            .listRowSeparator(.hidden, edges: .all)
             
-            .navigationTitle("profile")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("done")
-                            .fontWeight(.bold)
+            // Introduction
+            Text("Hello. My beautiful world.")
+                .listRowSeparator(.hidden, edges: .all)
+        }
+        .listStyle(.plain)
+        
+        .sheet(isPresented: $isShowAccountView) {
+            AccountView()
+        }
+        
+        .navigationTitle("profile")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    if FireAuth.uid() == userId {
+                        Button(action: {
+                            
+                        }) {
+                            Label("edit_profile", systemImage: "person")
+                        }
+                        
+                        Button(action: {
+                            isShowAccountView.toggle()
+                        }) {
+                            Label("account_setting", systemImage: "person")
+                        }
                     }
+                } label: {
+                    Image(systemName: "ellipsis")
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     
