@@ -13,8 +13,10 @@ struct FirstView: View {
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     
-    // Navigation to x
-    @State var isShowCreateThreadView = false
+    // Navigation to any views
+    @State private var isShowSignInView = false
+    @State private var isShowSignUpView = false
+    @State private var isShowCreateThreadView = false
     
     var body: some View {
         NavigationView {
@@ -28,7 +30,13 @@ struct FirstView: View {
             }
             .listStyle(PlainListStyle())
             
+            .sheet(isPresented: $isShowSignInView) {
+                SignInView()
+            }
             
+            .sheet(isPresented: $isShowSignUpView) {
+                SignUpView()
+            }
             
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()
@@ -37,10 +45,31 @@ struct FirstView: View {
             .navigationTitle("threads")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
-                        Image(systemName: "person.crop.circle")
-                            .font(.title2)
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    if signInStateViewModel.isSignedIn {
+                        NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
+                            Image(systemName: "person.crop.circle")
+                                .font(.title2)
+                        }
+                    }
+                    
+                    if !signInStateViewModel.isSignedIn {
+                        Menu {
+                            Button(action: {
+                                isShowSignInView.toggle()
+                            }) {
+                                Label("sign_in", systemImage: "ipad.and.arrow.forward")
+                            }
+                            
+                            Button(action: {
+                                isShowSignUpView.toggle()
+                            }) {
+                                Label("sign_up", systemImage: "square.and.pencil")
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .font(.title3)
+                        }
                     }
                 }
                 
