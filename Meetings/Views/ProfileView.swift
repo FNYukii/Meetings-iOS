@@ -14,8 +14,7 @@ struct ProfileView: View {
     @State private var user: User? = nil
     
     // States
-    @State private var comments: [Comment] = []
-    @State private var isCommentsLoaded = false
+    @State private var comments: [Comment]? = nil
     
     // Navigation
     @State private var isShowAccountView = false
@@ -68,9 +67,24 @@ struct ProfileView: View {
                 }
             }
             
-            // Comments Row
-            ForEach(comments) { comment in
-                CommentRow(comment: comment, isDisableShowingProfileView: true, isAbleShowingThreadView: true)
+            // CommentRows Row
+            Group {
+                // Progress view
+                if comments == nil {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                        Spacer()
+                    }
+                }
+                
+                // CommentRows
+                if comments != nil {
+                    ForEach(comments!) { comment in
+                        CommentRow(comment: comment, isDisableShowingProfileView: true, isAbleShowingThreadView: true)
+                    }
+                }
             }
         }
         .listStyle(.plain)
@@ -115,7 +129,7 @@ struct ProfileView: View {
         }
         
         // Commentsを読み取る
-        if !isCommentsLoaded {
+        if comments == nil {
             FireComment.readComments(userId: userId) { comments in
                 self.comments = comments
             }
