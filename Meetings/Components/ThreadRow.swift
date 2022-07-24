@@ -11,12 +11,14 @@ struct ThreadRow: View {
     
     let thread: Thread
     
+    @State private var comments: [Comment] = []
+    @State private var isCommentsLoaded = false
     @State private var isShowDialog = false
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            
+            // Header
             HStack {
                 Text(thread.title)
                     .fontWeight(.bold)
@@ -42,10 +44,17 @@ struct ThreadRow: View {
                 }
             }
             
+            // Comments
+            ForEach(comments) { comment in
+                CommentRow(comment: comment)
+            }
+            
+            // Message
             Text("0 Comments")
                 .foregroundColor(.secondary)
         }
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
+        .onAppear(perform: load)
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
             Button("delete_thread", role: .destructive) {
@@ -53,6 +62,18 @@ struct ThreadRow: View {
             }
         } message: {
             Text("are_you_sure_you_want_to_delete_this_thread")
+        }
+    }
+    
+    private func load() {
+        // このスレッド上のコメントを読み取り
+        if !isCommentsLoaded {
+            FireComment.readComments(threadId: thread.id) { comments in
+                withAnimation {
+                    self.comments = comments
+                    self.isCommentsLoaded = true
+                }
+            }
         }
     }
 }
