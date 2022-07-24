@@ -35,6 +35,31 @@ class FireComment {
         }
     }
     
+    static func readComments(userId: String, completion: (([Comment]) -> Void)?) {
+        // ドキュメント読み取り
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .whereField("userId", isEqualTo: userId)
+            .order(by: "createdAt", descending: false)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Comments: \(err)")
+                    return
+                }
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
+                
+                // Comments
+                var comments: [Comment] = []
+                for document in querySnapshot!.documents {
+                    let comment = Comment(document: document)
+                    comments.append(comment)
+                }
+                
+                // Return
+                completion?(comments)
+        }
+    }
+    
     static func createComment(threadId: String, text: String) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
