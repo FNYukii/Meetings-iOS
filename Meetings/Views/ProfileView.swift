@@ -17,7 +17,7 @@ struct ProfileView: View {
     @State private var comments: [Comment] = []
     @State private var isCommentsLoaded = false
     
-    // Navigation to views
+    // Navigation
     @State private var isShowAccountView = false
     
     var body: some View {

@@ -13,7 +13,7 @@ struct FirstView: View {
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     
-    // Navigation to any views
+    // Navigations
     @State private var isShowSignInView = false
     @State private var isShowSignUpView = false
     @State private var isShowCreateThreadView = false

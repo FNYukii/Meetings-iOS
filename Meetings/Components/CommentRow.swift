@@ -12,7 +12,7 @@ struct CommentRow: View {
     // Comment to show
     let comment: Comment
     
-    // Navigation to ProfileView
+    // Navigation
     @State var isShowProfileView = false
     
     // States
