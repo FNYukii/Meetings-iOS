@@ -11,15 +11,17 @@ struct ThreadRow: View {
     
     let thread: Thread
     
+    @State private var comments: [Comment] = []
+    @State private var isCommentsLoaded = false
     @State private var isShowDialog = false
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            
-            HStack {
+            // Header
+            HStack(alignment: .top) {
                 Text(thread.title)
-                    .fontWeight(.bold)
+                    .font(.title)
                     .multilineTextAlignment(.leading)
                 
                 Spacer()
@@ -39,9 +41,30 @@ struct ThreadRow: View {
                 }
             }
             
-            Text("0 Comments")
-                .foregroundColor(.secondary)
+            // ProgressView
+            if !isCommentsLoaded {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                    Spacer()
+                }
+            }
+            
+            // Comments
+            if isCommentsLoaded {
+                ForEach(comments) { comment in
+                    CommentRow(comment: comment)
+                }
+            }
+            
+            // 0 Comment Message
+            if isCommentsLoaded && comments.count == 0 {
+                Text("0_Comments")
+                    .foregroundColor(.secondary)
+            }
         }
+        .padding(.bottom)
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
@@ -50,6 +73,18 @@ struct ThreadRow: View {
             }
         } message: {
             Text("are_you_sure_you_want_to_delete_this_thread")
+        }
+        
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        // このスレッド上のコメントを読み取り
+        FireComment.readComments(threadId: thread.id) { comments in
+            withAnimation {
+                self.comments = comments
+                self.isCommentsLoaded = true
+            }
         }
     }
 }
