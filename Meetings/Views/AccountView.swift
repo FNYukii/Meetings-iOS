@@ -33,6 +33,7 @@ struct AccountView: View {
             Section {
                 Button("sign_out") {
                     FireAuth.signOut()
+                    dismiss()
                 }
                 .foregroundColor(.red)
                 .frame(maxWidth: .infinity, alignment: .center)
