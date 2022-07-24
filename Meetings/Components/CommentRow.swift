@@ -13,19 +13,17 @@ struct CommentRow: View {
     let comment: Comment
     
     // Navigation to ProfileView
-    @Binding var isShowProfileView: Bool
-    @Binding var selectedUserId: String
+    @State var isShowProfileView = false
     
     // States
     @State private var user: User? = nil
     @State private var isShowDialog = false
         
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: 8) {
             
             // Icon
             Button (action: {
-                selectedUserId = comment.userId
                 isShowProfileView.toggle()
             }) {
                 Image(systemName: "person.crop.circle")
@@ -94,6 +92,12 @@ struct CommentRow: View {
                     .buttonStyle(.borderless)
                 }
                 .padding(.top, 4)
+                
+                NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
+                    EmptyView()
+                }
+                .hidden()
+                
             }
         }
         .onAppear(perform: load)

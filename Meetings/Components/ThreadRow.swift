@@ -17,10 +17,6 @@ struct ThreadRow: View {
     @State private var isCommentsLoaded = false
     @State private var isShowDialog = false
     
-    // Navigation to ProfileView
-    @State var isShowProfileView = false
-    @State var selectedUserId = ""
-    
     var body: some View {
         
         VStack(alignment: .leading) {
@@ -60,7 +56,7 @@ struct ThreadRow: View {
             // Comments
             if isCommentsLoaded {
                 ForEach(comments) { comment in
-                    CommentRow(comment: comment, isShowProfileView: $isShowProfileView, selectedUserId: $selectedUserId)
+                    CommentRow(comment: comment)
                 }
             }
             
@@ -69,11 +65,6 @@ struct ThreadRow: View {
                 Text("0_Comments")
                     .foregroundColor(.secondary)
             }
-            
-            NavigationLink(destination: ProfileView(userId: selectedUserId), isActive: $isShowProfileView) {
-                EmptyView()
-            }
-            .hidden()
         }
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
