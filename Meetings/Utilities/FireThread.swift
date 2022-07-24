@@ -9,6 +9,50 @@ import Firebase
 
 class FireThread {
     
+    static func toThread(document: DocumentSnapshot) -> Thread {
+        let id = document.documentID
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
+        let userId = document.get("userId") as! String
+        let title = document.get("title") as! String
+        
+        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
+        return thread
+    }
+    
+    static func toThread(document: QueryDocumentSnapshot) -> Thread {
+        let id = document.documentID
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
+        let userId = document.get("userId") as! String
+        let title = document.get("title") as! String
+        
+        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
+        return thread
+    }
+    
+    static func readThread(threadId: String, completion: ((Thread?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .document(threadId)
+            .getDocument { (document, error) in
+                // エラー処理
+                if let error = error {
+                    print("HELLO! Fail! Error reading Thread. \(error)")
+                    completion?(nil)
+                    return
+                }
+                if !document!.exists {
+                    print("HELLO! Fail! Thread not found.")
+                    completion?(nil)
+                    return
+                }
+                print("HELLO! Success! Read 1 Thread.")
+                
+                // Return
+                let thread = toThread(document: document!)
+                completion?(thread)
+            }
+    }
+    
     static func createThread(title: String) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {

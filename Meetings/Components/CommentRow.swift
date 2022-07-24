@@ -12,52 +12,60 @@ struct CommentRow: View {
     // Comment to show
     let comment: Comment
     
-    // Navigation to ProfileView
-    @Binding var isShowProfileView: Bool
-    @Binding var selectedUserId: String
+    // Navigations
+    let isDisableShowingProfileView: Bool
+    @State private var isShowProfileView = false
+    let isAbleShowingThreadView: Bool
+    @State private var isShowThreadView = false
     
     // States
     @State private var user: User? = nil
+    @State private var thread: Thread? = nil
     @State private var isShowDialog = false
         
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: 8) {
             
             // Icon
             Button (action: {
-                selectedUserId = comment.userId
                 isShowProfileView.toggle()
             }) {
                 Image(systemName: "person.crop.circle")
                     .resizable()
                     .frame(width: 40, height: 40)
                     .foregroundColor(.secondary)
+                    .opacity(0.5)
             }
             .buttonStyle(.borderless)
+            .disabled(isDisableShowingProfileView)
             
             VStack(alignment: .leading, spacing: 4) {
                 
-                // Header
+                // Header Row
                 HStack {
-                    
+                    // 3 Progress view
                     if user == nil {
                         Color.secondary.opacity(0.2)
                             .frame(width: 80)
                         
                         Color.secondary.opacity(0.2)
                             .frame(width: 80)
+                        
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 40)
                     }
                     
+                    // Display name & User tag & HowManyAgoText
                     if user != nil {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
                         Text(user!.userTag)
                             .foregroundColor(.secondary)
+                        
+                        EditDate.HowManyAgoText(from: comment.createdAt)
+                            .foregroundColor(.secondary)
                     }
-                    
-                    EditDate.HowManyAgoText(from: comment.createdAt)
-                        .foregroundColor(.secondary)
                     
                     Spacer()
                     
@@ -76,24 +84,78 @@ struct CommentRow: View {
                     }
                 }
                 
-                // Text
-                Text(comment.text)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                // Reaction Bar
-                HStack {
-                    Button(action: {
-                        print("HELLO! Like")
-                    }) {
-                        HStack(spacing: 2) {
-                            Image(systemName: "heart")
-                            Text("0")
-                        }
-                        .foregroundColor(.secondary)
+                // Text Row
+                Group {
+                    // Progress view
+                    if user == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 200, height: 16)
                     }
-                    .buttonStyle(.borderless)
+                    
+                    // Text
+                    if user != nil {
+                        Text(comment.text)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                
+                // Reaction Row
+                HStack {
+                    // Progress view
+                    if user == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 40, height: 16)
+                    }
+                    
+                    // Like button
+                    if user != nil {
+                        Button(action: {
+                            print("HELLO! Like")
+                        }) {
+                            HStack(spacing: 2) {
+                                Image(systemName: "heart")
+                                Text("0")
+                            }
+                            .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.borderless)
+                    }
                 }
                 .padding(.top, 4)
+                
+                // Thread Title Row
+                Group {
+                    // Progress view
+                    if isAbleShowingThreadView && thread == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 120, height: 16)
+                    }
+                    
+                    // Thread title
+                    if isAbleShowingThreadView && thread != nil {
+                        Button(action: {
+                            isShowThreadView.toggle()
+                        }) {
+                            Text(thread!.title)
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.borderless)
+                    }
+                }
+                
+                // NavigationLink to ProfileView
+                NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
+                    EmptyView()
+                }
+                .hidden()
+                
+                // NavigationLink to ThreadView
+                if thread != nil {
+                    NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                }
             }
         }
         .onAppear(perform: load)
@@ -112,6 +174,13 @@ struct CommentRow: View {
         if user == nil {
             FireUser.readUser(userId: comment.userId) { user in
                 self.user = user
+            }
+        }
+        
+        // Commentが追加されたThreadを読み取り
+        if isAbleShowingThreadView && thread == nil {
+            FireThread.readThread(threadId: comment.threadId) { thread in
+                self.thread = thread
             }
         }
     }

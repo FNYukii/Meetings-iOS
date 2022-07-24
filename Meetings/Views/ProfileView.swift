@@ -9,13 +9,15 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    // User ID to show
-    let userId: String
-    
     // User to show
+    let userId: String
     @State private var user: User? = nil
     
-    // Navigation to views
+    // States
+    @State private var comments: [Comment] = []
+    @State private var isCommentsLoaded = false
+    
+    // Navigation
     @State private var isShowAccountView = false
     
     var body: some View {
@@ -65,7 +67,11 @@ struct ProfileView: View {
                     Text(user!.introduction)
                 }
             }
-            .listRowSeparator(.hidden)
+            
+            // Comments Row
+            ForEach(comments) { comment in
+                CommentRow(comment: comment, isDisableShowingProfileView: true, isAbleShowingThreadView: true)
+            }
         }
         .listStyle(.plain)
         
@@ -105,6 +111,13 @@ struct ProfileView: View {
         if user == nil {
             FireUser.readUser(userId: userId) { user in
                 self.user = user
+            }
+        }
+        
+        // Commentsを読み取る
+        if !isCommentsLoaded {
+            FireComment.readComments(userId: userId) { comments in
+                self.comments = comments
             }
         }
     }

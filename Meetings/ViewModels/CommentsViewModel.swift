@@ -31,7 +31,7 @@ class CommentsViewModel: ObservableObject {
                 // Comments
                 var comments: [Comment] = []
                 snapshot.documents.forEach { document in
-                    let comment = Comment(document: document)
+                    let comment = FireComment.toComment(document: document)
                     comments.append(comment)
                 }
                 

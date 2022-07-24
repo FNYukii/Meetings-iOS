@@ -17,10 +17,6 @@ struct ThreadView: View {
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
     @State private var isShowCreateCommentView = false
     
-    // Navigation to ProfileView
-    @State var isShowProfileView = false
-    @State var selectedUserId = ""
-    
     init(thread: Thread) {
         self.thread = thread
         self.commentsViewModel = CommentsViewModel(threadId: thread.id)
@@ -30,16 +26,12 @@ struct ThreadView: View {
         
         List {
             ForEach(commentsViewModel.comments) { comment in
-                CommentRow(comment: comment, isShowProfileView: $isShowProfileView, selectedUserId: $selectedUserId)
+                CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
             }
             .listRowSeparator(.hidden, edges: .top)
             .listRowSeparator(.visible, edges: .bottom)
         }
         .listStyle(.plain)
-        
-        NavigationLink(destination: ProfileView(userId: selectedUserId), isActive: $isShowProfileView) {
-            EmptyView()
-        }
         
         .sheet(isPresented: $isShowCreateCommentView) {
             CreateCommentView(threadId: thread.id)
