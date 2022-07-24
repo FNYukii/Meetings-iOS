@@ -34,6 +34,7 @@ struct CommentRow: View {
                     .resizable()
                     .frame(width: 40, height: 40)
                     .foregroundColor(.secondary)
+                    .opacity(0.5)
             }
             .buttonStyle(.borderless)
             .disabled(isDisableShowingProfileView)
@@ -42,25 +43,29 @@ struct CommentRow: View {
                 
                 // Header Row
                 HStack {
-                    
+                    // 3 Progress view
                     if user == nil {
                         Color.secondary.opacity(0.2)
                             .frame(width: 80)
                         
                         Color.secondary.opacity(0.2)
                             .frame(width: 80)
+                        
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 40)
                     }
                     
+                    // Display name & User tag & HowManyAgoText
                     if user != nil {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
                         Text(user!.userTag)
                             .foregroundColor(.secondary)
+                        
+                        EditDate.HowManyAgoText(from: comment.createdAt)
+                            .foregroundColor(.secondary)
                     }
-                    
-                    EditDate.HowManyAgoText(from: comment.createdAt)
-                        .foregroundColor(.secondary)
                     
                     Spacer()
                     
@@ -80,33 +85,62 @@ struct CommentRow: View {
                 }
                 
                 // Text Row
-                Text(comment.text)
-                    .fixedSize(horizontal: false, vertical: true)
+                Group {
+                    // Progress view
+                    if user == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 200, height: 16)
+                    }
+                    
+                    // Text
+                    if user != nil {
+                        Text(comment.text)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
                 
                 // Reaction Row
                 HStack {
-                    Button(action: {
-                        print("HELLO! Like")
-                    }) {
-                        HStack(spacing: 2) {
-                            Image(systemName: "heart")
-                            Text("0")
-                        }
-                        .foregroundColor(.secondary)
+                    // Progress view
+                    if user == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 40, height: 16)
                     }
-                    .buttonStyle(.borderless)
+                    
+                    // Like button
+                    if user != nil {
+                        Button(action: {
+                            print("HELLO! Like")
+                        }) {
+                            HStack(spacing: 2) {
+                                Image(systemName: "heart")
+                                Text("0")
+                            }
+                            .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.borderless)
+                    }
                 }
                 .padding(.top, 4)
                 
                 // Thread Title Row
-                if isAbleShowingThreadView && thread != nil {
-                    Button(action: {
-                        isShowThreadView.toggle()
-                    }) {
-                        Text(thread!.title)
-                            .foregroundColor(.secondary)
+                Group {
+                    // Progress view
+                    if isAbleShowingThreadView && thread == nil {
+                        Color.secondary.opacity(0.2)
+                            .frame(width: 120, height: 16)
                     }
-                    .buttonStyle(.borderless)
+                    
+                    // Thread title
+                    if isAbleShowingThreadView && thread != nil {
+                        Button(action: {
+                            isShowThreadView.toggle()
+                        }) {
+                            Text(thread!.title)
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.borderless)
+                    }
                 }
                 
                 // NavigationLink to ProfileView
