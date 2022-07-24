@@ -13,14 +13,14 @@ struct ThreadRow: View {
     let thread: Thread
     
     // States
-    @State private var comments: [Comment] = []
-    @State private var isCommentsLoaded = false
+    @State private var comments: [Comment]? = []
     @State private var isShowDialog = false
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            // Header
+            
+            // Header Row
             HStack(alignment: .top) {
                 Text(thread.title)
                     .font(.title)
@@ -43,25 +43,28 @@ struct ThreadRow: View {
                 }
             }
             
-            // ProgressView
-            if !isCommentsLoaded {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                    Spacer()
+            // CommentRows Row
+            Group {
+                // Progress view
+                if comments == nil {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                        Spacer()
+                    }
+                }
+                
+                // CommentRows
+                if comments != nil {
+                    ForEach(comments!) { comment in
+                        CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
+                    }
                 }
             }
             
-            // Comments
-            if isCommentsLoaded {
-                ForEach(comments) { comment in
-                    CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
-                }
-            }
-            
-            // 0 Comment Message
-            if isCommentsLoaded && comments.count == 0 {
+            // 0 Comment Message Row
+            if comments != nil && comments!.count == 0 {
                 Text("0_Comments")
                     .foregroundColor(.secondary)
             }
@@ -84,7 +87,6 @@ struct ThreadRow: View {
         FireComment.readComments(threadId: thread.id) { comments in
             withAnimation {
                 self.comments = comments
-                self.isCommentsLoaded = true
             }
         }
     }
