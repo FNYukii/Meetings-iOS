@@ -12,6 +12,7 @@ struct CommentRow: View {
     let comment: Comment
     
     @State private var user: User? = nil
+    @State private var isShowDialog = false
     
     var body: some View {
         HStack(alignment: .top) {
@@ -49,7 +50,13 @@ struct CommentRow: View {
                     Spacer()
                     
                     Menu {
-                        
+                        if FireAuth.uid() == comment.userId {
+                            Button(role: .destructive) {
+                                isShowDialog.toggle()
+                            } label: {
+                                Label("delete_comment", systemImage: "trash")
+                            }
+                        }
                     } label: {
                         Image(systemName: "ellipsis")
                             .foregroundColor(.secondary)
@@ -78,6 +85,14 @@ struct CommentRow: View {
             }
         }
         .onAppear(perform: load)
+        
+        .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
+            Button("delete_comment", role: .destructive) {
+                FireComment.deleteComment(commentId: comment.id)
+            }
+        } message: {
+            Text("are_you_sure_you_want_to_delete_this_comment")
+        }
     }
     
     private func load() {
