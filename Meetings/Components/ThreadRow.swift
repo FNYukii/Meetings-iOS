@@ -19,13 +19,10 @@ struct ThreadRow: View {
         
         VStack(alignment: .leading) {
             // Header
-            HStack {
+            HStack(alignment: .top) {
                 Text(thread.title)
-                    .fontWeight(.bold)
+                    .font(.title)
                     .multilineTextAlignment(.leading)
-                
-                EditDate.HowManyAgoText(from: thread.createdAt)
-                    .foregroundColor(.secondary)
                 
                 Spacer()
                 
@@ -49,9 +46,11 @@ struct ThreadRow: View {
                 CommentRow(comment: comment)
             }
             
-            // Message
-            Text("More 2 Comments")
-                .foregroundColor(.secondary)
+            // 0 Comment Message
+            if isCommentsLoaded && comments.count == 0 {
+                Text("0_Comments")
+                    .foregroundColor(.secondary)
+            }
         }
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         .onAppear(perform: load)
