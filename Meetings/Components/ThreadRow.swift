@@ -47,7 +47,6 @@ struct ThreadRow: View {
                     Spacer()
                     ProgressView()
                         .progressViewStyle(.circular)
-                        .padding(.bottom)
                     Spacer()
                 }
             }
@@ -65,6 +64,7 @@ struct ThreadRow: View {
                     .foregroundColor(.secondary)
             }
         }
+        .padding(.bottom)
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
