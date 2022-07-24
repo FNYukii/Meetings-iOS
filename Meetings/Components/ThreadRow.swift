@@ -15,6 +15,9 @@ struct ThreadRow: View {
     @State private var isCommentsLoaded = false
     @State private var isShowDialog = false
     
+//    @State private var isShowProfileView = false
+//    @State private var selectedUserId = ""
+    
     var body: some View {
         
         VStack(alignment: .leading) {
@@ -52,11 +55,11 @@ struct ThreadRow: View {
             }
             
             // Comments
-            if isCommentsLoaded {
-                ForEach(comments) { comment in
-                    CommentRow(comment: comment)
-                }
-            }
+//            if isCommentsLoaded {
+//                ForEach(comments) { comment in
+//                    CommentRow(comment: comment, isShowProfileView: $isShowProfileView, selectedUserId: $selectedUserId)
+//                }
+//            }
             
             // 0 Comment Message
             if isCommentsLoaded && comments.count == 0 {

@@ -10,18 +10,26 @@ import SwiftUI
 struct CommentRow: View {
     
     let comment: Comment
+    @Binding var isShowProfileView: Bool
+    @Binding var selectedUserId: String
     
     @State private var user: User? = nil
     @State private var isShowDialog = false
-    
+        
     var body: some View {
         HStack(alignment: .top) {
             
             // Icon
-            Image(systemName: "person.crop.circle")
-                .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundColor(.secondary)
+            Button (action: {
+                selectedUserId = comment.userId
+                isShowProfileView.toggle()
+            }) {
+                Image(systemName: "person.crop.circle")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.secondary)
+            }
+            .buttonStyle(.borderless)
             
             VStack(alignment: .leading, spacing: 4) {
                 
