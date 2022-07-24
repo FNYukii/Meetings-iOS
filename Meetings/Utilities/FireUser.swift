@@ -89,4 +89,46 @@ class FireUser {
             }
     }
     
+    static func likeComment(commentId: String) {
+        // UIDを確認
+        if FireAuth.uid() == nil {
+            return
+        }
+        
+        // Userドキュメントをアップデート
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(FireAuth.uid()!)
+            .updateData([
+                "likes": FieldValue.arrayUnion([commentId])
+            ]) { err in
+                if let err = err {
+                    print("HELLO! Fail! Error updating User. Error: \(err)")
+                } else {
+                    print("HELLO! Success! Updated 1 User.")
+                }
+            }
+    }
+    
+    static func unlikeComment(commentId: String) {
+        // UIDを確認
+        if FireAuth.uid() == nil {
+            return
+        }
+        
+        // Userドキュメントをアップデート
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(FireAuth.uid()!)
+            .updateData([
+                "likes": FieldValue.arrayRemove([commentId])
+            ]) { err in
+                if let err = err {
+                    print("HELLO! Fail! Error updating User. Error: \(err)")
+                } else {
+                    print("HELLO! Success! Updated 1 User.")
+                }
+            }
+    }
+    
 }
