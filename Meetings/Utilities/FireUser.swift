@@ -26,14 +26,47 @@ class FireUser {
         db.collection("users")
             .document(userId)
             .getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let user = toUser(document: document)
-                    print("HELLO! Success! Read 1 User.")
-                    completion?(user)
-                } else {
-                    print("HELLO! Fail! User identified as \(userId) does not exist.")
+                // エラー処理
+                if let error = error {
+                    print("HELLO! Fail! Error reading User. \(error)")
                     completion?(nil)
+                    return
                 }
+                if !document!.exists {
+                    print("HELLO! Fail! User not found.")
+                    completion?(nil)
+                    return
+                }
+                print("HELLO! Success! Read 1 User.")
+                
+                // Return
+                let user = toUser(document: document!)
+                completion?(user)
+            }
+    }
+    
+    static func readUsersLikesComment(commentId: String, completion: (([User]) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("users")
+            .whereField("likes", arrayContains: commentId)
+            .getDocuments() { (querySnapshot, err) in
+                // エラー処理
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                    completion?([])
+                    return
+                }
+                print("HELLO! Success! Read \(querySnapshot!.count) Users.")
+                
+                // Users
+                var users: [User] = []
+                for document in querySnapshot!.documents {
+                    let user = toUser(document: document)
+                    users.append(user)
+                }
+                
+                // Return
+                completion?(users)
             }
     }
     
