@@ -20,6 +20,7 @@ struct ProfileView: View {
     
     var body: some View {
         List {
+            // Header Row
             HStack(alignment: .top) {
                 
                 // Icon
@@ -30,13 +31,13 @@ struct ProfileView: View {
                 
                 VStack(alignment: .leading) {
                     
-                    // ProgressView
+                    // Progress View
                     if user == nil {
                         Color.secondary.opacity(0.2)
-                            .frame(width: 80)
+                            .frame(width: 80, height: 16)
                         
                         Color.secondary.opacity(0.2)
-                            .frame(width: 80)
+                            .frame(width: 80, height: 16)
                     }
                     
                     // DisplayName, userTag
@@ -51,19 +52,20 @@ struct ProfileView: View {
             }
             .listRowSeparator(.hidden)
             
-            // ProgressView
-            if user == nil {
-                Color.secondary.opacity(0.2)
-                    .frame(width: 200)
-                    .listRowSeparator(.hidden)
+            // Introduction Row
+            Group {
+                // Progress View
+                if user == nil {
+                    Color.secondary.opacity(0.2)
+                        .frame(width: 200, height: 16)
+                }
+                
+                // Introduction
+                if user != nil {
+                    Text(user!.introduction)
+                }
             }
-            
-            // Introduction
-            if user != nil {
-                Text(user!.introduction)
-                    .listRowSeparator(.hidden)
-            }
-            
+            .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         
