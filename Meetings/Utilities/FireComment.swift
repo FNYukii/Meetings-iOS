@@ -14,6 +14,7 @@ class FireComment {
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
+            .order(by: "createdAt", descending: false)
             .limit(to: 3)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
