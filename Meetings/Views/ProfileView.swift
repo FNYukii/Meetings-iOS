@@ -11,6 +11,8 @@ struct ProfileView: View {
     
     let userId: String
     
+    @State private var isShowAccountView = false
+    
     var body: some View {
         List {
             // Header
@@ -32,19 +34,34 @@ struct ProfileView: View {
             
             // Introduction
             Text("Hello. My beautiful world.")
-                .listRowSeparator(.hidden, edges: .all)            
+                .listRowSeparator(.hidden, edges: .all)
         }
         .listStyle(.plain)
+        
+        .sheet(isPresented: $isShowAccountView) {
+            AccountView()
+        }
         
         .navigationTitle("profile")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    
-                }) {
+                Menu {
+                    if FireAuth.uid() == userId {
+                        Button(action: {
+                            
+                        }) {
+                            Label("edit_profile", systemImage: "person")
+                        }
+                        
+                        Button(action: {
+                            isShowAccountView.toggle()
+                        }) {
+                            Label("account_setting", systemImage: "person")
+                        }
+                    }
+                } label: {
                     Image(systemName: "ellipsis")
-                        .font(.title2)
                 }
             }
         }
