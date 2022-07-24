@@ -22,6 +22,9 @@ struct ThreadRow: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
                 
+                EditDate.HowManyAgoText(from: thread.createdAt)
+                    .foregroundColor(.secondary)
+                
                 Spacer()
                 
                 Menu {
