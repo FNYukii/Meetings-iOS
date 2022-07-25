@@ -37,6 +37,7 @@
 		5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9C288C380300F4A29B /* CommentsViewModel.swift */; };
 		5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9E288C3C6800F4A29B /* CommentRow.swift */; };
 		5410EAA1288C453200F4A29B /* EditDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EAA0288C453200F4A29B /* EditDate.swift */; };
+		54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* MyTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		5410EA9C288C380300F4A29B /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		5410EA9E288C3C6800F4A29B /* CommentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRow.swift; sourceTree = "<group>"; };
 		5410EAA0288C453200F4A29B /* EditDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDate.swift; sourceTree = "<group>"; };
+		54DC779F288E4DDB00296419 /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				5410EA96288C2FCC00F4A29B /* MyTextEditor.swift */,
+				54DC779F288E4DDB00296419 /* MyTabBar.swift */,
 				540D2E60288985CB00DBB512 /* ThreadRow.swift */,
 				5410EA9E288C3C6800F4A29B /* CommentRow.swift */,
 			);
@@ -279,6 +282,7 @@
 				5410EA85288BC00C00F4A29B /* SignUpView.swift in Sources */,
 				540D2E4D2889775600DBB512 /* CreateCommentView.swift in Sources */,
 				540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */,
+				54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */,
 				5410EA83288BBD5900F4A29B /* SignInStateViewModel.swift in Sources */,
 				540D2E592889811000DBB512 /* Thread.swift in Sources */,
 				5410EA93288C280F00F4A29B /* FireThread.swift in Sources */,
