@@ -16,6 +16,7 @@ struct ProfileView: View {
     // States
     @State private var selection = 0
     @State private var postedComments: [Comment]? = nil
+    @State private var likedComments: [Comment]? = nil
     
     // Navigation
     @State private var isShowAccountView = false
@@ -80,7 +81,7 @@ struct ProfileView: View {
                     .tag(0)
                 
                 // Likes Page
-                Text("Likes")
+                PostedCommentsPage(comments: likedComments)
                     .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -126,10 +127,17 @@ struct ProfileView: View {
             }
         }
         
-        // Commentsを読み取る
+        // ユーザーが投稿したCommentsを読み取る
         if postedComments == nil {
             FireComment.readPostedComments(userId: userId) { comments in
                 self.postedComments = comments
+            }
+        }
+        
+        // ユーザーがいいねしたコメントを読み取る
+        if likedComments == nil {
+            FireComment.readLikedComments(userId: userId) { comment in
+                self.likedComments = comment
             }
         }
     }

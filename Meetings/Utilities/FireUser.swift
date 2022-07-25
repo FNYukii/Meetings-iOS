@@ -48,7 +48,7 @@ class FireUser {
     static func readLikedUserIds(commentId: String, completion: (([String]?) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("users")
-            .whereField("likes", arrayContains: commentId)
+            .whereField("likedCommentIds", arrayContains: commentId)
             .getDocuments() { (querySnapshot, err) in
                 // エラー処理
                 if let err = err {
@@ -107,7 +107,7 @@ class FireUser {
         db.collection("users")
             .document(FireAuth.uid()!)
             .updateData([
-                "likes": FieldValue.arrayUnion([commentId])
+                "likedCommentIds": FieldValue.arrayUnion([commentId])
             ]) { err in
                 if let err = err {
                     print("HELLO! Fail! Error updating User. Error: \(err)")
@@ -128,7 +128,7 @@ class FireUser {
         db.collection("users")
             .document(FireAuth.uid()!)
             .updateData([
-                "likes": FieldValue.arrayRemove([commentId])
+                "likedCommentIds": FieldValue.arrayRemove([commentId])
             ]) { err in
                 if let err = err {
                     print("HELLO! Fail! Error updating User. Error: \(err)")

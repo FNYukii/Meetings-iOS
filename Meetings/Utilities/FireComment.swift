@@ -82,6 +82,11 @@ class FireComment {
             // likedCommentIdsの値を取得
             let likedCommentIds = user!.likedCommentIds
             
+            // likedCommentIdsが空なら終了
+            if likedCommentIds.count == 0 {
+                return
+            }
+            
             // ユーザーがいいねしたコメントを全て取得
             let db = Firestore.firestore()
             db.collection("comments")
