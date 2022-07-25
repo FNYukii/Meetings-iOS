@@ -14,6 +14,7 @@ struct ProfileView: View {
     @State private var user: User? = nil
     
     // States
+    @State private var selection = 0
     @State private var comments: [Comment]? = nil
     
     // Navigation
@@ -24,12 +25,13 @@ struct ProfileView: View {
             // Header Row
             HStack(alignment: .top) {
                 
-                // Icon
+                // Icon Column
                 Image(systemName: "person.crop.circle")
                     .resizable()
                     .frame(width: 40, height: 40)
                     .foregroundColor(.secondary)
                 
+                // Detail Column
                 VStack(alignment: .leading) {
                     
                     // Progress View
@@ -66,26 +68,26 @@ struct ProfileView: View {
                     Text(user!.introduction)
                 }
             }
+            .listRowSeparator(.hidden)
             
-            // CommentRows Row
-            Group {
-                // Progress view
-                if comments == nil {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                        Spacer()
-                    }
-                }
+            // Tab Bar Row
+            MyTabBar(tabBarItems: [Text("comments"), Text("likes")], selection: $selection)
+                .listRowSeparator(.hidden)
+                .foregroundColor(Color.purple)
+            
+            // Tab Body Row
+            TabView(selection: $selection) {
+                // Comments Page
+                Text("Comments")
+                    .tag(0)
                 
-                // CommentRows
-                if comments != nil {
-                    ForEach(comments!) { comment in
-                        CommentRow(comment: comment, isDisableShowingProfileView: true, isAbleShowingThreadView: true)
-                    }
-                }
+                // Likes Page
+                Text("Likes")
+                    .tag(1)
             }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .animation(.spring(), value: selection)
+            .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         
