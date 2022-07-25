@@ -21,7 +21,7 @@ struct ProfileView: View {
     @State private var isShowAccountView = false
     
     var body: some View {
-        List {
+        VStack(alignment: .leading) {
             // Header Row
             HStack(alignment: .top) {
                 
@@ -34,7 +34,7 @@ struct ProfileView: View {
                 // Detail Column
                 VStack(alignment: .leading) {
                     
-                    // Progress View
+                    // Progress view
                     if user == nil {
                         Color.secondary.opacity(0.2)
                             .frame(width: 80, height: 16)
@@ -53,11 +53,11 @@ struct ProfileView: View {
                     }
                 }
             }
-            .listRowSeparator(.hidden)
+            .padding(.horizontal)
             
             // Introduction Row
             Group {
-                // Progress View
+                // Progress view
                 if user == nil {
                     Color.secondary.opacity(0.2)
                         .frame(width: 200, height: 16)
@@ -68,17 +68,15 @@ struct ProfileView: View {
                     Text(user!.introduction)
                 }
             }
-            .listRowSeparator(.hidden)
+            .padding(.horizontal)
             
             // Tab Bar Row
             MyTabBar(tabBarItems: [Text("comments"), Text("likes")], selection: $selection)
-                .listRowSeparator(.hidden)
-                .foregroundColor(Color.purple)
             
             // Tab Body Row
             TabView(selection: $selection) {
                 // Comments Page
-                Text("Comments")
+                CommentsPage(comments: comments)
                     .tag(0)
                 
                 // Likes Page
@@ -87,9 +85,7 @@ struct ProfileView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .animation(.spring(), value: selection)
-            .listRowSeparator(.hidden)
         }
-        .listStyle(.plain)
         
         .sheet(isPresented: $isShowAccountView) {
             AccountView()

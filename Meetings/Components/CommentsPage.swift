@@ -12,7 +12,7 @@ struct CommentsPage: View {
     let comments: [Comment]?
     
     var body: some View {
-        VStack {
+        List {
             // Progress view
             if comments == nil {
                 HStack {
@@ -21,6 +21,7 @@ struct CommentsPage: View {
                         .progressViewStyle(.circular)
                     Spacer()
                 }
+                .listRowSeparator(.hidden)
             }
             
             // CommentRows
@@ -28,9 +29,9 @@ struct CommentsPage: View {
                 ForEach(comments!) { comment in
                     CommentRow(comment: comment, isDisableShowingProfileView: true, isAbleShowingThreadView: true)
                 }
-            }
-            
-            Spacer()
+                .listRowSeparator(.hidden)
+            }            
         }
+        .listStyle(.plain)
     }
 }

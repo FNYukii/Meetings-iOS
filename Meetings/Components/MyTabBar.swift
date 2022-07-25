@@ -20,37 +20,44 @@ struct MyTabBar: View {
     
     var body: some View {
         
-        HStack {
-            ForEach(0 ..< tabBarItems.count, id: \.self) { index in
-                Button(action: {
-                    self.selection = index
-                }) {
-                    VStack {
-                        
-                        // Label
-                        tabBarItems[index]
-                            .foregroundColor(self.selection == index ? .accentColor : .primary)
-                        
-                        // Color underline
-                        if self.selection == index {
-                            Color.accentColor
-                                .frame(height: 2)
-                                .padding(.horizontal)
-                                .matchedGeometryEffect(id: "underline", in: namespace)
+        VStack(spacing: 0) {
+            
+            // Button Row
+            HStack {
+                ForEach(0 ..< tabBarItems.count, id: \.self) { index in
+                    Button(action: {
+                        self.selection = index
+                    }) {
+                        VStack {
+                            
+                            // Label
+                            tabBarItems[index]
+                                .foregroundColor(self.selection == index ? .accentColor : .primary)
+                            
+                            // Color underline
+                            if self.selection == index {
+                                Color.accentColor
+                                    .frame(height: 2)
+                                    .padding(.horizontal)
+                                    .matchedGeometryEffect(id: "underline", in: namespace)
+                            }
+                            
+                            // Clear underline
+                            if self.selection != index {
+                                Color.clear
+                                    .frame(height: 2)
+                                    .padding(.horizontal)
+                            }
                         }
-                        
-                        // Clear underline
-                        if self.selection != index {
-                            Color.clear
-                                .frame(height: 2)
-                                .padding(.horizontal)
-                        }
+                        .animation(.spring(), value: selection)
                     }
-                    .animation(.spring(), value: selection)
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
+            .padding(.top)
+            
+            // Underline Row
+            Divider()
         }
-        
     }
 }
