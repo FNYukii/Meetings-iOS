@@ -82,8 +82,9 @@ class FireComment {
             // likedCommentIdsの値を取得
             let likedCommentIds = user!.likedCommentIds
             
-            // likedCommentIdsが空なら終了
+            // likedCommentIdsが空ならReturnして終了
             if likedCommentIds.count == 0 {
+                completion?([])
                 return
             }
             

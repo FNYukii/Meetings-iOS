@@ -77,11 +77,11 @@ struct ProfileView: View {
             // Tab Body Row
             TabView(selection: $selection) {
                 // Comments Page
-                PostedCommentsPage(comments: postedComments)
+                CommentRowList(comments: postedComments)
                     .tag(0)
                 
                 // Likes Page
-                PostedCommentsPage(comments: likedComments)
+                CommentRowList(comments: likedComments)
                     .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

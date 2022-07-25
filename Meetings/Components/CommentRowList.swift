@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PostedCommentsPage: View {
+struct CommentRowList: View {
     
     let comments: [Comment]?
     
