@@ -54,6 +54,7 @@ struct MyTabBar: View {
                     .buttonStyle(.plain)
                 }
             }
+            .padding(.top)
             
             // Underline Row
             Divider()
