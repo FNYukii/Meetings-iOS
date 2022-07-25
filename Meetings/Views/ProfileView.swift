@@ -15,7 +15,8 @@ struct ProfileView: View {
     
     // States
     @State private var selection = 0
-    @State private var comments: [Comment]? = nil
+    @State private var postedComments: [Comment]? = nil
+    @State private var likedComments: [Comment]? = nil
     
     // Navigation
     @State private var isShowAccountView = false
@@ -71,16 +72,16 @@ struct ProfileView: View {
             .padding(.horizontal)
             
             // Tab Bar Row
-            MyTabBar(tabBarItems: [Text("comments"), Text("likes")], selection: $selection)
+            MyTabBar(tabBarItems: [Text("posts"), Text("likes")], selection: $selection)
             
             // Tab Body Row
             TabView(selection: $selection) {
                 // Comments Page
-                CommentsPage(comments: comments)
+                CommentRowList(comments: postedComments)
                     .tag(0)
                 
                 // Likes Page
-                Text("Likes")
+                CommentRowList(comments: likedComments)
                     .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -126,10 +127,17 @@ struct ProfileView: View {
             }
         }
         
-        // Commentsを読み取る
-        if comments == nil {
-            FireComment.readComments(userId: userId) { comments in
-                self.comments = comments
+        // ユーザーが投稿したCommentsを読み取る
+        if postedComments == nil {
+            FireComment.readPostedComments(userId: userId) { comments in
+                self.postedComments = comments
+            }
+        }
+        
+        // ユーザーがいいねしたコメントを読み取る
+        if likedComments == nil {
+            FireComment.readLikedComments(userId: userId) { comment in
+                self.likedComments = comment
             }
         }
     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommentsPage: View {
+struct CommentRowList: View {
     
     let comments: [Comment]?
     
@@ -22,6 +22,14 @@ struct CommentsPage: View {
                     Spacer()
                 }
                 .listRowSeparator(.hidden)
+            }
+            
+            // No content text
+            if comments?.count == 0 {
+                Text("no_comments")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.secondary)
+                    .listRowSeparator(.hidden)
             }
             
             // CommentRows

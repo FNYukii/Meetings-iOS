@@ -15,9 +15,9 @@ class FireUser {
         let userTag = document.get("userTag") as! String
         let introduction = document.get("introduction") as! String
         let iconUrl = document.get("iconPath") as? String
-        let likes = document.get("likes") as! [String]
+        let likedCommentIds = document.get("likedCommentIds") as! [String]
         
-        let user = User(id: id, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl, likes: likes)
+        let user = User(id: id, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl, likedCommentIds: likedCommentIds)
         return user
     }
     
@@ -48,7 +48,7 @@ class FireUser {
     static func readLikedUserIds(commentId: String, completion: (([String]?) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("users")
-            .whereField("likes", arrayContains: commentId)
+            .whereField("likedCommentIds", arrayContains: commentId)
             .getDocuments() { (querySnapshot, err) in
                 // エラー処理
                 if let err = err {
@@ -86,7 +86,7 @@ class FireUser {
                 "userTag": userTag,
                 "introduction": introduction,
                 "iconPath": iconPath as Any,
-                "likes": []
+                "likedCommentIds": []
             ]) { err in
                 if let err = err {
                     print("HELLO! Fail! Error writing User: \(err)")
@@ -107,7 +107,7 @@ class FireUser {
         db.collection("users")
             .document(FireAuth.uid()!)
             .updateData([
-                "likes": FieldValue.arrayUnion([commentId])
+                "likedCommentIds": FieldValue.arrayUnion([commentId])
             ]) { err in
                 if let err = err {
                     print("HELLO! Fail! Error updating User. Error: \(err)")
@@ -128,7 +128,7 @@ class FireUser {
         db.collection("users")
             .document(FireAuth.uid()!)
             .updateData([
-                "likes": FieldValue.arrayRemove([commentId])
+                "likedCommentIds": FieldValue.arrayRemove([commentId])
             ]) { err in
                 if let err = err {
                     print("HELLO! Fail! Error updating User. Error: \(err)")
