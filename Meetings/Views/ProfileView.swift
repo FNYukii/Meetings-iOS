@@ -76,7 +76,7 @@ struct ProfileView: View {
             // Tab Body Row
             TabView(selection: $selection) {
                 // Comments Page
-                Text("Comments")
+                CommentsPage(comments: comments)
                     .tag(0)
                 
                 // Likes Page
