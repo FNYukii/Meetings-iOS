@@ -55,7 +55,7 @@ class FireComment {
             }
     }
     
-    static func readComments(threadId: String, completion: (([Comment]) -> Void)?) {
+    static func readComments(threadId: String, completion: (([Comment]?) -> Void)?) {
         // ドキュメント読み取り
         let db = Firestore.firestore()
         db.collection("comments")
@@ -65,6 +65,7 @@ class FireComment {
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments: \(err)")
+                    completion?(nil)
                     return
                 }
                 print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
@@ -81,7 +82,7 @@ class FireComment {
             }
     }
     
-    static func readPostedComments(userId: String, completion: (([Comment]) -> Void)?) {
+    static func readPostedComments(userId: String, completion: (([Comment]?) -> Void)?) {
         // ドキュメント読み取り
         let db = Firestore.firestore()
         db.collection("comments")
@@ -90,6 +91,7 @@ class FireComment {
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments: \(err)")
+                    completion?(nil)
                     return
                 }
                 print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
@@ -106,11 +108,12 @@ class FireComment {
             }
     }
     
-    static func readLikedComments(userId: String, completion: (([Comment]) -> Void)?) {
+    static func readLikedComments(userId: String, completion: (([Comment]?) -> Void)?) {
         // Userドキュメントを読み取り
         FireUser.readUser(userId: userId) { user in
             // userが読み取れなかったなら終了
             if user == nil {
+                completion?(nil)
                 return
             }
             
