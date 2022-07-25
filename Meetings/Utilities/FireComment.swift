@@ -109,7 +109,7 @@ class FireComment {
     static func readLikedComments(userId: String, completion: (([Comment]) -> Void)?) {
         // Userドキュメントを読み取り
         FireUser.readUser(userId: userId) { user in
-            // userがnilなら終了
+            // userが読み取れなかったなら終了
             if user == nil {
                 return
             }
@@ -117,33 +117,25 @@ class FireComment {
             // likedCommentIdsの値を取得
             let likedCommentIds = user!.likedCommentIds
             
-            // likedCommentIdsが空ならReturnして終了
+            // likedCommentIdsが0件なら完了
             if likedCommentIds.count == 0 {
                 completion?([])
-                return
             }
             
-            // ユーザーがいいねしたコメントを全て取得
-            let db = Firestore.firestore()
-            db.collection("comments")
-                .whereField(FieldPath.documentID(), in: likedCommentIds)
-                .getDocuments() { (querySnapshot, err) in
-                    if let err = err {
-                        print("HELLO! Fail! Error Reeding Comments: \(err)")
-                        return
+            // likedCommentIdsの数だけ、ドキュメント読み取りを行う
+            var likedComments: [Comment] = []
+            likedCommentIds.forEach { commentId in
+                readComment(commentId: commentId) { comment in
+                    if let comment = comment {
+                        likedComments.append(comment)
+                        
+                        // 読み取ったドキュメントの数がlikedCommentIdsの数に達したら完了
+                        if likedComments.count >= likedCommentIds.count {
+                            completion?(likedComments)
+                        }
                     }
-                    print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
-                    
-                    // Comments
-                    var comments: [Comment] = []
-                    for document in querySnapshot!.documents {
-                        let comment = toComment(document: document)
-                        comments.append(comment)
-                    }
-                    
-                    // Return
-                    completion?(comments)
                 }
+            }
         }
     }
     
