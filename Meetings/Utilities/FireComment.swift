@@ -46,7 +46,7 @@ class FireComment {
         }
     }
     
-    static func readComments(userId: String, completion: (([Comment]) -> Void)?) {
+    static func readPostedComments(userId: String, completion: (([Comment]) -> Void)?) {
         // ドキュメント読み取り
         let db = Firestore.firestore()
         db.collection("comments")

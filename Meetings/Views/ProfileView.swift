@@ -128,7 +128,7 @@ struct ProfileView: View {
         
         // Commentsを読み取る
         if postedComments == nil {
-            FireComment.readComments(userId: userId) { comments in
+            FireComment.readPostedComments(userId: userId) { comments in
                 self.postedComments = comments
             }
         }
