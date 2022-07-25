@@ -20,6 +20,41 @@ class FireComment {
         return comment
     }
     
+    static func toComment(document: DocumentSnapshot) -> Comment {
+        let id = document.documentID
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
+        let userId = document.get("userId") as! String
+        let threadId = document.get("threadId") as! String
+        let text = document.get("text") as! String
+        
+        let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text)
+        return comment
+    }
+    
+    static func readComment(commentId: String, completion: ((Comment?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .document(commentId)
+            .getDocument { (document, error) in
+                // エラー処理
+                if let error = error {
+                    print("HELLO! Fail! Error reading User. \(error)")
+                    completion?(nil)
+                    return
+                }
+                if !document!.exists {
+                    print("HELLO! Fail! User not found.")
+                    completion?(nil)
+                    return
+                }
+                print("HELLO! Success! Read 1 User.")
+                
+                // Return
+                let comment = toComment(document: document!)
+                completion?(comment)
+            }
+    }
+    
     static func readComments(threadId: String, completion: (([Comment]) -> Void)?) {
         // ドキュメント読み取り
         let db = Firestore.firestore()
