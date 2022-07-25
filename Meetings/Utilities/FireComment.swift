@@ -71,6 +71,11 @@ class FireComment {
         }
     }
     
+    static func readLikedComments(userId: String, completion: (([Comment]) -> Void)?) {
+        // ドキュメント読み取り
+        
+    }
+    
     static func createComment(threadId: String, text: String) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
