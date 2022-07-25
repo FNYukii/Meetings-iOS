@@ -81,12 +81,12 @@ class FireThread {
         db.collection("threads")
             .document(threadId)
             .delete() { err in
-            if let err = err {
-                print("HELLO! Fail! Error removing document: \(err)")
-            } else {
-                print("HELLO! Success! Deleted 1 Thread.")
+                if let err = err {
+                    print("HELLO! Fail! Error removing document: \(err)")
+                } else {
+                    print("HELLO! Success! Deleted 1 Thread.")
+                }
             }
-        }
     }
     
 }

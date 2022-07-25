@@ -78,7 +78,7 @@ class FireComment {
                 
                 // Return
                 completion?(comments)
-        }
+            }
     }
     
     static func readPostedComments(userId: String, completion: (([Comment]) -> Void)?) {
@@ -176,12 +176,12 @@ class FireComment {
         db.collection("comments")
             .document(commentId)
             .delete() { err in
-            if let err = err {
-                print("HELLO! Fail! Error removing document: \(err)")
-            } else {
-                print("HELLO! Success! Deleted 1 Comment.")
+                if let err = err {
+                    print("HELLO! Fail! Error removing document: \(err)")
+                } else {
+                    print("HELLO! Success! Deleted 1 Comment.")
+                }
             }
-        }
     }
     
 }
