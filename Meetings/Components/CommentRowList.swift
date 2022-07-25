@@ -24,6 +24,14 @@ struct CommentRowList: View {
                 .listRowSeparator(.hidden)
             }
             
+            // No content text
+            if comments?.count == 0 {
+                Text("no_comments")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.secondary)
+                    .listRowSeparator(.hidden)
+            }
+            
             // CommentRows
             if comments != nil {
                 ForEach(comments!) { comment in
