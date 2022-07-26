@@ -25,7 +25,8 @@ struct ThreadRow: View {
             // Header Row
             HStack(alignment: .top) {
                 Text(thread.title)
-                    .font(.title)
+                    .font(.title2)
+                    .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
                 
                 Spacer()
