@@ -66,7 +66,7 @@ struct SignInView: View {
                                 }
                             }
                         }) {
-                            Text("done")
+                            Text("sign_in")
                                 .fontWeight(.bold)
                         }
                         .disabled(email.isEmpty || password.isEmpty)
