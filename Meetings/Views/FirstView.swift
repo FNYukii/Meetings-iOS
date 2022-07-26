@@ -48,7 +48,7 @@ struct FirstView: View {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     if signInStateViewModel.isSignedIn {
                         NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
-                            IconImage(url: "", iconSize: .small)
+                            IconImage(url: "", iconImageFamily: .small)
                         }
                     }
                     

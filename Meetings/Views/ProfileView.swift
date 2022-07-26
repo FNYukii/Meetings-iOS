@@ -27,7 +27,7 @@ struct ProfileView: View {
             HStack(alignment: .top) {
                 
                 // Icon Column
-                IconImage(url: user?.iconUrl, iconSize: .large)
+                IconImage(url: user?.iconUrl, iconImageFamily: .medium)
                 
                 // Detail Column
                 VStack(alignment: .leading) {

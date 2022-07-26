@@ -31,7 +31,7 @@ struct CommentRow: View {
             Button (action: {
                 isShowProfileView.toggle()
             }) {
-                IconImage(url: user?.iconUrl, iconSize: .large)
+                IconImage(url: user?.iconUrl, iconImageFamily: .medium)
             }
             .buttonStyle(.borderless)
             .disabled(isDisableShowingProfileView)

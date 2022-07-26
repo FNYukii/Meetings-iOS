@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 struct IconImage: View {
     
     let url: String?
-    let iconSize: IconSize
+    let iconImageFamily: IconImageFamily
     
     var body: some View {
         WebImage(url: URL(string: url ?? ""))
@@ -20,7 +20,7 @@ struct IconImage: View {
                 Color.secondary
                     .opacity(0.2)
             }
-            .frame(width: iconSize.rawValue, height: iconSize.rawValue)
+            .frame(width: iconImageFamily.rawValue, height: iconImageFamily.rawValue)
             .cornerRadius(.infinity)
             .overlay(
                 RoundedRectangle(cornerRadius: .infinity)
@@ -29,7 +29,7 @@ struct IconImage: View {
     }
 }
 
-enum IconSize: CGFloat {
+enum IconImageFamily: CGFloat {
     case small = 32
-    case large = 40
+    case medium = 40
 }
