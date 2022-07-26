@@ -9,7 +9,11 @@ import SwiftUI
 
 struct AccountView: View {
     
+    // Environments
     @Environment(\.dismiss) private var dismiss
+    
+    // States
+    @State private var isShowDialog = false
     
     var body: some View {
         
@@ -32,12 +36,20 @@ struct AccountView: View {
             
             Section {
                 Button("sign_out") {
-                    FireAuth.signOut()
-                    dismiss()
+                    isShowDialog.toggle()
                 }
                 .foregroundColor(.red)
                 .frame(maxWidth: .infinity, alignment: .center)
             }
+        }
+        
+        .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
+            Button("sign_out", role: .destructive) {
+                FireAuth.signOut()
+                dismiss()
+            }
+        } message: {
+            Text("are_you_sure_you_want_to_sign_out")
         }
         
         .navigationTitle("account")
