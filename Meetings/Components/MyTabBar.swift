@@ -14,6 +14,7 @@ struct MyTabBar: View {
     
     // States
     @Binding var selection: Int
+    @Environment(\.colorScheme) var colorScheme
     
     // Namespace
     @Namespace private var namespace
@@ -23,7 +24,7 @@ struct MyTabBar: View {
         VStack(spacing: 0) {
             
             // Button Row
-            HStack {
+            HStack(spacing: 0) {
                 ForEach(0 ..< tabBarItems.count, id: \.self) { index in
                     Button(action: {
                         self.selection = index
@@ -49,6 +50,7 @@ struct MyTabBar: View {
                                     .padding(.horizontal)
                             }
                         }
+                        .background(colorScheme == .dark ? Color.black : Color.white)
                         .animation(.spring(), value: selection)
                     }
                     .buttonStyle(.plain)
