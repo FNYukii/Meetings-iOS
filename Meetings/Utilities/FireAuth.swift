@@ -33,23 +33,43 @@ class FireAuth {
         return nil
     }
     
-    static func signUp(email: String, password: String, completion: ((String) -> Void)?) {
+    static func signUp(email: String, password: String, completion: ((String?) -> Void)?) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            // エラー処理
             if let error = error {
                 print("HELLO! Fail! Erroring sign up. error: \(error)")
+                completion?(nil)
+                return
             }
-            if let authResult = authResult {
-                let uid = authResult.user.uid
-                completion?(uid)
+            if authResult == nil {
+                print("HELLO! Fail! AuthResult does not exists.")
+                completion?(nil)
+                return
             }
+            
+            // Return
+            let uid = authResult!.user.uid
+            completion?(uid)
         }
     }
     
-    static func signIn(email: String, password: String) {
+    static func signIn(email: String, password: String, completion: ((String?) -> Void)?) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            // エラー処理
             if let error = error {
                 print("HELLO! Fail! Erroring sign in. error: \(error)")
+                completion?(nil)
+                return
             }
+            if authResult == nil {
+                print("HELLO! Fail! AuthResult does not exists.")
+                completion?(nil)
+                return
+            }
+            
+            // Return
+            let uid = authResult!.user.uid
+            completion?(uid)
         }
     }
     
