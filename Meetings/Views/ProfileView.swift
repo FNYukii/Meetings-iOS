@@ -35,7 +35,10 @@ struct ProfileView: View {
                             .opacity(0.2)
                     }
                     .frame(width: 40, height: 40)
-                    .cornerRadius(.infinity)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: .infinity)
+                            .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                    )
                 
                 // Detail Column
                 VStack(alignment: .leading) {
