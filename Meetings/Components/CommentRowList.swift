@@ -9,20 +9,34 @@ import SwiftUI
 
 struct CommentRowList: View {
     
-    let comments: [Comment]?
+    // User ID, Comments family
+    let userId: String
+    let commentRowListFamily: CommentRowListFamily
+    
+    // States
+    @State private var comments: [Comment]? = nil
+    @State private var isLoadedComments = false
     
     var body: some View {
         List {
             // Progress view
-            if comments == nil {
+            if !isLoadedComments {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .listRowSeparator(.hidden)
             }
             
+            // Reading failed text
+            if isLoadedComments && comments == nil {
+                Text("comments_reading_failed")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.secondary)
+                    .listRowSeparator(.hidden)
+            }
+            
             // No content text
-            if comments?.count == 0 {
+            if isLoadedComments && comments?.count == 0 {
                 Text("no_comments")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -30,7 +44,7 @@ struct CommentRowList: View {
             }
             
             // CommentRows
-            if comments != nil {
+            if isLoadedComments && comments != nil {
                 ForEach(comments!) { comment in
                     CommentRow(comment: comment, isDisableShowingProfileView: true, isAbleShowingThreadView: true)
                 }
@@ -39,5 +53,29 @@ struct CommentRowList: View {
             }            
         }
         .listStyle(.plain)
+        .onAppear(perform: load)
     }
+    
+    private func load() {
+        // postsが指定されたなら、ユーザーが投稿したコメントを読み取り
+        if comments == nil && commentRowListFamily == .posts {
+            FireComment.readPostedComments(userId: userId) { comments in
+                self.comments = comments
+                self.isLoadedComments = true
+            }
+        }
+        
+        // likesが指定されたなら、ユーザーがいいねしたコメントを読み取り
+        if comments == nil && commentRowListFamily == .likes {
+            FireComment.readLikedComments(userId: userId) { comment in
+                self.comments = comment
+                self.isLoadedComments = true
+            }
+        }
+    }
+}
+
+enum CommentRowListFamily: Int {
+    case posts = 0
+    case likes = 1
 }

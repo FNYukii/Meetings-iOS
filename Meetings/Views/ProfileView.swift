@@ -18,12 +18,6 @@ struct ProfileView: View {
     
     @State private var selection = 0
     
-    @State private var postedComments: [Comment]? = nil
-    @State private var isloadedPostedComments = false
-    
-    @State private var likedComments: [Comment]? = nil
-    @State private var isLoadedLikedComments = false
-    
     // Navigation
     @State private var isShowAccountView = false
     
@@ -54,7 +48,7 @@ struct ProfileView: View {
                         EmptyView()
                     }
                     
-                    // Reading successful view
+                    // DisplayName, UserTag
                     if isLoadedUser && user != nil {
                         Text(user!.displayName)
                             .fontWeight(.bold)
@@ -87,7 +81,7 @@ struct ProfileView: View {
                     EmptyView()
                 }
                 
-                // Reading successful view
+                // Introduction
                 if isLoadedUser && user != nil {
                     Text(user!.introduction)
                 }
@@ -101,11 +95,11 @@ struct ProfileView: View {
             // Tab Body Row
             TabView(selection: $selection) {
                 // Comments Page
-                CommentRowList(comments: postedComments)
+                CommentRowList(userId: userId, commentRowListFamily: .posts)
                     .tag(0)
                 
                 // Likes Page
-                CommentRowList(comments: likedComments)
+                CommentRowList(userId: userId, commentRowListFamily: .likes)
                     .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -149,22 +143,6 @@ struct ProfileView: View {
             FireUser.readUser(userId: userId) { user in
                 self.user = user
                 self.isLoadedUser = true
-            }
-        }
-        
-        // ユーザーが投稿したCommentsを読み取る
-        if postedComments == nil {
-            FireComment.readPostedComments(userId: userId) { comments in
-                self.postedComments = comments
-                self.isloadedPostedComments = true
-            }
-        }
-        
-        // ユーザーがいいねしたコメントを読み取る
-        if likedComments == nil {
-            FireComment.readLikedComments(userId: userId) { comment in
-                self.likedComments = comment
-                self.isLoadedLikedComments = true
             }
         }
     }
