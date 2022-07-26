@@ -27,20 +27,22 @@ struct ProfileView: View {
             HStack(alignment: .top) {
                 
                 // Icon Column
-                Image(systemName: "person.crop.circle")
-                    .resizable()
+                Color.secondary
+                    .opacity(0.2)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.secondary)
+                    .cornerRadius(.infinity)
                 
                 // Detail Column
                 VStack(alignment: .leading) {
                     
                     // Progress view
                     if user == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 80, height: 16)
                         
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 80, height: 16)
                     }
                     
@@ -60,7 +62,8 @@ struct ProfileView: View {
             Group {
                 // Progress view
                 if user == nil {
-                    Color.secondary.opacity(0.2)
+                    Color.secondary
+                        .opacity(0.2)
                         .frame(width: 200, height: 16)
                 }
                 

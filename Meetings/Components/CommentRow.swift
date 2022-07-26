@@ -31,11 +31,10 @@ struct CommentRow: View {
             Button (action: {
                 isShowProfileView.toggle()
             }) {
-                Image(systemName: "person.crop.circle")
-                    .resizable()
+                Color.secondary
+                    .opacity(0.2)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.secondary)
-                    .opacity(0.5)
+                    .cornerRadius(.infinity)
             }
             .buttonStyle(.borderless)
             .disabled(isDisableShowingProfileView)
@@ -47,13 +46,16 @@ struct CommentRow: View {
                 HStack {
                     // 3 Progress view
                     if user == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 80)
                         
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 80)
                         
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 40)
                     }
                     
@@ -90,7 +92,8 @@ struct CommentRow: View {
                 Group {
                     // Progress view
                     if user == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 200, height: 16)
                     }
                     
@@ -105,8 +108,9 @@ struct CommentRow: View {
                 HStack {
                     // Progress view
                     if likedUserIds == nil {
-                        Color.secondary.opacity(0.2)
-                            .frame(width: 40, height: 16)
+                        Color.secondary
+                            .opacity(0.2)
+                            .frame(width: 40)
                     }
                     
                     // Like button when not liked
@@ -141,13 +145,15 @@ struct CommentRow: View {
                         .disabled(!FireAuth.isSignedIn())
                     }
                 }
+                .frame(height: 16)
                 .padding(.top, 4)
                 
                 // Thread Title Row
                 Group {
                     // Progress view
                     if isAbleShowingThreadView && thread == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 120, height: 16)
                     }
                     

@@ -48,8 +48,10 @@ struct FirstView: View {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     if signInStateViewModel.isSignedIn {
                         NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
-                            Image(systemName: "person.crop.circle")
-                                .font(.title2)
+                            Color.secondary
+                                .opacity(0.2)
+                                .frame(width: 32, height: 32)
+                                .cornerRadius(.infinity)
                         }
                     }
                     
