@@ -22,6 +22,7 @@ struct CommentRow: View {
     @State private var user: User? = nil
     @State private var likedUserIds: [String]? = nil
     @State private var thread: Thread? = nil
+    @State private var isLoadedThread = false
     @State private var isShowDialog = false
         
     var body: some View {
@@ -148,14 +149,20 @@ struct CommentRow: View {
                 // Thread Title Row
                 Group {
                     // Progress view
-                    if isAbleShowingThreadView && thread == nil {
+                    if isAbleShowingThreadView && !isLoadedThread {
                         Color.secondary
                             .opacity(0.2)
                             .frame(width: 120, height: 16)
                     }
                     
+                    // Not found text
+                    if isAbleShowingThreadView && isLoadedThread && thread == nil {
+                        Text("thread_not_found")
+                            .foregroundColor(.secondary)
+                    }
+                    
                     // Thread title
-                    if isAbleShowingThreadView && thread != nil {
+                    if isAbleShowingThreadView && isLoadedThread && thread != nil {
                         Button(action: {
                             isShowThreadView.toggle()
                         }) {
@@ -204,6 +211,7 @@ struct CommentRow: View {
         if isAbleShowingThreadView && thread == nil {
             FireThread.readThread(threadId: comment.threadId) { thread in
                 self.thread = thread
+                self.isLoadedThread = true
             }
         }
         
