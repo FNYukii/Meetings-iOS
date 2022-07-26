@@ -34,7 +34,8 @@ struct CommentRowList: View {
                 ForEach(comments!) { comment in
                     CommentRow(comment: comment, isDisableShowingProfileView: true, isAbleShowingThreadView: true)
                 }
-                .listRowSeparator(.hidden)
+                .listRowSeparator(.hidden, edges: .top)
+                .listRowSeparator(.visible, edges: .bottom)
             }            
         }
         .listStyle(.plain)
