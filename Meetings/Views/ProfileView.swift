@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    // User to show
+    // User ID to show
     let userId: String
-    @State private var user: User? = nil
     
     // States
+    @State private var user: User? = nil
+    @State private var isLoadedUser = false
+    
     @State private var selection = 0
     @State private var postedComments: [Comment]? = nil
     @State private var likedComments: [Comment]? = nil
@@ -33,7 +35,7 @@ struct ProfileView: View {
                 VStack(alignment: .leading) {
                     
                     // Progress view
-                    if user == nil {
+                    if !isLoadedUser {
                         Color.secondary
                             .opacity(0.2)
                             .frame(width: 80, height: 16)
@@ -43,8 +45,13 @@ struct ProfileView: View {
                             .frame(width: 80, height: 16)
                     }
                     
+                    // Not found view
+                    if isLoadedUser && user == nil {
+                        EmptyView()
+                    }
+                    
                     // DisplayName, userTag
-                    if user != nil {
+                    if isLoadedUser && user != nil {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
@@ -55,17 +62,24 @@ struct ProfileView: View {
             }
             .padding(.horizontal)
             
+            // User Not Found Row
+            if isLoadedUser && user == nil {
+                Text("user_not_found")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.secondary)
+            }
+            
             // Introduction Row
             Group {
                 // Progress view
-                if user == nil {
+                if !isLoadedUser {
                     Color.secondary
                         .opacity(0.2)
                         .frame(width: 200, height: 16)
                 }
                 
                 // Introduction
-                if user != nil {
+                if isLoadedUser && user != nil {
                     Text(user!.introduction)
                 }
             }
@@ -125,6 +139,7 @@ struct ProfileView: View {
         if user == nil {
             FireUser.readUser(userId: userId) { user in
                 self.user = user
+                self.isLoadedUser = true
             }
         }
         
