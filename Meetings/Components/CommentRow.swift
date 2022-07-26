@@ -47,13 +47,16 @@ struct CommentRow: View {
                 HStack {
                     // 3 Progress view
                     if user == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 80)
                         
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 80)
                         
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 40)
                     }
                     
@@ -90,7 +93,8 @@ struct CommentRow: View {
                 Group {
                     // Progress view
                     if user == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 200, height: 16)
                     }
                     
@@ -105,7 +109,8 @@ struct CommentRow: View {
                 HStack {
                     // Progress view
                     if likedUserIds == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 40, height: 16)
                     }
                     
@@ -147,7 +152,8 @@ struct CommentRow: View {
                 Group {
                     // Progress view
                     if isAbleShowingThreadView && thread == nil {
-                        Color.secondary.opacity(0.2)
+                        Color.secondary
+                            .opacity(0.2)
                             .frame(width: 120, height: 16)
                     }
                     
