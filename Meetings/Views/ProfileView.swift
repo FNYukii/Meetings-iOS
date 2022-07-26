@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    // User to show
+    // User ID to show
     let userId: String
-    @State private var user: User? = nil
     
     // States
+    @State private var user: User? = nil
+    @State private var isLoadedUser = false
+    
     @State private var selection = 0
-    @State private var postedComments: [Comment]? = nil
-    @State private var likedComments: [Comment]? = nil
     
     // Navigation
     @State private var isShowAccountView = false
@@ -29,11 +29,11 @@ struct ProfileView: View {
                 // Icon Column
                 IconImage(url: user?.iconUrl, iconImageFamily: .medium)
                 
-                // Detail Column
+                // DisplayName And UserTag Column
                 VStack(alignment: .leading) {
                     
                     // Progress view
-                    if user == nil {
+                    if !isLoadedUser {
                         Color.secondary
                             .opacity(0.2)
                             .frame(width: 80, height: 16)
@@ -43,8 +43,13 @@ struct ProfileView: View {
                             .frame(width: 80, height: 16)
                     }
                     
-                    // DisplayName, userTag
-                    if user != nil {
+                    // Reading failed view
+                    if isLoadedUser && user == nil {
+                        EmptyView()
+                    }
+                    
+                    // DisplayName, UserTag
+                    if isLoadedUser && user != nil {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
@@ -55,17 +60,29 @@ struct ProfileView: View {
             }
             .padding(.horizontal)
             
+            // User Reading Failed Row
+            if isLoadedUser && user == nil {
+                Text("user_reading_failed")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.secondary)
+            }
+            
             // Introduction Row
             Group {
                 // Progress view
-                if user == nil {
+                if !isLoadedUser {
                     Color.secondary
                         .opacity(0.2)
                         .frame(width: 200, height: 16)
                 }
                 
+                // Reading failed view
+                if isLoadedUser && user == nil {
+                    EmptyView()
+                }
+                
                 // Introduction
-                if user != nil {
+                if isLoadedUser && user != nil {
                     Text(user!.introduction)
                 }
             }
@@ -78,11 +95,11 @@ struct ProfileView: View {
             // Tab Body Row
             TabView(selection: $selection) {
                 // Comments Page
-                CommentRowList(comments: postedComments)
+                CommentRowList(userId: userId, commentRowListFamily: .posts)
                     .tag(0)
                 
                 // Likes Page
-                CommentRowList(comments: likedComments)
+                CommentRowList(userId: userId, commentRowListFamily: .likes)
                     .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -125,20 +142,7 @@ struct ProfileView: View {
         if user == nil {
             FireUser.readUser(userId: userId) { user in
                 self.user = user
-            }
-        }
-        
-        // ユーザーが投稿したCommentsを読み取る
-        if postedComments == nil {
-            FireComment.readPostedComments(userId: userId) { comments in
-                self.postedComments = comments
-            }
-        }
-        
-        // ユーザーがいいねしたコメントを読み取る
-        if likedComments == nil {
-            FireComment.readLikedComments(userId: userId) { comment in
-                self.likedComments = comment
+                self.isLoadedUser = true
             }
         }
     }

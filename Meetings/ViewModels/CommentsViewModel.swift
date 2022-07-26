@@ -19,7 +19,7 @@ class CommentsViewModel: ObservableObject {
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
-            .order(by: "createdAt", descending: false)
+            .order(by: "createdAt")
             .addSnapshotListener {(snapshot, error) in
                 // エラー処理
                 guard let snapshot = snapshot else {

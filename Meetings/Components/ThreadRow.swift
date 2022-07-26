@@ -14,6 +14,8 @@ struct ThreadRow: View {
     
     // States
     @State private var comments: [Comment]? = []
+    @State private var isLoadedComments = false
+    
     @State private var isShowDialog = false
     
     var body: some View {
@@ -46,25 +48,32 @@ struct ThreadRow: View {
             // CommentRows Row
             Group {
                 // Progress view
-                if comments == nil {
+                if !isLoadedComments {
                     ProgressView()
                         .progressViewStyle(.circular)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .listRowSeparator(.hidden)
                 }
                 
+                // Reading failed view
+                if isLoadedComments && comments == nil {
+                    Text("comments_reading_failed")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(.secondary)
+                }
+                
+                // No content text
+                if isLoadedComments && comments != nil && comments!.count == 0 {
+                    Text("no_comments")
+                        .foregroundColor(.secondary)
+                }
+                
                 // CommentRows
-                if comments != nil {
+                if isLoadedComments && comments != nil {
                     ForEach(comments!) { comment in
                         CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
                     }
                 }
-            }
-            
-            // 0 Comment Message Row
-            if comments != nil && comments!.count == 0 {
-                Text("0_Comments")
-                    .foregroundColor(.secondary)
             }
         }
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
@@ -85,6 +94,7 @@ struct ThreadRow: View {
         FireComment.readComments(threadId: thread.id) { comments in
             withAnimation {
                 self.comments = comments
+                self.isLoadedComments = true
             }
         }
     }
