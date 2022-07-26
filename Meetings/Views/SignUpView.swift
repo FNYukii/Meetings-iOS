@@ -9,8 +9,10 @@ import SwiftUI
 
 struct SignUpView: View {
     
+    // Environments
     @Environment(\.dismiss) private var dismiss
     
+    // States
     @State private var email = ""
     @State private var password1 = ""
     @State private var password2 = ""
@@ -18,6 +20,8 @@ struct SignUpView: View {
     @State private var userTag = ""
     @State private var introduction = ""
     @State private var icon: UIImage? = nil
+    
+    @State private var isShowDialog = false
     
     var body: some View {
         NavigationView {
@@ -39,6 +43,14 @@ struct SignUpView: View {
                 }
             }
             
+            .alert("failed", isPresented: $isShowDialog) {
+                Button("ok") {
+                    isShowDialog.toggle()
+                }
+            } message: {
+                Text("failed_to_sign_up")
+            }
+            
             .navigationTitle("new_account")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -49,10 +61,19 @@ struct SignUpView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        // サインアップ試行
                         FireAuth.signUp(email: email, password: password1) { uid in
-                            FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil)
+                            // 失敗
+                            if uid == nil {
+                                isShowDialog.toggle()
+                            }
+                            
+                            // 成功
+                            if let uid = uid {
+                                FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil)
+                                dismiss()
+                            }
                         }
-                        dismiss()
                     }) {
                         Text("create")
                             .fontWeight(.bold)
