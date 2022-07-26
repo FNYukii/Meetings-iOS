@@ -62,18 +62,18 @@ struct ThreadRow: View {
                         .foregroundColor(.secondary)
                 }
                 
+                // No content text
+                if isLoadedComments && comments != nil && comments!.count == 0 {
+                    Text("no_comments")
+                        .foregroundColor(.secondary)
+                }
+                
                 // CommentRows
                 if isLoadedComments && comments != nil {
                     ForEach(comments!) { comment in
                         CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
                     }
                 }
-            }
-            
-            // 0 Comment Message Row
-            if comments != nil && comments!.count == 0 {
-                Text("0_Comments")
-                    .foregroundColor(.secondary)
             }
         }
         .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
