@@ -21,6 +21,7 @@ struct SignUpView: View {
     @State private var introduction = ""
     @State private var icon: UIImage? = nil
     
+    @State private var isLoading = false
     @State private var isShowDialog = false
     
     var body: some View {
@@ -30,14 +31,22 @@ struct SignUpView: View {
                 Section {
                     TextField("email", text: $email)
                         .keyboardType(.asciiCapable)
+                        .disabled(isLoading)
+                    
                     SecureField("password", text: $password1)
+                        .disabled(isLoading)
+                    
                     SecureField("check_password", text: $password2)
+                        .disabled(isLoading)
                 }
                 
                 Section {
                     TextField("display_name", text: $displayName)
+                        .disabled(isLoading
+                        )
                     TextField("user_tag", text: $userTag)
                         .keyboardType(.asciiCapable)
+                        .disabled(isLoading)
                 }
                 
                 Section {
@@ -47,7 +56,7 @@ struct SignUpView: View {
             
             .alert("failed", isPresented: $isShowDialog) {
                 Button("ok") {
-                    isShowDialog.toggle()
+                    isShowDialog = false
                 }
             } message: {
                 Text("failed_to_sign_up")
@@ -61,26 +70,37 @@ struct SignUpView: View {
                         dismiss()
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        // サインアップ試行
-                        FireAuth.signUp(email: email, password: password1) { uid in
-                            // 失敗
-                            if uid == nil {
-                                isShowDialog.toggle()
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // Sign Up Button
+                    if !isLoading {
+                        Button(action: {
+                            isLoading = true
+                            // サインアップ試行
+                            FireAuth.signUp(email: email, password: password1) { uid in
+                                isLoading = false
+                                // 失敗
+                                if uid == nil {
+                                    isShowDialog = true
+                                }
+                                
+                                // 成功
+                                if let uid = uid {
+                                    FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil)
+                                    dismiss()
+                                }
                             }
-                            
-                            // 成功
-                            if let uid = uid {
-                                FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil)
-                                dismiss()
-                            }
+                        }) {
+                            Text("create")
+                                .fontWeight(.bold)
                         }
-                    }) {
-                        Text("create")
-                            .fontWeight(.bold)
+                        .disabled(email.isEmpty || password1.isEmpty || password1 != password2 || displayName.isEmpty || userTag.isEmpty)
                     }
-                    .disabled(email.isEmpty || password1.isEmpty || password1 != password2 || displayName.isEmpty || userTag.isEmpty)
+                    
+                    // ProgressView
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
                 }
             }
         }
