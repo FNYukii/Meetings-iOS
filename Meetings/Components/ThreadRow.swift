@@ -47,12 +47,10 @@ struct ThreadRow: View {
             Group {
                 // Progress view
                 if comments == nil {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                        Spacer()
-                    }
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .listRowSeparator(.hidden)
                 }
                 
                 // CommentRows

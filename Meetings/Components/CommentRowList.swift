@@ -15,13 +15,10 @@ struct CommentRowList: View {
         List {
             // Progress view
             if comments == nil {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                    Spacer()
-                }
-                .listRowSeparator(.hidden)
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .listRowSeparator(.hidden)
             }
             
             // No content text
