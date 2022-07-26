@@ -56,8 +56,32 @@ class FireComment {
     }
     
     static func readComments(threadId: String, completion: (([Comment]?) -> Void)?) {
-        // ドキュメント読み取り
+        // キャッシュからドキュメントを読み取り
         let db = Firestore.firestore()
+        db.collection("comments")
+            .whereField("threadId", isEqualTo: threadId)
+            .order(by: "createdAt")
+            .limit(to: 3)
+            .getDocuments(source: .cache) { (querySnapshot, err) in
+                // エラー処理
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Comments from cashe. \(err)")
+                    return
+                }
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from cashe.")
+                
+                // Comments
+                var comments: [Comment] = []
+                for document in querySnapshot!.documents {
+                    let comment = toComment(document: document)
+                    comments.append(comment)
+                }
+                
+                // Return
+                completion?(comments)
+            }
+        
+        // サーバーからドキュメント読み取り
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
             .order(by: "createdAt")
