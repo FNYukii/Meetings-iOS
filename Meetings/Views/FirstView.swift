@@ -31,8 +31,13 @@ struct FirstView: View {
                         .listRowSeparator(.hidden)
                 }
                 
-                // Message
-                
+                // No content text
+                if threadsViewModel.isLoaded && threadsViewModel.threads.count == 0 {
+                    Text("no_threads")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(.secondary)
+                        .listRowSeparator(.hidden)
+                }
                 
                 // ThreadRows
                 ForEach(threadsViewModel.threads) { thread in
