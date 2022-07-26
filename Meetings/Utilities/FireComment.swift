@@ -88,11 +88,11 @@ class FireComment {
             .limit(to: 3)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    print("HELLO! Fail! Error Reeding Comments: \(err)")
+                    print("HELLO! Fail! Error Reeding Comments from server. \(err)")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from server.")
                 
                 // Comments
                 var comments: [Comment] = []
