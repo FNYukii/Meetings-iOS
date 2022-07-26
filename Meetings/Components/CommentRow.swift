@@ -59,10 +59,10 @@ struct CommentRow: View {
                     
                     // User reading failed views
                     if isLoadedUser && user == nil {
-                        ForEach(0 ..< 2) { _ in
-                            Image(systemName: "exclamationmark.triangle")
-                                .foregroundColor(.secondary)
-                        }
+                        Image(systemName: "exclamationmark.triangle")
+                            .foregroundColor(.secondary)
+                        Text("user_reading_failed")
+                            .foregroundColor(.secondary)
                     }
                     
                     // Display name & User tag
