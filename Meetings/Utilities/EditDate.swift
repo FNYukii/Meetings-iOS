@@ -10,7 +10,7 @@ import SwiftUI
 
 class EditDate {
     
-    static func HowManyAgoText(from: Date) -> Text {
+    static func howManyAgoText(from: Date) -> Text {
         let inputDate = from
         
         let secondDiff: Int = (Calendar.current.dateComponents([.second], from: inputDate, to: Date())).second!
