@@ -20,6 +20,7 @@ struct IconImage: View {
                 Color.secondary
                     .opacity(0.2)
             }
+            .scaledToFill()
             .frame(width: iconImageFamily.rawValue, height: iconImageFamily.rawValue)
             .cornerRadius(.infinity)
             .overlay(
