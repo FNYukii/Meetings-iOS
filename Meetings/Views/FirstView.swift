@@ -23,6 +23,23 @@ struct FirstView: View {
         NavigationView {
             
             List {
+                // Progress view
+                if !threadsViewModel.isLoaded {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .listRowSeparator(.hidden)
+                }
+                
+                // No content text
+                if threadsViewModel.isLoaded && threadsViewModel.threads.count == 0 {
+                    Text("no_threads")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(.secondary)
+                        .listRowSeparator(.hidden)
+                }
+                
+                // ThreadRows
                 ForEach(threadsViewModel.threads) { thread in
                     ThreadRow(thread: thread)
                 }
