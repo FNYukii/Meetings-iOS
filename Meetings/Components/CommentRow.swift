@@ -23,6 +23,7 @@ struct CommentRow: View {
     @State private var isLoadedUser = false
     
     @State private var likedUserIds: [String]? = nil
+    @State private var isLoadedLikedUserIds = false
     
     @State private var thread: Thread? = nil
     @State private var isLoadedThread = false
@@ -102,14 +103,22 @@ struct CommentRow: View {
                 // Reaction Row
                 HStack {
                     // Progress view
-                    if likedUserIds == nil {
+                    if !isLoadedLikedUserIds {
                         Color.secondary
                             .opacity(0.2)
                             .frame(width: 40)
                     }
                     
+                    // Reading failed view
+                    if isLoadedLikedUserIds && likedUserIds == nil {
+                        Image(systemName: "exclamationmark.triangle")
+                            .foregroundColor(.secondary)
+                        Text("likes_reading_failed")
+                            .foregroundColor(.secondary)
+                    }
+                    
                     // Like button when not liked
-                    if likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
+                    if isLoadedLikedUserIds && likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
                         Button(action: {
                             FireUser.likeComment(commentId: comment.id)
                             loadLikedUserIds()
@@ -125,7 +134,7 @@ struct CommentRow: View {
                     }
                     
                     // Like button when liked
-                    if likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
+                    if isLoadedLikedUserIds && likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
                         Button(action: {
                             FireUser.unlikeComment(commentId: comment.id)
                             loadLikedUserIds()
@@ -226,9 +235,11 @@ struct CommentRow: View {
     }
     
     private func loadLikedUserIds() {
+        self.isLoadedLikedUserIds = false
         FireUser.readLikedUserIds(commentId: comment.id) { userIds in
             withAnimation {
                 self.likedUserIds = userIds
+                self.isLoadedLikedUserIds = true
             }
         }
     }
