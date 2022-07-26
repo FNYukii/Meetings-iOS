@@ -23,6 +23,7 @@ struct SignInView: View {
             
             Form {
                 TextField("email", text: $email)
+                    .keyboardType(.asciiCapable)
                 SecureField("password", text: $password)
             }
             

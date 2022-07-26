@@ -29,6 +29,7 @@ struct SignUpView: View {
             Form {
                 Section {
                     TextField("email", text: $email)
+                        .keyboardType(.asciiCapable)
                     SecureField("password", text: $password1)
                     SecureField("check_password", text: $password2)
                 }
@@ -36,6 +37,7 @@ struct SignUpView: View {
                 Section {
                     TextField("display_name", text: $displayName)
                     TextField("user_tag", text: $userTag)
+                        .keyboardType(.asciiCapable)
                 }
                 
                 Section {
