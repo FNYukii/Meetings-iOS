@@ -12,6 +12,7 @@ struct FirstView: View {
     // States
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    @State private var myIconUrl: String? = nil
     
     // Navigations
     @State private var isShowSignInView = false
@@ -48,10 +49,7 @@ struct FirstView: View {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     if signInStateViewModel.isSignedIn {
                         NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
-                            Color.secondary
-                                .opacity(0.2)
-                                .frame(width: 32, height: 32)
-                                .cornerRadius(.infinity)
+                            IconImage(url: myIconUrl, iconImageFamily: .small)
                         }
                     }
                     
@@ -87,5 +85,16 @@ struct FirstView: View {
             }
         }
         .navigationViewStyle(.stack)
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        if FireAuth.isSignedIn() && myIconUrl == nil {
+            FireUser.readUser(userId: FireAuth.uid()!) { user in
+                if let user = user {
+                    self.myIconUrl = user.iconUrl
+                }
+            }
+        }
     }
 }

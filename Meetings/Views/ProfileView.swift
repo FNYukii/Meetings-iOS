@@ -27,10 +27,7 @@ struct ProfileView: View {
             HStack(alignment: .top) {
                 
                 // Icon Column
-                Color.secondary
-                    .opacity(0.2)
-                    .frame(width: 40, height: 40)
-                    .cornerRadius(.infinity)
+                IconImage(url: user?.iconUrl, iconImageFamily: .medium)
                 
                 // Detail Column
                 VStack(alignment: .leading) {

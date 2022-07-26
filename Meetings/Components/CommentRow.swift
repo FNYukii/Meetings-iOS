@@ -31,10 +31,7 @@ struct CommentRow: View {
             Button (action: {
                 isShowProfileView.toggle()
             }) {
-                Color.secondary
-                    .opacity(0.2)
-                    .frame(width: 40, height: 40)
-                    .cornerRadius(.infinity)
+                IconImage(url: user?.iconUrl, iconImageFamily: .medium)
             }
             .buttonStyle(.borderless)
             .disabled(isDisableShowingProfileView)
@@ -64,10 +61,10 @@ struct CommentRow: View {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
-                        Text(user!.userTag)
+                        Text("@\(user!.userTag)")
                             .foregroundColor(.secondary)
                         
-                        EditDate.HowManyAgoText(from: comment.createdAt)
+                        EditDate.howManyAgoText(from: comment.createdAt)
                             .foregroundColor(.secondary)
                     }
                     

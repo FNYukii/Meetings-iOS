@@ -14,7 +14,7 @@ class FireUser {
         let displayName = document.get("displayName") as! String
         let userTag = document.get("userTag") as! String
         let introduction = document.get("introduction") as! String
-        let iconUrl = document.get("iconPath") as? String
+        let iconUrl = document.get("iconUrl") as? String
         let likedCommentIds = document.get("likedCommentIds") as! [String]
         
         let user = User(id: id, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl, likedCommentIds: likedCommentIds)
@@ -77,7 +77,7 @@ class FireUser {
             }
     }
     
-    static func createUser(userId: String, displayName: String, userTag: String, introduction: String, iconPath: String?) {
+    static func createUser(userId: String, displayName: String, userTag: String, introduction: String, iconUrl: String?) {
         let db = Firestore.firestore()
         db.collection("users")
             .document(userId)
@@ -85,7 +85,7 @@ class FireUser {
                 "displayName": displayName,
                 "userTag": userTag,
                 "introduction": introduction,
-                "iconPath": iconPath as Any,
+                "iconUrl": iconUrl as Any,
                 "likedCommentIds": []
             ]) { err in
                 if let err = err {
