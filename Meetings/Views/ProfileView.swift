@@ -33,8 +33,6 @@ struct ProfileView: View {
                     .placeholder {
                         Color.secondary
                             .opacity(0.2)
-                            .frame(width: 40, height: 40)
-                            .cornerRadius(.infinity)
                     }
                     .frame(width: 40, height: 40)
                     .cornerRadius(.infinity)
