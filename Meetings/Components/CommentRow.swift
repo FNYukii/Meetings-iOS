@@ -157,8 +157,11 @@ struct CommentRow: View {
                     
                     // Not found text
                     if isAbleShowingThreadView && isLoadedThread && thread == nil {
-                        Text("thread_not_found")
-                            .foregroundColor(.secondary)
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle")
+                            Text("thread_not_found")
+                        }
+                        .foregroundColor(.secondary)
                     }
                     
                     // Thread title
