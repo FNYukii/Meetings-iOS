@@ -17,8 +17,12 @@ struct ProfileView: View {
     @State private var isLoadedUser = false
     
     @State private var selection = 0
+    
     @State private var postedComments: [Comment]? = nil
+    @State private var isloadedPostedComments = false
+    
     @State private var likedComments: [Comment]? = nil
+    @State private var isLoadedLikedComments = false
     
     // Navigation
     @State private var isShowAccountView = false
@@ -31,7 +35,7 @@ struct ProfileView: View {
                 // Icon Column
                 IconImage(url: user?.iconUrl, iconImageFamily: .medium)
                 
-                // Detail Column
+                // DisplayName And UserTag Column
                 VStack(alignment: .leading) {
                     
                     // Progress view
@@ -45,12 +49,12 @@ struct ProfileView: View {
                             .frame(width: 80, height: 16)
                     }
                     
-                    // Not found view
+                    // Reading failed view
                     if isLoadedUser && user == nil {
                         EmptyView()
                     }
                     
-                    // DisplayName, userTag
+                    // Reading successful view
                     if isLoadedUser && user != nil {
                         Text(user!.displayName)
                             .fontWeight(.bold)
@@ -62,9 +66,9 @@ struct ProfileView: View {
             }
             .padding(.horizontal)
             
-            // User Not Found Row
+            // User Reading Failed Row
             if isLoadedUser && user == nil {
-                Text("user_not_found")
+                Text("user_reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
             }
@@ -78,7 +82,12 @@ struct ProfileView: View {
                         .frame(width: 200, height: 16)
                 }
                 
-                // Introduction
+                // Reading failed view
+                if isLoadedUser && user == nil {
+                    EmptyView()
+                }
+                
+                // Reading successful view
                 if isLoadedUser && user != nil {
                     Text(user!.introduction)
                 }
@@ -147,6 +156,7 @@ struct ProfileView: View {
         if postedComments == nil {
             FireComment.readPostedComments(userId: userId) { comments in
                 self.postedComments = comments
+                self.isloadedPostedComments = true
             }
         }
         
@@ -154,6 +164,7 @@ struct ProfileView: View {
         if likedComments == nil {
             FireComment.readLikedComments(userId: userId) { comment in
                 self.likedComments = comment
+                self.isLoadedLikedComments = true
             }
         }
     }
