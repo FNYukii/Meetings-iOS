@@ -176,18 +176,21 @@ struct CommentRow: View {
                     }
                 }
                 
-                // NavigationLink to ProfileView
-                NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
-                    EmptyView()
-                }
-                .hidden()
-                
-                // NavigationLink to ThreadView
-                if thread != nil {
-                    NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
+                // NavigationLinks Row
+                VStack(spacing: 0) {
+                    // NavigationLink to ProfileView
+                    NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
                         EmptyView()
                     }
                     .hidden()
+                    
+                    // NavigationLink to ThreadView
+                    if thread != nil {
+                        NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
+                            EmptyView()
+                        }
+                        .hidden()
+                    }
                 }
             }
         }
