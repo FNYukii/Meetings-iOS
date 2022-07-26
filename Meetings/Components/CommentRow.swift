@@ -175,25 +175,25 @@ struct CommentRow: View {
                         .buttonStyle(.borderless)
                     }
                 }
+            }
+        }
+        .background(
+            Group {
+                // NavigationLink to ProfileView
+                NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
+                    EmptyView()
+                }
+                .hidden()
                 
-                // NavigationLinks Row
-                VStack(spacing: 0) {
-                    // NavigationLink to ProfileView
-                    NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
+                // NavigationLink to ThreadView
+                if thread != nil {
+                    NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
                         EmptyView()
                     }
                     .hidden()
-                    
-                    // NavigationLink to ThreadView
-                    if thread != nil {
-                        NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
-                            EmptyView()
-                        }
-                        .hidden()
-                    }
                 }
             }
-        }
+        )
         .onAppear(perform: load)
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
