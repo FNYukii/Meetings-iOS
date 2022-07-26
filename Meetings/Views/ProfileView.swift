@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ProfileView: View {
     
@@ -27,10 +28,28 @@ struct ProfileView: View {
             HStack(alignment: .top) {
                 
                 // Icon Column
-                Color.secondary
-                    .opacity(0.2)
-                    .frame(width: 40, height: 40)
-                    .cornerRadius(.infinity)
+                Group {
+                    // Progress view
+//                    Color.secondary
+//                        .opacity(0.2)
+//                        .frame(width: 40, height: 40)
+//                        .cornerRadius(.infinity)
+                    
+                    // Icon
+                    WebImage(url: URL(string: user != nil && user!.iconUrl != nil ? user!.iconUrl! : ""))
+                        .resizable()
+                        .placeholder {
+                            Color.secondary
+                                .opacity(0.2)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(.infinity)
+                        }
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(.infinity)
+                    
+                    
+                    
+                }
                 
                 // Detail Column
                 VStack(alignment: .leading) {
