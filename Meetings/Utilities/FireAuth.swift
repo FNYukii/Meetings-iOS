@@ -48,16 +48,28 @@ class FireAuth {
             }
             
             // Return
-            let uid = authResult?.user.uid
+            let uid = authResult!.user.uid
             completion?(uid)
         }
     }
     
-    static func signIn(email: String, password: String) {
+    static func signIn(email: String, password: String, completion: ((String?) -> Void)?) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            // エラー処理
             if let error = error {
                 print("HELLO! Fail! Erroring sign in. error: \(error)")
+                completion?(nil)
+                return
             }
+            if authResult == nil {
+                print("HELLO! Fail! AuthResult does not exists.")
+                completion?(nil)
+                return
+            }
+            
+            // Return
+            let uid = authResult!.user.uid
+            completion?(uid)
         }
     }
     
