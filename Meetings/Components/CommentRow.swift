@@ -61,7 +61,7 @@ struct CommentRow: View {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
-                        Text(user!.userTag)
+                        Text("@\(user!.userTag)")
                             .foregroundColor(.secondary)
                         
                         EditDate.HowManyAgoText(from: comment.createdAt)
