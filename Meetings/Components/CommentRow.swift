@@ -20,9 +20,13 @@ struct CommentRow: View {
     
     // States
     @State private var user: User? = nil
+    @State private var isLoadedUser = false
+    
     @State private var likedUserIds: [String]? = nil
+    
     @State private var thread: Thread? = nil
     @State private var isLoadedThread = false
+    
     @State private var isShowDialog = false
         
     var body: some View {
@@ -42,8 +46,8 @@ struct CommentRow: View {
                 
                 // Header Row
                 HStack {
-                    // 3 Progress view
-                    if user == nil {
+                    // Progress views
+                    if !isLoadedUser {
                         Color.secondary
                             .opacity(0.2)
                             .frame(width: 80)
@@ -51,23 +55,28 @@ struct CommentRow: View {
                         Color.secondary
                             .opacity(0.2)
                             .frame(width: 80)
-                        
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 40)
                     }
                     
-                    // Display name & User tag & HowManyAgoText
-                    if user != nil {
+                    // User reading failed views
+                    if isLoadedUser && user == nil {
+                        ForEach(0 ..< 2) { _ in
+                            Image(systemName: "exclamationmark.triangle")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    // Display name & User tag
+                    if isLoadedUser && user != nil {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
                         Text("@\(user!.userTag)")
                             .foregroundColor(.secondary)
-                        
-                        EditDate.howManyAgoText(from: comment.createdAt)
-                            .foregroundColor(.secondary)
                     }
+                    
+                    // Date text
+                    EditDate.howManyAgoText(from: comment.createdAt)
+                        .foregroundColor(.secondary)
                     
                     Spacer()
                     
@@ -87,20 +96,8 @@ struct CommentRow: View {
                 }
                 
                 // Text Row
-                Group {
-                    // Progress view
-                    if user == nil {
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 200, height: 16)
-                    }
-                    
-                    // Text
-                    if user != nil {
-                        Text(comment.text)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                }
+                Text(comment.text)
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 // Reaction Row
                 HStack {
@@ -210,6 +207,7 @@ struct CommentRow: View {
         if user == nil {
             FireUser.readUser(userId: comment.userId) { user in
                 self.user = user
+                self.isLoadedUser = true
             }
         }
         
