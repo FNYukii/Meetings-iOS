@@ -50,7 +50,7 @@ struct SignUpView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         FireAuth.signUp(email: email, password: password1) { uid in
-                            FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconPath: nil)
+                            FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil)
                         }
                         dismiss()
                     }) {
