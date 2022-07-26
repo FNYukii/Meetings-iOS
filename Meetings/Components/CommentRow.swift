@@ -38,7 +38,7 @@ struct CommentRow: View {
             .disabled(isDisableShowingProfileView)
             
             // Detail Column
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading) {
                 
                 // Header Row
                 HStack {
