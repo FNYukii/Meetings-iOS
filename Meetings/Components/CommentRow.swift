@@ -110,7 +110,7 @@ struct CommentRow: View {
                     if likedUserIds == nil {
                         Color.secondary
                             .opacity(0.2)
-                            .frame(width: 40, height: 16)
+                            .frame(width: 40)
                     }
                     
                     // Like button when not liked
@@ -145,6 +145,7 @@ struct CommentRow: View {
                         .disabled(!FireAuth.isSignedIn())
                     }
                 }
+                .frame(height: 16)
                 .padding(.top, 4)
                 
                 // Thread Title Row
