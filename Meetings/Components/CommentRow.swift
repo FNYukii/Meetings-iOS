@@ -31,11 +31,10 @@ struct CommentRow: View {
             Button (action: {
                 isShowProfileView.toggle()
             }) {
-                Image(systemName: "person.crop.circle")
-                    .resizable()
+                Color.secondary
+                    .opacity(0.2)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.secondary)
-                    .opacity(0.5)
+                    .cornerRadius(.infinity)
             }
             .buttonStyle(.borderless)
             .disabled(isDisableShowingProfileView)
