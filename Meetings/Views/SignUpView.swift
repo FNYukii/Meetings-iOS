@@ -42,8 +42,8 @@ struct SignUpView: View {
                 
                 Section {
                     TextField("display_name", text: $displayName)
-                        .disabled(isLoading
-                        )
+                        .disabled(isLoading)
+                    
                     TextField("user_tag", text: $userTag)
                         .keyboardType(.asciiCapable)
                         .disabled(isLoading)
