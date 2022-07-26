@@ -38,6 +38,7 @@
 		5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9E288C3C6800F4A29B /* CommentRow.swift */; };
 		5410EAA1288C453200F4A29B /* EditDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EAA0288C453200F4A29B /* EditDate.swift */; };
 		54C3441E288F944E00468A94 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 54C3441D288F944E00468A94 /* SDWebImageSwiftUI */; };
+		54C34420288F9BBE00468A94 /* IconImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C3441F288F9BBE00468A94 /* IconImage.swift */; };
 		54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* MyTabBar.swift */; };
 		54DC77A2288E512800296419 /* CommentRowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentRowList.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		5410EA9C288C380300F4A29B /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		5410EA9E288C3C6800F4A29B /* CommentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRow.swift; sourceTree = "<group>"; };
 		5410EAA0288C453200F4A29B /* EditDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDate.swift; sourceTree = "<group>"; };
+		54C3441F288F9BBE00468A94 /* IconImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconImage.swift; sourceTree = "<group>"; };
 		54DC779F288E4DDB00296419 /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
 		54DC77A1288E512800296419 /* CommentRowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRowList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +174,7 @@
 				5410EA96288C2FCC00F4A29B /* MyTextEditor.swift */,
 				540D2E60288985CB00DBB512 /* ThreadRow.swift */,
 				5410EA9E288C3C6800F4A29B /* CommentRow.swift */,
+				54C3441F288F9BBE00468A94 /* IconImage.swift */,
 				54DC779F288E4DDB00296419 /* MyTabBar.swift */,
 				54DC77A1288E512800296419 /* CommentRowList.swift */,
 			);
@@ -286,6 +289,7 @@
 				54DC77A2288E512800296419 /* CommentRowList.swift in Sources */,
 				5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */,
 				5410EA8B288BDF8B00F4A29B /* ProfileView.swift in Sources */,
+				54C34420288F9BBE00468A94 /* IconImage.swift in Sources */,
 				5410EA87288BC71E00F4A29B /* FireUser.swift in Sources */,
 				5410EA85288BC00C00F4A29B /* SignUpView.swift in Sources */,
 				540D2E4D2889775600DBB512 /* CreateCommentView.swift in Sources */,
