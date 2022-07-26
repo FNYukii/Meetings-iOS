@@ -60,7 +60,7 @@ class FireComment {
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
-            .order(by: "createdAt", descending: false)
+            .order(by: "createdAt")
             .limit(to: 3)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -87,7 +87,7 @@ class FireComment {
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("userId", isEqualTo: userId)
-            .order(by: "createdAt", descending: false)
+            .order(by: "createdAt", descending: true)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments: \(err)")
