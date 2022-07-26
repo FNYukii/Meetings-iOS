@@ -27,10 +27,10 @@ struct ProfileView: View {
             HStack(alignment: .top) {
                 
                 // Icon Column
-                Image(systemName: "person.crop.circle")
-                    .resizable()
+                Color.secondary
+                    .opacity(0.2)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.secondary)
+                    .cornerRadius(.infinity)
                 
                 // Detail Column
                 VStack(alignment: .leading) {
