@@ -22,7 +22,7 @@ struct ProfileView: View {
     @State private var isShowAccountView = false
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             // Header Row
             HStack(alignment: .top) {
                 
