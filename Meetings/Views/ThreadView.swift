@@ -25,6 +25,23 @@ struct ThreadView: View {
     var body: some View {
         
         List {
+            // Progress view
+            if !commentsViewModel.isLoaded {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .listRowSeparator(.hidden)
+            }
+            
+            // No content text
+            if commentsViewModel.isLoaded && commentsViewModel.comments.count == 0 {
+                Text("no_comments")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.secondary)
+                    .listRowSeparator(.hidden)
+            }
+            
+            // CommentRows
             ForEach(commentsViewModel.comments) { comment in
                 CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
             }
