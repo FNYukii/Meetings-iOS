@@ -64,12 +64,15 @@ struct FirstView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
+                    // Profile Button
                     if signInStateViewModel.isSignedIn {
                         NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
                             IconImage(url: myIconUrl, iconImageFamily: .small)
+                                .onAppear(perform: loadMyIconUrl)
                         }
                     }
                     
+                    // Sign In Menu
                     if !signInStateViewModel.isSignedIn {
                         Menu {
                             Button(action: {
@@ -91,6 +94,7 @@ struct FirstView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    // Add Thread Button
                     Button(action: {
                         isShowCreateThreadView.toggle()
                     }) {
@@ -102,10 +106,9 @@ struct FirstView: View {
             }
         }
         .navigationViewStyle(.stack)
-        .onAppear(perform: load)
     }
     
-    private func load() {
+    private func loadMyIconUrl() {
         if FireAuth.isSignedIn() && myIconUrl == nil {
             FireUser.readUser(userId: FireAuth.uid()!) { user in
                 if let user = user {
