@@ -36,20 +36,22 @@ class FireComment {
         db.collection("comments")
             .document(commentId)
             .getDocument { (document, error) in
-                // エラー処理
+                // 失敗
                 if let error = error {
                     print("HELLO! Fail! Error reading User. \(error)")
                     completion?(nil)
                     return
                 }
+                
+                // ドキュメントが無い
                 if !document!.exists {
                     print("HELLO! Fail! User not found.")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read 1 User.")
                 
-                // Return
+                // 成功
+                print("HELLO! Success! Read 1 User.")
                 let comment = toComment(document: document!)
                 completion?(comment)
             }
@@ -63,11 +65,13 @@ class FireComment {
             .order(by: "createdAt")
             .limit(to: 3)
             .getDocuments(source: .cache) { (querySnapshot, err) in
-                // エラー処理
+                // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments from cashe. \(err)")
                     return
                 }
+                
+                // 成功
                 print("HELLO! Success! Read \(querySnapshot!.count) Comments from cashe.")
                 
                 // Comments
@@ -87,11 +91,14 @@ class FireComment {
             .order(by: "createdAt")
             .limit(to: 3)
             .getDocuments() { (querySnapshot, err) in
+                // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments from server. \(err)")
                     completion?(nil)
                     return
                 }
+                
+                // 成功
                 print("HELLO! Success! Read \(querySnapshot!.count) Comments from server.")
                 
                 // Comments

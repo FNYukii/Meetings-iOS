@@ -40,9 +40,9 @@ class FireUser {
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read 1 User.")
                 
                 // 成功
+                print("HELLO! Success! Read 1 User.")
                 let user = toUser(document: document!)
                 completion?(user)
             }
@@ -64,9 +64,9 @@ class FireUser {
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read 1 User.")
                 
                 // 成功
+                print("HELLO! Success! Read 1 User.")
                 let user = toUser(document: document!)
                 completion?(user)
             }

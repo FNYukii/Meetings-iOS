@@ -30,24 +30,51 @@ class FireThread {
     }
     
     static func readThread(threadId: String, completion: ((Thread?) -> Void)?) {
+        // キャッシュから読み取り
         let db = Firestore.firestore()
         db.collection("threads")
             .document(threadId)
-            .getDocument { (document, error) in
-                // エラー処理
+            .getDocument(source: .cache) { (document, error) in
+                // 失敗
                 if let error = error {
                     print("HELLO! Fail! Error reading Thread. \(error)")
                     completion?(nil)
                     return
                 }
+                
+                // ドキュメントが無い
                 if !document!.exists {
                     print("HELLO! Fail! Thread not found.")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read 1 Thread.")
                 
-                // Return
+                // 成功
+                print("HELLO! Success! Read 1 Thread.")
+                let thread = toThread(document: document!)
+                completion?(thread)
+            }
+        
+        // サーバーから読み取り
+        db.collection("threads")
+            .document(threadId)
+            .getDocument { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading Thread. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! Thread not found.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 Thread.")
                 let thread = toThread(document: document!)
                 completion?(thread)
             }
