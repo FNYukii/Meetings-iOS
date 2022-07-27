@@ -93,10 +93,8 @@ struct ThreadRow: View {
     private func load() {
         // このスレッド上のコメントを読み取り
         FireComment.readComments(threadId: thread.id) { comments in
-            withAnimation {
-                self.comments = comments
-                self.isLoadedComments = true
-            }
+            self.comments = comments
+            self.isLoadedComments = true
         }
     }
 }

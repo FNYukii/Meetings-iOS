@@ -31,44 +31,105 @@ class FireComment {
         return comment
     }
     
-    static func readComment(commentId: String, completion: ((Comment?) -> Void)?) {
+    // For readLikedComments()
+    static func readCommentFromCashe(commentId: String, completion: ((Comment?) -> Void)?) {
+        // キャッシュから読み取り
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .document(commentId)
+            .getDocument(source: .cache) { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading User from cashe. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found in cashe.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 User from cashe.")
+                let comment = toComment(document: document!)
+                completion?(comment)
+            }
+    }
+    
+    // For readLikedComments()
+    static func readCommentFromServer(commentId: String, completion: ((Comment?) -> Void)?) {
+        // サーバーから読み取り
         let db = Firestore.firestore()
         db.collection("comments")
             .document(commentId)
             .getDocument { (document, error) in
-                // エラー処理
+                // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error reading User. \(error)")
+                    print("HELLO! Fail! Error reading User from server. \(error)")
                     completion?(nil)
                     return
                 }
-                if !document!.exists {
-                    print("HELLO! Fail! User not found.")
-                    completion?(nil)
-                    return
-                }
-                print("HELLO! Success! Read 1 User.")
                 
-                // Return
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found in server.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 User from server.")
                 let comment = toComment(document: document!)
                 completion?(comment)
             }
     }
     
     static func readComments(threadId: String, completion: (([Comment]?) -> Void)?) {
-        // ドキュメント読み取り
+        // キャッシュからドキュメントを読み取り
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
             .order(by: "createdAt")
             .limit(to: 3)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments(source: .cache) { (querySnapshot, err) in
+                // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error Reeding Comments: \(err)")
+                    print("HELLO! Fail! Error Reeding Comments from cashe. \(err)")
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from cashe.")
+                
+                // Comments
+                var comments: [Comment] = []
+                for document in querySnapshot!.documents {
+                    let comment = toComment(document: document)
+                    comments.append(comment)
+                }
+                
+                // Return
+                completion?(comments)
+            }
+        
+        // サーバーからドキュメント読み取り
+        db.collection("comments")
+            .whereField("threadId", isEqualTo: threadId)
+            .order(by: "createdAt")
+            .limit(to: 3)
+            .getDocuments() { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Comments from server. \(err)")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from server.")
                 
                 // Comments
                 var comments: [Comment] = []
@@ -83,18 +144,47 @@ class FireComment {
     }
     
     static func readPostedComments(userId: String, completion: (([Comment]?) -> Void)?) {
-        // ドキュメント読み取り
+        // キャッシュからドキュメント読み取り
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("userId", isEqualTo: userId)
             .order(by: "createdAt", descending: true)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments(source: .cache) { (querySnapshot, err) in
+                // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error Reeding Comments: \(err)")
+                    print("HELLO! Fail! Error Reeding Comments from cashe. \(err)")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from cashe.")
+                
+                // Comments
+                var comments: [Comment] = []
+                for document in querySnapshot!.documents {
+                    let comment = toComment(document: document)
+                    comments.append(comment)
+                }
+                
+                // Return
+                completion?(comments)
+            }
+        
+        // サーバーからドキュメント読み取り
+        db.collection("comments")
+            .whereField("userId", isEqualTo: userId)
+            .order(by: "createdAt", descending: true)
+            .getDocuments() { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Comments from server. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from server.")
                 
                 // Comments
                 var comments: [Comment] = []
@@ -125,10 +215,13 @@ class FireComment {
                 completion?([])
             }
             
+            // TODO: 配列commentsをいいねした順番に並べ替えてからReturnする
+            // TODO: キャッシュから取得した配列commentsを瞬時にReturnし、その後サーバーから取得した配列commentsをReturnする
+            
             // likedCommentIdsの数だけ、ドキュメント読み取りを行う
             var likedComments: [Comment] = []
             likedCommentIds.forEach { commentId in
-                readComment(commentId: commentId) { comment in
+                readCommentFromServer(commentId: commentId) { comment in
                     if let comment = comment {
                         likedComments.append(comment)
                         
@@ -158,7 +251,7 @@ class FireComment {
                 "text": text,
             ]) { error in
                 if let error = error {
-                    print("HELLO! Fail! Error adding new document. Error: \(error)")
+                    print("HELLO! Fail! Error adding new Comment. \(error)")
                 } else {
                     print("HELLO! Success! Added 1 Comment.")
                 }
@@ -172,7 +265,7 @@ class FireComment {
             .document(commentId)
             .delete() { err in
                 if let err = err {
-                    print("HELLO! Fail! Error removing document: \(err)")
+                    print("HELLO! Fail! Error removing Comment. \(err)")
                 } else {
                     print("HELLO! Success! Deleted 1 Comment.")
                 }

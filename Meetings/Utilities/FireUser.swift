@@ -22,41 +22,103 @@ class FireUser {
     }
     
     static func readUser(userId: String, completion: ((User?) -> Void)?) {
+        // キャッシュから読み取り
         let db = Firestore.firestore()
         db.collection("users")
             .document(userId)
-            .getDocument { (document, error) in
-                // エラー処理
+            .getDocument(source: .cache) { (document, error) in
+                // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error reading User. \(error)")
+                    print("HELLO! Fail! Error reading User from cashe. \(error)")
                     completion?(nil)
                     return
                 }
-                if !document!.exists {
-                    print("HELLO! Fail! User not found.")
-                    completion?(nil)
-                    return
-                }
-                print("HELLO! Success! Read 1 User.")
                 
-                // Return
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found in cashe.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 User from cashe.")
+                let user = toUser(document: document!)
+                completion?(user)
+            }
+        
+        // サーバーから読み取り
+        db.collection("users")
+            .document(userId)
+            .getDocument { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading User from server. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found in server.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 User from server.")
                 let user = toUser(document: document!)
                 completion?(user)
             }
     }
     
     static func readLikedUserIds(commentId: String, completion: (([String]?) -> Void)?) {
+        // キャッシュから読み取り
         let db = Firestore.firestore()
         db.collection("users")
             .whereField("likedCommentIds", arrayContains: commentId)
-            .getDocuments() { (querySnapshot, err) in
-                // エラー処理
+            .getDocuments(source: .cache) { (querySnapshot, err) in
+                // 失敗
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    print("HELLO! Fail! Error getting Users from cashe. \(err)")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read \(querySnapshot!.count) Users.")
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Users from cashe.")
+                
+                // Users
+                var users: [User] = []
+                for document in querySnapshot!.documents {
+                    let user = toUser(document: document)
+                    users.append(user)
+                }
+                
+                // User IDs
+                var userIds: [String] = []
+                users.forEach { user in
+                    let userId = user.id
+                    userIds.append(userId)
+                }
+                
+                // Return
+                completion?(userIds)
+            }
+        
+        // サーバーから読み取り
+        db.collection("users")
+            .whereField("likedCommentIds", arrayContains: commentId)
+            .getDocuments() { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error getting Users from server. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Users from server.")
                 
                 // Users
                 var users: [User] = []
@@ -89,7 +151,7 @@ class FireUser {
                 "likedCommentIds": []
             ]) { err in
                 if let err = err {
-                    print("HELLO! Fail! Error writing User: \(err)")
+                    print("HELLO! Fail! Error writing User. \(err)")
                 } else {
                     print("HELLO! Success! Created 1 User.")
                 }
@@ -110,7 +172,7 @@ class FireUser {
                 "likedCommentIds": FieldValue.arrayUnion([commentId])
             ]) { err in
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. Error: \(err)")
+                    print("HELLO! Fail! Error updating User. \(err)")
                 } else {
                     print("HELLO! Success! Updated 1 User.")
                 }
@@ -131,7 +193,7 @@ class FireUser {
                 "likedCommentIds": FieldValue.arrayRemove([commentId])
             ]) { err in
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. Error: \(err)")
+                    print("HELLO! Fail! Error updating User. \(err)")
                 } else {
                     print("HELLO! Success! Updated 1 User.")
                 }
