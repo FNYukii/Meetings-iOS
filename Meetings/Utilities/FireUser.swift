@@ -206,4 +206,32 @@ class FireUser {
             }
     }
     
+    static func updateUser(displayName: String, userTag: String, introduction: String, iconUrl: String?, completion: ((String?) -> Void)?) {
+        // UIDを確認
+        if FireAuth.uid() == nil {
+            return
+        }
+        
+        // Userドキュメントをアップデート
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(FireAuth.uid()!)
+            .updateData([
+                "displayName": displayName,
+                "userTag": userTag,
+                "introduction": introduction,
+                "iconUrl": iconUrl as Any
+            ]) { err in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error updating User. \(err)")
+                    completion?(nil)
+                    return
+                }
+                // 成功
+                print("HELLO! Success! Updated 1 User.")
+                completion?(FireAuth.uid()!)
+            }
+    }
+    
 }
