@@ -74,12 +74,14 @@ struct EditProfileView: View {
                                 if isDuplicate == nil {
                                     isLoading = false
                                     isShowDialogError = true
+                                    return
                                 }
                                 
                                 // 重複あり
                                 if isDuplicate == true {
                                     isLoading = false
                                     isShowDialogDuplicate = true
+                                    return
                                 }
                                 
                                 // 重複なし
@@ -88,12 +90,11 @@ struct EditProfileView: View {
                                     if documentId == nil {
                                         isLoading = false
                                         isShowDialogError = true
+                                        return
                                     }
                                     
                                     // 成功
-                                    if documentId != nil {
-                                        dismiss()
-                                    }
+                                    dismiss()
                                 }
                             }
                         }) {
