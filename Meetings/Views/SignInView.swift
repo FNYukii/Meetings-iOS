@@ -54,16 +54,15 @@ struct SignInView: View {
                             isLoading = true
                             // サインイン試行
                             FireAuth.signIn(email: email, password: password) { uid in
-                                isLoading = false
                                 // 失敗
                                 if uid == nil {
+                                    isLoading = false
                                     isShowDialog = true
+                                    return
                                 }
                                 
                                 // 成功
-                                if uid != nil {
-                                    dismiss()
-                                }
+                                dismiss()
                             }
                         }) {
                             Text("sign_in")

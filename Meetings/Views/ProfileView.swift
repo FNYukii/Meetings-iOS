@@ -19,6 +19,7 @@ struct ProfileView: View {
     @State private var selection = 0
     
     // Navigation
+    @State private var isShowEditProfileView = false
     @State private var isShowAccountView = false
     
     var body: some View {
@@ -106,6 +107,10 @@ struct ProfileView: View {
             .animation(.spring(), value: selection)
         }
         
+        .sheet(isPresented: $isShowEditProfileView) {
+            EditProfileView()
+        }
+        
         .sheet(isPresented: $isShowAccountView) {
             AccountView()
         }
@@ -117,7 +122,7 @@ struct ProfileView: View {
                 Menu {
                     if FireAuth.uid() == userId {
                         Button(action: {
-                            
+                            isShowEditProfileView.toggle()
                         }) {
                             Label("edit_profile", systemImage: "person")
                         }
@@ -125,7 +130,7 @@ struct ProfileView: View {
                         Button(action: {
                             isShowAccountView.toggle()
                         }) {
-                            Label("account_setting", systemImage: "person")
+                            Label("account", systemImage: "person")
                         }
                     }
                 } label: {

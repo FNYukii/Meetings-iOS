@@ -1,52 +1,35 @@
 //
-//  SignUpView.swift
+//  EditProfileView.swift
 //  Meetings
 //
-//  Created by Yu on 2022/07/23.
+//  Created by Yu on 2022/07/27.
 //
 
 import SwiftUI
 
-struct SignUpView: View {
+struct EditProfileView: View {
     
     // Environments
     @Environment(\.dismiss) private var dismiss
-    
+        
     // States
-    @State private var email = ""
-    @State private var password1 = ""
-    @State private var password2 = ""
     @State private var displayName = ""
     @State private var userTag = ""
     @State private var introduction = ""
-    @State private var icon: UIImage? = nil
+    @State private var iconUrl: String? = nil
+    @State private var isLoadedUser = false
     
     @State private var isLoading = false
-    @State private var isShowDialog = false
+    @State private var isShowDialogError = false
+    @State private var isShowDialogDuplicate = false
     
     var body: some View {
         NavigationView {
             
             Form {
                 Section {
-                    TextField("email", text: $email)
-                        .keyboardType(.asciiCapable)
-                        .disabled(isLoading)
-                    
-                    SecureField("password", text: $password1)
-                        .disabled(isLoading)
-                    
-                    SecureField("check_password", text: $password2)
-                        .disabled(isLoading)
-                }
-                
-                Section {
                     TextField("display_name", text: $displayName)
-                        .disabled(isLoading)
-                    
                     TextField("user_tag", text: $userTag)
-                        .keyboardType(.asciiCapable)
-                        .disabled(isLoading)
                 }
                 
                 Section {
@@ -54,15 +37,23 @@ struct SignUpView: View {
                 }
             }
             
-            .alert("failed", isPresented: $isShowDialog) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isShowDialog = false
+                    isShowDialogError = false
                 }
             } message: {
-                Text("failed_to_sign_up")
+                Text("user_updating_failed")
             }
             
-            .navigationTitle("new_account")
+            .alert("failed", isPresented: $isShowDialogDuplicate) {
+                Button("ok") {
+                    isShowDialogDuplicate = false
+                }
+            } message: {
+                Text("user_tag_is_duplicated")
+            }
+            
+            .navigationTitle("edit_profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -70,28 +61,35 @@ struct SignUpView: View {
                         dismiss()
                     }
                 }
+                
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    // Sign Up Button
+                    // Update Button
                     if !isLoading {
                         Button(action: {
-                            // 処理開始
                             isLoading = true
-                            // Authenticationによるサインアップ試行
-                            FireAuth.signUp(email: email, password: password1) { uid in
+                            
+                            // userTagが重複していないか確認
+                            FireUser.readIsUserTagDuplicates(userTag: userTag) { isDuplicate in
                                 // 失敗
-                                if uid == nil {
+                                if isDuplicate == nil {
                                     isLoading = false
-                                    isShowDialog = true
+                                    isShowDialogError = true
                                     return
                                 }
                                 
-                                // 成功
-                                FireUser.createUser(userId: uid!, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil) { documentId in
+                                // 重複あり
+                                if isDuplicate == true {
+                                    isLoading = false
+                                    isShowDialogDuplicate = true
+                                    return
+                                }
+                                
+                                // 重複なし
+                                FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
                                     // 失敗
                                     if documentId == nil {
                                         isLoading = false
-                                        isShowDialog = true
-                                        FireAuth.signOut()
+                                        isShowDialogError = true
                                         return
                                     }
                                     
@@ -100,10 +98,9 @@ struct SignUpView: View {
                                 }
                             }
                         }) {
-                            Text("create")
+                            Text("done")
                                 .fontWeight(.bold)
                         }
-                        .disabled(email.isEmpty || password1.isEmpty || password1 != password2 || displayName.isEmpty || userTag.isEmpty)
                     }
                     
                     // ProgressView
@@ -115,5 +112,22 @@ struct SignUpView: View {
             }
         }
         .navigationViewStyle(.stack)
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        if !isLoadedUser {
+            FireUser.readUser(userId: FireAuth.uid()!) { user in
+                // 失敗
+                
+                // 成功
+                if let user = user {
+                    self.displayName = user.displayName
+                    self.userTag = user.userTag
+                    self.introduction = user.introduction
+                    self.iconUrl = user.iconUrl
+                }
+            }
+        }
     }
 }

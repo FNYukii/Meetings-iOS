@@ -49,16 +49,14 @@ struct CreateThreadView: View {
                         Button(action: {
                             isLoading = true
                             FireThread.createThread(title: title) { documentId in
-                                isLoading = false
                                 // 失敗
                                 if documentId == nil {
+                                    isLoading = false
                                     isShowDialog = true
                                 }
                                 
                                 // 成功
-                                if documentId != nil {
-                                    dismiss()
-                                }
+                                dismiss()
                             }
                         }) {
                             Text("create")

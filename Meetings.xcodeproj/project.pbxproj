@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5408F02128911EE8007D8EFB /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5408F02028911EE8007D8EFB /* EditProfileView.swift */; };
 		540D2E36288971AE00DBB512 /* MeetingsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E35288971AE00DBB512 /* MeetingsApp.swift */; };
 		540D2E38288971AE00DBB512 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E37288971AE00DBB512 /* ContentView.swift */; };
 		540D2E3A288971AF00DBB512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 540D2E39288971AF00DBB512 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5408F02028911EE8007D8EFB /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		540D2E32288971AE00DBB512 /* Meetings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meetings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		540D2E35288971AE00DBB512 /* MeetingsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsApp.swift; sourceTree = "<group>"; };
 		540D2E37288971AE00DBB512 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				5410EA84288BC00C00F4A29B /* SignUpView.swift */,
 				5410EA88288BCF7600F4A29B /* SignInView.swift */,
 				5410EA8A288BDF8B00F4A29B /* ProfileView.swift */,
+				5408F02028911EE8007D8EFB /* EditProfileView.swift */,
 				540D2E462889733A00DBB512 /* AccountView.swift */,
 				540D2E4A288974B900DBB512 /* CreateThreadView.swift */,
 				540D2E482889734800DBB512 /* ThreadView.swift */,
@@ -288,6 +291,7 @@
 				540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */,
 				54DC77A2288E512800296419 /* CommentRowList.swift in Sources */,
 				5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */,
+				5408F02128911EE8007D8EFB /* EditProfileView.swift in Sources */,
 				5410EA8B288BDF8B00F4A29B /* ProfileView.swift in Sources */,
 				54C34420288F9BBE00468A94 /* IconImage.swift in Sources */,
 				5410EA87288BC71E00F4A29B /* FireUser.swift in Sources */,

@@ -139,6 +139,31 @@ class FireUser {
             }
     }
     
+    static func readIsUserTagDuplicates(userTag: String, completion: ((Bool?) -> Void)?) {
+        // サーバーから読み取り
+        let db = Firestore.firestore()
+        db.collection("users")
+            .whereField("userTag", isEqualTo: userTag)
+            .getDocuments() { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error getting Users from server. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Users from server.")
+                
+                // 特定のuserTagを持つUserが一つでもあればTrueをReturn
+                if querySnapshot!.count == 0 {
+                    completion?(false)
+                } else {
+                    completion?(true)
+                }
+            }
+    }
+    
     static func createUser(userId: String, displayName: String, userTag: String, introduction: String, iconUrl: String?, completion: ((String?) -> Void)?) {
         // ドキュメント追加
         let db = Firestore.firestore()
@@ -203,6 +228,35 @@ class FireUser {
                 } else {
                     print("HELLO! Success! Updated 1 User.")
                 }
+            }
+    }
+    
+    static func updateUser(displayName: String, userTag: String, introduction: String, iconUrl: String?, completion: ((String?) -> Void)?) {
+        // UIDを確認
+        if FireAuth.uid() == nil {
+            completion?(nil)
+            return
+        }
+        
+        // Userドキュメントをアップデート
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(FireAuth.uid()!)
+            .updateData([
+                "displayName": displayName,
+                "userTag": userTag,
+                "introduction": introduction,
+                "iconUrl": iconUrl as Any
+            ]) { err in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error updating User. \(err)")
+                    completion?(nil)
+                    return
+                }
+                // 成功
+                print("HELLO! Success! Updated 1 User.")
+                completion?(FireAuth.uid()!)
             }
     }
     
