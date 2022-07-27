@@ -216,23 +216,42 @@ class FireComment {
             }
             
             // TODO: 配列likedCommentsをいいねした順番に並べ替えてからReturnする
-            // TODO: キャッシュから取得した配列commentsを瞬時にReturnし、その後サーバーから取得した配列commentsをReturnする
             
             // likedCommentIdsの数だけ、ドキュメント読み取りを行う
-            var likedComments: [Comment] = []
-            var readCount = 0
+            // キャッシュから読み取り
+            var likedComments1: [Comment] = []
+            var readCount1 = 0
             likedCommentIds.forEach { commentId in
-                readCommentFromServer(commentId: commentId) { comment in
-                    readCount += 1
+                readCommentFromCashe(commentId: commentId) { comment in
+                    readCount1 += 1
                                         
                     // 成功
                     if comment != nil {
-                        likedComments.append(comment!)
+                        likedComments1.append(comment!)
                     }
                     
                     // 読み取ったドキュメントの数がlikedCommentIdsの数に達したら完了
-                    if readCount == likedCommentIds.count {
-                        completion?(likedComments)
+                    if readCount1 == likedCommentIds.count {
+                        completion?(likedComments1)
+                    }
+                }
+            }
+            
+            // サーバーから読み取り
+            var likedComments2: [Comment] = []
+            var readCount2 = 0
+            likedCommentIds.forEach { commentId in
+                readCommentFromServer(commentId: commentId) { comment in
+                    readCount2 += 1
+                                        
+                    // 成功
+                    if comment != nil {
+                        likedComments2.append(comment!)
+                    }
+                    
+                    // 読み取ったドキュメントの数がlikedCommentIdsの数に達したら完了
+                    if readCount2 == likedCommentIds.count {
+                        completion?(likedComments2)
                     }
                 }
             }
