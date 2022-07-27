@@ -12,11 +12,24 @@ struct EditProfileView: View {
     // Environments
     @Environment(\.dismiss) private var dismiss
     
+    // States
+    @State private var displayName = ""
+    @State private var userTag = ""
+    @State private var introduction = ""
+    @State private var icon: UIImage? = nil
+    
     var body: some View {
         NavigationView {
             
             Form {
-                Text("HELLO")
+                Section {
+                    TextField("display_name", text: $displayName)
+                    TextField("user_tag", text: $userTag)
+                }
+                
+                Section {
+                    MyTextEditor(hintText: Text("introduction"), text: $introduction)
+                }
             }
             
             .navigationTitle("edit_profile")
