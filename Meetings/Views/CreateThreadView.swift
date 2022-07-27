@@ -48,15 +48,15 @@ struct CreateThreadView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireThread.createThread(title: title) { threadId in
+                            FireThread.createThread(title: title) { documentId in
                                 isLoading = false
                                 // 失敗
-                                if threadId == nil {
+                                if documentId == nil {
                                     isShowDialog = true
                                 }
                                 
                                 // 成功
-                                if threadId != nil {
+                                if documentId != nil {
                                     dismiss()
                                 }
                             }

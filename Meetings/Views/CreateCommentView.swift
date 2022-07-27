@@ -51,15 +51,15 @@ struct CreateCommentView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireComment.createComment(threadId: threadId, text: text) { commentId in
+                            FireComment.createComment(threadId: threadId, text: text) { documentId in
                                 isLoading = false
                                 // 失敗
-                                if commentId == nil {
+                                if documentId == nil {
                                     isShowDialog = true
                                 }
                                 
                                 // 成功
-                                if commentId != nil {
+                                if documentId != nil {
                                     dismiss()
                                 }
                             }

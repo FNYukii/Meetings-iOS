@@ -74,19 +74,32 @@ struct SignUpView: View {
                     // Sign Up Button
                     if !isLoading {
                         Button(action: {
+                            // 処理開始
                             isLoading = true
-                            // サインアップ試行
+                            // Authenticationによるサインアップ試行
                             FireAuth.signUp(email: email, password: password1) { uid in
-                                isLoading = false
                                 // 失敗
                                 if uid == nil {
+                                    isLoading = false
                                     isShowDialog = true
                                 }
                                 
                                 // 成功
                                 if let uid = uid {
-                                    FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil)
-                                    dismiss()
+                                    // Cloud FirestoreによるUserドキュメント追加試行
+                                    FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil) { documentId in
+                                        isLoading = false
+                                        // 失敗
+                                        if documentId == nil {
+                                            isShowDialog = true
+                                            FireAuth.signOut()
+                                        }
+                                        
+                                        // 成功
+                                        if documentId != nil {
+                                            dismiss()
+                                        }
+                                    }
                                 }
                             }
                         }) {
