@@ -82,24 +82,21 @@ struct SignUpView: View {
                                 if uid == nil {
                                     isLoading = false
                                     isShowDialog = true
+                                    return
                                 }
                                 
                                 // 成功
-                                if let uid = uid {
-                                    // Cloud FirestoreによるUserドキュメント追加試行
-                                    FireUser.createUser(userId: uid, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil) { documentId in
+                                FireUser.createUser(userId: uid!, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: nil) { documentId in
+                                    // 失敗
+                                    if documentId == nil {
                                         isLoading = false
-                                        // 失敗
-                                        if documentId == nil {
-                                            isShowDialog = true
-                                            FireAuth.signOut()
-                                        }
-                                        
-                                        // 成功
-                                        if documentId != nil {
-                                            dismiss()
-                                        }
+                                        isShowDialog = true
+                                        FireAuth.signOut()
+                                        return
                                     }
+                                    
+                                    // 成功
+                                    dismiss()
                                 }
                             }
                         }) {
