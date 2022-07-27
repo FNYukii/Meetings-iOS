@@ -29,20 +29,20 @@ class FireUser {
             .getDocument(source: .cache) { (document, error) in
                 // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error reading User. \(error)")
+                    print("HELLO! Fail! Error reading User from cashe. \(error)")
                     completion?(nil)
                     return
                 }
                 
                 // ドキュメントが無い
                 if !document!.exists {
-                    print("HELLO! Fail! User not found.")
+                    print("HELLO! Fail! User not found in cashe.")
                     completion?(nil)
                     return
                 }
                 
                 // 成功
-                print("HELLO! Success! Read 1 User.")
+                print("HELLO! Success! Read 1 User from cashe.")
                 let user = toUser(document: document!)
                 completion?(user)
             }
@@ -53,20 +53,20 @@ class FireUser {
             .getDocument { (document, error) in
                 // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error reading User. \(error)")
+                    print("HELLO! Fail! Error reading User from server. \(error)")
                     completion?(nil)
                     return
                 }
                 
                 // ドキュメントが無い
                 if !document!.exists {
-                    print("HELLO! Fail! User not found.")
+                    print("HELLO! Fail! User not found in server.")
                     completion?(nil)
                     return
                 }
                 
                 // 成功
-                print("HELLO! Success! Read 1 User.")
+                print("HELLO! Success! Read 1 User from server.")
                 let user = toUser(document: document!)
                 completion?(user)
             }
@@ -151,7 +151,7 @@ class FireUser {
                 "likedCommentIds": []
             ]) { err in
                 if let err = err {
-                    print("HELLO! Fail! Error writing User: \(err)")
+                    print("HELLO! Fail! Error writing User. \(err)")
                 } else {
                     print("HELLO! Success! Created 1 User.")
                 }
@@ -172,7 +172,7 @@ class FireUser {
                 "likedCommentIds": FieldValue.arrayUnion([commentId])
             ]) { err in
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. Error: \(err)")
+                    print("HELLO! Fail! Error updating User. \(err)")
                 } else {
                     print("HELLO! Success! Updated 1 User.")
                 }
@@ -193,7 +193,7 @@ class FireUser {
                 "likedCommentIds": FieldValue.arrayRemove([commentId])
             ]) { err in
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. Error: \(err)")
+                    print("HELLO! Fail! Error updating User. \(err)")
                 } else {
                     print("HELLO! Success! Updated 1 User.")
                 }

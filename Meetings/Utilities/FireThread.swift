@@ -37,20 +37,20 @@ class FireThread {
             .getDocument(source: .cache) { (document, error) in
                 // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error reading Thread. \(error)")
+                    print("HELLO! Fail! Error reading Thread from cashe. \(error)")
                     completion?(nil)
                     return
                 }
                 
                 // ドキュメントが無い
                 if !document!.exists {
-                    print("HELLO! Fail! Thread not found.")
+                    print("HELLO! Fail! Thread not found in cashe.")
                     completion?(nil)
                     return
                 }
                 
                 // 成功
-                print("HELLO! Success! Read 1 Thread.")
+                print("HELLO! Success! Read 1 Thread from cashe.")
                 let thread = toThread(document: document!)
                 completion?(thread)
             }
@@ -61,20 +61,20 @@ class FireThread {
             .getDocument { (document, error) in
                 // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error reading Thread. \(error)")
+                    print("HELLO! Fail! Error reading Thread from server. \(error)")
                     completion?(nil)
                     return
                 }
                 
                 // ドキュメントが無い
                 if !document!.exists {
-                    print("HELLO! Fail! Thread not found.")
+                    print("HELLO! Fail! Thread not found in server.")
                     completion?(nil)
                     return
                 }
                 
                 // 成功
-                print("HELLO! Success! Read 1 Thread.")
+                print("HELLO! Success! Read 1 Thread from cashe.")
                 let thread = toThread(document: document!)
                 completion?(thread)
             }
@@ -95,7 +95,7 @@ class FireThread {
                 "title": title
             ]) { error in
                 if let error = error {
-                    print("HELLO! Fail! Error adding new document. Error: \(error)")
+                    print("HELLO! Fail! Error adding new Thread. \(error)")
                 } else {
                     print("HELLO! Success! Added 1 Thread.")
                 }
@@ -109,7 +109,7 @@ class FireThread {
             .document(threadId)
             .delete() { err in
                 if let err = err {
-                    print("HELLO! Fail! Error removing document: \(err)")
+                    print("HELLO! Fail! Error removing Thread. \(err)")
                 } else {
                     print("HELLO! Success! Deleted 1 Thread.")
                 }

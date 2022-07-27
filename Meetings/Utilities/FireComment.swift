@@ -251,7 +251,7 @@ class FireComment {
                 "text": text,
             ]) { error in
                 if let error = error {
-                    print("HELLO! Fail! Error adding new document. Error: \(error)")
+                    print("HELLO! Fail! Error adding new Comment. \(error)")
                 } else {
                     print("HELLO! Success! Added 1 Comment.")
                 }
@@ -265,7 +265,7 @@ class FireComment {
             .document(commentId)
             .delete() { err in
                 if let err = err {
-                    print("HELLO! Fail! Error removing document: \(err)")
+                    print("HELLO! Fail! Error removing Comment. \(err)")
                 } else {
                     print("HELLO! Success! Deleted 1 Comment.")
                 }
