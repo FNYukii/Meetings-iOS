@@ -83,6 +83,7 @@ class FireThread {
     static func createThread(title: String, completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
+            completion?(nil)
             return
         }
         

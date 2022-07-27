@@ -31,7 +31,7 @@ struct CreateThreadView: View {
                     isShowDialog = false
                 }
             } message: {
-                Text("failed_to_thread_creation")
+                Text("thread_creation_failed")
             }
             
             .navigationTitle("new_thread")

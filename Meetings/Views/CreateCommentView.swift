@@ -9,16 +9,31 @@ import SwiftUI
 
 struct CreateCommentView: View {
     
+    // Environments
     @Environment(\.dismiss) private var dismiss
     
+    // Thread ID to input comment
     let threadId: String
+    
+    // States
     @State private var text = ""
+    
+    @State private var isLoading = false
+    @State private var isShowDialog = false
     
     var body: some View {
         NavigationView {
             
             Form {
                 MyTextEditor(hintText: Text("text"), text: $text)
+            }
+            
+            .alert("failed", isPresented: $isShowDialog) {
+                Button("ok") {
+                    isShowDialog = false
+                }
+            } message: {
+                Text("comment_creation_failed")
             }
             
             .navigationTitle("new_comment")
@@ -30,15 +45,36 @@ struct CreateCommentView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        FireComment.createComment(threadId: threadId, text: text)
-                        dismiss()
-                    }) {
-                        Text("add")
-                            .fontWeight(.bold)
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    
+                    // Create Button
+                    if !isLoading {
+                        Button(action: {
+                            isLoading = true
+                            FireComment.createComment(threadId: threadId, text: text) { commentId in
+                                isLoading = false
+                                // 失敗
+                                if commentId == nil {
+                                    isShowDialog = true
+                                }
+                                
+                                // 成功
+                                if commentId != nil {
+                                    dismiss()
+                                }
+                            }
+                        }) {
+                            Text("add")
+                                .fontWeight(.bold)
+                        }
+                        .disabled(text.isEmpty)
                     }
-                    .disabled(text.isEmpty)
+                    
+                    // ProgressView
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
                 }
             }
         }
