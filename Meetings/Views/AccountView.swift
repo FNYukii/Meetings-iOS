@@ -30,7 +30,7 @@ struct AccountView: View {
                     Text("password")
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text("kjflakjfldkajl")
+                    Text("••••")
                 }
             }
             
