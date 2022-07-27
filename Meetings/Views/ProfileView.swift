@@ -53,7 +53,7 @@ struct ProfileView: View {
                         Text(user!.displayName)
                             .fontWeight(.bold)
                         
-                        Text(user!.userTag)
+                        Text("@\(user!.userTag)")
                             .foregroundColor(.secondary)
                     }
                 }
