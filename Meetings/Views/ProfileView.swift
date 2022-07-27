@@ -130,7 +130,7 @@ struct ProfileView: View {
                         Button(action: {
                             isShowAccountView.toggle()
                         }) {
-                            Label("account_setting", systemImage: "person")
+                            Label("account", systemImage: "person")
                         }
                     }
                 } label: {
