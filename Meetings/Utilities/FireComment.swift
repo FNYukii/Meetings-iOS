@@ -215,6 +215,9 @@ class FireComment {
                 completion?([])
             }
             
+            // TODO: 配列commentsをいいねした順番に並べ替えてからReturnする
+            // TODO: キャッシュから取得した配列commentsを瞬時にReturnし、その後サーバーから取得した配列commentsをReturnする
+            
             // likedCommentIdsの数だけ、ドキュメント読み取りを行う
             var likedComments: [Comment] = []
             likedCommentIds.forEach { commentId in
