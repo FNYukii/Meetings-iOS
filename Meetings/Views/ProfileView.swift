@@ -110,7 +110,7 @@ struct ProfileView: View {
             AccountView()
         }
         
-        .navigationTitle(user != nil ? user!.displayName : "profile")
+        .navigationTitle("profile")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
