@@ -9,15 +9,29 @@ import SwiftUI
 
 struct CreateThreadView: View {
     
+    // Environments
     @Environment(\.dismiss) private var dismiss
     
+    // States
     @State private var title = ""
+    
+    @State private var isLoading = false
+    @State private var isShowDialog = false
     
     var body: some View {
         NavigationView {
             
             Form {
                 TextField("title", text: $title)
+                    .disabled(isLoading)
+            }
+            
+            .alert("failed", isPresented: $isShowDialog) {
+                Button("ok") {
+                    isShowDialog = false
+                }
+            } message: {
+                Text("failed_to_thread_creation")
             }
             
             .navigationTitle("new_thread")
@@ -29,15 +43,35 @@ struct CreateThreadView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        FireThread.createThread(title: title)
-                        dismiss()
-                    }) {
-                        Text("create")
-                            .fontWeight(.bold)
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // Create Button
+                    if !isLoading {
+                        Button(action: {
+                            isLoading = true
+                            FireThread.createThread(title: title) { threadId in
+                                isLoading = false
+                                // 失敗
+                                if threadId == nil {
+                                    isShowDialog = true
+                                }
+                                
+                                // 成功
+                                if threadId != nil {
+                                    dismiss()
+                                }
+                            }
+                        }) {
+                            Text("create")
+                                .fontWeight(.bold)
+                        }
+                        .disabled(title.isEmpty)
                     }
-                    .disabled(title.isEmpty)
+                    
+                    // ProgressView
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
                 }
             }
         }
