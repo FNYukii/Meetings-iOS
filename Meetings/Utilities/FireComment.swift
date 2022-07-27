@@ -220,15 +220,19 @@ class FireComment {
             
             // likedCommentIdsの数だけ、ドキュメント読み取りを行う
             var likedComments: [Comment] = []
+            var readCount = 0
             likedCommentIds.forEach { commentId in
                 readCommentFromServer(commentId: commentId) { comment in
-                    if let comment = comment {
-                        likedComments.append(comment)
-                        
-                        // 読み取ったドキュメントの数がlikedCommentIdsの数に達したら完了
-                        if likedComments.count >= likedCommentIds.count {
-                            completion?(likedComments)
-                        }
+                    readCount += 1
+                                        
+                    // 成功
+                    if comment != nil {
+                        likedComments.append(comment!)
+                    }
+                    
+                    // 読み取ったドキュメントの数がlikedCommentIdsの数に達したら完了
+                    if readCount == likedCommentIds.count {
+                        completion?(likedComments)
                     }
                 }
             }
