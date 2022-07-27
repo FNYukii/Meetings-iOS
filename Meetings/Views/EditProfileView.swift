@@ -17,8 +17,10 @@ struct EditProfileView: View {
     @State private var userTag = ""
     @State private var introduction = ""
     @State private var iconUrl: String? = nil
-    
     @State private var isLoadedUser = false
+    
+    @State private var isLoading = false
+    @State private var isShowDialog = false
     
     var body: some View {
         NavigationView {
@@ -34,6 +36,14 @@ struct EditProfileView: View {
                 }
             }
             
+            .alert("failed", isPresented: $isShowDialog) {
+                Button("ok") {
+                    isShowDialog = false
+                }
+            } message: {
+                Text("user_updating_failed")
+            }
+            
             .navigationTitle("edit_profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -43,23 +53,34 @@ struct EditProfileView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        // Userドキュメントを更新
-                        FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
-                            // 失敗
-                            if documentId == nil {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // Update Button
+                    if !isLoading {
+                        Button(action: {
+                            isLoading = true
+                            // Userドキュメントを更新
+                            FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
+                                isLoading = false
+                                // 失敗
+                                if documentId == nil {
+                                    isShowDialog = true
+                                }
                                 
+                                // 成功
+                                if documentId != nil {
+                                    dismiss()
+                                }
                             }
-                            
-                            // 成功
-                            if documentId != nil {
-                                dismiss()
-                            }
+                        }) {
+                            Text("done")
+                                .fontWeight(.bold)
                         }
-                    }) {
-                        Text("done")
-                            .fontWeight(.bold)
+                    }
+                    
+                    // ProgressView
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
                     }
                 }
             }
