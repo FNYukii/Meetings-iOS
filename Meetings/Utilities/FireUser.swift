@@ -140,6 +140,12 @@ class FireUser {
     }
     
     static func readIsUserTagDuplicates(userTag: String, completion: ((Bool?) -> Void)?) {
+        // UIDを確認
+        if FireAuth.uid() == nil {
+            completion?(nil)
+            return
+        }
+        
         // サーバーから読み取り
         let db = Firestore.firestore()
         db.collection("users")
@@ -155,8 +161,23 @@ class FireUser {
                 // 成功
                 print("HELLO! Success! Read \(querySnapshot!.count) Users from server.")
                 
-                // 特定のuserTagを持つUserが一つでもあればTrueをReturn
-                if querySnapshot!.count == 0 {
+                // Users
+                var users: [User] = []
+                for document in querySnapshot!.documents {
+                    let user = toUser(document: document)
+                    users.append(user)
+                }
+                
+                // Users without me
+                var otherUsers: [User] = []
+                users.forEach { user in
+                    if user.id != FireAuth.uid()! {
+                        otherUsers.append(user)
+                    }
+                }
+                
+                // 特定のuserTagを持つUserが他に一つでもあればTrueをReturn
+                if otherUsers.count == 0 {
                     completion?(false)
                 } else {
                     completion?(true)
