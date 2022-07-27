@@ -200,7 +200,8 @@ class FireComment {
     
     // For readLikedComments()
     static func sortedLikedComments(comments: [Comment]) -> [Comment] {
-        return []
+        let sortedComments = comments.sorted(by: {$0.createdAt > $1.createdAt})
+        return sortedComments
     }
     
     static func readLikedComments(userId: String, completion: (([Comment]?) -> Void)?) {
@@ -219,9 +220,7 @@ class FireComment {
             if likedCommentIds.count == 0 {
                 completion?([])
             }
-            
-            // TODO: 配列likedCommentsをいいねした順番に並べ替えてからReturnする
-            
+                        
             // likedCommentIdsの数だけ、ドキュメント読み取りを行う
             // キャッシュから読み取り
             var likedComments1: [Comment] = []
@@ -237,7 +236,8 @@ class FireComment {
                     
                     // 読み取ったドキュメントの数がlikedCommentIdsの数に達したら完了
                     if readCount1 == likedCommentIds.count {
-                        completion?(likedComments1)
+                        let sortedLikedComments = sortedLikedComments(comments: likedComments1)
+                        completion?(sortedLikedComments)
                     }
                 }
             }
@@ -256,7 +256,8 @@ class FireComment {
                     
                     // 読み取ったドキュメントの数がlikedCommentIdsの数に達したら完了
                     if readCount2 == likedCommentIds.count {
-                        completion?(likedComments2)
+                        let sortedLikedComments = sortedLikedComments(comments: likedComments2)
+                        completion?(sortedLikedComments)
                     }
                 }
             }
