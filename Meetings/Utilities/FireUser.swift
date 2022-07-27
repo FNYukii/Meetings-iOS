@@ -73,17 +73,52 @@ class FireUser {
     }
     
     static func readLikedUserIds(commentId: String, completion: (([String]?) -> Void)?) {
+        // キャッシュから読み取り
         let db = Firestore.firestore()
         db.collection("users")
             .whereField("likedCommentIds", arrayContains: commentId)
-            .getDocuments() { (querySnapshot, err) in
-                // エラー処理
+            .getDocuments(source: .cache) { (querySnapshot, err) in
+                // 失敗
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    print("HELLO! Fail! Error getting Users from cashe. \(err)")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read \(querySnapshot!.count) Users.")
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Users from cashe.")
+                
+                // Users
+                var users: [User] = []
+                for document in querySnapshot!.documents {
+                    let user = toUser(document: document)
+                    users.append(user)
+                }
+                
+                // User IDs
+                var userIds: [String] = []
+                users.forEach { user in
+                    let userId = user.id
+                    userIds.append(userId)
+                }
+                
+                // Return
+                completion?(userIds)
+            }
+        
+        // サーバーから読み取り
+        db.collection("users")
+            .whereField("likedCommentIds", arrayContains: commentId)
+            .getDocuments() { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error getting Users from server. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Users from server.")
                 
                 // Users
                 var users: [User] = []
