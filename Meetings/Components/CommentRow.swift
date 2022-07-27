@@ -235,7 +235,6 @@ struct CommentRow: View {
     }
     
     private func loadLikedUserIds() {
-        self.isLoadedLikedUserIds = false
         FireUser.readLikedUserIds(commentId: comment.id) { userIds in
             withAnimation {
                 self.likedUserIds = userIds
