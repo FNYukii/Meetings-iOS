@@ -114,18 +114,47 @@ class FireComment {
     }
     
     static func readPostedComments(userId: String, completion: (([Comment]?) -> Void)?) {
-        // ドキュメント読み取り
+        // キャッシュからドキュメント読み取り
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("userId", isEqualTo: userId)
             .order(by: "createdAt", descending: true)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments(source: .cache) { (querySnapshot, err) in
+                // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error Reeding Comments: \(err)")
+                    print("HELLO! Fail! Error Reeding Comments from cashe. \(err)")
                     completion?(nil)
                     return
                 }
-                print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from cashe.")
+                
+                // Comments
+                var comments: [Comment] = []
+                for document in querySnapshot!.documents {
+                    let comment = toComment(document: document)
+                    comments.append(comment)
+                }
+                
+                // Return
+                completion?(comments)
+            }
+        
+        // サーバーからドキュメント読み取り
+        db.collection("comments")
+            .whereField("userId", isEqualTo: userId)
+            .order(by: "createdAt", descending: true)
+            .getDocuments() { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Comments from server. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from server.")
                 
                 // Comments
                 var comments: [Comment] = []
