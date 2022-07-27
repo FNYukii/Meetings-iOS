@@ -80,25 +80,32 @@ class FireThread {
             }
     }
     
-    static func createThread(title: String) {
+    static func createThread(title: String, completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
+            completion?(nil)
             return
         }
         
         // ドキュメントを追加
         let db = Firestore.firestore()
-        db.collection("threads")
+        var ref: DocumentReference? = nil
+        ref = db.collection("threads")
             .addDocument(data: [
                 "createdAt": FieldValue.serverTimestamp(),
                 "userId": FireAuth.uid()!,
                 "title": title
             ]) { error in
+                // 失敗
                 if let error = error {
                     print("HELLO! Fail! Error adding new Thread. \(error)")
-                } else {
-                    print("HELLO! Success! Added 1 Thread.")
+                    completion?(nil)
+                    return
                 }
+                
+                // 成功
+                print("HELLO! Success! Added 1 Thread.")
+                completion?(ref!.documentID)
             }
     }
     

@@ -139,7 +139,8 @@ class FireUser {
             }
     }
     
-    static func createUser(userId: String, displayName: String, userTag: String, introduction: String, iconUrl: String?) {
+    static func createUser(userId: String, displayName: String, userTag: String, introduction: String, iconUrl: String?, completion: ((String?) -> Void)?) {
+        // ドキュメント追加
         let db = Firestore.firestore()
         db.collection("users")
             .document(userId)
@@ -149,12 +150,17 @@ class FireUser {
                 "introduction": introduction,
                 "iconUrl": iconUrl as Any,
                 "likedCommentIds": []
-            ]) { err in
-                if let err = err {
-                    print("HELLO! Fail! Error writing User. \(err)")
-                } else {
-                    print("HELLO! Success! Created 1 User.")
+            ]) { error in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error adding new Thread. \(error)")
+                    completion?(nil)
+                    return
                 }
+                
+                // 成功
+                print("HELLO! Success! Added 1 Thread.")
+                completion?(userId)
             }
     }
     

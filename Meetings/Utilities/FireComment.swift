@@ -235,26 +235,33 @@ class FireComment {
         }
     }
     
-    static func createComment(threadId: String, text: String) {
+    static func createComment(threadId: String, text: String, completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
+            completion?(nil)
             return
         }
         
         // ドキュメント追加
         let db = Firestore.firestore()
-        db.collection("comments")
+        var ref: DocumentReference? = nil
+        ref = db.collection("comments")
             .addDocument(data: [
                 "createdAt": FieldValue.serverTimestamp(),
                 "threadId": threadId,
                 "userId": FireAuth.uid()!,
                 "text": text,
             ]) { error in
+                // 失敗
                 if let error = error {
                     print("HELLO! Fail! Error adding new Comment. \(error)")
-                } else {
-                    print("HELLO! Success! Added 1 Comment.")
+                    completion?(nil)
+                    return
                 }
+                
+                // 成功
+                print("HELLO! Success! Added 1 Comment.")
+                completion?(ref!.documentID)
             }
     }
     
