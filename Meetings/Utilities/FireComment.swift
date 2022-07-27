@@ -31,62 +31,6 @@ class FireComment {
         return comment
     }
     
-    // For readLikedComments()
-    static func readCommentFromCashe(commentId: String, completion: ((Comment?) -> Void)?) {
-        // キャッシュから読み取り
-        let db = Firestore.firestore()
-        db.collection("comments")
-            .document(commentId)
-            .getDocument(source: .cache) { (document, error) in
-                // 失敗
-                if let error = error {
-                    print("HELLO! Fail! Error reading User from cashe. \(error)")
-                    completion?(nil)
-                    return
-                }
-                
-                // ドキュメントが無い
-                if !document!.exists {
-                    print("HELLO! Fail! User not found in cashe.")
-                    completion?(nil)
-                    return
-                }
-                
-                // 成功
-                print("HELLO! Success! Read 1 User from cashe.")
-                let comment = toComment(document: document!)
-                completion?(comment)
-            }
-    }
-    
-    // For readLikedComments()
-    static func readCommentFromServer(commentId: String, completion: ((Comment?) -> Void)?) {
-        // サーバーから読み取り
-        let db = Firestore.firestore()
-        db.collection("comments")
-            .document(commentId)
-            .getDocument { (document, error) in
-                // 失敗
-                if let error = error {
-                    print("HELLO! Fail! Error reading User from server. \(error)")
-                    completion?(nil)
-                    return
-                }
-                
-                // ドキュメントが無い
-                if !document!.exists {
-                    print("HELLO! Fail! User not found in server.")
-                    completion?(nil)
-                    return
-                }
-                
-                // 成功
-                print("HELLO! Success! Read 1 User from server.")
-                let comment = toComment(document: document!)
-                completion?(comment)
-            }
-    }
-    
     static func readComments(threadId: String, completion: (([Comment]?) -> Void)?) {
         // キャッシュからドキュメントを読み取り
         let db = Firestore.firestore()
@@ -196,6 +140,67 @@ class FireComment {
                 // Return
                 completion?(comments)
             }
+    }
+    
+    // For readLikedComments()
+    static func readCommentFromCashe(commentId: String, completion: ((Comment?) -> Void)?) {
+        // キャッシュから読み取り
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .document(commentId)
+            .getDocument(source: .cache) { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading User from cashe. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found in cashe.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 User from cashe.")
+                let comment = toComment(document: document!)
+                completion?(comment)
+            }
+    }
+    
+    // For readLikedComments()
+    static func readCommentFromServer(commentId: String, completion: ((Comment?) -> Void)?) {
+        // サーバーから読み取り
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .document(commentId)
+            .getDocument { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading User from server. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found in server.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 User from server.")
+                let comment = toComment(document: document!)
+                completion?(comment)
+            }
+    }
+    
+    // For readLikedComments()
+    static func sortedLikedComments(comments: [Comment]) -> [Comment] {
+        return []
     }
     
     static func readLikedComments(userId: String, completion: (([Comment]?) -> Void)?) {
