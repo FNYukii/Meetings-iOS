@@ -22,16 +22,19 @@ class FireUser {
     }
     
     static func readUser(userId: String, completion: ((User?) -> Void)?) {
+        // キャッシュから読み取り
         let db = Firestore.firestore()
         db.collection("users")
             .document(userId)
-            .getDocument { (document, error) in
-                // エラー処理
+            .getDocument(source: .cache) { (document, error) in
+                // 失敗
                 if let error = error {
                     print("HELLO! Fail! Error reading User. \(error)")
                     completion?(nil)
                     return
                 }
+                
+                // ドキュメントが無い
                 if !document!.exists {
                     print("HELLO! Fail! User not found.")
                     completion?(nil)
@@ -39,7 +42,31 @@ class FireUser {
                 }
                 print("HELLO! Success! Read 1 User.")
                 
-                // Return
+                // 成功
+                let user = toUser(document: document!)
+                completion?(user)
+            }
+        
+        // サーバーから読み取り
+        db.collection("users")
+            .document(userId)
+            .getDocument { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading User. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found.")
+                    completion?(nil)
+                    return
+                }
+                print("HELLO! Success! Read 1 User.")
+                
+                // 成功
                 let user = toUser(document: document!)
                 completion?(user)
             }
