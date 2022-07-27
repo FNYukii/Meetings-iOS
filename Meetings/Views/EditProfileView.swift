@@ -20,7 +20,8 @@ struct EditProfileView: View {
     @State private var isLoadedUser = false
     
     @State private var isLoading = false
-    @State private var isShowDialog = false
+    @State private var isShowDialogError = false
+    @State private var isShowDialogDuplicate = false
     
     var body: some View {
         NavigationView {
@@ -36,12 +37,20 @@ struct EditProfileView: View {
                 }
             }
             
-            .alert("failed", isPresented: $isShowDialog) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isShowDialog = false
+                    isShowDialogError = false
                 }
             } message: {
                 Text("user_updating_failed")
+            }
+            
+            .alert("failed", isPresented: $isShowDialogDuplicate) {
+                Button("ok") {
+                    isShowDialogDuplicate = false
+                }
+            } message: {
+                Text("user_tag_is_duplicated")
             }
             
             .navigationTitle("edit_profile")
@@ -58,17 +67,33 @@ struct EditProfileView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            // Userドキュメントを更新
-                            FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
-                                isLoading = false
+                            
+                            // userTagが重複していないか確認
+                            FireUser.readIsUserTagDuplicates(userTag: userTag) { isDuplicate in
                                 // 失敗
-                                if documentId == nil {
-                                    isShowDialog = true
+                                if isDuplicate == nil {
+                                    isLoading = false
+                                    isShowDialogError = true
                                 }
                                 
-                                // 成功
-                                if documentId != nil {
-                                    dismiss()
+                                // 重複あり
+                                if isDuplicate == true {
+                                    isLoading = false
+                                    isShowDialogDuplicate = true
+                                }
+                                
+                                // 重複なし
+                                FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
+                                    isLoading = false
+                                    // 失敗
+                                    if documentId == nil {
+                                        isShowDialogError = true
+                                    }
+                                    
+                                    // 成功
+                                    if documentId != nil {
+                                        dismiss()
+                                    }
                                 }
                             }
                         }) {
