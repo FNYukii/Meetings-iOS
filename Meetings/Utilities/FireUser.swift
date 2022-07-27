@@ -234,6 +234,7 @@ class FireUser {
     static func updateUser(displayName: String, userTag: String, introduction: String, iconUrl: String?, completion: ((String?) -> Void)?) {
         // UIDを確認
         if FireAuth.uid() == nil {
+            completion?(nil)
             return
         }
         

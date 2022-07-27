@@ -84,9 +84,9 @@ struct EditProfileView: View {
                                 
                                 // 重複なし
                                 FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
-                                    isLoading = false
                                     // 失敗
                                     if documentId == nil {
+                                        isLoading = false
                                         isShowDialogError = true
                                     }
                                     
