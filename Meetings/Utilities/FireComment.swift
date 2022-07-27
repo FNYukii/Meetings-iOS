@@ -31,27 +31,57 @@ class FireComment {
         return comment
     }
     
-    static func readComment(commentId: String, completion: ((Comment?) -> Void)?) {
+    // For readLikedComments()
+    static func readCommentFromCashe(commentId: String, completion: ((Comment?) -> Void)?) {
+        // キャッシュから読み取り
         let db = Firestore.firestore()
         db.collection("comments")
             .document(commentId)
-            .getDocument { (document, error) in
+            .getDocument(source: .cache) { (document, error) in
                 // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error reading User. \(error)")
+                    print("HELLO! Fail! Error reading User from cashe. \(error)")
                     completion?(nil)
                     return
                 }
                 
                 // ドキュメントが無い
                 if !document!.exists {
-                    print("HELLO! Fail! User not found.")
+                    print("HELLO! Fail! User not found in cashe.")
                     completion?(nil)
                     return
                 }
                 
                 // 成功
-                print("HELLO! Success! Read 1 User.")
+                print("HELLO! Success! Read 1 User from cashe.")
+                let comment = toComment(document: document!)
+                completion?(comment)
+            }
+    }
+    
+    // For readLikedComments()
+    static func readCommentFromServer(commentId: String, completion: ((Comment?) -> Void)?) {
+        // サーバーから読み取り
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .document(commentId)
+            .getDocument { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading User from server. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! User not found in server.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 User from server.")
                 let comment = toComment(document: document!)
                 completion?(comment)
             }
@@ -188,7 +218,7 @@ class FireComment {
             // likedCommentIdsの数だけ、ドキュメント読み取りを行う
             var likedComments: [Comment] = []
             likedCommentIds.forEach { commentId in
-                readComment(commentId: commentId) { comment in
+                readCommentFromServer(commentId: commentId) { comment in
                     if let comment = comment {
                         likedComments.append(comment)
                         
