@@ -135,6 +135,7 @@ struct EditProfileView: View {
                                 }
                                 
                                 // 重複なし
+                                // Userドキュメントを更新
                                 FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
                                     // 失敗
                                     if documentId == nil {
