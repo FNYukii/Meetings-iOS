@@ -156,12 +156,12 @@
 				5410EA8A288BDF8B00F4A29B /* ProfileView.swift */,
 				5408F02028911EE8007D8EFB /* EditProfileView.swift */,
 				54CE7F6F289199A90064F2AF /* ImagePickerView.swift */,
-				544D591F289272760056C244 /* ImagesPickerView.swift */,
 				540D2E462889733A00DBB512 /* AccountView.swift */,
 				540D2E4A288974B900DBB512 /* CreateThreadView.swift */,
 				544D591B28922AA00056C244 /* CreateReportView.swift */,
 				540D2E482889734800DBB512 /* ThreadView.swift */,
 				540D2E4C2889775600DBB512 /* CreateCommentView.swift */,
+				544D591F289272760056C244 /* ImagesPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
