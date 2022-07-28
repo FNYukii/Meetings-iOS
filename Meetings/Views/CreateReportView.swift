@@ -12,16 +12,26 @@ struct CreateReportView: View {
     // Enviorosments
     @Environment(\.dismiss) private var dismiss
     
+    // Report target
+    let target: ReportTargetFamily
+    
     // States
     @State private var category = ""
+    @State private var detail = ""
     
     var body: some View {
         NavigationView {
             Form {
-                TextField("category", text: $category)
+                Section {
+                    TextField("category", text: $category)
+                }
+                
+                Section {
+                    MyTextEditor(hintText: Text("detail"), text: $detail)
+                }
             }
             
-            .navigationTitle("report_thread")
+            .navigationTitle("report_\(target.rawValue)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -41,4 +51,9 @@ struct CreateReportView: View {
         }
         .navigationViewStyle(.stack)
     }
+}
+
+enum ReportTargetFamily: String {
+    case thread = "thread"
+    case comment = "comment"
 }

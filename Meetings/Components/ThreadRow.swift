@@ -99,7 +99,7 @@ struct ThreadRow: View {
         }
         
         .sheet(isPresented: $isShowCreateReportView) {
-            CreateReportView()
+            CreateReportView(target: .thread)
         }
         
         .onAppear(perform: load)
