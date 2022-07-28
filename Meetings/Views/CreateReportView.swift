@@ -24,7 +24,7 @@ struct CreateReportView: View {
     
     // Loading, Dialog
     @State private var isLoading = false
-    @State private var isError = false
+    @State private var isShowDialogError = false
     
     var body: some View {
         NavigationView {
@@ -51,9 +51,9 @@ struct CreateReportView: View {
                 }
             }
             
-            .alert("failed", isPresented: $isError) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isError = false
+                    isShowDialogError = false
                 }
             } message: {
                 Text("report_creation_failed")
@@ -76,7 +76,7 @@ struct CreateReportView: View {
                                 // 失敗
                                 if documentId == nil {
                                     isLoading = false
-                                    isError = true
+                                    isShowDialogError = true
                                     return
                                 }
                                 

@@ -23,7 +23,7 @@ struct CreateCommentView: View {
     @State private var isShowImagesPickerView = false
     @State private var isPickingImages = false
     @State private var isLoading = false
-    @State private var isShowDialog = false
+    @State private var isShowDialogError = false
     
     var body: some View {
         NavigationView {
@@ -62,9 +62,9 @@ struct CreateCommentView: View {
                 }
             }
             
-            .alert("failed", isPresented: $isShowDialog) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isShowDialog = false
+                    isShowDialogError = false
                 }
             } message: {
                 Text("comment_creation_failed")
@@ -84,20 +84,33 @@ struct CreateCommentView: View {
                 }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    
                     // Create Button
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireComment.createComment(threadId: threadId, text: text) { documentId in
+                            
+                            // 画像をアップロード
+                            FireImage.uploadImages(images: pickedImages, folderName: "images") { imageUrls in
                                 // 失敗
-                                if documentId == nil {
+                                if imageUrls == nil {
                                     isLoading = false
-                                    isShowDialog = true
+                                    isShowDialogError = true
+                                    return
                                 }
                                 
                                 // 成功
-                                dismiss()
+                                // Commentドキュメントを追加
+                                FireComment.createComment(threadId: threadId, text: text, imageUrls: imageUrls ?? []) { documentId in
+                                    // 失敗
+                                    if documentId == nil {
+                                        isLoading = false
+                                        isShowDialogError = true
+                                        return
+                                    }
+                                    
+                                    // 成功
+                                    dismiss()
+                                }
                             }
                         }) {
                             Text("add")

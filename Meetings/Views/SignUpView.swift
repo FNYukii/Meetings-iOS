@@ -22,7 +22,7 @@ struct SignUpView: View {
     @State private var icon: UIImage? = nil
     
     @State private var isLoading = false
-    @State private var isShowDialog = false
+    @State private var isShowDialogError = false
     
     var body: some View {
         NavigationView {
@@ -54,9 +54,9 @@ struct SignUpView: View {
                 }
             }
             
-            .alert("failed", isPresented: $isShowDialog) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isShowDialog = false
+                    isShowDialogError = false
                 }
             } message: {
                 Text("failed_to_sign_up")
@@ -81,7 +81,7 @@ struct SignUpView: View {
                                 // 失敗
                                 if uid == nil {
                                     isLoading = false
-                                    isShowDialog = true
+                                    isShowDialogError = true
                                     return
                                 }
                                 
@@ -90,7 +90,7 @@ struct SignUpView: View {
                                     // 失敗
                                     if documentId == nil {
                                         isLoading = false
-                                        isShowDialog = true
+                                        isShowDialogError = true
                                         FireAuth.signOut()
                                         return
                                     }

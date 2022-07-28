@@ -264,7 +264,7 @@ class FireComment {
         }
     }
     
-    static func createComment(threadId: String, text: String, completion: ((String?) -> Void)?) {
+    static func createComment(threadId: String, text: String, imageUrls: [String], completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
             completion?(nil)
@@ -280,6 +280,7 @@ class FireComment {
                 "threadId": threadId,
                 "userId": FireAuth.uid()!,
                 "text": text,
+                "imageUrls": imageUrls
             ]) { error in
                 // 失敗
                 if let error = error {
