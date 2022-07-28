@@ -28,6 +28,7 @@ struct CommentRow: View {
     @State private var thread: Thread? = nil
     @State private var isLoadedThread = false
     
+    // Dialogs, Navigations
     @State private var isShowDialog = false
     @State private var isShowCreateReportView = false
         

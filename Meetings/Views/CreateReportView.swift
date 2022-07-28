@@ -66,4 +66,5 @@ struct CreateReportView: View {
 enum ReportTargetFamily: String {
     case thread = "thread"
     case comment = "comment"
+    case user = "user"
 }

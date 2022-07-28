@@ -16,6 +16,7 @@ struct ThreadRow: View {
     @State private var comments: [Comment]? = []
     @State private var isLoadedComments = false
     
+    // Dialogs, Navigations
     @State private var isShowDialog = false
     @State private var isShowCreateReportView = false
     
