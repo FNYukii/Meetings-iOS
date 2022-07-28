@@ -12,6 +12,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var image: UIImage?
+    @Binding var isPicking: Bool
     
     class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
         let parent: ImagePickerView
@@ -22,6 +23,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             parent.presentationMode.wrappedValue.dismiss()
+            parent.isPicking = true
             
             let itemProvider = results.first?.itemProvider
             
@@ -29,6 +31,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
                 itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                     // 失敗
                     guard let image = image as? UIImage else {
+                        self?.parent.isPicking = false
                         return
                     }
                     
@@ -36,6 +39,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
                     DispatchQueue.main.sync {
                         let clipedImage = EditImage.clipImageToSquare(image: image)
                         let resizedImage = EditImage.resizeImage(image: clipedImage, width: 1000)
+                        self?.parent.isPicking = false
                         self?.parent.image = resizedImage
                     }
                 }

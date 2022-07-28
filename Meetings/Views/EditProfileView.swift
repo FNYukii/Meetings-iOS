@@ -23,7 +23,8 @@ struct EditProfileView: View {
     @State private var isShowImagePickerView = false
     @State private var pickedImage: UIImage? = nil
     
-    // Loading, Dialogs
+    // Loadings, Dialogs
+    @State private var isPicking = false
     @State private var isLoading = false
     @State private var isShowDialogError = false
     @State private var isShowDialogDuplicate = false
@@ -37,12 +38,18 @@ struct EditProfileView: View {
                         isShowImagePickerView.toggle()
                     }) {
                         // Current icon
-                        if pickedImage == nil {
+                        if !isPicking && pickedImage == nil {
                             IconImage(url: iconUrl, iconImageFamily: .medium)
                         }
                         
+                        // Picking view
+                        if isPicking {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                        }
+                        
                         // New icon
-                        if pickedImage != nil {
+                        if !isPicking && pickedImage != nil {
                             Image(uiImage: pickedImage!)
                                 .resizable()
                                 .scaledToFill()
@@ -67,7 +74,7 @@ struct EditProfileView: View {
             }
             
             .sheet(isPresented: $isShowImagePickerView) {
-                ImagePickerView(image: $pickedImage)
+                ImagePickerView(image: $pickedImage, isPicking: $isPicking)
             }
             
             .alert("failed", isPresented: $isShowDialogError) {
