@@ -21,6 +21,7 @@ struct ProfileView: View {
     // Navigation
     @State private var isShowEditProfileView = false
     @State private var isShowAccountView = false
+    @State private var isShowCreateReportView = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -105,6 +106,7 @@ struct ProfileView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .animation(.spring(), value: selection)
+            .ignoresSafeArea()
         }
         
         .sheet(isPresented: $isShowEditProfileView) {
@@ -115,22 +117,39 @@ struct ProfileView: View {
             AccountView()
         }
         
+        .sheet(isPresented: $isShowCreateReportView) {
+            CreateReportView(target: .user)
+        }
+        
         .navigationTitle("profile")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
+                    // Edit Profile Button
                     if FireAuth.uid() == userId {
                         Button(action: {
                             isShowEditProfileView.toggle()
                         }) {
                             Label("edit_profile", systemImage: "person")
                         }
-                        
+                    }
+                    
+                    // Account Button
+                    if FireAuth.uid() == userId {
                         Button(action: {
                             isShowAccountView.toggle()
                         }) {
                             Label("account", systemImage: "person")
+                        }
+                    }
+                    
+                    // Report Button
+                    if FireAuth.uid() != userId {
+                        Button(action: {
+                            isShowCreateReportView.toggle()
+                        }) {
+                            Label("report_user", systemImage: "flag")
                         }
                     }
                 } label: {

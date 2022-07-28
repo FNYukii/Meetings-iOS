@@ -16,7 +16,9 @@ struct ThreadRow: View {
     @State private var comments: [Comment]? = []
     @State private var isLoadedComments = false
     
+    // Dialogs, Navigations
     @State private var isShowDialog = false
+    @State private var isShowCreateReportView = false
     
     var body: some View {
         
@@ -32,11 +34,21 @@ struct ThreadRow: View {
                 Spacer()
                 
                 Menu {
+                    // 削除ボタン
                     if FireAuth.uid() == thread.userId {
                         Button(role: .destructive) {
                             isShowDialog.toggle()
                         } label: {
                             Label("delete_thread", systemImage: "trash")
+                        }
+                    }
+                    
+                    // 報告ボタン
+                    if FireAuth.uid() != thread.userId {
+                        Button(action: {
+                            isShowCreateReportView.toggle()
+                        }) {
+                            Label("report_thread", systemImage: "flag")
                         }
                     }
                 } label: {
@@ -85,6 +97,10 @@ struct ThreadRow: View {
             }
         } message: {
             Text("are_you_sure_you_want_to_delete_this_thread")
+        }
+        
+        .sheet(isPresented: $isShowCreateReportView) {
+            CreateReportView(target: .thread)
         }
         
         .onAppear(perform: load)
