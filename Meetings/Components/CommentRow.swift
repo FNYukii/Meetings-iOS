@@ -112,6 +112,11 @@ struct CommentRow: View {
                 Text(comment.text)
                     .fixedSize(horizontal: false, vertical: true)
                 
+                // Images Row
+                ForEach(comment.imageUrls, id: \.self) { imageUrl in
+                    CommentImage(url: imageUrl)
+                }
+                
                 // Reaction Row
                 HStack {
                     // Progress view
