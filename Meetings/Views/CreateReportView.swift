@@ -43,7 +43,7 @@ struct CreateReportView: View {
                     Button(action: {
                         dismiss()
                     }) {
-                        Text("done")
+                        Text("report")
                             .fontWeight(.bold)
                     }
                 }

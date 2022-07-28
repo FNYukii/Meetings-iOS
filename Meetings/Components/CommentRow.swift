@@ -29,6 +29,7 @@ struct CommentRow: View {
     @State private var isLoadedThread = false
     
     @State private var isShowDialog = false
+    @State private var isShowCreateReportView = false
         
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -82,11 +83,21 @@ struct CommentRow: View {
                     Spacer()
                     
                     Menu {
+                        // 削除ボタン
                         if FireAuth.uid() == comment.userId {
                             Button(role: .destructive) {
                                 isShowDialog.toggle()
                             } label: {
                                 Label("delete_comment", systemImage: "trash")
+                            }
+                        }
+                        
+                        // 報告ボタン
+                        if FireAuth.uid() != comment.userId {
+                            Button(action: {
+                                isShowCreateReportView.toggle()
+                            }) {
+                                Label("report_comment", systemImage: "flag")
                             }
                         }
                     } label: {
@@ -208,6 +219,10 @@ struct CommentRow: View {
             }
         } message: {
             Text("are_you_sure_you_want_to_delete_this_comment")
+        }
+        
+        .sheet(isPresented: $isShowCreateReportView) {
+            CreateReportView(target: .comment)
         }
     }
     
