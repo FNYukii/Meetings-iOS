@@ -169,6 +169,9 @@ struct EditProfileView: View {
         if !isLoadedUser {
             FireUser.readUser(userId: FireAuth.uid()!) { user in
                 // 失敗
+                if user == nil {
+                    // Do nothing
+                }
                 
                 // 成功
                 if let user = user {
@@ -176,6 +179,7 @@ struct EditProfileView: View {
                     self.userTag = user.userTag
                     self.introduction = user.introduction
                     self.iconUrl = user.iconUrl
+                    self.isLoadedUser = true
                 }
             }
         }
