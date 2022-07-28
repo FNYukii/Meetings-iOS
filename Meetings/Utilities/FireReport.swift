@@ -13,7 +13,7 @@ class FireReport {
         // ドキュメント追加
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
-        ref = db.collection("comments")
+        ref = db.collection("reports")
             .addDocument(data: [
                 "createdAt": FieldValue.serverTimestamp(),
                 "userId": FireAuth.uid() as Any,
@@ -23,13 +23,13 @@ class FireReport {
             ]) { error in
                 // 失敗
                 if let error = error {
-                    print("HELLO! Fail! Error adding new Comment. \(error)")
+                    print("HELLO! Fail! Error adding new Report. \(error)")
                     completion?(nil)
                     return
                 }
                 
                 // 成功
-                print("HELLO! Success! Added 1 Comment.")
+                print("HELLO! Success! Added 1 Report.")
                 completion?(ref!.documentID)
             }
     }
