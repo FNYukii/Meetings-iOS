@@ -49,6 +49,17 @@ struct CreateCommentView: View {
                             .progressViewStyle(.circular)
                     }
                 }
+                
+                // Images (仮)
+                Section {
+                    VStack {
+                        ForEach(0 ..< pickedImages.count, id: \.self) { index in
+                            Image(uiImage: pickedImages[index])
+                                .resizable()
+                                .scaledToFit()
+                        }
+                    }
+                }
             }
             
             .alert("failed", isPresented: $isShowDialog) {
