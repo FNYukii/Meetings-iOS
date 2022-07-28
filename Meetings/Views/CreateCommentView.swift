@@ -17,7 +17,11 @@ struct CreateCommentView: View {
     
     // States
     @State private var text = ""
+    @State private var pickedImages: [UIImage] = []
     
+    // Bools
+    @State private var isShowImagesPickerView = false
+    @State private var isPickingImages = false
     @State private var isLoading = false
     @State private var isShowDialog = false
     
@@ -25,7 +29,26 @@ struct CreateCommentView: View {
         NavigationView {
             
             Form {
-                MyTextEditor(hintText: Text("text"), text: $text)
+                Section {
+                    MyTextEditor(hintText: Text("text"), text: $text)
+                }
+                
+                Section {
+                    // Pick Button
+                    if !isPickingImages {
+                        Button(action: {
+                            isShowImagesPickerView.toggle()
+                        }) {
+                            Text("pick_images")
+                        }
+                    }
+                    
+                    // ProgressView
+                    if isPickingImages {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
+                }
             }
             
             .alert("failed", isPresented: $isShowDialog) {
@@ -34,6 +57,10 @@ struct CreateCommentView: View {
                 }
             } message: {
                 Text("comment_creation_failed")
+            }
+            
+            .sheet(isPresented: $isShowImagesPickerView) {
+                ImagesPickerView(images: $pickedImages, isPicking: $isPickingImages)
             }
             
             .navigationTitle("new_comment")

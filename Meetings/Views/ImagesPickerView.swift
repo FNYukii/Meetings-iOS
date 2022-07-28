@@ -46,11 +46,9 @@ struct ImagesPickerView: UIViewControllerRepresentable {
                     }
                     // 画像を配列に追加
                     DispatchQueue.main.sync {
-                        self?.parent.isPicking = false
-                        let clipedImage = EditImage.clipImageToSquare(image: image)
-                        let resizedImage = EditImage.resizeImage(image: clipedImage, width: 1000)
-                        self?.parent.isPicking = false
+                        let resizedImage = EditImage.resizeImage(image: image, width: 1000)
                         self?.parent.images.append(resizedImage)
+                        self?.parent.isPicking = false
                     }
                 }
             }
