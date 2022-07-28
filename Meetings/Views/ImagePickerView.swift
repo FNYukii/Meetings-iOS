@@ -23,11 +23,11 @@ struct ImagePickerView: UIViewControllerRepresentable {
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             parent.presentationMode.wrappedValue.dismiss()
-            parent.isPicking = true
             
             let itemProvider = results.first?.itemProvider
-            
             if let itemProvider = itemProvider {
+                
+                parent.isPicking = true
                 itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                     // 失敗
                     guard let image = image as? UIImage else {
