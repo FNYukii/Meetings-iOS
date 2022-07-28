@@ -19,6 +19,12 @@ struct EditProfileView: View {
     @State private var iconUrl: String? = nil
     @State private var isLoadedUser = false
     
+    // Pick image
+    @State private var isShowImagePickerView = false
+    @State private var pickedImage: UIImage? = nil
+    
+    // Loadings, Dialogs
+    @State private var isPicking = false
     @State private var isLoading = false
     @State private var isShowDialogError = false
     @State private var isShowDialogDuplicate = false
@@ -28,6 +34,46 @@ struct EditProfileView: View {
             
             Form {
                 Section {
+                    HStack {
+                        Spacer()
+                        
+                        // Icon Button
+                        Button(action: {
+                            isShowImagePickerView.toggle()
+                        }) {
+                            // Current icon
+                            if !isPicking && pickedImage == nil {
+                                IconImage(url: iconUrl, iconImageFamily: .large)
+                            }
+                            
+                            // Picking view
+                            if isPicking {
+                                ProgressView()
+                                    .progressViewStyle(.circular)
+                                    .frame(height: 80)
+                            }
+                            
+                            // New icon
+                            if !isPicking && pickedImage != nil {
+                                Image(uiImage: pickedImage!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .cornerRadius(.infinity)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: .infinity)
+                                            .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                                    )
+                            }
+                        }
+                        .buttonStyle(.borderless)
+                        
+                        Spacer()
+                    }
+                    .listRowBackground(Color.clear)
+                }
+                
+                Section {
                     TextField("display_name", text: $displayName)
                     TextField("user_tag", text: $userTag)
                 }
@@ -35,6 +81,10 @@ struct EditProfileView: View {
                 Section {
                     MyTextEditor(hintText: Text("introduction"), text: $introduction)
                 }
+            }
+            
+            .sheet(isPresented: $isShowImagePickerView) {
+                ImagePickerView(image: $pickedImage, isPicking: $isPicking)
             }
             
             .alert("failed", isPresented: $isShowDialogError) {

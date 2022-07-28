@@ -33,4 +33,5 @@ struct IconImage: View {
 enum IconImageFamily: CGFloat {
     case small = 32
     case medium = 40
+    case large = 80
 }
