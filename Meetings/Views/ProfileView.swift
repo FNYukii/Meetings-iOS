@@ -105,6 +105,7 @@ struct ProfileView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .animation(.spring(), value: selection)
+            .ignoresSafeArea()
         }
         
         .sheet(isPresented: $isShowEditProfileView) {
