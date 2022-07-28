@@ -11,14 +11,14 @@ import FirebaseStorage
 
 class FireImage {
     
-    static func uploadImage(image: UIImage, completion: ((String?) -> Void)?) {
+    static func uploadImage(image: UIImage, folderName: String, completion: ((String?) -> Void)?) {
         // Data to upload
         let data = image.pngData()!
 
         // Reference
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let imagePath = "images/\(UUID()).png"
+        let imagePath = "\(folderName)/\(UUID()).png"
         let imageRef = storageRef.child(imagePath)
         
         imageRef.putData(data, metadata: nil) { (metadata, error) in

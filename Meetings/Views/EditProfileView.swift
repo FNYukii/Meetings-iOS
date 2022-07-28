@@ -153,7 +153,7 @@ struct EditProfileView: View {
                                 
                                 // 新しいアイコンが選択されていれば更新
                                 if let pickedImage = pickedImage {
-                                    FireImage.uploadImage(image: pickedImage) { newIconUrl in
+                                    FireImage.uploadImage(image: pickedImage ,folderName: "icons") { newIconUrl in
                                         // 失敗
                                         if newIconUrl == nil {
                                             isLoading = false
