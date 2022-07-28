@@ -135,16 +135,46 @@ struct EditProfileView: View {
                                 }
                                 
                                 // 重複なし
-                                FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
-                                    // 失敗
-                                    if documentId == nil {
-                                        isLoading = false
-                                        isShowDialogError = true
-                                        return
+                                // アイコンのアップロードをせずに更新
+                                if pickedImage == nil {
+                                    // Userドキュメントを更新
+                                    FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl) { documentId in
+                                        // 失敗
+                                        if documentId == nil {
+                                            isLoading = false
+                                            isShowDialogError = true
+                                            return
+                                        }
+                                        
+                                        // 成功
+                                        dismiss()
                                     }
-                                    
-                                    // 成功
-                                    dismiss()
+                                }
+                                
+                                // 新しいアイコンが選択されていれば更新
+                                if let pickedImage = pickedImage {
+                                    FireImage.uploadImage(image: pickedImage ,folderName: "icons") { newIconUrl in
+                                        // 失敗
+                                        if newIconUrl == nil {
+                                            isLoading = false
+                                            isShowDialogError = true
+                                            return
+                                        }
+                                        
+                                        // 成功
+                                        // Userドキュメントを更新
+                                        FireUser.updateUser(displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: newIconUrl!) { documentId in
+                                            // 失敗
+                                            if documentId == nil {
+                                                isLoading = false
+                                                isShowDialogError = true
+                                                return
+                                            }
+                                            
+                                            // 成功
+                                            dismiss()
+                                        }
+                                    }
                                 }
                             }
                         }) {
@@ -169,6 +199,9 @@ struct EditProfileView: View {
         if !isLoadedUser {
             FireUser.readUser(userId: FireAuth.uid()!) { user in
                 // 失敗
+                if user == nil {
+                    // Do nothing
+                }
                 
                 // 成功
                 if let user = user {
@@ -176,6 +209,7 @@ struct EditProfileView: View {
                     self.userTag = user.userTag
                     self.introduction = user.introduction
                     self.iconUrl = user.iconUrl
+                    self.isLoadedUser = true
                 }
             }
         }
