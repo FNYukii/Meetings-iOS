@@ -61,6 +61,7 @@ struct EditProfileView: View {
                                 )
                         }
                     }
+                    .buttonStyle(.borderless)
                 }
                 
                 Section {
