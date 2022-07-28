@@ -15,8 +15,9 @@ class FireComment {
         let userId = document.get("userId") as! String
         let threadId = document.get("threadId") as! String
         let text = document.get("text") as! String
+        let imageUrls = document.get("imageUrls") as? [String] ?? []
         
-        let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text)
+        let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text, imageUrls: imageUrls)
         return comment
     }
     
@@ -26,8 +27,9 @@ class FireComment {
         let userId = document.get("userId") as! String
         let threadId = document.get("threadId") as! String
         let text = document.get("text") as! String
+        let imageUrls = document.get("imageUrls") as? [String] ?? []
         
-        let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text)
+        let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text, imageUrls: imageUrls)
         return comment
     }
     

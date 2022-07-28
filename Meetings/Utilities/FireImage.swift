@@ -55,7 +55,7 @@ class FireImage {
     static func uploadImages(images: [UIImage], folderName: String, completion: (([String]?) -> Void)?) {
         // imagesが空なら失敗
         if images.count == 0 {
-            completion?(nil)
+            completion?([])
             return
         }
         
