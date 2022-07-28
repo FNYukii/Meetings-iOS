@@ -126,27 +126,23 @@ struct CommentRow: View {
                     }
                     
                     if comment.imageUrls.count == 3 {
-                        VStack {
-                            HStack {
-                                CommentImage(url: comment.imageUrls.first)
-                                CommentImage(url: comment.imageUrls[1])
-                            }
-                            
-                            CommentImage(url: comment.imageUrls[2])
+                        HStack {
+                            CommentImage(url: comment.imageUrls.first)
+                            CommentImage(url: comment.imageUrls[1])
                         }
+                        
+                        CommentImage(url: comment.imageUrls[2])
                     }
                     
                     if comment.imageUrls.count == 4 {
-                        VStack {
-                            HStack {
-                                CommentImage(url: comment.imageUrls.first)
-                                CommentImage(url: comment.imageUrls[1])
-                            }
-                            
-                            HStack {
-                                CommentImage(url: comment.imageUrls[2])
-                                CommentImage(url: comment.imageUrls[3])
-                            }
+                        HStack {
+                            CommentImage(url: comment.imageUrls.first)
+                            CommentImage(url: comment.imageUrls[1])
+                        }
+                        
+                        HStack {
+                            CommentImage(url: comment.imageUrls[2])
+                            CommentImage(url: comment.imageUrls[3])
                         }
                     }
                 }
