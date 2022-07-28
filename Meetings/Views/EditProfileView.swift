@@ -19,6 +19,11 @@ struct EditProfileView: View {
     @State private var iconUrl: String? = nil
     @State private var isLoadedUser = false
     
+    // Pick image
+    @State private var isShowImagePickerView = false
+    @State private var pickedImage: UIImage? = nil
+    
+    // Loading, Dialogs
     @State private var isLoading = false
     @State private var isShowDialogError = false
     @State private var isShowDialogDuplicate = false
@@ -28,6 +33,30 @@ struct EditProfileView: View {
             
             Form {
                 Section {
+                    Button(action: {
+                        isShowImagePickerView.toggle()
+                    }) {
+                        // Current icon
+                        if pickedImage == nil {
+                            IconImage(url: iconUrl, iconImageFamily: .medium)
+                        }
+                        
+                        // New icon
+                        if pickedImage != nil {
+                            Image(uiImage: pickedImage!)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(.infinity)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: .infinity)
+                                        .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                                )
+                        }
+                    }
+                }
+                
+                Section {
                     TextField("display_name", text: $displayName)
                     TextField("user_tag", text: $userTag)
                 }
@@ -35,6 +64,10 @@ struct EditProfileView: View {
                 Section {
                     MyTextEditor(hintText: Text("introduction"), text: $introduction)
                 }
+            }
+            
+            .sheet(isPresented: $isShowImagePickerView) {
+                ImagePickerView(image: $pickedImage)
             }
             
             .alert("failed", isPresented: $isShowDialogError) {

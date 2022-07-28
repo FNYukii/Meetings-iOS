@@ -8,15 +8,15 @@
 import SwiftUI
 import PhotosUI
 
-struct ImagesPickerView: UIViewControllerRepresentable {
+struct ImagePickerView: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
-    @Binding var image: UIImage
+    @Binding var image: UIImage?
     
     class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-        let parent: ImagesPickerView
+        let parent: ImagePickerView
         
-        init(_ parent: ImagesPickerView) {
+        init(_ parent: ImagePickerView) {
             self.parent = parent
         }
         
@@ -47,16 +47,16 @@ struct ImagesPickerView: UIViewControllerRepresentable {
         Coordinator(self)
     }
     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagesPickerView>) -> PHPickerViewController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerView>) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
-        configuration.selectionLimit = 4
+        configuration.selectionLimit = 1
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = context.coordinator
         return picker
     }
     
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<ImagesPickerView>) {
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<ImagePickerView>) {
         // Do nothing
     }
 }
