@@ -23,7 +23,7 @@ struct CreateCommentView: View {
     @State private var isShowImagesPickerView = false
     @State private var isPickingImages = false
     @State private var isLoading = false
-    @State private var isFailed = false
+    @State private var isShowDialogError = false
     
     var body: some View {
         NavigationView {
@@ -62,9 +62,9 @@ struct CreateCommentView: View {
                 }
             }
             
-            .alert("failed", isPresented: $isFailed) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isFailed = false
+                    isShowDialogError = false
                 }
             } message: {
                 Text("comment_creation_failed")
@@ -94,7 +94,7 @@ struct CreateCommentView: View {
                                 // 失敗
                                 if imageUrls == nil {
                                     isLoading = false
-                                    isFailed = true
+                                    isShowDialogError = true
                                     return
                                 }
                                 
@@ -104,7 +104,7 @@ struct CreateCommentView: View {
                                     // 失敗
                                     if documentId == nil {
                                         isLoading = false
-                                        isFailed = true
+                                        isShowDialogError = true
                                         return
                                     }
                                     

@@ -16,7 +16,7 @@ struct CreateThreadView: View {
     @State private var title = ""
     
     @State private var isLoading = false
-    @State private var isShowDialog = false
+    @State private var isShowDialogError = false
     
     var body: some View {
         NavigationView {
@@ -26,9 +26,9 @@ struct CreateThreadView: View {
                     .disabled(isLoading)
             }
             
-            .alert("failed", isPresented: $isShowDialog) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isShowDialog = false
+                    isShowDialogError = false
                 }
             } message: {
                 Text("thread_creation_failed")
@@ -52,7 +52,7 @@ struct CreateThreadView: View {
                                 // 失敗
                                 if documentId == nil {
                                     isLoading = false
-                                    isShowDialog = true
+                                    isShowDialogError = true
                                 }
                                 
                                 // 成功

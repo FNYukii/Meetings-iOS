@@ -17,7 +17,7 @@ struct SignInView: View {
     @State private var password = ""
     
     @State private var isLoading = false
-    @State private var isShowDialog = false
+    @State private var isShowDialogError = false
     
     var body: some View {
         NavigationView {
@@ -31,9 +31,9 @@ struct SignInView: View {
                     .disabled(isLoading)
             }
             
-            .alert("failed", isPresented: $isShowDialog) {
+            .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
-                    isShowDialog = false
+                    isShowDialogError = false
                 }
             } message: {
                 Text("failed_to_sign_up")
@@ -57,7 +57,7 @@ struct SignInView: View {
                                 // 失敗
                                 if uid == nil {
                                     isLoading = false
-                                    isShowDialog = true
+                                    isShowDialogError = true
                                     return
                                 }
                                 
