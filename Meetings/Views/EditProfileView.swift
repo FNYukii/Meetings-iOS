@@ -34,34 +34,43 @@ struct EditProfileView: View {
             
             Form {
                 Section {
-                    Button(action: {
-                        isShowImagePickerView.toggle()
-                    }) {
-                        // Current icon
-                        if !isPicking && pickedImage == nil {
-                            IconImage(url: iconUrl, iconImageFamily: .medium)
-                        }
+                    HStack {
+                        Spacer()
                         
-                        // Picking view
-                        if isPicking {
-                            ProgressView()
-                                .progressViewStyle(.circular)
+                        // Icon Button
+                        Button(action: {
+                            isShowImagePickerView.toggle()
+                        }) {
+                            // Current icon
+                            if !isPicking && pickedImage == nil {
+                                IconImage(url: iconUrl, iconImageFamily: .large)
+                            }
+                            
+                            // Picking view
+                            if isPicking {
+                                ProgressView()
+                                    .progressViewStyle(.circular)
+                                    .frame(height: 80)
+                            }
+                            
+                            // New icon
+                            if !isPicking && pickedImage != nil {
+                                Image(uiImage: pickedImage!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .cornerRadius(.infinity)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: .infinity)
+                                            .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                                    )
+                            }
                         }
+                        .buttonStyle(.borderless)
                         
-                        // New icon
-                        if !isPicking && pickedImage != nil {
-                            Image(uiImage: pickedImage!)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(.infinity)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: .infinity)
-                                        .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
-                                )
-                        }
+                        Spacer()
                     }
-                    .buttonStyle(.borderless)
+                    .listRowBackground(Color.clear)
                 }
                 
                 Section {
