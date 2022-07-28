@@ -16,14 +16,24 @@ struct CreateReportView: View {
     let target: ReportTargetFamily
     
     // States
-    @State private var category = ""
+    @State private var categorySelection = 0
     @State private var detail = ""
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    TextField("category", text: $category)
+                    Picker("category", selection: $categorySelection) {
+                        Text("violent")
+                            .tag(0)
+                        Text("spam")
+                            .tag(1)
+                        Text("sensitive")
+                            .tag(2)
+                        Text("fake")
+                            .tag(3)
+                    }
+                    .pickerStyle(.menu)
                 }
                 
                 Section {
