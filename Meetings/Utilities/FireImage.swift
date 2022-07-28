@@ -52,4 +52,37 @@ class FireImage {
         }
     }
     
+    static func uploadImages(images: [UIImage], folderName: String, completion: (([String]?) -> Void)?) {
+        // imagesが空なら失敗
+        if images.count == 0 {
+            completion?(nil)
+            return
+        }
+        
+        // 画像をアップロードしていく
+        var imageUrls: [String] = []
+        var uploadCount = 0
+        images.forEach { image in
+            uploadImage(image: image, folderName: "images") { imageUrl in
+                uploadCount += 1
+                
+                // 失敗
+                if imageUrl == nil {
+                    // 一枚でもアップロードに失敗したら、uploadImagesは失敗とする
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                // imageUrlを配列に追加していく
+                imageUrls.append(imageUrl!)
+                                
+                // 画像を全てアップロードできたら、imagePaths配列をreturn
+                if images.count == uploadCount {
+                    completion?(imageUrls)
+                }
+            }
+        }
+    }
+    
 }
