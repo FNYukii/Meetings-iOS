@@ -23,17 +23,24 @@ struct CreateReportView: View {
         NavigationView {
             Form {
                 Section {
-                    Picker("category", selection: $categorySelection) {
-                        Text("violent")
-                            .tag(0)
-                        Text("spam")
-                            .tag(1)
-                        Text("sensitive")
-                            .tag(2)
-                        Text("fake")
-                            .tag(3)
+                    HStack {
+                        Text("category")
+                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                        
+                        Picker("category", selection: $categorySelection) {
+                            Text("violent")
+                                .tag(0)
+                            Text("spam")
+                                .tag(1)
+                            Text("sensitive")
+                                .tag(2)
+                            Text("fake")
+                                .tag(3)
+                        }
+                        .pickerStyle(.menu)
                     }
-                    .pickerStyle(.menu)
                 }
                 
                 Section {
