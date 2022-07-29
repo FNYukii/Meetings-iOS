@@ -13,11 +13,12 @@ struct CommentRow: View {
     let comment: Comment
     
     // Navigations
-    let isDisableShowingProfileView: Bool
-    @State private var isShowProfileView = false
+    let isAbleShowingProfileView: Bool
     let isAbleShowingThreadView: Bool
-    @State private var isShowThreadView = false
     let isAbleShowingCommentView: Bool
+    
+    @State private var isShowProfileView = false
+    @State private var isShowThreadView = false
     
     // States
     @State private var user: User? = nil
@@ -43,7 +44,7 @@ struct CommentRow: View {
                 IconImage(url: user?.iconUrl, iconImageFamily: .medium)
             }
             .buttonStyle(.borderless)
-            .disabled(isDisableShowingProfileView)
+            .disabled(!isAbleShowingProfileView)
             
             // Detail Column
             VStack(alignment: .leading) {
