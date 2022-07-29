@@ -34,22 +34,21 @@ struct CommentView: View {
         
         List {
             
-            HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading) {
                 
-                // Icon Column
-                Button (action: {
-                    isShowProfileView.toggle()
-                }) {
-                    IconImage(url: user?.iconUrl, iconImageFamily: .medium)
-                }
-                .buttonStyle(.borderless)
-                
-                // Detail Column
-                VStack(alignment: .leading) {
+                // Header Row
+                HStack(alignment: .top) {
+                    // Icon Column
+                    Button (action: {
+                        isShowProfileView.toggle()
+                    }) {
+                        IconImage(url: user?.iconUrl, iconImageFamily: .medium)
+                    }
+                    .buttonStyle(.borderless)
                     
-                    // Header Row
-                    HStack {
-                        // Progress views
+                    // Detail Column
+                    VStack(alignment: .leading) {
+                        // Progress views Row
                         if !isLoadedUser {
                             Color.secondary
                                 .opacity(0.2)
@@ -60,7 +59,7 @@ struct CommentView: View {
                                 .frame(width: 80)
                         }
                         
-                        // User reading failed views
+                        // User reading failed views Row
                         if isLoadedUser && user == nil {
                             Image(systemName: "exclamationmark.triangle")
                                 .foregroundColor(.secondary)
@@ -68,7 +67,7 @@ struct CommentView: View {
                                 .foregroundColor(.secondary)
                         }
                         
-                        // Display name & User tag
+                        // Display name & User tag Row
                         if isLoadedUser && user != nil {
                             Text(user!.displayName)
                                 .fontWeight(.bold)
@@ -76,157 +75,157 @@ struct CommentView: View {
                             Text("@\(user!.userTag)")
                                 .foregroundColor(.secondary)
                         }
-                        
-                        // Date text
-                        EditDate.howManyAgoText(from: comment.createdAt)
-                            .foregroundColor(.secondary)
-                        
-                        Spacer()
-                        
-                        Menu {
-                            // 削除ボタン
-                            if FireAuth.uid() == comment.userId {
-                                Button(role: .destructive) {
-                                    isShowDialogDelete.toggle()
-                                } label: {
-                                    Label("delete_comment", systemImage: "trash")
-                                }
-                            }
-                            
-                            // 報告ボタン
-                            if FireAuth.uid() != comment.userId {
-                                Button(action: {
-                                    isShowCreateReportView.toggle()
-                                }) {
-                                    Label("report_comment", systemImage: "flag")
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .foregroundColor(.secondary)
-                                .padding(.vertical, 6)
-                        }
                     }
                     
-                    // Text Row
-                    Text(comment.text)
-                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer()
                     
-                    // Images Row
-                    Group {
-                        if comment.imageUrls.count == 1 {
+                    // Menu Column
+                    Menu {
+                        // 削除ボタン
+                        if FireAuth.uid() == comment.userId {
+                            Button(role: .destructive) {
+                                isShowDialogDelete.toggle()
+                            } label: {
+                                Label("delete_comment", systemImage: "trash")
+                            }
+                        }
+                        
+                        // 報告ボタン
+                        if FireAuth.uid() != comment.userId {
+                            Button(action: {
+                                isShowCreateReportView.toggle()
+                            }) {
+                                Label("report_comment", systemImage: "flag")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.secondary)
+                            .padding(.vertical, 6)
+                    }
+                }
+                
+                // Text Row
+                Text(comment.text)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                // Images Row
+                Group {
+                    if comment.imageUrls.count == 1 {
+                        CommentImage(url: comment.imageUrls.first)
+                    }
+                    
+                    if comment.imageUrls.count == 2 {
+                        HStack {
                             CommentImage(url: comment.imageUrls.first)
+                            CommentImage(url: comment.imageUrls[1])
+                        }
+                    }
+                    
+                    if comment.imageUrls.count == 3 {
+                        HStack {
+                            CommentImage(url: comment.imageUrls.first)
+                            CommentImage(url: comment.imageUrls[1])
                         }
                         
-                        if comment.imageUrls.count == 2 {
-                            HStack {
-                                CommentImage(url: comment.imageUrls.first)
-                                CommentImage(url: comment.imageUrls[1])
-                            }
+                        CommentImage(url: comment.imageUrls[2])
+                    }
+                    
+                    if comment.imageUrls.count == 4 {
+                        HStack {
+                            CommentImage(url: comment.imageUrls.first)
+                            CommentImage(url: comment.imageUrls[1])
                         }
                         
-                        if comment.imageUrls.count == 3 {
-                            HStack {
-                                CommentImage(url: comment.imageUrls.first)
-                                CommentImage(url: comment.imageUrls[1])
-                            }
-                            
+                        HStack {
                             CommentImage(url: comment.imageUrls[2])
-                        }
-                        
-                        if comment.imageUrls.count == 4 {
-                            HStack {
-                                CommentImage(url: comment.imageUrls.first)
-                                CommentImage(url: comment.imageUrls[1])
-                            }
-                            
-                            HStack {
-                                CommentImage(url: comment.imageUrls[2])
-                                CommentImage(url: comment.imageUrls[3])
-                            }
+                            CommentImage(url: comment.imageUrls[3])
                         }
                     }
-                    
-                    // Reaction Row
-                    HStack {
-                        // Progress view
-                        if !isLoadedLikedUserIds {
-                            Color.secondary
-                                .opacity(0.2)
-                                .frame(width: 40)
-                        }
-                        
-                        // Reading failed view
-                        if isLoadedLikedUserIds && likedUserIds == nil {
-                            Image(systemName: "exclamationmark.triangle")
-                                .foregroundColor(.secondary)
-                            Text("likes_reading_failed")
-                                .foregroundColor(.secondary)
-                        }
-                        
-                        // Like button when not liked
-                        if isLoadedLikedUserIds && likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
-                            Button(action: {
-                                FireUser.likeComment(commentId: comment.id)
-                                loadLikedUserIds()
-                            }) {
-                                HStack(spacing: 2) {
-                                    Image(systemName: "heart")
-                                    Text("\(likedUserIds!.count)")
-                                }
-                                .foregroundColor(.secondary)
-                            }
-                            .buttonStyle(.borderless)
-                            .disabled(!FireAuth.isSignedIn())
-                        }
-                        
-                        // Like button when liked
-                        if isLoadedLikedUserIds && likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
-                            Button(action: {
-                                FireUser.unlikeComment(commentId: comment.id)
-                                loadLikedUserIds()
-                            }) {
-                                HStack(spacing: 2) {
-                                    Image(systemName: "heart.fill")
-                                    Text("\(likedUserIds!.count)")
-                                }
-                                .foregroundColor(.red)
-                            }
-                            .buttonStyle(.borderless)
-                            .disabled(!FireAuth.isSignedIn())
-                        }
+                }
+                
+                // Date Row
+                Text("2022-1-1")
+                    .foregroundColor(.secondary)
+                
+                // Reaction Row
+                HStack {
+                    // Progress view
+                    if !isLoadedLikedUserIds {
+                        Color.secondary
+                            .opacity(0.2)
+                            .frame(width: 40)
                     }
-                    .frame(height: 16)
-                    .padding(.top, 4)
                     
-                    // Thread Title Row
-                    Group {
-                        // Progress view
-                        if !isLoadedThread {
-                            Color.secondary
-                                .opacity(0.2)
-                                .frame(width: 120, height: 16)
-                        }
-                        
-                        // Not found text
-                        if isLoadedThread && thread == nil {
-                            HStack {
-                                Image(systemName: "exclamationmark.triangle")
-                                Text("thread_not_found")
+                    // Reading failed view
+                    if isLoadedLikedUserIds && likedUserIds == nil {
+                        Image(systemName: "exclamationmark.triangle")
+                            .foregroundColor(.secondary)
+                        Text("likes_reading_failed")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    // Like button when not liked
+                    if isLoadedLikedUserIds && likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
+                        Button(action: {
+                            FireUser.likeComment(commentId: comment.id)
+                            loadLikedUserIds()
+                        }) {
+                            HStack(spacing: 2) {
+                                Image(systemName: "heart")
+                                Text("\(likedUserIds!.count)")
                             }
                             .foregroundColor(.secondary)
                         }
-                        
-                        // Thread title
-                        if isLoadedThread && thread != nil {
-                            Button(action: {
-                                isShowThreadView.toggle()
-                            }) {
-                                Text(thread!.title)
-                                    .foregroundColor(.secondary)
+                        .buttonStyle(.borderless)
+                        .disabled(!FireAuth.isSignedIn())
+                    }
+                    
+                    // Like button when liked
+                    if isLoadedLikedUserIds && likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
+                        Button(action: {
+                            FireUser.unlikeComment(commentId: comment.id)
+                            loadLikedUserIds()
+                        }) {
+                            HStack(spacing: 2) {
+                                Image(systemName: "heart.fill")
+                                Text("\(likedUserIds!.count)")
                             }
-                            .buttonStyle(.borderless)
+                            .foregroundColor(.red)
                         }
+                        .buttonStyle(.borderless)
+                        .disabled(!FireAuth.isSignedIn())
+                    }
+                }
+                .frame(height: 16)
+                
+                // Thread Title Row
+                Group {
+                    // Progress view
+                    if !isLoadedThread {
+                        Color.secondary
+                            .opacity(0.2)
+                            .frame(width: 120, height: 16)
+                    }
+                    
+                    // Not found text
+                    if isLoadedThread && thread == nil {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle")
+                            Text("thread_not_found")
+                        }
+                        .foregroundColor(.secondary)
+                    }
+                    
+                    // Thread title
+                    if isLoadedThread && thread != nil {
+                        Button(action: {
+                            isShowThreadView.toggle()
+                        }) {
+                            Text(thread!.title)
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.borderless)
                     }
                 }
             }

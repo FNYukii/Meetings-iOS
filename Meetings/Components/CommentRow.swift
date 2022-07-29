@@ -46,7 +46,7 @@ struct CommentRow: View {
             .buttonStyle(.borderless)
             .disabled(!isAbleShowingProfileView)
             
-            // Detail Column
+            // Content Column
             VStack(alignment: .leading) {
                 
                 // Header Row
