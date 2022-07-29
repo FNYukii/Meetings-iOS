@@ -18,14 +18,10 @@ struct CommentRow: View {
     let isAbleShowingCommentView: Bool
     
     @State private var isShowProfileView = false
-    @State private var isShowThreadView = false
     
     // States
     @State private var user: User? = nil
     @State private var isLoadedUser = false
-    
-    @State private var thread: Thread? = nil
-    @State private var isLoadedThread = false
         
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -93,33 +89,8 @@ struct CommentRow: View {
                     .padding(.top, 4)
                 
                 // Thread Title Row
-                Group {
-                    // Progress view
-                    if isAbleShowingThreadView && !isLoadedThread {
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 120, height: 16)
-                    }
-                    
-                    // Not found text
-                    if isAbleShowingThreadView && isLoadedThread && thread == nil {
-                        HStack {
-                            Image(systemName: "exclamationmark.triangle")
-                            Text("thread_not_found")
-                        }
-                        .foregroundColor(.secondary)
-                    }
-                    
-                    // Thread title
-                    if isAbleShowingThreadView && isLoadedThread && thread != nil {
-                        Button(action: {
-                            isShowThreadView.toggle()
-                        }) {
-                            Text(thread!.title)
-                                .foregroundColor(.secondary)
-                        }
-                        .buttonStyle(.borderless)
-                    }
+                if isAbleShowingThreadView {
+                    CommentThreadTitleRow(comment: comment)
                 }
             }
         }
@@ -130,14 +101,6 @@ struct CommentRow: View {
                     EmptyView()
                 }
                 .hidden()
-                
-                // NavigationLink to ThreadView
-                if thread != nil {
-                    NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
-                        EmptyView()
-                    }
-                    .hidden()
-                }
             }
         )
         .background(NavigationLink("", destination: CommentView(comment: comment)).disabled(!isAbleShowingCommentView).opacity(0))
@@ -150,14 +113,6 @@ struct CommentRow: View {
             FireUser.readUser(userId: comment.userId) { user in
                 self.user = user
                 self.isLoadedUser = true
-            }
-        }
-        
-        // Commentが追加されたThreadを読み取り
-        if isAbleShowingThreadView && thread == nil {
-            FireThread.readThread(threadId: comment.threadId) { thread in
-                self.thread = thread
-                self.isLoadedThread = true
             }
         }
     }
