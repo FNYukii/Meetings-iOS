@@ -9,8 +9,9 @@ import SwiftUI
 
 struct CommentImagesRow: View {
     
+    // Comment to show
     let comment: Comment
-    
+        
     var body: some View {
         Group {
             if comment.imageUrls.count == 1 {
