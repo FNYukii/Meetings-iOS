@@ -29,13 +29,6 @@ struct ImageView: View {
                         .opacity(0.2)
                 }
                 .scaledToFit()
-                .scaleEffect(scaleValue)
-                .gesture(
-                    MagnificationGesture()
-                        .onChanged { value in
-                            self.scaleValue = value
-                        }
-                )
                 
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
