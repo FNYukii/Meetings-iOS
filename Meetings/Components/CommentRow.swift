@@ -17,6 +17,7 @@ struct CommentRow: View {
     @State private var isShowProfileView = false
     let isAbleShowingThreadView: Bool
     @State private var isShowThreadView = false
+    let isAbleShowingCommentView: Bool
     
     // States
     @State private var user: User? = nil
@@ -247,6 +248,7 @@ struct CommentRow: View {
                 }
             }
         )
+        .background(NavigationLink("", destination: CommentView(comment: comment)).disabled(!isAbleShowingCommentView).opacity(0))
         .onAppear(perform: load)
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {

@@ -43,7 +43,7 @@ struct ThreadView: View {
             
             // CommentRows
             ForEach(commentsViewModel.comments) { comment in
-                CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
+                CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false, isAbleShowingCommentView: true)
             }
             .listRowSeparator(.hidden, edges: .top)
             .listRowSeparator(.visible, edges: .bottom)
