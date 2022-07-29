@@ -14,7 +14,6 @@ struct CommentImage: View {
     let url: String?
     
     // Navigation
-    let isAbleShowingImageView: Bool
     @State private var isShowImageView = false
     
     var body: some View {
@@ -34,7 +33,6 @@ struct CommentImage: View {
                         .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
                 )
         }
-        .disabled(!isAbleShowingImageView)
         .buttonStyle(.borderless)
         
         .sheet(isPresented: $isShowImageView) {
