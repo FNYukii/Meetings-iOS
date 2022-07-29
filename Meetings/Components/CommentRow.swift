@@ -89,39 +89,7 @@ struct CommentRow: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 // Images Row
-                Group {
-                    if comment.imageUrls.count == 1 {
-                        CommentImage(url: comment.imageUrls.first)
-                    }
-                    
-                    if comment.imageUrls.count == 2 {
-                        HStack {
-                            CommentImage(url: comment.imageUrls.first)
-                            CommentImage(url: comment.imageUrls[1])
-                        }
-                    }
-                    
-                    if comment.imageUrls.count == 3 {
-                        HStack {
-                            CommentImage(url: comment.imageUrls.first)
-                            CommentImage(url: comment.imageUrls[1])
-                        }
-                        
-                        CommentImage(url: comment.imageUrls[2])
-                    }
-                    
-                    if comment.imageUrls.count == 4 {
-                        HStack {
-                            CommentImage(url: comment.imageUrls.first)
-                            CommentImage(url: comment.imageUrls[1])
-                        }
-                        
-                        HStack {
-                            CommentImage(url: comment.imageUrls[2])
-                            CommentImage(url: comment.imageUrls[3])
-                        }
-                    }
-                }
+                CommentImagesRow(comment: comment)
                 
                 // Reaction Row
                 HStack {
