@@ -84,7 +84,7 @@ struct ThreadRow: View {
                 // CommentRows
                 if isLoadedComments && comments != nil {
                     ForEach(comments!) { comment in
-                        CommentRow(comment: comment, isDisableShowingProfileView: false, isAbleShowingThreadView: false)
+                        CommentRow(comment: comment, isAbleShowingProfileView: true, isAbleShowingThreadView: false, isAbleShowingCommentView: false)
                     }
                 }
             }

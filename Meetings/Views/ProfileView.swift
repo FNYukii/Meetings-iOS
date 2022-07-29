@@ -29,7 +29,7 @@ struct ProfileView: View {
             HStack(alignment: .top) {
                 
                 // Icon Column
-                IconImage(url: user?.iconUrl, iconImageFamily: .medium)
+                UserIconImage(userId: userId, iconImageFamily: .medium)
                 
                 // DisplayName And UserTag Column
                 VStack(alignment: .leading) {
@@ -154,6 +154,7 @@ struct ProfileView: View {
                     }
                 } label: {
                     Image(systemName: "ellipsis")
+                        .foregroundColor(.secondary)
                 }
             }
         }
