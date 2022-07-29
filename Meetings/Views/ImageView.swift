@@ -16,6 +16,9 @@ struct ImageView: View {
     // Image to show
     let url: String?
     
+    // States
+    @State var scaleValue: CGFloat = 1.0
+    
     var body: some View {
         
         NavigationView {
@@ -26,6 +29,13 @@ struct ImageView: View {
                         .opacity(0.2)
                 }
                 .scaledToFit()
+                .scaleEffect(scaleValue)
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged { value in
+                            self.scaleValue = value
+                        }
+                )
                 
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
