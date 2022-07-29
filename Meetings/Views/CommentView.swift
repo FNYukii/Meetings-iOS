@@ -12,9 +12,6 @@ struct CommentView: View {
     // Comment to show
     let comment: Comment
     
-    // Navigations
-    @State private var isShowProfileView = false
-    
     var body: some View {
         
         List {
@@ -24,12 +21,7 @@ struct CommentView: View {
                 // Header Row
                 HStack(alignment: .top) {
                     // Icon Column
-                    Button (action: {
-                        isShowProfileView.toggle()
-                    }) {
-                        UserIconImage(userId: comment.userId, iconImageFamily: .medium)
-                    }
-                    .buttonStyle(.borderless)
+                    CommentUserIconButton(comment: comment, isAbleShowingProfileView: true)
                     
                     // Display name & User tag Column
                     CommentUserNameAndTagStack(comment: comment, stackFamily: .vstack)
