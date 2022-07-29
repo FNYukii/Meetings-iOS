@@ -41,4 +41,11 @@ class EditDate {
         return Text(dateFormatter.string(from: from))
     }
     
+    static func toString(from: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: from)
+    }
+    
 }

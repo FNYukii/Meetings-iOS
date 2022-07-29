@@ -40,7 +40,7 @@ struct CommentView: View {
                 CommentImagesRow(comment: comment)
                 
                 // Date Row
-                Text("2022-1-1")
+                Text(EditDate.toString(from: comment.createdAt))
                     .foregroundColor(.secondary)
                 
                 // Reaction Row
