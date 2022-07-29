@@ -89,7 +89,7 @@ struct ThreadRow: View {
                 }
             }
         }
-        .background( NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
+        .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
             Button("delete_thread", role: .destructive) {
