@@ -42,7 +42,7 @@ struct CommentView: View {
                     Button (action: {
                         isShowProfileView.toggle()
                     }) {
-                        IconImage(url: user?.iconUrl, iconImageFamily: .medium)
+                        UserIconImage(userId: comment.userId, iconImageFamily: .medium)
                     }
                     .buttonStyle(.borderless)
                     

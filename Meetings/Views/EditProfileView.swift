@@ -43,7 +43,7 @@ struct EditProfileView: View {
                         }) {
                             // Current icon
                             if !isPickingImage && pickedImage == nil {
-                                IconImage(url: iconUrl, iconImageFamily: .large)
+                                UserIconImage(userId: FireAuth.uid()!, iconImageFamily: .large)
                             }
                             
                             // Picking view
