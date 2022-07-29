@@ -25,11 +25,6 @@ struct CommentView: View {
                     
                     // Display name & User tag Column
                     CommentUserNameAndTagStack(comment: comment, stackFamily: .vstack)
-                    
-                    Spacer()
-                    
-                    // Menu Column
-                    CommentMenu(comment: comment)
                 }
                 
                 // Text Row
@@ -56,5 +51,11 @@ struct CommentView: View {
         
         .navigationTitle("comment")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                // Menu Column
+                CommentMenu(comment: comment)
+            }
+        }
     }
 }
