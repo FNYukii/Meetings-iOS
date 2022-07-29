@@ -32,7 +32,7 @@ struct CommentView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 // Images Row
-                CommentImagesRow(comment: comment)
+                CommentImagesRow(comment: comment, isAbleShowingImageView: true)
                 
                 // Date Row
                 Text(EditDate.toString(from: comment.createdAt))

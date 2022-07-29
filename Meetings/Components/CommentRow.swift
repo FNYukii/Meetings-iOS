@@ -45,7 +45,7 @@ struct CommentRow: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 // Images Row
-                CommentImagesRow(comment: comment)
+                CommentImagesRow(comment: comment, isAbleShowingImageView: isAbleShowingCommentView)
                 
                 // Reaction Row
                 CommentReactionRow(comment: comment)

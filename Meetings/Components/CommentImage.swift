@@ -10,20 +10,35 @@ import SDWebImageSwiftUI
 
 struct CommentImage: View {
     
+    // Image to show
     let url: String?
     
+    // Navigation
+    let isAbleShowingImageView: Bool
+    @State private var isShowImageView = false
+    
     var body: some View {
-        WebImage(url: URL(string: url ?? ""))
-            .resizable()
-            .placeholder {
-                Color.secondary
-                    .opacity(0.2)
-            }
-            .scaledToFill()
-            .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
-            )
+        Button(action: {
+            isShowImageView.toggle()
+        }) {
+            WebImage(url: URL(string: url ?? ""))
+                .resizable()
+                .placeholder {
+                    Color.secondary
+                        .opacity(0.2)
+                }
+                .scaledToFill()
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                )
+        }
+        .disabled(!isAbleShowingImageView)
+        .buttonStyle(.borderless)
+        
+        .sheet(isPresented: $isShowImageView) {
+            ImageView(url: url)
+        }
     }
 }
