@@ -24,9 +24,6 @@ struct CommentRow: View {
     @State private var user: User? = nil
     @State private var isLoadedUser = false
     
-    @State private var likedUserIds: [String]? = nil
-    @State private var isLoadedLikedUserIds = false
-    
     @State private var thread: Thread? = nil
     @State private var isLoadedThread = false
         
@@ -92,56 +89,8 @@ struct CommentRow: View {
                 CommentImagesRow(comment: comment)
                 
                 // Reaction Row
-                HStack {
-                    // Progress view
-                    if !isLoadedLikedUserIds {
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 40)
-                    }
-                    
-                    // Reading failed view
-                    if isLoadedLikedUserIds && likedUserIds == nil {
-                        Image(systemName: "exclamationmark.triangle")
-                            .foregroundColor(.secondary)
-                        Text("likes_reading_failed")
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    // Like button when not liked
-                    if isLoadedLikedUserIds && likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
-                        Button(action: {
-                            FireUser.likeComment(commentId: comment.id)
-                            loadLikedUserIds()
-                        }) {
-                            HStack(spacing: 2) {
-                                Image(systemName: "heart")
-                                Text("\(likedUserIds!.count)")
-                            }
-                            .foregroundColor(.secondary)
-                        }
-                        .buttonStyle(.borderless)
-                        .disabled(!FireAuth.isSignedIn())
-                    }
-                    
-                    // Like button when liked
-                    if isLoadedLikedUserIds && likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
-                        Button(action: {
-                            FireUser.unlikeComment(commentId: comment.id)
-                            loadLikedUserIds()
-                        }) {
-                            HStack(spacing: 2) {
-                                Image(systemName: "heart.fill")
-                                Text("\(likedUserIds!.count)")
-                            }
-                            .foregroundColor(.red)
-                        }
-                        .buttonStyle(.borderless)
-                        .disabled(!FireAuth.isSignedIn())
-                    }
-                }
-                .frame(height: 16)
-                .padding(.top, 4)
+                CommentReactionRow(comment: comment)
+                    .padding(.top, 4)
                 
                 // Thread Title Row
                 Group {
@@ -209,20 +158,6 @@ struct CommentRow: View {
             FireThread.readThread(threadId: comment.threadId) { thread in
                 self.thread = thread
                 self.isLoadedThread = true
-            }
-        }
-        
-        // コメントをいいねしたユーザーを読み取り
-        if likedUserIds == nil {
-            loadLikedUserIds()
-        }
-    }
-    
-    private func loadLikedUserIds() {
-        FireUser.readLikedUserIds(commentId: comment.id) { userIds in
-            withAnimation {
-                self.likedUserIds = userIds
-                self.isLoadedLikedUserIds = true
             }
         }
     }
