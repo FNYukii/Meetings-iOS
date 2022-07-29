@@ -85,6 +85,7 @@ struct CommentUserNameAndTagStack: View {
                         .foregroundColor(.secondary)
                 }
             }
+            .onAppear(perform: load)
         }
     }
     

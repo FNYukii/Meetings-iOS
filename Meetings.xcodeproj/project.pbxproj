@@ -214,11 +214,11 @@
 				54DC779F288E4DDB00296419 /* MyTabBar.swift */,
 				54DC77A1288E512800296419 /* CommentRowList.swift */,
 				54C41DFA289375E1007B5631 /* CommentUserIconButton.swift */,
+				54C41DF8289371CD007B5631 /* CommentUserNameAndTagStack.swift */,
 				54C41DEE28936C4C007B5631 /* CommentMenu.swift */,
 				54C41DF028936D1B007B5631 /* CommentImagesRow.swift */,
 				54C41DF228936DA7007B5631 /* CommentReactionRow.swift */,
 				54C41DF428936E9C007B5631 /* CommentThreadTitleRow.swift */,
-				54C41DF8289371CD007B5631 /* CommentUserNameAndTagStack.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
