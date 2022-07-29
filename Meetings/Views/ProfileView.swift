@@ -154,6 +154,7 @@ struct ProfileView: View {
                     }
                 } label: {
                     Image(systemName: "ellipsis")
+                        .foregroundColor(.secondary)
                 }
             }
         }
