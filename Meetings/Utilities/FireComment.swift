@@ -11,10 +11,10 @@ class FireComment {
     
     static func toComment(document: QueryDocumentSnapshot) -> Comment {
         let id = document.documentID
-        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
-        let userId = document.get("userId") as! String
-        let threadId = document.get("threadId") as! String
-        let text = document.get("text") as! String
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
+        let userId = document.get("userId") as? String ?? ""
+        let threadId = document.get("threadId") as? String ?? ""
+        let text = document.get("text") as? String ?? ""
         let imageUrls = document.get("imageUrls") as? [String] ?? []
         
         let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text, imageUrls: imageUrls)
@@ -23,10 +23,10 @@ class FireComment {
     
     static func toComment(document: DocumentSnapshot) -> Comment {
         let id = document.documentID
-        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
-        let userId = document.get("userId") as! String
-        let threadId = document.get("threadId") as! String
-        let text = document.get("text") as! String
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
+        let userId = document.get("userId") as? String ?? ""
+        let threadId = document.get("threadId") as? String ?? ""
+        let text = document.get("text") as? String ?? ""
         let imageUrls = document.get("imageUrls") as? [String] ?? []
         
         let comment = Comment(id: id, createdAt: createdAt, userId: userId, threadId: threadId, text: text, imageUrls: imageUrls)

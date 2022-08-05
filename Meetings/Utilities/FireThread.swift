@@ -11,9 +11,9 @@ class FireThread {
     
     static func toThread(document: DocumentSnapshot) -> Thread {
         let id = document.documentID
-        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
-        let userId = document.get("userId") as! String
-        let title = document.get("title") as! String
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
+        let userId = document.get("userId") as? String ?? ""
+        let title = document.get("title") as? String ?? ""
         
         let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
         return thread
@@ -21,9 +21,9 @@ class FireThread {
     
     static func toThread(document: QueryDocumentSnapshot) -> Thread {
         let id = document.documentID
-        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as! Timestamp).dateValue()
-        let userId = document.get("userId") as! String
-        let title = document.get("title") as! String
+        let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
+        let userId = document.get("userId") as? String ?? ""
+        let title = document.get("title") as? String ?? ""
         
         let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
         return thread
