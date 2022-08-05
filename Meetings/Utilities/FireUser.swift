@@ -11,11 +11,11 @@ class FireUser {
     
     static func toUser(document: DocumentSnapshot) -> User {
         let id = document.documentID
-        let displayName = document.get("displayName") as! String
-        let userTag = document.get("userTag") as! String
-        let introduction = document.get("introduction") as! String
+        let displayName = document.get("displayName") as? String ?? ""
+        let userTag = document.get("userTag") as? String ?? ""
+        let introduction = document.get("introduction") as? String ?? ""
         let iconUrl = document.get("iconUrl") as? String
-        let likedCommentIds = document.get("likedCommentIds") as! [String]
+        let likedCommentIds = document.get("likedCommentIds") as? [String] ?? []
         
         let user = User(id: id, displayName: displayName, userTag: userTag, introduction: introduction, iconUrl: iconUrl, likedCommentIds: likedCommentIds)
         return user
