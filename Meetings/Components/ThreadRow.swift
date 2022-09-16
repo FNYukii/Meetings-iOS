@@ -62,6 +62,10 @@ struct ThreadRow: View {
             }
             
             // User And Date Row
+            HStack {
+                UserDisplayNameText(userId: thread.userId)
+                UserUserTagText(userId: thread.userId)
+            }
             
             // Tags Row
             
