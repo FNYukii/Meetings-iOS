@@ -22,46 +22,53 @@ struct ThreadRow: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 1) {
+        HStack(alignment: .top) {
             
-            // Header Row
-            HStack(alignment: .top) {
+            // User Icon Column
+            UserIconButton(userId: thread.userId, isAbleShowingProfileView: true)
+            
+            // Contents Column
+            VStack(alignment: .leading, spacing: 1) {
                 
-                // Title Column
-                Text(thread.title)
-                    .font(.title2)
-                    .multilineTextAlignment(.leading)
-                
-                Spacer()
-                
-                // Menu Column
-                Menu {
-                    // 削除ボタン
-                    if FireAuth.uid() == thread.userId {
-                        Button(role: .destructive) {
-                            isShowDialog.toggle()
-                        } label: {
-                            Label("delete_thread", systemImage: "trash")
-                        }
-                    }
+                // Header Row
+                HStack(alignment: .top) {
                     
-                    // 報告ボタン
-                    if FireAuth.uid() != thread.userId {
-                        Button(action: {
-                            isShowCreateReportView.toggle()
-                        }) {
-                            Label("report_thread", systemImage: "flag")
+                    // Title Column
+                    Text(thread.title)
+                        .font(.title2)
+                        .multilineTextAlignment(.leading)
+                    
+                    Spacer()
+                    
+                    // Menu Column
+                    Menu {
+                        // 削除ボタン
+                        if FireAuth.uid() == thread.userId {
+                            Button(role: .destructive) {
+                                isShowDialog.toggle()
+                            } label: {
+                                Label("delete_thread", systemImage: "trash")
+                            }
                         }
+                        
+                        // 報告ボタン
+                        if FireAuth.uid() != thread.userId {
+                            Button(action: {
+                                isShowCreateReportView.toggle()
+                            }) {
+                                Label("report_thread", systemImage: "flag")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.secondary)
+                            .padding(.vertical, 6)
                     }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .foregroundColor(.secondary)
-                        .padding(.vertical, 6)
                 }
+                
+                // Tags Row
+                UserUserTagText(userId: thread.userId)
             }
-            
-            // Tags Row
-            UserUserTagText(userId: thread.userId)
         }
         .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
