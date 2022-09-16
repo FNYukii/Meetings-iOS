@@ -33,31 +33,8 @@ struct ProfileView: View {
                 
                 // DisplayName And UserTag Column
                 VStack(alignment: .leading) {
-                    
-                    // Progress view
-                    if !isLoadedUser {
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 80, height: 16)
-                        
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 80, height: 16)
-                    }
-                    
-                    // Reading failed view
-                    if isLoadedUser && user == nil {
-                        EmptyView()
-                    }
-                    
-                    // DisplayName, UserTag
-                    if isLoadedUser && user != nil {
-                        Text(user!.displayName)
-                            .fontWeight(.bold)
-                        
-                        Text("@\(user!.userTag)")
-                            .foregroundColor(.secondary)
-                    }
+                    UserDisplayNameText(userId: userId)
+                    UserUserTagText(userId: userId)
                 }
             }
             .padding(.horizontal)
