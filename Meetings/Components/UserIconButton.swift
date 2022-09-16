@@ -13,7 +13,6 @@ struct UserIconButton: View {
     let userId: String
     
     // Navigations
-    let isDisabled: Bool
     @State private var isShowProfileView = false
     
     var body: some View {
@@ -23,7 +22,6 @@ struct UserIconButton: View {
             UserIconImage(userId: userId, iconImageFamily: .medium)
         }
         .buttonStyle(.borderless)
-        .disabled(isDisabled)
         .background(
             Group {
                 // NavigationLink to ProfileView

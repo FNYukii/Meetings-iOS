@@ -25,7 +25,7 @@ struct ThreadRow: View {
         HStack(alignment: .top) {
             
             // User Icon Column
-            UserIconButton(userId: thread.userId, isDisabled: false)
+            UserIconButton(userId: thread.userId)
             
             // Contents Column
             VStack(alignment: .leading, spacing: 1) {
