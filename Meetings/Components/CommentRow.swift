@@ -14,14 +14,14 @@ struct CommentRow: View {
     
     // Navigations
     let isAbleShowingProfileView: Bool
-    let isAbleShowingThreadView: Bool
-    let isAbleShowingCommentView: Bool
+    let isShowThread: Bool
                 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             
             // Icon Column
-            UserIconButton(userId: comment.userId, isAbleShowingProfileView: isAbleShowingProfileView)
+            UserIconButton(userId: comment.userId)
+                .disabled(!isAbleShowingProfileView)
             
             // Content Column
             VStack(alignment: .leading) {
@@ -55,11 +55,11 @@ struct CommentRow: View {
                     .padding(.top, 4)
                 
                 // Thread Title Row
-                if isAbleShowingThreadView {
+                if isShowThread {
                     CommentThreadTitleRow(comment: comment)
                 }
             }
         }
-        .background(NavigationLink("", destination: CommentView(comment: comment)).disabled(!isAbleShowingCommentView).opacity(0))
+        .background(NavigationLink("", destination: CommentView(comment: comment)).opacity(0))
     }
 }
