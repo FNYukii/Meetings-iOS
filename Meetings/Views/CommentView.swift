@@ -24,7 +24,10 @@ struct CommentView: View {
                     CommentUserIconButton(comment: comment, isAbleShowingProfileView: true)
                     
                     // Display name & User tag Column
-                    CommentUserNameAndTagStack(comment: comment, stackFamily: .vstack)
+                    VStack(alignment: .leading) {
+                        UserDisplayNameText(userId: comment.userId)
+                        UserUserTagText(userId: comment.userId)
+                    }
                 }
                 
                 // Text Row
