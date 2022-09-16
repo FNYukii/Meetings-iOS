@@ -30,14 +30,8 @@ struct CreateCommentView: View {
             
             VStack(alignment: .leading) {
                 
-                // Input Row
-                HStack(alignment: .top) {
-                    // Icon Column
-                    UserIconImage(userId: FireAuth.uid(), iconImageFamily: .medium)
-                    
-                    // TextEditor Column
-                    MyTextEditor(hintText: Text("text"), text: $text)
-                }
+                // TextEditor Row
+                MyTextEditor(hintText: Text("text"), text: $text)
                 .padding()
                 
                 Spacer()
@@ -130,4 +124,3 @@ struct CreateCommentView: View {
     }
     
 }
-
