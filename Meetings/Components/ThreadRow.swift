@@ -22,71 +22,52 @@ struct ThreadRow: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        HStack(alignment: .top) {
             
-            // Header Row
-            HStack(alignment: .top) {
-                Text(thread.title)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.leading)
+            // User Icon Column
+            UserIconButton(userId: thread.userId, isAbleShowingProfileView: true)
+            
+            // Contents Column
+            VStack(alignment: .leading, spacing: 1) {
                 
-                Spacer()
-                
-                Menu {
-                    // 削除ボタン
-                    if FireAuth.uid() == thread.userId {
-                        Button(role: .destructive) {
-                            isShowDialog.toggle()
-                        } label: {
-                            Label("delete_thread", systemImage: "trash")
-                        }
-                    }
+                // Header Row
+                HStack(alignment: .top) {
                     
-                    // 報告ボタン
-                    if FireAuth.uid() != thread.userId {
-                        Button(action: {
-                            isShowCreateReportView.toggle()
-                        }) {
-                            Label("report_thread", systemImage: "flag")
+                    // Title Column
+                    Text(thread.title)
+                        .font(.title2)
+                        .multilineTextAlignment(.leading)
+                    
+                    Spacer()
+                    
+                    // Menu Column
+                    Menu {
+                        // 削除ボタン
+                        if FireAuth.uid() == thread.userId {
+                            Button(role: .destructive) {
+                                isShowDialog.toggle()
+                            } label: {
+                                Label("delete_thread", systemImage: "trash")
+                            }
                         }
-                    }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .foregroundColor(.secondary)
-                        .padding(.vertical, 6)
-                }
-            }
-            
-            // CommentRows Row
-            Group {
-                // Progress view
-                if !isLoadedComments {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .listRowSeparator(.hidden)
-                }
-                
-                // Reading failed view
-                if isLoadedComments && comments == nil {
-                    Text("comments_reading_failed")
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .foregroundColor(.secondary)
-                }
-                
-                // No content text
-                if isLoadedComments && comments != nil && comments!.count == 0 {
-                    Text("no_comments")
-                        .foregroundColor(.secondary)
-                }
-                
-                // CommentRows
-                if isLoadedComments && comments != nil {
-                    ForEach(comments!) { comment in
-                        CommentRow(comment: comment, isAbleShowingProfileView: true, isAbleShowingThreadView: false, isAbleShowingCommentView: false)
+                        
+                        // 報告ボタン
+                        if FireAuth.uid() != thread.userId {
+                            Button(action: {
+                                isShowCreateReportView.toggle()
+                            }) {
+                                Label("report_thread", systemImage: "flag")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.secondary)
+                            .padding(.vertical, 6)
                     }
                 }
+                
+                // Tags Row
+                UserUserTagText(userId: thread.userId)
             }
         }
         .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))

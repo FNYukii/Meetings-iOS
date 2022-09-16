@@ -21,14 +21,17 @@ struct CommentRow: View {
         HStack(alignment: .top, spacing: 8) {
             
             // Icon Column
-            CommentUserIconButton(comment: comment, isAbleShowingProfileView: isAbleShowingProfileView)
+            UserIconButton(userId: comment.userId, isAbleShowingProfileView: isAbleShowingProfileView)
             
             // Content Column
             VStack(alignment: .leading) {
                 // Header Row
                 HStack {
-                    // Display name & User tag Column
-                    CommentUserNameAndTagStack(comment: comment, stackFamily: .hstack)
+                    // Display Name Column
+                    UserDisplayNameText(userId: comment.userId)
+                    
+                    // User Tag Column
+                    UserUserTagText(userId: comment.userId)
                     
                     // Date Column
                     EditDate.howManyAgoText(from: comment.createdAt)

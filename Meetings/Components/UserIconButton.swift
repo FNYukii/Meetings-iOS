@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct CommentUserIconButton: View {
+struct UserIconButton: View {
     
     // Comment to show
-    let comment: Comment
+    let userId: String
     
     // Navigations
     let isAbleShowingProfileView: Bool
@@ -20,14 +20,14 @@ struct CommentUserIconButton: View {
         Button (action: {
             isShowProfileView.toggle()
         }) {
-            UserIconImage(userId: comment.userId, iconImageFamily: .medium)
+            UserIconImage(userId: userId, iconImageFamily: .medium)
         }
         .buttonStyle(.borderless)
         .disabled(!isAbleShowingProfileView)
         .background(
             Group {
                 // NavigationLink to ProfileView
-                NavigationLink(destination: ProfileView(userId: comment.userId), isActive: $isShowProfileView) {
+                NavigationLink(destination: ProfileView(userId: userId), isActive: $isShowProfileView) {
                     EmptyView()
                 }
                 .hidden()

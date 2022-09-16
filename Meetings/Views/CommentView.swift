@@ -21,10 +21,13 @@ struct CommentView: View {
                 // Header Row
                 HStack(alignment: .top) {
                     // Icon Column
-                    CommentUserIconButton(comment: comment, isAbleShowingProfileView: true)
+                    UserIconButton(userId: comment.userId, isAbleShowingProfileView: true)
                     
                     // Display name & User tag Column
-                    CommentUserNameAndTagStack(comment: comment, stackFamily: .vstack)
+                    VStack(alignment: .leading) {
+                        UserDisplayNameText(userId: comment.userId)
+                        UserUserTagText(userId: comment.userId)
+                    }
                 }
                 
                 // Text Row
