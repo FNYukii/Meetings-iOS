@@ -28,38 +28,37 @@ struct CreateCommentView: View {
     var body: some View {
         NavigationView {
             
-            Form {
-                Section {
+            VStack(alignment: .leading) {
+                
+                // Input Row
+                HStack(alignment: .top) {
+                    // Icon Column
+                    UserIconImage(userId: FireAuth.uid(), iconImageFamily: .medium)
+                    
+                    // TextEditor Column
                     MyTextEditor(hintText: Text("text"), text: $text)
                 }
+                .padding()
                 
-                Section {
-                    // Pick Button
-                    if !isPickingImages {
-                        Button(action: {
-                            isShowImagesPickerView.toggle()
-                        }) {
-                            Text("pick_images")
-                        }
-                    }
+                Spacer()
+                
+                // Buttons Row
+                HStack {
                     
-                    // ProgressView
-                    if isPickingImages {
-                        ProgressView()
-                            .progressViewStyle(.circular)
+                    Button(action: {
+                        isShowImagesPickerView.toggle()
+                    }) {
+                        Image(systemName: "photo")
+                            .foregroundColor(.accentColor)
                     }
+                    .padding()
                 }
                 
-                // Images (仮)
-                Section {
-                    VStack {
-                        ForEach(0 ..< pickedImages.count, id: \.self) { index in
-                            Image(uiImage: pickedImages[index])
-                                .resizable()
-                                .scaledToFit()
-                        }
-                    }
-                }
+//                ForEach(0 ..< pickedImages.count, id: \.self) { index in
+//                    Image(uiImage: pickedImages[index])
+//                        .resizable()
+//                        .scaledToFit()
+//                }
             }
             
             .alert("failed", isPresented: $isShowDialogError) {

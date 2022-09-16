@@ -66,7 +66,7 @@ struct FirstView: View {
                     // Profile Button
                     if signInStateViewModel.isSignedIn {
                         NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
-                            UserIconImage(userId: FireAuth.uid()!, iconImageFamily: .small)
+                            UserIconImage(userId: FireAuth.uid(), iconImageFamily: .small)
                         }
                     }
                     
