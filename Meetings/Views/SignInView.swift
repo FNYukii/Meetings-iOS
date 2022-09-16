@@ -26,9 +26,11 @@ struct SignInView: View {
                 TextField("email", text: $email)
                     .keyboardType(.asciiCapable)
                     .disabled(isLoading)
+                    .submitLabel(.done)
                 
                 SecureField("password", text: $password)
                     .disabled(isLoading)
+                    .submitLabel(.done)
             }
             
             .alert("failed", isPresented: $isShowDialogError) {

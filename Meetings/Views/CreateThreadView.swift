@@ -29,6 +29,7 @@ struct CreateThreadView: View {
                     }
                     .disabled(isLoading)
                     .padding()
+                    .submitLabel(.done)
                 
                 Spacer()
             }
