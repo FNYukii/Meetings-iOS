@@ -21,9 +21,12 @@ struct CreateThreadView: View {
     var body: some View {
         NavigationView {
             
-            Form {
+            VStack(alignment: .leading) {
                 TextField("title", text: $title)
                     .disabled(isLoading)
+                    .padding()
+                
+                Spacer()
             }
             
             .alert("failed", isPresented: $isShowDialogError) {
