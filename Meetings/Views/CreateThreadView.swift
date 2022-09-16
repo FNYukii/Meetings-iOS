@@ -15,6 +15,7 @@ struct CreateThreadView: View {
     
     // States
     @State private var title = ""
+    @State private var tags: [String] = []
     
     @State private var isLoading = false
     @State private var isShowDialogError = false
@@ -22,17 +23,57 @@ struct CreateThreadView: View {
     var body: some View {
         NavigationView {
             
-            VStack(alignment: .leading) {
-                TextField("title", text: $title)
-                    .introspectTextField { textField in
-                        textField.becomeFirstResponder()
-                    }
-                    .disabled(isLoading)
-                    .padding()
-                    .submitLabel(.done)
+            List {
+                // TextField Row
+                ScrollView(.horizontal) {
+                    TextField("title", text: $title)
+                        .introspectTextField { textField in
+                            textField.becomeFirstResponder()
+                        }
+                        .disabled(isLoading)
+                        .submitLabel(.done)
+                        .listRowSeparator(.hidden)
+                }
                 
-                Spacer()
+                // Tags Row
+                ForEach(0 ..< tags.count, id: \.self) { index in
+                    HStack {
+                        // Image Column
+                        Image(systemName: "tag")
+                            .foregroundColor(.secondary)
+                        
+                        // TextField Column
+                        TextField("tag", text: $tags[index])
+                            .submitLabel(.done)
+                        
+                        Spacer()
+                        
+                        // Delete Button Column
+                        Button(action: {
+                            tags.remove(at: index)
+                        }) {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .listRowSeparator(.hidden)
+                }
+                
+                // Add Tag Button Row
+                Button(action: {
+                    tags.append("")
+                }) {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("add_tag")
+                    }
+                }
+                .foregroundColor(.secondary)
+                .buttonStyle(.plain)
+                .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
             
             .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
@@ -70,7 +111,7 @@ struct CreateThreadView: View {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(title.isEmpty)
+                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}))
                     }
                     
                     // ProgressView
