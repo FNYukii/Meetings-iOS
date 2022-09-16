@@ -25,7 +25,7 @@ struct ThreadRow: View {
         HStack(alignment: .top) {
             
             // User Icon Column
-            UserIconButton(userId: thread.userId, isAbleShowingProfileView: true)
+            UserIconButton(userId: thread.userId, isDisabled: false)
             
             // Contents Column
             VStack(alignment: .leading, spacing: 1) {
