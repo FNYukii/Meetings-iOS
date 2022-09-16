@@ -111,7 +111,7 @@ struct CreateThreadView: View {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(title.isEmpty)
+                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}))
                     }
                     
                     // ProgressView
