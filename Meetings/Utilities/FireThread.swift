@@ -80,7 +80,7 @@ class FireThread {
             }
     }
     
-    static func createThread(title: String, completion: ((String?) -> Void)?) {
+    static func createThread(title: String, tags: [String], completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
             completion?(nil)
@@ -94,7 +94,8 @@ class FireThread {
             .addDocument(data: [
                 "createdAt": FieldValue.serverTimestamp(),
                 "userId": FireAuth.uid()!,
-                "title": title
+                "title": title,
+                "tags": tags
             ]) { error in
                 // 失敗
                 if let error = error {
