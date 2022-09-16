@@ -31,7 +31,7 @@ struct CreateCommentView: View {
             VStack(alignment: .leading) {
                 
                 // TextEditor Row
-                MyTextEditor(hintText: Text("text"), text: $text)
+                MyTextEditor(hintText: Text("text"), text: $text, isFocus: true)
                 .padding()
                 
                 // Images Row
