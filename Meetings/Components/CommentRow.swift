@@ -14,7 +14,7 @@ struct CommentRow: View {
     
     // Navigations
     let isAbleShowingProfileView: Bool
-    let isAbleShowingThreadView: Bool
+    let isShowThread: Bool
                 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -55,7 +55,7 @@ struct CommentRow: View {
                     .padding(.top, 4)
                 
                 // Thread Title Row
-                if isAbleShowingThreadView {
+                if isShowThread {
                     CommentThreadTitleRow(comment: comment)
                 }
             }
