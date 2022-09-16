@@ -32,21 +32,26 @@ struct SignUpView: View {
                     TextField("email", text: $email)
                         .keyboardType(.asciiCapable)
                         .disabled(isLoading)
+                        .submitLabel(.done)
                     
                     SecureField("password", text: $password1)
                         .disabled(isLoading)
+                        .submitLabel(.done)
                     
                     SecureField("check_password", text: $password2)
                         .disabled(isLoading)
+                        .submitLabel(.done)
                 }
                 
                 Section {
                     TextField("display_name", text: $displayName)
                         .disabled(isLoading)
+                        .submitLabel(.done)
                     
                     TextField("user_tag", text: $userTag)
                         .keyboardType(.asciiCapable)
                         .disabled(isLoading)
+                        .submitLabel(.done)
                 }
                 
                 Section {

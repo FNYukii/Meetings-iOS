@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct CreateThreadView: View {
     
@@ -21,9 +22,16 @@ struct CreateThreadView: View {
     var body: some View {
         NavigationView {
             
-            Form {
+            VStack(alignment: .leading) {
                 TextField("title", text: $title)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
                     .disabled(isLoading)
+                    .padding()
+                    .submitLabel(.done)
+                
+                Spacer()
             }
             
             .alert("failed", isPresented: $isShowDialogError) {

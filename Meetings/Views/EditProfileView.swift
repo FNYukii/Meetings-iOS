@@ -75,7 +75,9 @@ struct EditProfileView: View {
                 
                 Section {
                     TextField("display_name", text: $displayName)
+                        .submitLabel(.done)
                     TextField("user_tag", text: $userTag)
+                        .submitLabel(.done)
                 }
                 
                 Section {
