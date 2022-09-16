@@ -36,9 +36,13 @@ class EditDate {
             return Text("\(dayDiff)d")
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.setLocalizedDateFormatFromTemplate("YYYY MMMM d")
-        return Text(dateFormatter.string(from: from))
+        let monthDiff = (Calendar.current.dateComponents([.month], from: inputDate, to: Date())).month!
+        if monthDiff < 12 {
+            return Text("\(monthDiff)M")
+        }
+        
+        let yearDiff = (Calendar.current.dateComponents([.month], from: inputDate, to: Date())).year!
+        return Text("\(yearDiff)Y")
     }
     
     static func toString(from: Date) -> String {
