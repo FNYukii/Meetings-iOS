@@ -15,7 +15,6 @@ struct CommentRow: View {
     // Navigations
     let isAbleShowingProfileView: Bool
     let isAbleShowingThreadView: Bool
-//    let isAbleShowingCommentView: Bool
                 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
