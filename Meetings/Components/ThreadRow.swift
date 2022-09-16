@@ -26,6 +26,8 @@ struct ThreadRow: View {
             
             // Header Row
             HStack(alignment: .top) {
+                
+                // Title Column
                 Text(thread.title)
                     .font(.title2)
                     .fontWeight(.bold)
@@ -33,6 +35,7 @@ struct ThreadRow: View {
                 
                 Spacer()
                 
+                // Menu Column
                 Menu {
                     // 削除ボタン
                     if FireAuth.uid() == thread.userId {
@@ -58,36 +61,40 @@ struct ThreadRow: View {
                 }
             }
             
+            // User And Date Row
+            
+            // Tags Row
+            
             // CommentRows Row
-            Group {
-                // Progress view
-                if !isLoadedComments {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .listRowSeparator(.hidden)
-                }
-                
-                // Reading failed view
-                if isLoadedComments && comments == nil {
-                    Text("comments_reading_failed")
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .foregroundColor(.secondary)
-                }
-                
-                // No content text
-                if isLoadedComments && comments != nil && comments!.count == 0 {
-                    Text("no_comments")
-                        .foregroundColor(.secondary)
-                }
-                
-                // CommentRows
-                if isLoadedComments && comments != nil {
-                    ForEach(comments!) { comment in
-                        CommentRow(comment: comment, isAbleShowingProfileView: true, isAbleShowingThreadView: false, isAbleShowingCommentView: false)
-                    }
-                }
-            }
+//            Group {
+//                // Progress view
+//                if !isLoadedComments {
+//                    ProgressView()
+//                        .progressViewStyle(.circular)
+//                        .frame(maxWidth: .infinity, alignment: .center)
+//                        .listRowSeparator(.hidden)
+//                }
+//
+//                // Reading failed view
+//                if isLoadedComments && comments == nil {
+//                    Text("comments_reading_failed")
+//                        .frame(maxWidth: .infinity, alignment: .center)
+//                        .foregroundColor(.secondary)
+//                }
+//
+//                // No content text
+//                if isLoadedComments && comments != nil && comments!.count == 0 {
+//                    Text("no_comments")
+//                        .foregroundColor(.secondary)
+//                }
+//
+//                // CommentRows
+//                if isLoadedComments && comments != nil {
+//                    ForEach(comments!) { comment in
+//                        CommentRow(comment: comment, isAbleShowingProfileView: true, isAbleShowingThreadView: false, isAbleShowingCommentView: false)
+//                    }
+//                }
+//            }
         }
         .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
