@@ -22,7 +22,7 @@ struct ThreadRow: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 1) {
             
             // Header Row
             HStack(alignment: .top) {
@@ -30,7 +30,6 @@ struct ThreadRow: View {
                 // Title Column
                 Text(thread.title)
                     .font(.title2)
-                    .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
                 
                 Spacer()
@@ -61,44 +60,8 @@ struct ThreadRow: View {
                 }
             }
             
-            // User And Date Row
-            HStack {
-                UserDisplayNameText(userId: thread.userId)
-                UserUserTagText(userId: thread.userId)
-            }
-            
             // Tags Row
-            
-            // CommentRows Row
-//            Group {
-//                // Progress view
-//                if !isLoadedComments {
-//                    ProgressView()
-//                        .progressViewStyle(.circular)
-//                        .frame(maxWidth: .infinity, alignment: .center)
-//                        .listRowSeparator(.hidden)
-//                }
-//
-//                // Reading failed view
-//                if isLoadedComments && comments == nil {
-//                    Text("comments_reading_failed")
-//                        .frame(maxWidth: .infinity, alignment: .center)
-//                        .foregroundColor(.secondary)
-//                }
-//
-//                // No content text
-//                if isLoadedComments && comments != nil && comments!.count == 0 {
-//                    Text("no_comments")
-//                        .foregroundColor(.secondary)
-//                }
-//
-//                // CommentRows
-//                if isLoadedComments && comments != nil {
-//                    ForEach(comments!) { comment in
-//                        CommentRow(comment: comment, isAbleShowingProfileView: true, isAbleShowingThreadView: false, isAbleShowingCommentView: false)
-//                    }
-//                }
-//            }
+            UserUserTagText(userId: thread.userId)
         }
         .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
