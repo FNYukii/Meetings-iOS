@@ -51,7 +51,7 @@
 		54C41DF328936DA7007B5631 /* CommentReactionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DF228936DA7007B5631 /* CommentReactionRow.swift */; };
 		54C41DF528936E9C007B5631 /* CommentThreadTitleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DF428936E9C007B5631 /* CommentThreadTitleRow.swift */; };
 		54C41DF728937059007B5631 /* UserIconImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DF628937059007B5631 /* UserIconImage.swift */; };
-		54C41DFB289375E1007B5631 /* CommentUserIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DFA289375E1007B5631 /* CommentUserIconButton.swift */; };
+		54C41DFB289375E1007B5631 /* UserIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DFA289375E1007B5631 /* UserIconButton.swift */; };
 		54C5D66E2892D7EF005AE7D4 /* CommentImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5D66D2892D7EF005AE7D4 /* CommentImage.swift */; };
 		54CE7F70289199A90064F2AF /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F6F289199A90064F2AF /* ImagePickerView.swift */; };
 		54CE7F72289199C90064F2AF /* EditImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F71289199C90064F2AF /* EditImage.swift */; };
@@ -102,7 +102,7 @@
 		54C41DF228936DA7007B5631 /* CommentReactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReactionRow.swift; sourceTree = "<group>"; };
 		54C41DF428936E9C007B5631 /* CommentThreadTitleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentThreadTitleRow.swift; sourceTree = "<group>"; };
 		54C41DF628937059007B5631 /* UserIconImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIconImage.swift; sourceTree = "<group>"; };
-		54C41DFA289375E1007B5631 /* CommentUserIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUserIconButton.swift; sourceTree = "<group>"; };
+		54C41DFA289375E1007B5631 /* UserIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIconButton.swift; sourceTree = "<group>"; };
 		54C5D66D2892D7EF005AE7D4 /* CommentImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentImage.swift; sourceTree = "<group>"; };
 		54CE7F6F289199A90064F2AF /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		54CE7F71289199C90064F2AF /* EditImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImage.swift; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 				54C5D66D2892D7EF005AE7D4 /* CommentImage.swift */,
 				54DC779F288E4DDB00296419 /* MyTabBar.swift */,
 				54DC77A1288E512800296419 /* CommentRowList.swift */,
-				54C41DFA289375E1007B5631 /* CommentUserIconButton.swift */,
+				54C41DFA289375E1007B5631 /* UserIconButton.swift */,
 				5489709428D4552A0045DFAA /* UserDisplayNameText.swift */,
 				5489709628D455AB0045DFAA /* UserUserTagText.swift */,
 				54C41DEE28936C4C007B5631 /* CommentMenu.swift */,
@@ -345,7 +345,7 @@
 				54DC77A2288E512800296419 /* CommentRowList.swift in Sources */,
 				5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */,
 				5408F02128911EE8007D8EFB /* EditProfileView.swift in Sources */,
-				54C41DFB289375E1007B5631 /* CommentUserIconButton.swift in Sources */,
+				54C41DFB289375E1007B5631 /* UserIconButton.swift in Sources */,
 				5410EA8B288BDF8B00F4A29B /* ProfileView.swift in Sources */,
 				54C41DED28936252007B5631 /* CommentView.swift in Sources */,
 				54C41DEF28936C4C007B5631 /* CommentMenu.swift in Sources */,
