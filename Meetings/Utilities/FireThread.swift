@@ -14,8 +14,9 @@ class FireThread {
         let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
         let userId = document.get("userId") as? String ?? ""
         let title = document.get("title") as? String ?? ""
+        let tags = document.get("tags") as? [String] ?? []
         
-        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
+        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title, tags: tags)
         return thread
     }
     
@@ -24,8 +25,9 @@ class FireThread {
         let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
         let userId = document.get("userId") as? String ?? ""
         let title = document.get("title") as? String ?? ""
+        let tags = document.get("tags") as? [String] ?? []
         
-        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
+        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title, tags: tags)
         return thread
     }
     
@@ -80,7 +82,7 @@ class FireThread {
             }
     }
     
-    static func createThread(title: String, completion: ((String?) -> Void)?) {
+    static func createThread(title: String, tags: [String], completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
             completion?(nil)
@@ -94,7 +96,8 @@ class FireThread {
             .addDocument(data: [
                 "createdAt": FieldValue.serverTimestamp(),
                 "userId": FireAuth.uid()!,
-                "title": title
+                "title": title,
+                "tags": tags
             ]) { error in
                 // 失敗
                 if let error = error {

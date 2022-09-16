@@ -97,7 +97,7 @@ struct CreateThreadView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireThread.createThread(title: title) { documentId in
+                            FireThread.createThread(title: title, tags: tags) { documentId in
                                 // 失敗
                                 if documentId == nil {
                                     isLoading = false

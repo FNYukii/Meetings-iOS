@@ -12,4 +12,5 @@ struct Thread: Identifiable {
     let createdAt: Date
     let userId: String
     let title: String
+    let tags: [String]
 }
