@@ -15,7 +15,7 @@ struct CommentRow: View {
     // Navigations
     let isAbleShowingProfileView: Bool
     let isAbleShowingThreadView: Bool
-    let isAbleShowingCommentView: Bool
+//    let isAbleShowingCommentView: Bool
                 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -60,6 +60,6 @@ struct CommentRow: View {
                 }
             }
         }
-        .background(NavigationLink("", destination: CommentView(comment: comment)).disabled(!isAbleShowingCommentView).opacity(0))
+        .background(NavigationLink("", destination: CommentView(comment: comment)).opacity(0))
     }
 }

@@ -46,7 +46,7 @@ struct CommentRowList: View {
             // CommentRows
             if isLoadedComments && comments != nil {
                 ForEach(comments!) { comment in
-                    CommentRow(comment: comment, isAbleShowingProfileView: false, isAbleShowingThreadView: true, isAbleShowingCommentView: true)
+                    CommentRow(comment: comment, isAbleShowingProfileView: false, isAbleShowingThreadView: true)
                 }
                 .listRowSeparator(.hidden, edges: .top)
                 .listRowSeparator(.visible, edges: .bottom)
