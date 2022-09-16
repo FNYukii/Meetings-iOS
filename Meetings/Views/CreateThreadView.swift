@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct CreateThreadView: View {
     
@@ -23,6 +24,9 @@ struct CreateThreadView: View {
             
             VStack(alignment: .leading) {
                 TextField("title", text: $title)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
                     .disabled(isLoading)
                     .padding()
                 
