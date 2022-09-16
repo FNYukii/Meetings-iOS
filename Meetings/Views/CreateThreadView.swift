@@ -50,7 +50,7 @@ struct CreateThreadView: View {
                         Button(action: {
                             tags.remove(at: index)
                         }) {
-                            Image(systemName: "trash")
+                            Image(systemName: "xmark")
                                 .foregroundColor(.secondary)
                         }
                         .buttonStyle(.plain)
