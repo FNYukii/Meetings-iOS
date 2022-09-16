@@ -50,20 +50,23 @@ struct CreateCommentView: View {
                 Spacer()
                 
                 // Buttons Row
-                HStack {
-                    Button(action: {
-                        isShowImagesPickerView.toggle()
-                    }) {
-                        Image(systemName: "photo")
-                            .foregroundColor(.accentColor)
-                    }
-                    .padding()
-                    
-                    Spacer()
-                    
-                    Text("\(text.count)")
-                        .foregroundColor(.secondary)
+                VStack(alignment: .leading, spacing: 0) {
+                    Divider()
+                    HStack {
+                        Button(action: {
+                            isShowImagesPickerView.toggle()
+                        }) {
+                            Image(systemName: "photo")
+                                .foregroundColor(.accentColor)
+                        }
                         .padding()
+                        
+                        Spacer()
+                        
+                        Text("\(text.count)")
+                            .foregroundColor(.secondary)
+                            .padding()
+                    }
                 }
             }
             
