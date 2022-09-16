@@ -24,6 +24,7 @@ struct CreateThreadView: View {
         NavigationView {
             
             List {
+                // TextField Row
                 TextField("title", text: $title)
                     .introspectTextField { textField in
                         textField.becomeFirstResponder()
@@ -32,6 +33,7 @@ struct CreateThreadView: View {
                     .submitLabel(.done)
                     .listRowSeparator(.hidden)
                 
+                // Tags Row
                 ForEach(0 ..< tags.count, id: \.self) { index in
                     HStack {
                         Image(systemName: "tag")
@@ -42,6 +44,7 @@ struct CreateThreadView: View {
                     .listRowSeparator(.hidden)
                 }
                 
+                // Add Tag Button Row
                 Button(action: {
                     tags.append("")
                 }) {
