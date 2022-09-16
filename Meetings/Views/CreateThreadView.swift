@@ -15,6 +15,7 @@ struct CreateThreadView: View {
     
     // States
     @State private var title = ""
+    @State private var tags: [String] = []
     
     @State private var isLoading = false
     @State private var isShowDialogError = false
@@ -22,17 +23,38 @@ struct CreateThreadView: View {
     var body: some View {
         NavigationView {
             
-            VStack(alignment: .leading) {
+            List {
                 TextField("title", text: $title)
                     .introspectTextField { textField in
                         textField.becomeFirstResponder()
                     }
                     .disabled(isLoading)
-                    .padding()
                     .submitLabel(.done)
+                    .listRowSeparator(.hidden)
                 
-                Spacer()
+                ForEach(0 ..< tags.count, id: \.self) { index in
+                    HStack {
+                        Image(systemName: "tag")
+                            .foregroundColor(.secondary)
+                        TextField("tag", text: $tags[index])
+                            .submitLabel(.done)
+                    }
+                    .listRowSeparator(.hidden)
+                }
+                
+                Button(action: {
+                    tags.append("")
+                }) {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("add_tag")
+                    }
+                }
+                .foregroundColor(.secondary)
+                .buttonStyle(.plain)
+                .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
             
             .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
