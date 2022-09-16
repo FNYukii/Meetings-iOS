@@ -28,36 +28,44 @@ struct CreateCommentView: View {
     var body: some View {
         NavigationView {
             
-            Form {
-                Section {
-                    MyTextEditor(hintText: Text("text"), text: $text)
-                }
+            VStack(alignment: .leading) {
                 
-                Section {
-                    // Pick Button
-                    if !isPickingImages {
-                        Button(action: {
-                            isShowImagesPickerView.toggle()
-                        }) {
-                            Text("pick_images")
-                        }
-                    }
-                    
-                    // ProgressView
-                    if isPickingImages {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                    }
-                }
+                // TextEditor Row
+                MyTextEditor(hintText: Text("text"), text: $text)
+                .padding()
                 
-                // Images (仮)
-                Section {
-                    VStack {
+                // Images Row
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top) {
                         ForEach(0 ..< pickedImages.count, id: \.self) { index in
                             Image(uiImage: pickedImages[index])
                                 .resizable()
                                 .scaledToFit()
+                                .cornerRadius(8)
                         }
+                    }
+                }
+                .padding()
+                
+                Spacer()
+                
+                // Buttons Row
+                VStack(alignment: .leading, spacing: 0) {
+                    Divider()
+                    HStack {
+                        Button(action: {
+                            isShowImagesPickerView.toggle()
+                        }) {
+                            Image(systemName: "photo")
+                                .foregroundColor(.accentColor)
+                        }
+                        .padding()
+                        
+                        Spacer()
+                        
+                        Text("\(text.count)")
+                            .foregroundColor(.secondary)
+                            .padding()
                     }
                 }
             }
@@ -131,4 +139,3 @@ struct CreateCommentView: View {
     }
     
 }
-

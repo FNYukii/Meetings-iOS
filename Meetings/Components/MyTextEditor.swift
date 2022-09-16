@@ -15,7 +15,8 @@ struct MyTextEditor: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             TextEditor(text: $text)
-                .frame(minHeight: 80)
+                .frame(minHeight: 130)
+            
             hintText
                 .foregroundColor(Color(UIColor.placeholderText))
                 .opacity(text.isEmpty ? 1 : 0)

@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 struct UserIconImage: View {
     
     // User ID to show
-    let userId: String
+    let userId: String?
     
     // Icon size
     let iconImageFamily: IconImageFamily
@@ -39,8 +39,8 @@ struct UserIconImage: View {
     
     private func load() {
         // Commentを追加したUserを読み取り
-        if user == nil {
-            FireUser.readUser(userId: userId) { user in
+        if user == nil && userId != nil {
+            FireUser.readUser(userId: userId!) { user in
                 self.user = user
                 self.isLoadedUser = true
             }
