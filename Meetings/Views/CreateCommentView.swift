@@ -34,11 +34,23 @@ struct CreateCommentView: View {
                 MyTextEditor(hintText: Text("text"), text: $text)
                 .padding()
                 
+                // Images Row
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top) {
+                        ForEach(0 ..< pickedImages.count, id: \.self) { index in
+                            Image(uiImage: pickedImages[index])
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(8)
+                        }
+                    }
+                }
+                .padding()
+                
                 Spacer()
                 
                 // Buttons Row
                 HStack {
-                    
                     Button(action: {
                         isShowImagesPickerView.toggle()
                     }) {
@@ -46,13 +58,13 @@ struct CreateCommentView: View {
                             .foregroundColor(.accentColor)
                     }
                     .padding()
+                    
+                    Spacer()
+                    
+                    Text("\(text.count)")
+                        .foregroundColor(.secondary)
+                        .padding()
                 }
-                
-//                ForEach(0 ..< pickedImages.count, id: \.self) { index in
-//                    Image(uiImage: pickedImages[index])
-//                        .resizable()
-//                        .scaledToFit()
-//                }
             }
             
             .alert("failed", isPresented: $isShowDialogError) {
