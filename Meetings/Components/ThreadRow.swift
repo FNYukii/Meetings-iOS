@@ -35,7 +35,6 @@ struct ThreadRow: View {
                     
                     // Title Column
                     Text(thread.title)
-                        .font(.title2)
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -67,7 +66,11 @@ struct ThreadRow: View {
                 }
                 
                 // Tags Row
-                UserUserTagText(userId: thread.userId)
+                HStack {
+                    UserUserTagText(userId: thread.userId)
+                    EditDate.howManyAgoText(from: thread.createdAt)
+                        .foregroundColor(.secondary)
+                }
             }
         }
         .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
