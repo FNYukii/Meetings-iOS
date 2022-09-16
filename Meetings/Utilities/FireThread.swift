@@ -14,8 +14,9 @@ class FireThread {
         let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
         let userId = document.get("userId") as? String ?? ""
         let title = document.get("title") as? String ?? ""
+        let tags = document.get("tags") as? [String] ?? []
         
-        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
+        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title, tags: tags)
         return thread
     }
     
@@ -24,8 +25,9 @@ class FireThread {
         let createdAt = (document.get("createdAt", serverTimestampBehavior: .estimate) as? Timestamp ?? Timestamp()).dateValue()
         let userId = document.get("userId") as? String ?? ""
         let title = document.get("title") as? String ?? ""
+        let tags = document.get("tags") as? [String] ?? []
         
-        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title)
+        let thread = Thread(id: id, createdAt: createdAt, userId: userId, title: title, tags: tags)
         return thread
     }
     

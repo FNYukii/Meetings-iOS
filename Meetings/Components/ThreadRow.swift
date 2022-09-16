@@ -70,6 +70,11 @@ struct ThreadRow: View {
                     UserUserTagText(userId: thread.userId)
                     EditDate.howManyAgoText(from: thread.createdAt)
                         .foregroundColor(.secondary)
+                    
+                    ForEach(thread.tags, id: \.self) { tag in
+                        Text(tag)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
         }
