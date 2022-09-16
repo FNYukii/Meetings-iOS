@@ -36,10 +36,24 @@ struct CreateThreadView: View {
                 // Tags Row
                 ForEach(0 ..< tags.count, id: \.self) { index in
                     HStack {
+                        // Image Column
                         Image(systemName: "tag")
                             .foregroundColor(.secondary)
+                        
+                        // TextField Column
                         TextField("tag", text: $tags[index])
                             .submitLabel(.done)
+                        
+                        Spacer()
+                        
+                        // Delete Button Column
+                        Button(action: {
+                            tags.remove(at: index)
+                        }) {
+                            Image(systemName: "trash")
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
                     }
                     .listRowSeparator(.hidden)
                 }
