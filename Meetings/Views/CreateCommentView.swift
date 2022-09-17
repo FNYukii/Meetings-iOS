@@ -28,29 +28,32 @@ struct CreateCommentView: View {
     var body: some View {
         NavigationView {
             
-            VStack(alignment: .leading) {
+            ZStack {
                 
-                // TextEditor Row
-                MyTextEditor(hintText: Text("text"), text: $text, isFocus: true)
-                .padding()
-                
-                // Images Row
-                ScrollView(.horizontal) {
-                    HStack(alignment: .top) {
-                        ForEach(0 ..< pickedImages.count, id: \.self) { index in
-                            Image(uiImage: pickedImages[index])
-                                .resizable()
-                                .scaledToFit()
-                                .cornerRadius(8)
+                List {
+                    // TextEditor Row
+                    MyTextEditor(hintText: Text("text"), text: $text, isFocus: true)
+                        .listRowSeparator(.hidden)
+                    
+                    // Images Row
+                    ScrollView(.horizontal) {
+                        HStack(alignment: .top) {
+                            ForEach(0 ..< pickedImages.count, id: \.self) { index in
+                                Image(uiImage: pickedImages[index])
+                                    .resizable()
+                                    .scaledToFit()
+                                    .cornerRadius(8)
+                                    .frame(height: 120)
+                            }
                         }
                     }
+                    .listRowSeparator(.hidden)
                 }
-                .padding()
+                .listStyle(.plain)
                 
-                Spacer()
-                
-                // Buttons Row
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(spacing: 0) {
+                    Spacer()
+                    
                     Divider()
                     HStack {
                         Button(action: {
@@ -59,6 +62,7 @@ struct CreateCommentView: View {
                             Image(systemName: "photo")
                                 .foregroundColor(.accentColor)
                         }
+                        .buttonStyle(.plain)
                         .padding()
                         
                         Spacer()
@@ -67,7 +71,13 @@ struct CreateCommentView: View {
                             .foregroundColor(.secondary)
                             .padding()
                     }
+                    .background(Color.black.opacity(0.1))
                 }
+                
+                
+                
+                
+                
             }
             
             .alert("failed", isPresented: $isShowDialogError) {
