@@ -55,7 +55,7 @@ struct CreateCommentView: View {
                 }
                 .listStyle(.plain)
                 
-                // Toolbar Layer
+                // VStack Layer
                 VStack(spacing: 0) {
                     Spacer()
                     Divider()
@@ -71,10 +71,6 @@ struct CreateCommentView: View {
                         }
                         
                         Spacer()
-                        
-                        // Counter Column
-                        Text("\(text.count) / \(textMax)")
-                            .foregroundColor(text.count > textMax ? .red : .secondary)
                     }
                     .padding()
                     .background(Color("ToolbarBackground"))
