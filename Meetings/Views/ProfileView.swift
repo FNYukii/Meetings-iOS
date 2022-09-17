@@ -69,7 +69,7 @@ struct ProfileView: View {
             .padding(.top)
             
             // Tab Bar Row
-            MyTabBar(tabBarItems: [Text("posts"), Text("likes")], selection: $selection)
+            MyTabBar(tabBarItems: [Text("comments"), Text("likes")], selection: $selection)
             
             // Tab Body Row
             TabView(selection: $selection) {
