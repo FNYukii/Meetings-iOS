@@ -1,0 +1,73 @@
+/* 
+  Localizable.strings
+  Meetings
+
+  Created by Yu on 2022/09/17.
+  
+*/
+
+// FirstView
+"no_threads" = "スレッドはありません";
+"threads" = "スレッド";
+"sign_in" = "サインイン";
+"sign_up" = "サインアップ";
+
+// SignUpView
+"email" = "メールアドレス";
+"password" = "パスワード";
+"check_password" = "パスワードを確認";
+"display_name" = "ディスプレイネーム";
+"user_tag" = "ユーザータグ";
+"introduction" = "自己紹介";
+
+"faild" = "失敗";
+"ok" = "OK";
+"failed_to_sign_up" = "サインアップに失敗しました。";
+"new_account" = "新規アカウント";
+"cancel" = "キャンセル";
+
+// SignInView
+"failed_to_sign_in" = "サインインに失敗しました。";
+
+// ProfileView
+"user_reading_failed" = "ユーザーの読み込みに失敗しました。";
+"comments" = "コメント";
+"likes" = "いいね";
+"profile" = "プロフィール";
+"edit_profile" = "プロフィールを編集";
+"account" = "アカウント";
+"report_user" = "ユーザーを報告";
+
+// EditProfileView
+"user_updating_failed" = "ユーザーの更新に失敗しました。";
+"user_tag_is_duplicated" = "ユーザータグが重複しています。";
+"done" = "完了";
+
+// AccountView
+"sign_out" = "サインアウト";
+"are_you_sure_you_want_to_sign_out" = "サインアウトしてもよろしいですか?";
+
+// CreateThreadView
+"title" = "タイトル";
+"tag" = "タグ";
+"add_tag" = "タグを追加";
+"thread_creation_failed" = "スレッド作成に失敗しました。";
+"new_thread" = "新規スレッド";
+"create" = "作成";
+
+// CreateReportView
+"category" = "カテゴリー";
+"detail" = "詳細";
+"report_creation_failed" = "レポートの作成に失敗しました。";
+
+// ThreadView
+"no_comments" = "コメントはありません";
+
+// CommentView
+"comment" = "コメント";
+
+// CreateCommentView
+"text" = "テキスト";
+"comment_creation_failed" = "コメントの作成に失敗しました。";
+"add" = "追加";
+"new_comment" = "新規コメント";
