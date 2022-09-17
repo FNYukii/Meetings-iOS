@@ -77,7 +77,7 @@ struct CreateCommentView: View {
                             .foregroundColor(.secondary)
                     }
                     .padding()
-                    .background(Color.black.opacity(0.1))
+                    .background(Color.white.opacity(0.01))
                 }
             }
             
