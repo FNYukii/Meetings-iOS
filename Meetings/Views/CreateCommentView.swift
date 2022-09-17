@@ -74,7 +74,7 @@ struct CreateCommentView: View {
                         
                         // Counter Column
                         Text("\(text.count) / \(textMax)")
-                            .foregroundColor(.secondary)
+                            .foregroundColor(text.count > textMax ? .red : .secondary)
                     }
                     .padding()
                     .background(Color.white.opacity(0.01))
