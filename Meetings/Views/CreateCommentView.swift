@@ -66,7 +66,6 @@ struct CreateCommentView: View {
                             Image(systemName: "photo")
                                 .foregroundColor(.accentColor)
                         }
-                        .buttonStyle(.plain)
                         .padding()
                         
                         Spacer()
