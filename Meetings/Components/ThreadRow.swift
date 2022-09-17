@@ -13,8 +13,8 @@ struct ThreadRow: View {
     let thread: Thread
     
     // States
-    @State private var comments: [Comment]? = []
-    @State private var isLoadedComments = false
+    @State private var firstComment: Comment? = nil
+    @State private var isLoadedFirstComment = false
     
     // Dialogs, Navigations
     @State private var isShowDialog = false
@@ -35,6 +35,7 @@ struct ThreadRow: View {
                     
                     // Title Column
                     Text(thread.title)
+                        .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -63,6 +64,11 @@ struct ThreadRow: View {
                             .foregroundColor(.secondary)
                             .padding(.vertical, 6)
                     }
+                }
+                
+                // First Comment Row
+                if firstComment != nil {
+                    Text(firstComment!.text)
                 }
                 
                 // Tags Row
@@ -97,9 +103,11 @@ struct ThreadRow: View {
     
     private func load() {
         // このスレッド上のコメントを読み取り
-        FireComment.readComments(threadId: thread.id) { comments in
-            self.comments = comments
-            self.isLoadedComments = true
+        if firstComment == nil {
+            FireComment.readFirstComment(threadId: thread.id) { comment in
+                self.firstComment = comment
+                self.isLoadedFirstComment = true
+            }
         }
     }
 }
