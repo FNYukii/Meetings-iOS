@@ -29,15 +29,13 @@ struct CreateThreadView: View {
             
             List {
                 // TextField Row
-                ScrollView(.horizontal) {
-                    TextField("title", text: $title)
-                        .introspectTextField { textField in
-                            textField.becomeFirstResponder()
-                        }
-                        .disabled(isLoading)
-                        .submitLabel(.done)
-                        .listRowSeparator(.hidden)
-                }
+                TextField("title", text: $title)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
+                    .disabled(isLoading)
+                    .submitLabel(.done)
+                    .listRowSeparator(.hidden)
                 
                 // Tags Row
                 ForEach(0 ..< tags.count, id: \.self) { index in
