@@ -129,6 +129,15 @@ struct ProfileView: View {
                             Label("report_user", systemImage: "flag")
                         }
                     }
+                    
+                    // Mute Button
+                    if FireAuth.uid() != userId {
+                        Button(action: {
+                            
+                        }) {
+                            Label("mute_user", systemImage: "speaker.slash")
+                        }
+                    }
                 } label: {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.secondary)

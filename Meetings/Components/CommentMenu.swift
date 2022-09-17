@@ -35,6 +35,15 @@ struct CommentMenu: View {
                     Label("report_comment", systemImage: "flag")
                 }
             }
+            
+            // Mute Button
+            if FireAuth.uid() != comment.userId {
+                Button(action: {
+                    
+                }) {
+                    Label("mute_user", systemImage: "speaker.slash")
+                }
+            }
         } label: {
             Image(systemName: "ellipsis")
                 .foregroundColor(.secondary)
