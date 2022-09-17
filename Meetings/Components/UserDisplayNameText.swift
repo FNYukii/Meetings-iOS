@@ -30,8 +30,6 @@ struct UserDisplayNameText: View {
             if isLoadedUser && user == nil {
                 Image(systemName: "exclamationmark.triangle")
                     .foregroundColor(.secondary)
-                Text("user_reading_failed")
-                    .foregroundColor(.secondary)
             }
             
             // Display name

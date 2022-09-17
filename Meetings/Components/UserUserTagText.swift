@@ -30,8 +30,6 @@ struct UserUserTagText: View {
             if isLoadedUser && user == nil {
                 Image(systemName: "exclamationmark.triangle")
                     .foregroundColor(.secondary)
-                Text("user_reading_failed")
-                    .foregroundColor(.secondary)
             }
             
             // User tag
