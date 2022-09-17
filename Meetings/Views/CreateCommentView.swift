@@ -25,6 +25,9 @@ struct CreateCommentView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    // Values
+    let textMax = 300
+    
     var body: some View {
         NavigationView {
             
@@ -71,7 +74,7 @@ struct CreateCommentView: View {
                         Spacer()
                         
                         // Counter Column
-                        Text("\(text.count) / 1000")
+                        Text("\(text.count) / \(textMax)")
                             .foregroundColor(.secondary)
                             .padding()
                     }
@@ -133,7 +136,7 @@ struct CreateCommentView: View {
                             Text("add")
                                 .fontWeight(.bold)
                         }
-                        .disabled(text.isEmpty)
+                        .disabled(text.isEmpty || text.count > textMax)
                     }
                     
                     // ProgressView
