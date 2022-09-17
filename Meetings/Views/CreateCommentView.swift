@@ -71,7 +71,7 @@ struct CreateCommentView: View {
                         Spacer()
                         
                         // Counter Column
-                        Text("\(text.count)")
+                        Text("\(text.count) / 1000")
                             .foregroundColor(.secondary)
                             .padding()
                     }
