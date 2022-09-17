@@ -71,3 +71,19 @@
 "comment_creation_failed" = "コメントの作成に失敗しました。";
 "add" = "追加";
 "new_comment" = "新規コメント";
+
+// ThreadRow
+"delete_thread" = "スレッドを削除";
+"report_thread" = "スレッドを報告";
+"are_you_sure_you_want_to_delete_this_thread" = "スレッドを削除してもよろしいですか?";
+
+// CommentMenu
+"delete_comment" = "コメントを削除";
+"report_comment" = "コメントを報告";
+"are_you_sure_you_want_to_delete_this_comment" = "コメントを削除してもよろしいですか?";
+
+// CommentThreadTitleRow
+"thread_not_found" = "スレッドが見つかりません";
+
+// CommentRowList
+"comments_reading_failed" = "コメントの読み取りに失敗しました。";

@@ -29,8 +29,6 @@ struct CommentReactionRow: View {
             if isLoadedLikedUserIds && likedUserIds == nil {
                 Image(systemName: "exclamationmark.triangle")
                     .foregroundColor(.secondary)
-                Text("likes_reading_failed")
-                    .foregroundColor(.secondary)
             }
             
             // Like button when not liked
