@@ -33,7 +33,7 @@ class FireComment {
         return comment
     }
     
-    static func readFirstComments(threadId: String, completion: (([Comment]?) -> Void)?) {
+    static func readFirstComment(threadId: String, completion: ((Comment?) -> Void)?) {
         // キャッシュからドキュメントを読み取り
         let db = Firestore.firestore()
         db.collection("comments")
@@ -44,21 +44,25 @@ class FireComment {
                 // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments from cashe. \(err)")
+                    completion?(nil)
                     return
                 }
                 
                 // 成功
                 print("HELLO! Success! Read \(querySnapshot!.count) Comments from cashe.")
                 
-                // Comments
-                var comments: [Comment] = []
-                for document in querySnapshot!.documents {
-                    let comment = toComment(document: document)
-                    comments.append(comment)
+                // コメントが0件ならnilを返す
+                if querySnapshot!.documents.count == 0 {
+                    completion?(nil)
+                    return
                 }
                 
+                // Comment
+                let document = querySnapshot!.documents.first!
+                let comment = toComment(document: document)
+                
                 // Return
-                completion?(comments)
+                completion?(comment)
             }
         
         // サーバーからドキュメント読み取り
@@ -77,15 +81,18 @@ class FireComment {
                 // 成功
                 print("HELLO! Success! Read \(querySnapshot!.count) Comments from server.")
                 
-                // Comments
-                var comments: [Comment] = []
-                for document in querySnapshot!.documents {
-                    let comment = toComment(document: document)
-                    comments.append(comment)
+                // コメントが0件ならnilを返す
+                if querySnapshot!.documents.count == 0 {
+                    completion?(nil)
+                    return
                 }
                 
+                // Comment
+                let document = querySnapshot!.documents.first!
+                let comment = toComment(document: document)
+                
                 // Return
-                completion?(comments)
+                completion?(comment)
             }
     }
     

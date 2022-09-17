@@ -13,8 +13,8 @@ struct ThreadRow: View {
     let thread: Thread
     
     // States
-    @State private var comments: [Comment]? = []
-    @State private var isLoadedComments = false
+    @State private var firstComment: Comment? = nil
+    @State private var isLoadedFirstComment = false
     
     // Dialogs, Navigations
     @State private var isShowDialog = false
@@ -67,8 +67,8 @@ struct ThreadRow: View {
                 }
                 
                 // First Comment Row
-                if comments != nil && comments?.count == 1 {
-                    Text(comments!.first!.text)
+                if firstComment != nil {
+                    Text(firstComment!.text)
                 }
                 
                 // Tags Row
@@ -103,9 +103,11 @@ struct ThreadRow: View {
     
     private func load() {
         // このスレッド上のコメントを読み取り
-        FireComment.readFirstComments(threadId: thread.id) { comments in
-            self.comments = comments
-            self.isLoadedComments = true
+        if firstComment == nil {
+            FireComment.readFirstComment(threadId: thread.id) { comment in
+                self.firstComment = comment
+                self.isLoadedFirstComment = true
+            }
         }
     }
 }
