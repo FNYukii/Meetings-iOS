@@ -77,7 +77,12 @@ struct CreateCommentView: View {
                             .foregroundColor(text.count > textMax ? .red : .secondary)
                     }
                     .padding()
-                    .background(Color.white.opacity(0.01))
+                    .background {
+                        ZStack {
+                            Color.black
+                            Color.white.opacity(0.1)
+                        }
+                    }
                 }
             }
             
