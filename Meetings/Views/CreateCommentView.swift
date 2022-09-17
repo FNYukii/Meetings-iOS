@@ -62,22 +62,21 @@ struct CreateCommentView: View {
                     
                     // Toolbar Row
                     HStack {
-                        // Button Column
+                        // Image Button Column
                         Button(action: {
                             isShowImagesPickerView.toggle()
                         }) {
                             Image(systemName: "photo")
                                 .foregroundColor(.accentColor)
                         }
-                        .padding()
                         
                         Spacer()
                         
                         // Counter Column
                         Text("\(text.count) / \(textMax)")
                             .foregroundColor(.secondary)
-                            .padding()
                     }
+                    .padding()
                     .background(Color.black.opacity(0.1))
                 }
             }
