@@ -38,7 +38,7 @@ struct SignInView: View {
                     isShowDialogError = false
                 }
             } message: {
-                Text("failed_to_sign_up")
+                Text("failed_to_sign_in")
             }
             
             .navigationTitle("sign_in")
