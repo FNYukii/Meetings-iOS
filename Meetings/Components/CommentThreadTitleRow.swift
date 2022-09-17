@@ -42,9 +42,10 @@ struct CommentThreadTitleRow: View {
                 Button(action: {
                     isShowThreadView.toggle()
                 }) {
+                    Image(systemName: "square.text.square")
                     Text(thread!.title)
-                        .foregroundColor(.secondary)
                 }
+                .foregroundColor(.secondary)
                 .buttonStyle(.borderless)
             }
         }
