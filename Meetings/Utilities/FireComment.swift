@@ -33,13 +33,13 @@ class FireComment {
         return comment
     }
     
-    static func readComments(threadId: String, completion: (([Comment]?) -> Void)?) {
+    static func readFirstComments(threadId: String, completion: (([Comment]?) -> Void)?) {
         // キャッシュからドキュメントを読み取り
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
             .order(by: "createdAt")
-            .limit(to: 3)
+            .limit(to: 1)
             .getDocuments(source: .cache) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
@@ -65,7 +65,7 @@ class FireComment {
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
             .order(by: "createdAt")
-            .limit(to: 3)
+            .limit(to: 1)
             .getDocuments() { (querySnapshot, err) in
                 // 失敗
                 if let err = err {

@@ -35,6 +35,7 @@ struct ThreadRow: View {
                     
                     // Title Column
                     Text(thread.title)
+                        .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -63,6 +64,11 @@ struct ThreadRow: View {
                             .foregroundColor(.secondary)
                             .padding(.vertical, 6)
                     }
+                }
+                
+                // First Comment Row
+                if comments != nil && comments?.count == 1 {
+                    Text(comments!.first!.text)
                 }
                 
                 // Tags Row
@@ -97,7 +103,7 @@ struct ThreadRow: View {
     
     private func load() {
         // このスレッド上のコメントを読み取り
-        FireComment.readComments(threadId: thread.id) { comments in
+        FireComment.readFirstComments(threadId: thread.id) { comments in
             self.comments = comments
             self.isLoadedComments = true
         }
