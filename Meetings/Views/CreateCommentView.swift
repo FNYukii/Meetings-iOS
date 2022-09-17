@@ -30,6 +30,7 @@ struct CreateCommentView: View {
             
             ZStack {
                 
+                // List Layer
                 List {
                     // TextEditor Row
                     MyTextEditor(hintText: Text("text"), text: $text, isFocus: true)
@@ -51,11 +52,14 @@ struct CreateCommentView: View {
                 }
                 .listStyle(.plain)
                 
+                // Toolbar Layer
                 VStack(spacing: 0) {
                     Spacer()
-                    
                     Divider()
+                    
+                    // Toolbar Row
                     HStack {
+                        // Button Column
                         Button(action: {
                             isShowImagesPickerView.toggle()
                         }) {
@@ -67,17 +71,13 @@ struct CreateCommentView: View {
                         
                         Spacer()
                         
+                        // Counter Column
                         Text("\(text.count)")
                             .foregroundColor(.secondary)
                             .padding()
                     }
                     .background(Color.black.opacity(0.1))
                 }
-                
-                
-                
-                
-                
             }
             
             .alert("failed", isPresented: $isShowDialogError) {
