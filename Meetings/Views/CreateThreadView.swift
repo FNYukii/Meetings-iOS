@@ -20,6 +20,10 @@ struct CreateThreadView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    // Values
+    let titleMax = 100
+    let tagMax = 30
+    
     var body: some View {
         NavigationView {
             
@@ -111,7 +115,7 @@ struct CreateThreadView: View {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}))
+                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || title.count > titleMax)
                     }
                     
                     // ProgressView
