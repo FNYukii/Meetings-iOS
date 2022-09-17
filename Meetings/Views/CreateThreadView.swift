@@ -20,20 +20,22 @@ struct CreateThreadView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    // Values
+    let titleMax = 100
+    let tagMax = 30
+    
     var body: some View {
         NavigationView {
             
             List {
                 // TextField Row
-                ScrollView(.horizontal) {
-                    TextField("title", text: $title)
-                        .introspectTextField { textField in
-                            textField.becomeFirstResponder()
-                        }
-                        .disabled(isLoading)
-                        .submitLabel(.done)
-                        .listRowSeparator(.hidden)
-                }
+                TextField("title", text: $title)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
+                    .disabled(isLoading)
+                    .submitLabel(.done)
+                    .listRowSeparator(.hidden)
                 
                 // Tags Row
                 ForEach(0 ..< tags.count, id: \.self) { index in
@@ -111,7 +113,7 @@ struct CreateThreadView: View {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}))
+                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || title.count > titleMax || tags.contains(where: {$0.count > tagMax}))
                     }
                     
                     // ProgressView
