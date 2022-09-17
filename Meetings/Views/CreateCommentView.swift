@@ -25,6 +25,9 @@ struct CreateCommentView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    // Values
+    let textMax = 300
+    
     var body: some View {
         NavigationView {
             
@@ -59,23 +62,27 @@ struct CreateCommentView: View {
                     
                     // Toolbar Row
                     HStack {
-                        // Button Column
+                        // Image Button Column
                         Button(action: {
                             isShowImagesPickerView.toggle()
                         }) {
                             Image(systemName: "photo")
                                 .foregroundColor(.accentColor)
                         }
-                        .padding()
                         
                         Spacer()
                         
                         // Counter Column
-                        Text("\(text.count)")
-                            .foregroundColor(.secondary)
-                            .padding()
+                        Text("\(text.count) / \(textMax)")
+                            .foregroundColor(text.count > textMax ? .red : .secondary)
                     }
-                    .background(Color.black.opacity(0.1))
+                    .padding()
+                    .background {
+                        ZStack {
+                            Color.black
+                            Color.white.opacity(0.1)
+                        }
+                    }
                 }
             }
             
@@ -133,7 +140,7 @@ struct CreateCommentView: View {
                             Text("add")
                                 .fontWeight(.bold)
                         }
-                        .disabled(text.isEmpty)
+                        .disabled(text.isEmpty || text.count > textMax)
                     }
                     
                     // ProgressView
