@@ -65,7 +65,9 @@ struct CreateThreadView: View {
                 
                 // Add Tag Button Row
                 Button(action: {
-                    tags.append("")
+                    withAnimation {
+                        tags.append("")
+                    }
                 }) {
                     HStack {
                         Image(systemName: "plus")
