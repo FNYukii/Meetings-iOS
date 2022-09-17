@@ -23,6 +23,7 @@ struct CreateThreadView: View {
     // Values
     let titleMax = 100
     let tagMax = 30
+    let tagsMax = 5
     
     var body: some View {
         NavigationView {
@@ -73,6 +74,7 @@ struct CreateThreadView: View {
                 }
                 .foregroundColor(.secondary)
                 .buttonStyle(.plain)
+                .disabled(tags.count >= tagsMax)
                 .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
