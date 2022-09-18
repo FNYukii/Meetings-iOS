@@ -69,7 +69,6 @@
 
 // CreateCommentView
 "comment_creation_failed" = "コメントの作成に失敗しました。";
-"add" = "追加";
 "new_comment" = "新規コメント";
 
 // ThreadRow

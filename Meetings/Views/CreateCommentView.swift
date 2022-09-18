@@ -114,7 +114,7 @@ struct CreateCommentView: View {
                                 }
                             }
                         }) {
-                            Text("add")
+                            Text("create")
                                 .fontWeight(.bold)
                         }
                         .disabled(commentText.isEmpty || commentText.count > commentTextMax)
