@@ -16,6 +16,7 @@ struct CreateThreadView: View {
     // States
     @State private var threadTitle = ""
     @State private var threadTags: [String] = []
+    @State private var commentText = ""
     
     @State private var isLoading = false
     @State private var isShowDialogError = false
@@ -78,6 +79,10 @@ struct CreateThreadView: View {
                 .buttonStyle(.plain)
                 .disabled(threadTags.count >= threadTagsMax)
                 .listRowSeparator(.hidden)
+                
+                // Comment Text Row
+                MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: false)
+                    .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             
