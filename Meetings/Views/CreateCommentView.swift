@@ -31,51 +31,37 @@ struct CreateCommentView: View {
     var body: some View {
         NavigationView {
             
-            ZStack {
-                
-                // List Layer
-                List {
-                    // TextEditor Row
-                    MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: true)
-                        .listRowSeparator(.hidden)
-                    
-                    // Images Row
-                    ScrollView(.horizontal) {
-                        HStack(alignment: .top) {
-                            ForEach(0 ..< commentImages.count, id: \.self) { index in
-                                Image(uiImage: commentImages[index])
-                                    .resizable()
-                                    .scaledToFit()
-                                    .cornerRadius(8)
-                                    .frame(height: 120)
-                            }
-                        }
-                    }
+            List {
+                // TextEditor Row
+                MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: true)
                     .listRowSeparator(.hidden)
-                }
-                .listStyle(.plain)
                 
-                // VStack Layer
-                VStack(spacing: 0) {
-                    Spacer()
-                    Divider()
-                    
-                    // Toolbar Row
-                    HStack {
-                        // Image Button Column
-                        Button(action: {
-                            isShowImagesPickerView.toggle()
-                        }) {
-                            Image(systemName: "photo")
-                                .foregroundColor(.accentColor)
-                        }
-                        
-                        Spacer()
-                    }
-                    .padding()
-                    .background(Color("ToolbarBackground"))
+                // Image Button Row
+                Button(action: {
+                    isShowImagesPickerView.toggle()
+                }) {
+                    Image(systemName: "plus")
+                    Text("add_images")
                 }
+                .foregroundColor(.secondary)
+                .buttonStyle(.plain)
+                .listRowSeparator(.hidden)
+                
+                // Images Row
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top) {
+                        ForEach(0 ..< commentImages.count, id: \.self) { index in
+                            Image(uiImage: commentImages[index])
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(8)
+                                .frame(height: 120)
+                        }
+                    }
+                }
+                .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
             
             .alert("failed", isPresented: $isShowDialogError) {
                 Button("ok") {
