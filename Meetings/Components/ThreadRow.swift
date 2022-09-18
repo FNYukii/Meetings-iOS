@@ -75,7 +75,7 @@ struct ThreadRow: View {
                 if isLoadedFirstComment && firstComment == nil {
                     HStack {
                         Image(systemName: "exclamationmark.triangle")
-                        Text("comment_reading_failed")
+                        Text("first_comment_reading_failed")
                     }
                     .foregroundColor(.secondary)
                 }
@@ -112,13 +112,21 @@ struct ThreadRow: View {
     
     private func load() {
         // 最初のコメントを読み取るまでタイマーを繰り返す
+        var timerCounter = 0
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timerCounter += 1
+            
             // このスレッド上のコメントを読み取り
             if firstComment == nil {
                 FireComment.readFirstComment(threadId: thread.id) { comment in
                     self.firstComment = comment
                     self.isLoadedFirstComment = true
                 }
+            }
+            
+            // 一定回数読み取りに失敗したらタイマー停止
+            if timerCounter == 10 {
+                timer.invalidate()
             }
             
             // コメント読み取り後はタイマー停止

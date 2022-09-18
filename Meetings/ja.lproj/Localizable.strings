@@ -73,7 +73,7 @@
 "new_comment" = "新規コメント";
 
 // ThreadRow
-"comment_reading_failed" = "コメントの読み取りに失敗";
+"first_comment_reading_failed" = "最初のコメントの読み取りに失敗";
 "delete_thread" = "スレッドを削除";
 "report_thread" = "スレッドを報告";
 "are_you_sure_you_want_to_delete_this_thread" = "スレッドを削除してもよろしいですか?";
