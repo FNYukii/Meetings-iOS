@@ -108,15 +108,27 @@ struct CreateThreadView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireThread.createThread(title: threadTitle, tags: threadTags) { documentId in
+                            
+                            // スレッドを作成
+                            FireThread.createThread(title: threadTitle, tags: threadTags) { threadId in
                                 // 失敗
-                                if documentId == nil {
+                                if threadId == nil {
                                     isLoading = false
                                     isShowDialogError = true
                                 }
                                 
                                 // 成功
-                                dismiss()
+                                // コメントを作成
+                                FireComment.createComment(threadId: threadId!, text: commentText, imageUrls: []) { commentId in
+                                    // 失敗
+                                    if commentId == nil {
+                                        isLoading = false
+                                        isShowDialogError = true
+                                    }
+                                    
+                                    // 成功
+                                    dismiss()
+                                }
                             }
                         }) {
                             Text("create")
