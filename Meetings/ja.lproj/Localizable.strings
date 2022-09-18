@@ -51,6 +51,7 @@
 "title" = "タイトル";
 "tag" = "タグ";
 "add_tag" = "タグを追加";
+"add_images" = "画像を追加";
 "thread_creation_failed" = "スレッド作成に失敗しました。";
 "new_thread" = "新規スレッド";
 "create" = "作成";
@@ -67,12 +68,11 @@
 "comment" = "コメント";
 
 // CreateCommentView
-"text" = "テキスト";
 "comment_creation_failed" = "コメントの作成に失敗しました。";
-"add" = "追加";
 "new_comment" = "新規コメント";
 
 // ThreadRow
+"first_comment_reading_failed" = "最初のコメントの読み取りに失敗";
 "delete_thread" = "スレッドを削除";
 "report_thread" = "スレッドを報告";
 "are_you_sure_you_want_to_delete_this_thread" = "スレッドを削除してもよろしいですか?";

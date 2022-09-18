@@ -96,8 +96,7 @@ struct FirstView: View {
                     Button(action: {
                         isShowCreateThreadView.toggle()
                     }) {
-                        Image(systemName: "plus")
-                            .font(.title3)
+                        Image(systemName: "square.and.pencil")
                     }
                     .disabled(!signInStateViewModel.isSignedIn)
                 }

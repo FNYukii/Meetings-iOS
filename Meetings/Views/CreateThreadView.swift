@@ -14,23 +14,29 @@ struct CreateThreadView: View {
     @Environment(\.dismiss) private var dismiss
     
     // States
-    @State private var title = ""
-    @State private var tags: [String] = []
+    @State private var threadTitle = ""
+    @State private var threadTags: [String] = []
+    @State private var commentText = ""
+    @State private var commentImages: [UIImage] = []
     
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    @State private var isShowImagesPickerView = false
+    @State private var isPickingImages = false
+    
     // Values
-    let titleMax = 100
-    let tagMax = 30
-    let tagsMax = 5
+    let threadTitleMax = 100
+    let threadTagMax = 30
+    let threadTagsMax = 5
+    let commentTextMax = 300
     
     var body: some View {
         NavigationView {
             
             List {
                 // TextField Row
-                TextField("title", text: $title)
+                TextField("title", text: $threadTitle)
                     .introspectTextField { textField in
                         textField.becomeFirstResponder()
                     }
@@ -39,21 +45,21 @@ struct CreateThreadView: View {
                     .listRowSeparator(.hidden)
                 
                 // Tags Row
-                ForEach(0 ..< tags.count, id: \.self) { index in
+                ForEach(0 ..< threadTags.count, id: \.self) { index in
                     HStack {
                         // Image Column
                         Image(systemName: "tag")
                             .foregroundColor(.secondary)
                         
                         // TextField Column
-                        TextField("tag", text: $tags[index])
+                        TextField("tag", text: $threadTags[index])
                             .submitLabel(.done)
                         
                         Spacer()
                         
                         // Delete Button Column
                         Button(action: {
-                            tags.remove(at: index)
+                            threadTags.remove(at: index)
                         }) {
                             Image(systemName: "xmark")
                                 .foregroundColor(.secondary)
@@ -66,7 +72,7 @@ struct CreateThreadView: View {
                 // Add Tag Button Row
                 Button(action: {
                     withAnimation {
-                        tags.append("")
+                        threadTags.append("")
                     }
                 }) {
                     HStack {
@@ -76,7 +82,36 @@ struct CreateThreadView: View {
                 }
                 .foregroundColor(.secondary)
                 .buttonStyle(.plain)
-                .disabled(tags.count >= tagsMax)
+                .disabled(threadTags.count >= threadTagsMax)
+                .listRowSeparator(.hidden)
+                
+                // Comment Text Row
+                MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: false)
+                    .listRowSeparator(.hidden)
+                
+                // Comment Image Button Row
+                Button(action: {
+                    isShowImagesPickerView.toggle()
+                }) {
+                    Image(systemName: "plus")
+                    Text("add_images")
+                }
+                .foregroundColor(.secondary)
+                .buttonStyle(.plain)
+                .listRowSeparator(.hidden)
+                
+                // Comment Images Row
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top) {
+                        ForEach(0 ..< commentImages.count, id: \.self) { index in
+                            Image(uiImage: commentImages[index])
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(8)
+                                .frame(height: 120)
+                        }
+                    }
+                }
                 .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
@@ -87,6 +122,10 @@ struct CreateThreadView: View {
                 }
             } message: {
                 Text("thread_creation_failed")
+            }
+            
+            .sheet(isPresented: $isShowImagesPickerView) {
+                ImagesPickerView(images: $commentImages, isPicking: $isPickingImages)
             }
             
             .navigationTitle("new_thread")
@@ -103,21 +142,46 @@ struct CreateThreadView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireThread.createThread(title: title, tags: tags) { documentId in
+                            
+                            // スレッドを作成
+                            FireThread.createThread(title: threadTitle, tags: threadTags) { threadId in
                                 // 失敗
-                                if documentId == nil {
+                                if threadId == nil {
                                     isLoading = false
                                     isShowDialogError = true
+                                    return
                                 }
                                 
                                 // 成功
-                                dismiss()
+                                // コメントの画像をアップロード
+                                FireImage.uploadImages(images: commentImages, folderName: "images") { imageUrls in
+                                    // 失敗
+                                    if imageUrls == nil {
+                                        isLoading = false
+                                        isShowDialogError = true
+                                        return
+                                    }
+                                    
+                                    // 成功
+                                    // コメントを作成
+                                    FireComment.createComment(threadId: threadId!, text: commentText, imageUrls: imageUrls!) { commentId in
+                                        // 失敗
+                                        if commentId == nil {
+                                            isLoading = false
+                                            isShowDialogError = true
+                                            return
+                                        }
+                                        
+                                        // 成功
+                                        dismiss()
+                                    }
+                                }
                             }
                         }) {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || title.count > titleMax || tags.contains(where: {$0.count > tagMax}))
+                        .disabled(threadTitle.isEmpty || threadTitle.count > threadTitleMax || threadTags.contains(where: {$0.count > threadTagMax}) || threadTags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || commentText.isEmpty || commentText.count > commentTextMax)
                     }
                     
                     // ProgressView
