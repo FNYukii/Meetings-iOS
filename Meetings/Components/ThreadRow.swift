@@ -71,6 +71,15 @@ struct ThreadRow: View {
                     Text(firstComment!.text)
                 }
                 
+                // No First Comment Row
+                if isLoadedFirstComment && firstComment == nil {
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle")
+                        Text("comment_reading_failed")
+                    }
+                    .foregroundColor(.secondary)
+                }
+                
                 // Tags Row
                 HStack {
                     UserUserTagText(userId: thread.userId)
@@ -102,11 +111,19 @@ struct ThreadRow: View {
     }
     
     private func load() {
-        // このスレッド上のコメントを読み取り
-        if firstComment == nil {
-            FireComment.readFirstComment(threadId: thread.id) { comment in
-                self.firstComment = comment
-                self.isLoadedFirstComment = true
+        // 最初のコメントを読み取るまでタイマーを繰り返す
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            // このスレッド上のコメントを読み取り
+            if firstComment == nil {
+                FireComment.readFirstComment(threadId: thread.id) { comment in
+                    self.firstComment = comment
+                    self.isLoadedFirstComment = true
+                }
+            }
+            
+            // コメント読み取り後はタイマー停止
+            if firstComment != nil {
+                timer.invalidate()
             }
         }
     }
