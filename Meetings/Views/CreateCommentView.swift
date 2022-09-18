@@ -16,8 +16,8 @@ struct CreateCommentView: View {
     let threadId: String
     
     // States
-    @State private var text = ""
-    @State private var pickedImages: [UIImage] = []
+    @State private var commentText = ""
+    @State private var commentImages: [UIImage] = []
     
     // Bools
     @State private var isShowImagesPickerView = false
@@ -26,7 +26,7 @@ struct CreateCommentView: View {
     @State private var isShowDialogError = false
     
     // Values
-    let textMax = 300
+    let commentTextMax = 300
     
     var body: some View {
         NavigationView {
@@ -36,14 +36,14 @@ struct CreateCommentView: View {
                 // List Layer
                 List {
                     // TextEditor Row
-                    MyTextEditor(hintText: Text("text"), text: $text, isFocus: true)
+                    MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: true)
                         .listRowSeparator(.hidden)
                     
                     // Images Row
                     ScrollView(.horizontal) {
                         HStack(alignment: .top) {
-                            ForEach(0 ..< pickedImages.count, id: \.self) { index in
-                                Image(uiImage: pickedImages[index])
+                            ForEach(0 ..< commentImages.count, id: \.self) { index in
+                                Image(uiImage: commentImages[index])
                                     .resizable()
                                     .scaledToFit()
                                     .cornerRadius(8)
@@ -86,7 +86,7 @@ struct CreateCommentView: View {
             }
             
             .sheet(isPresented: $isShowImagesPickerView) {
-                ImagesPickerView(images: $pickedImages, isPicking: $isPickingImages)
+                ImagesPickerView(images: $commentImages, isPicking: $isPickingImages)
             }
             
             .navigationTitle("new_comment")
@@ -105,7 +105,7 @@ struct CreateCommentView: View {
                             isLoading = true
                             
                             // 画像をアップロード
-                            FireImage.uploadImages(images: pickedImages, folderName: "images") { imageUrls in
+                            FireImage.uploadImages(images: commentImages, folderName: "images") { imageUrls in
                                 // 失敗
                                 if imageUrls == nil {
                                     isLoading = false
@@ -115,7 +115,7 @@ struct CreateCommentView: View {
                                 
                                 // 成功
                                 // Commentドキュメントを追加
-                                FireComment.createComment(threadId: threadId, text: text, imageUrls: imageUrls ?? []) { documentId in
+                                FireComment.createComment(threadId: threadId, text: commentText, imageUrls: imageUrls ?? []) { documentId in
                                     // 失敗
                                     if documentId == nil {
                                         isLoading = false
@@ -131,7 +131,7 @@ struct CreateCommentView: View {
                             Text("add")
                                 .fontWeight(.bold)
                         }
-                        .disabled(text.isEmpty || text.count > textMax)
+                        .disabled(commentText.isEmpty || commentText.count > commentTextMax)
                     }
                     
                     // ProgressView

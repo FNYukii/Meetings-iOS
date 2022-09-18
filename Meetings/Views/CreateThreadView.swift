@@ -93,11 +93,13 @@ struct CreateThreadView: View {
                     isShowImagesPickerView.toggle()
                 }) {
                     Image(systemName: "plus")
-                    Text("画像を追加")
+                    Text("select_images")
                 }
+                .foregroundColor(.secondary)
                 .buttonStyle(.plain)
-                .foregroundColor(.accentColor)
                 .listRowSeparator(.hidden)
+                
+                // Comment Images Row
             }
             .listStyle(.plain)
             
