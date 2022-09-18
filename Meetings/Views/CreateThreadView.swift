@@ -17,9 +17,13 @@ struct CreateThreadView: View {
     @State private var threadTitle = ""
     @State private var threadTags: [String] = []
     @State private var commentText = ""
+    @State private var commentImages: [UIImage] = []
     
     @State private var isLoading = false
     @State private var isShowDialogError = false
+    
+    @State private var isShowImagesPickerView = false
+    @State private var isPickingImages = false
     
     // Values
     let threadTitleMax = 100
@@ -83,6 +87,17 @@ struct CreateThreadView: View {
                 // Comment Text Row
                 MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: false)
                     .listRowSeparator(.hidden)
+                
+                // Comment Image Button Row
+                Button(action: {
+                    isShowImagesPickerView.toggle()
+                }) {
+                    Image(systemName: "plus")
+                    Text("画像を追加")
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(.accentColor)
+                .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             
@@ -92,6 +107,10 @@ struct CreateThreadView: View {
                 }
             } message: {
                 Text("thread_creation_failed")
+            }
+            
+            .sheet(isPresented: $isShowImagesPickerView) {
+                ImagesPickerView(images: $commentImages, isPicking: $isPickingImages)
             }
             
             .navigationTitle("new_thread")
@@ -115,19 +134,32 @@ struct CreateThreadView: View {
                                 if threadId == nil {
                                     isLoading = false
                                     isShowDialogError = true
+                                    return
                                 }
                                 
                                 // 成功
-                                // コメントを作成
-                                FireComment.createComment(threadId: threadId!, text: commentText, imageUrls: []) { commentId in
+                                // コメントの画像をアップロード
+                                FireImage.uploadImages(images: commentImages, folderName: "images") { imageUrls in
                                     // 失敗
-                                    if commentId == nil {
+                                    if imageUrls == nil {
                                         isLoading = false
                                         isShowDialogError = true
+                                        return
                                     }
                                     
                                     // 成功
-                                    dismiss()
+                                    // コメントを作成
+                                    FireComment.createComment(threadId: threadId!, text: commentText, imageUrls: imageUrls!) { commentId in
+                                        // 失敗
+                                        if commentId == nil {
+                                            isLoading = false
+                                            isShowDialogError = true
+                                            return
+                                        }
+                                        
+                                        // 成功
+                                        dismiss()
+                                    }
                                 }
                             }
                         }) {
