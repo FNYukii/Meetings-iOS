@@ -14,23 +14,23 @@ struct CreateThreadView: View {
     @Environment(\.dismiss) private var dismiss
     
     // States
-    @State private var title = ""
-    @State private var tags: [String] = []
+    @State private var threadTitle = ""
+    @State private var threadTags: [String] = []
     
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
     // Values
-    let titleMax = 100
-    let tagMax = 30
-    let tagsMax = 5
+    let threadTitleMax = 100
+    let threadTagMax = 30
+    let threadTagsMax = 5
     
     var body: some View {
         NavigationView {
             
             List {
                 // TextField Row
-                TextField("title", text: $title)
+                TextField("title", text: $threadTitle)
                     .introspectTextField { textField in
                         textField.becomeFirstResponder()
                     }
@@ -39,21 +39,21 @@ struct CreateThreadView: View {
                     .listRowSeparator(.hidden)
                 
                 // Tags Row
-                ForEach(0 ..< tags.count, id: \.self) { index in
+                ForEach(0 ..< threadTags.count, id: \.self) { index in
                     HStack {
                         // Image Column
                         Image(systemName: "tag")
                             .foregroundColor(.secondary)
                         
                         // TextField Column
-                        TextField("tag", text: $tags[index])
+                        TextField("tag", text: $threadTags[index])
                             .submitLabel(.done)
                         
                         Spacer()
                         
                         // Delete Button Column
                         Button(action: {
-                            tags.remove(at: index)
+                            threadTags.remove(at: index)
                         }) {
                             Image(systemName: "xmark")
                                 .foregroundColor(.secondary)
@@ -66,7 +66,7 @@ struct CreateThreadView: View {
                 // Add Tag Button Row
                 Button(action: {
                     withAnimation {
-                        tags.append("")
+                        threadTags.append("")
                     }
                 }) {
                     HStack {
@@ -76,7 +76,7 @@ struct CreateThreadView: View {
                 }
                 .foregroundColor(.secondary)
                 .buttonStyle(.plain)
-                .disabled(tags.count >= tagsMax)
+                .disabled(threadTags.count >= threadTagsMax)
                 .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
@@ -103,7 +103,7 @@ struct CreateThreadView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireThread.createThread(title: title, tags: tags) { documentId in
+                            FireThread.createThread(title: threadTitle, tags: threadTags) { documentId in
                                 // 失敗
                                 if documentId == nil {
                                     isLoading = false
@@ -117,7 +117,7 @@ struct CreateThreadView: View {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(title.isEmpty || tags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || title.count > titleMax || tags.contains(where: {$0.count > tagMax}))
+                        .disabled(threadTitle.isEmpty || threadTags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || threadTitle.count > threadTitleMax || threadTags.contains(where: {$0.count > threadTagMax}))
                     }
                     
                     // ProgressView
