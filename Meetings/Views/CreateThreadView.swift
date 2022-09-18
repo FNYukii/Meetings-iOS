@@ -29,6 +29,7 @@ struct CreateThreadView: View {
     let threadTitleMax = 100
     let threadTagMax = 30
     let threadTagsMax = 5
+    let commentTextMax = 300
     
     var body: some View {
         NavigationView {
@@ -180,7 +181,7 @@ struct CreateThreadView: View {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(threadTitle.isEmpty || threadTags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || threadTitle.count > threadTitleMax || threadTags.contains(where: {$0.count > threadTagMax}))
+                        .disabled(threadTitle.isEmpty || threadTitle.count > threadTitleMax || threadTags.contains(where: {$0.count > threadTagMax}) || threadTags.contains(where: {$0.trimmingCharacters(in: .whitespaces).isEmpty}) || commentText.isEmpty || commentText.count > commentTextMax)
                     }
                     
                     // ProgressView
