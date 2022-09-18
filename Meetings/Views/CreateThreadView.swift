@@ -93,13 +93,25 @@ struct CreateThreadView: View {
                     isShowImagesPickerView.toggle()
                 }) {
                     Image(systemName: "plus")
-                    Text("select_images")
+                    Text("add_images")
                 }
                 .foregroundColor(.secondary)
                 .buttonStyle(.plain)
                 .listRowSeparator(.hidden)
                 
                 // Comment Images Row
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top) {
+                        ForEach(0 ..< commentImages.count, id: \.self) { index in
+                            Image(uiImage: commentImages[index])
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(8)
+                                .frame(height: 120)
+                        }
+                    }
+                }
+                .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             

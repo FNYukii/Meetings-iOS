@@ -51,7 +51,7 @@
 "title" = "タイトル";
 "tag" = "タグ";
 "add_tag" = "タグを追加";
-"select_images" = "画像を選択";
+"add_images" = "画像を追加";
 "thread_creation_failed" = "スレッド作成に失敗しました。";
 "new_thread" = "新規スレッド";
 "create" = "作成";
