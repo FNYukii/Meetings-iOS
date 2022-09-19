@@ -12,54 +12,70 @@ struct CommentRow: View {
     // Comment to show
     let comment: Comment
     
+    // States
+    @State private var isCommentDeleted = false
+    
     // Navigations
     let isAbleShowingProfileView: Bool
     let isShowThread: Bool
                 
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
+        
+        Group {
+            // コメントが削除された
+            if isCommentDeleted {
+                Text("comment_was_deleted")
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
             
-            // Icon Column
-            UserIconButton(userId: comment.userId)
-                .disabled(!isAbleShowingProfileView)
-            
-            // Content Column
-            VStack(alignment: .leading) {
-                // Header Row
-                HStack {
-                    // Display Name Column
-                    UserDisplayNameText(userId: comment.userId)
+            // コメントが削除されていない
+            if !isCommentDeleted {
+                HStack(alignment: .top, spacing: 8) {
                     
-                    // User Tag Column
-                    UserUserTagText(userId: comment.userId)
+                    // Icon Column
+                    UserIconButton(userId: comment.userId)
+                        .disabled(!isAbleShowingProfileView)
                     
-                    // Date Column
-                    EditDate.howManyAgoText(from: comment.createdAt)
-                        .foregroundColor(.secondary)
-                    
-                    Spacer()
-                    
-                    // Menu Column
-                    CommentMenu(comment: comment)
+                    // Content Column
+                    VStack(alignment: .leading) {
+                        // Header Row
+                        HStack {
+                            // Display Name Column
+                            UserDisplayNameText(userId: comment.userId)
+                            
+                            // User Tag Column
+                            UserUserTagText(userId: comment.userId)
+                            
+                            // Date Column
+                            EditDate.howManyAgoText(from: comment.createdAt)
+                                .foregroundColor(.secondary)
+                            
+                            Spacer()
+                            
+                            // Menu Column
+                            CommentMenu(comment: comment, isCommentDeleted: $isCommentDeleted)
+                        }
+                        
+                        // Text Row
+                        Text(comment.text)
+                            .fixedSize(horizontal: false, vertical: true)
+                        
+                        // Images Row
+                        CommentImagesRow(comment: comment)
+                        
+                        // Reaction Row
+                        CommentReactionRow(comment: comment)
+                            .padding(.top, 4)
+                        
+                        // Thread Title Row
+                        if isShowThread {
+                            CommentThreadTitleRow(comment: comment)
+                        }
+                    }
                 }
-                
-                // Text Row
-                Text(comment.text)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                // Images Row
-                CommentImagesRow(comment: comment)
-                
-                // Reaction Row
-                CommentReactionRow(comment: comment)
-                    .padding(.top, 4)
-                
-                // Thread Title Row
-                if isShowThread {
-                    CommentThreadTitleRow(comment: comment)
-                }
+                .background(NavigationLink("", destination: CommentView(comment: comment)).opacity(0))
             }
         }
-        .background(NavigationLink("", destination: CommentView(comment: comment)).opacity(0))
     }
 }

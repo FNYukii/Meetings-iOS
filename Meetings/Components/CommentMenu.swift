@@ -11,6 +11,7 @@ struct CommentMenu: View {
     
     // Comment to show
     let comment: Comment
+    @Binding var isCommentDeleted: Bool
     
     // Navigations
     @State private var isShowDialogDelete = false
@@ -52,7 +53,12 @@ struct CommentMenu: View {
         
         .confirmationDialog("", isPresented: $isShowDialogDelete, titleVisibility: .hidden) {
             Button("delete_comment", role: .destructive) {
-                FireComment.deleteComment(commentId: comment.id)
+                FireComment.deleteComment(commentId: comment.id) { commentId in
+                    // 成功
+                    withAnimation {
+                        isCommentDeleted = true
+                    }
+                }
             }
         } message: {
             Text("are_you_sure_you_want_to_delete_this_comment")

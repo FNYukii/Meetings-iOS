@@ -12,6 +12,9 @@ struct CommentView: View {
     // Comment to show
     let comment: Comment
     
+    // States
+    @State private var isCommentDeleted = false
+    
     var body: some View {
         
         List {
@@ -58,7 +61,7 @@ struct CommentView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 // Menu Column
-                CommentMenu(comment: comment)
+                CommentMenu(comment: comment, isCommentDeleted: $isCommentDeleted)
             }
         }
     }
