@@ -31,11 +31,11 @@ struct CreateReportView: View {
         self.targetFamily = targetFamily
         
         if targetFamily == .user {
-            self.navTitle = "ユーザーを報告"
+            self.navTitle = NSLocalizedString("report_user", comment: "")
         } else if targetFamily == .thread {
-            self.navTitle = "スレッドを報告"
+            self.navTitle = NSLocalizedString("report_thread", comment: "")
         } else {
-            self.navTitle = "コメントを報告"
+            self.navTitle = NSLocalizedString("report_comment", comment: "")
         }
     }
         
