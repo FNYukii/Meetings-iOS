@@ -60,6 +60,10 @@
 "category" = "カテゴリー";
 "detail" = "詳細";
 "report_creation_failed" = "レポートの作成に失敗しました。";
+"report_user" = "ユーザーを報告";
+"report_thread" = "スレッドを報告";
+"report_comment" = "コメントを報告";
+"submit" = "送信";
 
 // ThreadView
 "no_comments" = "コメントはありません";
