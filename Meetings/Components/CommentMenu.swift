@@ -65,7 +65,7 @@ struct CommentMenu: View {
         }
         
         .sheet(isPresented: $isShowCreateReportView) {
-            CreateReportView(targetFamily: .comment)
+            CreateReportView(targetId: comment.id, targetFamily: .comment)
         }
     }
 }

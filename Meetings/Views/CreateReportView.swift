@@ -13,6 +13,7 @@ struct CreateReportView: View {
     @Environment(\.dismiss) private var dismiss
     
     // Report target
+    let targetId: String
     let targetFamily: ReportTargetFamily
     let navTitle: String
     
@@ -27,7 +28,8 @@ struct CreateReportView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
-    init(targetFamily: ReportTargetFamily) {
+    init(targetId: String, targetFamily: ReportTargetFamily) {
+        self.targetId = targetId
         self.targetFamily = targetFamily
         
         if targetFamily == .user {
@@ -85,7 +87,7 @@ struct CreateReportView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireReport.createReport(targetFamily: targetFamily.rawValue, probremCategory: probremCategories[probremCategorySelection], detail: detail) { documentId in
+                            FireReport.createReport(targetId: targetId, targetFamily: targetFamily.rawValue, probremCategory: probremCategories[probremCategorySelection], detail: detail) { documentId in
                                 // 失敗
                                 if documentId == nil {
                                     isLoading = false
