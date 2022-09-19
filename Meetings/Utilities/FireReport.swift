@@ -9,7 +9,7 @@ import Firebase
 
 class FireReport {
     
-    static func createReport(target: String, category: String, detail: String, completion: ((String?) -> Void)?) {
+    static func createReport(targetCategory: String, probremCategory: String, detail: String, completion: ((String?) -> Void)?) {
         // ドキュメント追加
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
@@ -17,8 +17,8 @@ class FireReport {
             .addDocument(data: [
                 "createdAt": FieldValue.serverTimestamp(),
                 "userId": FireAuth.uid() as Any,
-                "target": target,
-                "category": category,
+                "targetCategory": targetCategory,
+                "probremCategory": probremCategory,
                 "detail": detail
             ]) { error in
                 // 失敗

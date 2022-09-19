@@ -95,7 +95,7 @@ struct ProfileView: View {
         }
         
         .sheet(isPresented: $isShowCreateReportView) {
-            CreateReportView(target: .user)
+            CreateReportView(targetCategory: .user)
         }
         
         .navigationTitle("profile")

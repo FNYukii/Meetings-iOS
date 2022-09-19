@@ -104,7 +104,7 @@ struct ThreadRow: View {
         }
         
         .sheet(isPresented: $isShowCreateReportView) {
-            CreateReportView(target: .thread)
+            CreateReportView(targetCategory: .thread)
         }
         
         .onAppear(perform: load)
