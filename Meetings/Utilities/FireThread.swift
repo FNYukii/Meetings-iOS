@@ -112,17 +112,22 @@ class FireThread {
             }
     }
     
-    static func deleteThread(threadId: String) {
+    static func deleteThread(threadId: String, completion: ((String?) -> Void)?) {
         // ドキュメント削除
         let db = Firestore.firestore()
         db.collection("threads")
             .document(threadId)
             .delete() { err in
+                // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error removing Thread. \(err)")
-                } else {
-                    print("HELLO! Success! Deleted 1 Thread.")
+                    completion?(nil)
+                    return
                 }
+                
+                // 成功
+                print("HELLO! Success! Deleted 1 Thread.")
+                completion?(threadId)
             }
     }
     
