@@ -24,7 +24,7 @@ struct CommentRow: View {
         Group {
             // コメントが削除された
             if isCommentDeleted {
-                Text("コメントが削除されました")
+                Text("comment_was_deleted")
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
             }

@@ -77,6 +77,9 @@
 "report_thread" = "スレッドを報告";
 "are_you_sure_you_want_to_delete_this_thread" = "スレッドを削除してもよろしいですか?";
 
+// CommentRow
+"comment_was_deleted" = "コメントが削除されました";
+
 // CommentMenu
 "delete_comment" = "コメントを削除";
 "report_comment" = "コメントを報告";
