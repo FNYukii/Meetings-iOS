@@ -55,7 +55,9 @@ struct CommentMenu: View {
             Button("delete_comment", role: .destructive) {
                 FireComment.deleteComment(commentId: comment.id) { commentId in
                     // 成功
-                    isCommentDeleted = true
+                    withAnimation {
+                        isCommentDeleted = true
+                    }
                 }
             }
         } message: {
