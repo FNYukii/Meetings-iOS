@@ -84,7 +84,7 @@ struct CreateReportView: View {
                                 dismiss()
                             }
                         }) {
-                            Text("report")
+                            Text("submit")
                                 .fontWeight(.bold)
                         }
                         .disabled(isLoading)
