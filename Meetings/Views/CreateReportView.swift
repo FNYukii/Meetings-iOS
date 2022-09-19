@@ -13,19 +13,34 @@ struct CreateReportView: View {
     @Environment(\.dismiss) private var dismiss
     
     // Report target
-    let target: ReportTargetFamily
+    let targetId: String
+    let targetFamily: ReportTargetFamily
+    let navTitle: String
     
     // Categories
-    let categories = ["violent", "spam", "sensitive", "fake"]
+    let probremCategories = ["violent", "spam", "sensitive", "fake"]
     
     // States
-    @State private var categorySelection = 0
+    @State private var probremCategorySelection = 0
     @State private var detail = ""
-    
+        
     // Loading, Dialog
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    init(targetId: String, targetFamily: ReportTargetFamily) {
+        self.targetId = targetId
+        self.targetFamily = targetFamily
+        
+        if targetFamily == .user {
+            self.navTitle = NSLocalizedString("report_user", comment: "")
+        } else if targetFamily == .thread {
+            self.navTitle = NSLocalizedString("report_thread", comment: "")
+        } else {
+            self.navTitle = NSLocalizedString("report_comment", comment: "")
+        }
+    }
+        
     var body: some View {
         NavigationView {
             Form {
@@ -36,9 +51,9 @@ struct CreateReportView: View {
                         
                         Spacer()
                         
-                        Picker("category", selection: $categorySelection) {
-                            ForEach(0 ..< categories.count, id: \.self) { index in
-                                Text(categories[index])
+                        Picker("category", selection: $probremCategorySelection) {
+                            ForEach(0 ..< probremCategories.count, id: \.self) { index in
+                                Text(probremCategories[index])
                                     .tag(index)
                             }
                         }
@@ -59,7 +74,7 @@ struct CreateReportView: View {
                 Text("report_creation_failed")
             }
             
-            .navigationTitle("report_\(target.rawValue)")
+            .navigationTitle(navTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -72,7 +87,7 @@ struct CreateReportView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireReport.createReport(target: target.rawValue, category: categories[categorySelection], detail: detail) { documentId in
+                            FireReport.createReport(targetId: targetId, targetFamily: targetFamily.rawValue, probremCategory: probremCategories[probremCategorySelection], detail: detail) { documentId in
                                 // 失敗
                                 if documentId == nil {
                                     isLoading = false
@@ -84,7 +99,7 @@ struct CreateReportView: View {
                                 dismiss()
                             }
                         }) {
-                            Text("report")
+                            Text("submit")
                                 .fontWeight(.bold)
                         }
                         .disabled(isLoading)
