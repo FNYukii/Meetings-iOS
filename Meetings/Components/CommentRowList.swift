@@ -58,7 +58,7 @@ struct CommentRowList: View {
     
     private func load() {
         // postsが指定されたなら、ユーザーが投稿したコメントを読み取り
-        if comments == nil && commentRowListFamily == .posts {
+        if commentRowListFamily == .posts {
             FireComment.readPostedComments(userId: userId) { comments in
                 self.comments = comments
                 self.isLoadedComments = true
@@ -66,7 +66,7 @@ struct CommentRowList: View {
         }
         
         // likesが指定されたなら、ユーザーがいいねしたコメントを読み取り
-        if comments == nil && commentRowListFamily == .likes {
+        if commentRowListFamily == .likes {
             FireComment.readLikedComments(userId: userId) { comment in
                 self.comments = comment
                 self.isLoadedComments = true
