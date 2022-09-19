@@ -14,6 +14,7 @@ struct CreateReportView: View {
     
     // Report target
     let targetFamily: ReportTargetFamily
+    let navTitle: String
     
     // Categories
     let probremCategories = ["violent", "spam", "sensitive", "fake"]
@@ -21,10 +22,22 @@ struct CreateReportView: View {
     // States
     @State private var probremCategorySelection = 0
     @State private var detail = ""
-    
+        
     // Loading, Dialog
     @State private var isLoading = false
     @State private var isShowDialogError = false
+    
+    init(targetFamily: ReportTargetFamily) {
+        self.targetFamily = targetFamily
+        
+        if targetFamily == .user {
+            self.navTitle = "ユーザーを報告"
+        } else if targetFamily == .thread {
+            self.navTitle = "スレッドを報告"
+        } else {
+            self.navTitle = "コメントを報告"
+        }
+    }
         
     var body: some View {
         NavigationView {
@@ -59,7 +72,7 @@ struct CreateReportView: View {
                 Text("report_creation_failed")
             }
             
-            .navigationTitle("report_\(targetFamily.rawValue)")
+            .navigationTitle(navTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
