@@ -304,17 +304,22 @@ class FireComment {
             }
     }
     
-    static func deleteComment(commentId: String) {
+    static func deleteComment(commentId: String, completion: ((String?) -> Void)?) {
         // ドキュメント削除
         let db = Firestore.firestore()
         db.collection("comments")
             .document(commentId)
             .delete() { err in
+                // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error removing Comment. \(err)")
-                } else {
-                    print("HELLO! Success! Deleted 1 Comment.")
+                    completion?(nil)
+                    return
                 }
+                
+                // 成功
+                print("HELLO! Success! Deleted 1 Comment.")
+                completion?(commentId)
             }
     }
     
