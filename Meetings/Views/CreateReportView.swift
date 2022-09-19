@@ -13,7 +13,7 @@ struct CreateReportView: View {
     @Environment(\.dismiss) private var dismiss
     
     // Report target
-    let targetCategory: ReportTargetFamily
+    let targetFamily: ReportTargetFamily
     
     // Categories
     let probremCategories = ["violent", "spam", "sensitive", "fake"]
@@ -25,7 +25,7 @@ struct CreateReportView: View {
     // Loading, Dialog
     @State private var isLoading = false
     @State private var isShowDialogError = false
-    
+        
     var body: some View {
         NavigationView {
             Form {
@@ -59,7 +59,7 @@ struct CreateReportView: View {
                 Text("report_creation_failed")
             }
             
-            .navigationTitle("report_\(targetCategory.rawValue)")
+            .navigationTitle("report_\(targetFamily.rawValue)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -72,7 +72,7 @@ struct CreateReportView: View {
                     if !isLoading {
                         Button(action: {
                             isLoading = true
-                            FireReport.createReport(targetCategory: targetCategory.rawValue, probremCategory: probremCategories[probremCategorySelection], detail: detail) { documentId in
+                            FireReport.createReport(targetFamily: targetFamily.rawValue, probremCategory: probremCategories[probremCategorySelection], detail: detail) { documentId in
                                 // 失敗
                                 if documentId == nil {
                                     isLoading = false
