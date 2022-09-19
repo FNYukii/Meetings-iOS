@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CommentView: View {
     
+    // Environments
+    @Environment(\.dismiss) private var dismiss
+    
     // Comment to show
     let comment: Comment
     
@@ -55,6 +58,12 @@ struct CommentView: View {
             .listRowSeparator(.visible, edges: .bottom)
         }
         .listStyle(.plain)
+        
+        .onChange(of: isCommentDeleted) { _ in
+            if isCommentDeleted {
+                dismiss()
+            }
+        }
         
         .navigationTitle("comment")
         .navigationBarTitleDisplayMode(.inline)
