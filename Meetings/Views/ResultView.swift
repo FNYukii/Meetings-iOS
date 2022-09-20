@@ -78,7 +78,7 @@ struct ResultView: View {
             isShowResultView.toggle()
         }
         
-        .navigationTitle("Result")
+        .navigationTitle("result")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
