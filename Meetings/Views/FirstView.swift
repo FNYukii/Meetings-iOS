@@ -18,6 +18,10 @@ struct FirstView: View {
     @State private var isShowSignUpView = false
     @State private var isShowCreateThreadView = false
     
+    // SearchBar
+    @ObservedObject var searchBar: SearchBar = SearchBar()
+    @State private var keyword = ""
+    
     var body: some View {
         NavigationView {
             
@@ -57,6 +61,12 @@ struct FirstView: View {
             
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()
+            }
+            
+            // SearchBar
+            .add(self.searchBar)
+            .onChange(of: self.searchBar.text) { keyword in
+                self.keyword = keyword
             }
             
             .navigationTitle("threads")
