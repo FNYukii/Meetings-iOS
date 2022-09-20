@@ -22,7 +22,11 @@ struct TagRow: View {
                 
                 // Menu Column
                 Menu {
-                    
+                    Button(action: {
+                        
+                    }) {
+                        Text("興味なし")
+                    }
                 } label: {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.secondary)
