@@ -103,13 +103,13 @@ class FireComment {
             .getDocuments(source: .cache) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error Reeding Comments from cashe. \(err)")
+                    print("HELLO! Fail! Error Reeding Comments from server. \(err)")
                     completion?(nil)
                     return
                 }
                 
                 // 成功
-                print("HELLO! Success! Read \(querySnapshot!.count) Comments from cashe.")
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from server.")
                 completion?(querySnapshot!.count)
             }
     }
