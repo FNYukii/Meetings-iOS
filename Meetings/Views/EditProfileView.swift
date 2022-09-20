@@ -81,7 +81,7 @@ struct EditProfileView: View {
                 }
                 
                 Section {
-                    MyTextEditor(hintText: Text("introduction"), text: $introduction, isFocus: false)
+                    GuidedTextEditor(hintText: Text("introduction"), text: $introduction, isFocus: false)
                 }
             }
             

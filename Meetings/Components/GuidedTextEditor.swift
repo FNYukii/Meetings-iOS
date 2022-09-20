@@ -8,7 +8,7 @@
 import SwiftUI
 import Introspect
 
-struct MyTextEditor: View {
+struct GuidedTextEditor: View {
     
     let hintText: Text
     @Binding var text: String

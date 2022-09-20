@@ -33,7 +33,7 @@
 		5410EA91288BEA3900F4A29B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA90288BEA3900F4A29B /* User.swift */; };
 		5410EA93288C280F00F4A29B /* FireThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA92288C280F00F4A29B /* FireThread.swift */; };
 		5410EA95288C2E8E00F4A29B /* FireComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA94288C2E8E00F4A29B /* FireComment.swift */; };
-		5410EA97288C2FCC00F4A29B /* MyTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA96288C2FCC00F4A29B /* MyTextEditor.swift */; };
+		5410EA97288C2FCC00F4A29B /* GuidedTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA96288C2FCC00F4A29B /* GuidedTextEditor.swift */; };
 		5410EA9B288C379200F4A29B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9A288C379200F4A29B /* Comment.swift */; };
 		5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9C288C380300F4A29B /* CommentsViewModel.swift */; };
 		5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA9E288C3C6800F4A29B /* CommentRow.swift */; };
@@ -59,7 +59,7 @@
 		54CE7F72289199C90064F2AF /* EditImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F71289199C90064F2AF /* EditImage.swift */; };
 		54CE7F7428921CB10064F2AF /* FireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F7328921CB10064F2AF /* FireImage.swift */; };
 		54D5B15228D9748D00C043DF /* ThreadsByKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */; };
-		54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* MyTabBar.swift */; };
+		54DC77A0288E4DDB00296419 /* FluentTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* FluentTabBar.swift */; };
 		54DC77A2288E512800296419 /* CommentRowsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentRowsGroup.swift */; };
 		54DECBE528D9FBCC00E1EFD9 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DECBE428D9FBCC00E1EFD9 /* ResultView.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
@@ -91,7 +91,7 @@
 		5410EA90288BEA3900F4A29B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5410EA92288C280F00F4A29B /* FireThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireThread.swift; sourceTree = "<group>"; };
 		5410EA94288C2E8E00F4A29B /* FireComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireComment.swift; sourceTree = "<group>"; };
-		5410EA96288C2FCC00F4A29B /* MyTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextEditor.swift; sourceTree = "<group>"; };
+		5410EA96288C2FCC00F4A29B /* GuidedTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedTextEditor.swift; sourceTree = "<group>"; };
 		5410EA9A288C379200F4A29B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		5410EA9C288C380300F4A29B /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		5410EA9E288C3C6800F4A29B /* CommentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRow.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		54CE7F71289199C90064F2AF /* EditImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImage.swift; sourceTree = "<group>"; };
 		54CE7F7328921CB10064F2AF /* FireImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireImage.swift; sourceTree = "<group>"; };
 		54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsByKeywordViewModel.swift; sourceTree = "<group>"; };
-		54DC779F288E4DDB00296419 /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
+		54DC779F288E4DDB00296419 /* FluentTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluentTabBar.swift; sourceTree = "<group>"; };
 		54DC77A1288E512800296419 /* CommentRowsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRowsGroup.swift; sourceTree = "<group>"; };
 		54DECBE428D9FBCC00E1EFD9 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
@@ -228,8 +228,8 @@
 		540D2E5D288985A100DBB512 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5410EA96288C2FCC00F4A29B /* MyTextEditor.swift */,
-				54DC779F288E4DDB00296419 /* MyTabBar.swift */,
+				5410EA96288C2FCC00F4A29B /* GuidedTextEditor.swift */,
+				54DC779F288E4DDB00296419 /* FluentTabBar.swift */,
 				54C41DF628937059007B5631 /* UserIconImage.swift */,
 				54C41DFA289375E1007B5631 /* UserIconButton.swift */,
 				5489709428D4552A0045DFAA /* UserDisplayNameText.swift */,
@@ -379,7 +379,7 @@
 				540D2E4D2889775600DBB512 /* CreateCommentView.swift in Sources */,
 				540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */,
 				544D591E289249690056C244 /* FireReport.swift in Sources */,
-				54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */,
+				54DC77A0288E4DDB00296419 /* FluentTabBar.swift in Sources */,
 				54C41DF328936DA7007B5631 /* CommentReactionRow.swift in Sources */,
 				5410EA83288BBD5900F4A29B /* SignInStateViewModel.swift in Sources */,
 				54C41DF128936D1B007B5631 /* CommentImagesRow.swift in Sources */,
@@ -388,7 +388,7 @@
 				54CE7F72289199C90064F2AF /* EditImage.swift in Sources */,
 				5410EA93288C280F00F4A29B /* FireThread.swift in Sources */,
 				54C41DF728937059007B5631 /* UserIconImage.swift in Sources */,
-				5410EA97288C2FCC00F4A29B /* MyTextEditor.swift in Sources */,
+				5410EA97288C2FCC00F4A29B /* GuidedTextEditor.swift in Sources */,
 				54FB73D428D989E400B88525 /* SecondView.swift in Sources */,
 				54C41DF528936E9C007B5631 /* CommentThreadTitleRow.swift in Sources */,
 				544D591C28922AA00056C244 /* CreateReportView.swift in Sources */,

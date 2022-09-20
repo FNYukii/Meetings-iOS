@@ -86,7 +86,7 @@ struct CreateThreadView: View {
                 .listRowSeparator(.hidden)
                 
                 // Comment Text Row
-                MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: false)
+                GuidedTextEditor(hintText: Text("comment"), text: $commentText, isFocus: false)
                     .listRowSeparator(.hidden)
                 
                 // Comment Image Button Row
