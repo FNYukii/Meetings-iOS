@@ -63,6 +63,7 @@
 		54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* MyTabBar.swift */; };
 		54DC77A2288E512800296419 /* CommentRowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentRowList.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
+		54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D528D9AB8E00B88525 /* TagRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +120,7 @@
 		54DC779F288E4DDB00296419 /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
 		54DC77A1288E512800296419 /* CommentRowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRowList.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		54FB73D528D9AB8E00B88525 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				54C41DF228936DA7007B5631 /* CommentReactionRow.swift */,
 				54C41DF428936E9C007B5631 /* CommentThreadTitleRow.swift */,
 				54DC77A1288E512800296419 /* CommentRowList.swift */,
+				54FB73D528D9AB8E00B88525 /* TagRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				540D2E492889734800DBB512 /* ThreadView.swift in Sources */,
 				540D2E38288971AE00DBB512 /* ContentView.swift in Sources */,
 				5489709728D455AB0045DFAA /* UserUserTagText.swift in Sources */,
+				54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */,
 				540D2E442889731A00DBB512 /* FirstView.swift in Sources */,
 				540D2E36288971AE00DBB512 /* MeetingsApp.swift in Sources */,
 				5410EAA1288C453200F4A29B /* EditDate.swift in Sources */,

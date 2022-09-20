@@ -17,8 +17,17 @@ class ThreadsByKeywordViewModel: ObservableObject {
     
     func read(keyword: String) {
         
+        isLoaded = false
+        
+        // 前回のリスナーをデタッチ
         if let listener = listener {
             listener.remove()
+        }
+        
+        // keywordが空なら終了
+        if keyword.isEmpty {
+            threads = []
+            return
         }
         
         let db = Firestore.firestore()

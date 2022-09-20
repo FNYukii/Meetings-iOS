@@ -26,10 +26,10 @@ struct CreateThreadView: View {
     @State private var isPickingImages = false
     
     // Values
-    let threadTitleMax = 100
-    let threadTagMax = 30
-    let threadTagsMax = 5
-    let commentTextMax = 300
+    private let threadTitleMax = 100
+    private let threadTagMax = 30
+    private let threadTagsMax = 5
+    private let commentTextMax = 300
     
     var body: some View {
         NavigationView {
