@@ -70,19 +70,29 @@ struct ThreadRow: View {
                 }
                 
                 // First Comment Row
-                if firstComment != nil {
-                    Text(firstComment!.text)
-                        .foregroundColor(.secondary)
-                        .lineLimit(2)
-                }
-                
-                // No First Comment Row
-                if isLoadedFirstComment && firstComment == nil {
-                    HStack {
-                        Image(systemName: "exclamationmark.triangle")
-                        Text("first_comment_reading_failed")
+                Group {
+                    // Progress
+                    if !isLoadedFirstComment {
+                        Color.secondary
+                            .opacity(0.2)
+                            .frame(width: 120, height: 16)
                     }
-                    .foregroundColor(.secondary)
+                    
+                    // No Content
+                    if isLoadedFirstComment && firstComment == nil {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle")
+                            Text("first_comment_reading_failed")
+                        }
+                        .foregroundColor(.secondary)
+                    }
+                    
+                    // Done
+                    if firstComment != nil {
+                        Text(firstComment!.text)
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
                 }
                 
                 // Tags Row
@@ -98,13 +108,28 @@ struct ThreadRow: View {
                 }
                 
                 // Comment Count Row
-                if isLoadedCommentCount && commentCount != nil {
-                    HStack {
-                        Image(systemName: "bubble.left")
-                            .font(.subheadline)
-                        Text("\(commentCount!)")
+                Group {
+                    // Progress
+                    if !isLoadedCommentCount {
+                        Color.secondary
+                            .opacity(0.2)
+                            .frame(width: 20, height: 16)
                     }
-                    .foregroundColor(.secondary)
+                    
+                    // Failed
+                    if isLoadedCommentCount && commentCount == nil {
+                        Image(systemName: "exclamationmark.triangle")
+                    }
+                    
+                    // Done
+                    if isLoadedCommentCount && commentCount != nil {
+                        HStack {
+                            Image(systemName: "bubble.left")
+                                .font(.subheadline)
+                            Text("\(commentCount!)")
+                        }
+                        .foregroundColor(.secondary)
+                    }
                 }
             }
         }
@@ -128,35 +153,51 @@ struct ThreadRow: View {
     }
     
     private func load() {
-        // 最初のコメントを読み取るまでタイマーを繰り返す
+        if !isLoadedFirstComment {
+            loadFirstComment()
+        }
+        
+        if !isLoadedCommentCount {
+            loadCommentCount()
+        }
+    }
+    
+    private func loadFirstComment() {
         var timerCounter = 0
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             timerCounter += 1
             
-            // このスレッド上のコメントを読み取り
+            // 最初のコメントを読み取る
             if firstComment == nil {
                 FireComment.readFirstComment(threadId: thread.id) { comment in
                     self.firstComment = comment
-                    self.isLoadedFirstComment = true
                 }
             }
+                        
+            // 読み取り完了orタイムアウトでタイマー停止
+            if firstComment != nil || timerCounter == 10 {
+                timer.invalidate()
+                self.isLoadedFirstComment = true
+            }
+        }
+    }
+    
+    private func loadCommentCount() {
+        var timerCounter = 0
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timerCounter += 1
             
-            // このスレッドのコメント数を読み取り
-            if commentCount == nil {
+            // コメント数を読み取る
+            if firstComment == nil {
                 FireComment.readNumberOfCommentInThread(threadId: thread.id) { count in
-                    self.commentCount = count ?? 0
-                    self.isLoadedCommentCount = true
+                    self.commentCount = count
                 }
             }
-            
-            // 一定回数読み取りに失敗したらタイマー停止
-            if timerCounter == 10 {
+                        
+            // 読み取り完了orタイムアウトでタイマー停止
+            if firstComment != nil || timerCounter == 10 {
                 timer.invalidate()
-            }
-            
-            // コメント読み取り後はタイマー停止
-            if firstComment != nil {
-                timer.invalidate()
+                self.isLoadedCommentCount = true
             }
         }
     }
