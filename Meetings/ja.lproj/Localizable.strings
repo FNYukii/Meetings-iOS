@@ -96,3 +96,6 @@
 
 // CommentRowList
 "comments_reading_failed" = "コメントの読み取りに失敗しました。";
+
+// SecondView
+"search" = "検索";

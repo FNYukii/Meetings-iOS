@@ -8,7 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(Color("TabBarBackground"))
+    }
+    
     var body: some View {
-        FirstView()
+        TabView {
+            FirstView()
+                .tabItem {
+                    Image(systemName: "house")
+                }
+            
+            SecondView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                }
+        }
     }
 }

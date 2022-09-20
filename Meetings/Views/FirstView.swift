@@ -11,19 +11,12 @@ struct FirstView: View {
     
     // States
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
-    @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel()
+    @ObservedObject private var threadsViewModel = ThreadsViewModel()
         
     // Navigations
     @State private var isShowSignInView = false
     @State private var isShowSignUpView = false
     @State private var isShowCreateThreadView = false
-    
-    // SearchBar
-    @ObservedObject var searchBar: SearchBar = SearchBar()
-    
-    init() {
-        threadsViewModel.read(keyword: "")
-    }
     
     var body: some View {
         NavigationView {
@@ -74,12 +67,6 @@ struct FirstView: View {
             
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()
-            }
-            
-            // SearchBar
-            .add(searchBar)
-            .onChange(of: searchBar.text) { _ in
-                threadsViewModel.read(keyword: searchBar.text)
             }
             
             .navigationTitle("threads")
