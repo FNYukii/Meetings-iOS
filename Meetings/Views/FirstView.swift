@@ -10,9 +10,8 @@ import SwiftUI
 struct FirstView: View {
     
     // States
-//    @ObservedObject private var threadsViewModel = ThreadsViewModel()
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
-    @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel(keyword: "")
+    @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel(keyword: "PC")
         
     // Navigations
     @State private var isShowSignInView = false
