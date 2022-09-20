@@ -11,7 +11,7 @@ struct FirstView: View {
     
     // States
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
-    @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel(keyword: "PC")
+    @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel()
         
     // Navigations
     @State private var isShowSignInView = false
@@ -20,6 +20,10 @@ struct FirstView: View {
     
     // SearchBar
     @ObservedObject var searchBar: SearchBar = SearchBar()
+    
+    init() {
+        threadsViewModel.read(keyword: "")
+    }
     
     var body: some View {
         NavigationView {
@@ -73,9 +77,9 @@ struct FirstView: View {
             }
             
             // SearchBar
-            .add(self.searchBar)
-            .onChange(of: self.searchBar.text) { _ in
-                
+            .add(searchBar)
+            .onChange(of: searchBar.text) { _ in
+                threadsViewModel.read(keyword: searchBar.text)
             }
             
             .navigationTitle("threads")

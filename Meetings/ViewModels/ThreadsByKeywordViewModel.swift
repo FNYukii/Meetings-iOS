@@ -13,9 +13,16 @@ class ThreadsByKeywordViewModel: ObservableObject {
     @Published var threads: [Thread]? = []
     @Published var isLoaded = false
     
-    init(keyword: String) {
+    private var listener: ListenerRegistration? = nil
+    
+    func read(keyword: String) {
+        
+        if let listener = listener {
+            listener.remove()
+        }
+        
         let db = Firestore.firestore()
-        db.collection("threads")
+        listener = db.collection("threads")
             .order(by: "title")
             .start(at: [keyword])
             .end(at: [keyword + "\u{f8ff}"])
