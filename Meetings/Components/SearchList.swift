@@ -35,7 +35,7 @@ struct SearchList: View {
             
             // Search Results Section
             if isSubmited {
-                SearchResultsSection()
+                SearchResultsSection(keyword: keyword)
             }
         }
         .listStyle(.plain)
