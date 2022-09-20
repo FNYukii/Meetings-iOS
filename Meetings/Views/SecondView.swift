@@ -19,41 +19,6 @@ struct SecondView: View {
     var body: some View {
         NavigationView {
             List {
-//                // Searched Threads Section
-//                Section {
-//                    // Progress
-//                    if !keyword.isEmpty && !threadsByKeywordViewModel.isLoaded {
-//                        ProgressView()
-//                            .progressViewStyle(.circular)
-//                            .frame(maxWidth: .infinity, alignment: .center)
-//                            .listRowSeparator(.hidden)
-//                    }
-//
-//                    // Failed
-//                    if threadsByKeywordViewModel.isLoaded && threadsByKeywordViewModel.threads == nil {
-//                        Text("threads_reading_failed")
-//                            .frame(maxWidth: .infinity, alignment: .center)
-//                            .foregroundColor(.secondary)
-//                            .listRowSeparator(.hidden)
-//                    }
-//
-//                    // No content
-//                    if threadsByKeywordViewModel.isLoaded && threadsByKeywordViewModel.threads != nil && threadsByKeywordViewModel.threads!.count == 0 {
-//                        Text("no_threads")
-//                            .frame(maxWidth: .infinity, alignment: .center)
-//                            .foregroundColor(.secondary)
-//                            .listRowSeparator(.hidden)
-//                    }
-//
-//                    // Done
-//                    if threadsByKeywordViewModel.isLoaded && threadsByKeywordViewModel.threads != nil {
-//                        ForEach(threadsByKeywordViewModel.threads!) { thread in
-//                            ThreadRow(thread: thread)
-//                                .listRowSeparator(.hidden, edges: .top)
-//                                .listRowSeparator(.visible, edges: .bottom)
-//                        }
-//                    }
-//                }
                 
                 // Recommended Tags Section
                 if keyword.isEmpty {
@@ -69,7 +34,7 @@ struct SecondView: View {
             .listStyle(.plain)
             
             .background(
-                NavigationLink(destination: ResultView(), isActive: $isShowResultView) {
+                NavigationLink(destination: ResultView(keyword: keyword), isActive: $isShowResultView) {
                     EmptyView()
                 }
                 .hidden()
