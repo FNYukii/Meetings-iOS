@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommentRowList: View {
+struct CommentRowsGroup: View {
     
     // User ID, Comments family
     let userId: String
@@ -18,7 +18,7 @@ struct CommentRowList: View {
     @State private var isLoadedComments = false
     
     var body: some View {
-        List {
+        Group {
             // Progress view
             if !isLoadedComments {
                 ProgressView()
@@ -47,9 +47,9 @@ struct CommentRowList: View {
             if isLoadedComments && comments != nil {
                 ForEach(comments!) { comment in
                     CommentRow(comment: comment, isAbleShowingProfileView: userId != comment.userId, isShowThread: true)
+                        .listRowSeparator(.hidden, edges: .top)
+                        .listRowSeparator(.visible, edges: .bottom)
                 }
-                .listRowSeparator(.hidden, edges: .top)
-                .listRowSeparator(.visible, edges: .bottom)
             }            
         }
         .listStyle(.plain)
