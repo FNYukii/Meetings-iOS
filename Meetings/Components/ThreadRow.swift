@@ -16,6 +16,9 @@ struct ThreadRow: View {
     @State private var firstComment: Comment? = nil
     @State private var isLoadedFirstComment = false
     
+    @State private var commentCount: Int? = nil
+    @State private var isLoadedCommentCount = false
+    
     // Dialogs, Navigations
     @State private var isShowDialog = false
     @State private var isShowCreateReportView = false
@@ -93,6 +96,16 @@ struct ThreadRow: View {
                             .foregroundColor(.secondary)
                     }
                 }
+                
+                // Comment Count Row
+                if isLoadedCommentCount && commentCount != nil {
+                    HStack {
+                        Image(systemName: "bubble.left")
+                            .font(.subheadline)
+                        Text("\(commentCount!)")
+                    }
+                    .foregroundColor(.secondary)
+                }
             }
         }
         .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
@@ -125,6 +138,14 @@ struct ThreadRow: View {
                 FireComment.readFirstComment(threadId: thread.id) { comment in
                     self.firstComment = comment
                     self.isLoadedFirstComment = true
+                }
+            }
+            
+            // このスレッドのコメント数を読み取り
+            if commentCount == nil {
+                FireComment.readNumberOfCommentInThread(threadId: thread.id) { count in
+                    self.commentCount = count ?? 0
+                    self.isLoadedCommentCount = true
                 }
             }
             
