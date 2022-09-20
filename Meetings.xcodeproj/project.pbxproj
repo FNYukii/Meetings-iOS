@@ -61,6 +61,7 @@
 		54D5B15228D9748D00C043DF /* ThreadsByKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */; };
 		54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* MyTabBar.swift */; };
 		54DC77A2288E512800296419 /* CommentRowsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentRowsGroup.swift */; };
+		54DECBE528D9FBCC00E1EFD9 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DECBE428D9FBCC00E1EFD9 /* ResultView.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
 		54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D528D9AB8E00B88525 /* TagRow.swift */; };
 /* End PBXBuildFile section */
@@ -117,6 +118,7 @@
 		54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsByKeywordViewModel.swift; sourceTree = "<group>"; };
 		54DC779F288E4DDB00296419 /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
 		54DC77A1288E512800296419 /* CommentRowsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRowsGroup.swift; sourceTree = "<group>"; };
+		54DECBE428D9FBCC00E1EFD9 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		54FB73D528D9AB8E00B88525 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,6 +199,7 @@
 				540D2E4C2889775600DBB512 /* CreateCommentView.swift */,
 				544D591F289272760056C244 /* ImagesPickerView.swift */,
 				54FB73D328D989E400B88525 /* SecondView.swift */,
+				54DECBE428D9FBCC00E1EFD9 /* ResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				540D2E4B288974B900DBB512 /* CreateThreadView.swift in Sources */,
 				5410EA9B288C379200F4A29B /* Comment.swift in Sources */,
 				5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */,
+				54DECBE528D9FBCC00E1EFD9 /* ResultView.swift in Sources */,
 				540D2E472889733A00DBB512 /* AccountView.swift in Sources */,
 				54C5D66E2892D7EF005AE7D4 /* CommentImage.swift in Sources */,
 				5489709528D4552A0045DFAA /* UserDisplayNameText.swift in Sources */,
