@@ -24,17 +24,17 @@ struct SearchList: View {
             }
             
             // Search History Section
-            if isSearching && !isSubmited && keyword.isEmpty {
+            else if isSearching && !isSubmited && keyword.isEmpty {
                 SearchHistorySection()
             }
             
             // Search Suggestions Section
-            if isSearching && !isSubmited && !keyword.isEmpty {
+            else if isSearching && !isSubmited && !keyword.isEmpty {
                 SearchSuggestionsSection()
             }
             
             // Search Results Section
-            if isSubmited {
+            else if isSearching && isSubmited {
                 SearchResultsSection(keyword: keyword)
             }
         }
