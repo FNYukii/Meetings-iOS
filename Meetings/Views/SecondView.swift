@@ -31,11 +31,13 @@ struct SecondView: View {
                 }
                 
                 // Recommended Tags Section
-                Section (header: Text("おすすめ")) {
-                    ForEach(recommendedTags, id: \.self) { tag in
-                        TagRow(name: tag)
-                            .listRowSeparator(.hidden, edges: .top)
-                            .listRowSeparator(.visible, edges: .bottom)
+                if searchBar.text.isEmpty {
+                    Section (header: Text("おすすめ")) {
+                        ForEach(recommendedTags, id: \.self) { tag in
+                            TagRow(name: tag)
+                                .listRowSeparator(.hidden, edges: .top)
+                                .listRowSeparator(.visible, edges: .bottom)
+                        }
                     }
                 }
             }
