@@ -33,7 +33,7 @@ struct CreateCommentView: View {
             
             List {
                 // TextEditor Row
-                MyTextEditor(hintText: Text("comment"), text: $commentText, isFocus: true)
+                GuidedTextEditor(hintText: Text("comment"), text: $commentText, isFocus: true)
                     .listRowSeparator(.hidden)
                 
                 // Image Button Row

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyTabBar: View {
+struct FluentTabBar: View {
     
     // TabBar items
     let tabBarItems: [Text]

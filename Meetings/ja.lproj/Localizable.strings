@@ -99,3 +99,8 @@
 
 // SecondView
 "search" = "検索";
+"keyword" = "キーワード";
+
+// ResultView
+"result" = "結果";
+"users" = "ユーザー";

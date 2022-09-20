@@ -62,7 +62,7 @@ struct CreateReportView: View {
                 }
                 
                 Section {
-                    MyTextEditor(hintText: Text("detail"), text: $detail, isFocus: false)
+                    GuidedTextEditor(hintText: Text("detail"), text: $detail, isFocus: false)
                 }
             }
             
