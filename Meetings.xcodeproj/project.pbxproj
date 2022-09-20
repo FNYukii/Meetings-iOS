@@ -40,6 +40,7 @@
 		5410EAA1288C453200F4A29B /* EditDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EAA0288C453200F4A29B /* EditDate.swift */; };
 		542326CC2893A78400AC31BE /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542326CB2893A78400AC31BE /* ImageView.swift */; };
 		5441B58028DA0A7F00E545D5 /* RecommendTagSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B57F28DA0A7F00E545D5 /* RecommendTagSection.swift */; };
+		5441B58428DA110E00E545D5 /* ProfileButtonOrNot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B58328DA110E00E545D5 /* ProfileButtonOrNot.swift */; };
 		54454E4528D5D6CD008B3B4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54454E4728D5D6CD008B3B4B /* Localizable.strings */; };
 		544D591C28922AA00056C244 /* CreateReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D591B28922AA00056C244 /* CreateReportView.swift */; };
 		544D591E289249690056C244 /* FireReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D591D289249690056C244 /* FireReport.swift */; };
@@ -99,6 +100,7 @@
 		5410EAA0288C453200F4A29B /* EditDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDate.swift; sourceTree = "<group>"; };
 		542326CB2893A78400AC31BE /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		5441B57F28DA0A7F00E545D5 /* RecommendTagSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTagSection.swift; sourceTree = "<group>"; };
+		5441B58328DA110E00E545D5 /* ProfileButtonOrNot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButtonOrNot.swift; sourceTree = "<group>"; };
 		54454E4628D5D6CD008B3B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		54454E4828D5D6D1008B3B4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		544D591B28922AA00056C244 /* CreateReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportView.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				5410EA96288C2FCC00F4A29B /* GuidedTextEditor.swift */,
 				54DC779F288E4DDB00296419 /* FluentTabBar.swift */,
+				5441B58328DA110E00E545D5 /* ProfileButtonOrNot.swift */,
 				54C41DF628937059007B5631 /* UserIconImage.swift */,
 				54C41DFA289375E1007B5631 /* UserIconButton.swift */,
 				5489709428D4552A0045DFAA /* UserDisplayNameText.swift */,
@@ -352,6 +355,7 @@
 			files = (
 				544D5920289272760056C244 /* ImagesPickerView.swift in Sources */,
 				54D5B15228D9748D00C043DF /* ThreadsByKeywordViewModel.swift in Sources */,
+				5441B58428DA110E00E545D5 /* ProfileButtonOrNot.swift in Sources */,
 				540D2E4B288974B900DBB512 /* CreateThreadView.swift in Sources */,
 				5410EA9B288C379200F4A29B /* Comment.swift in Sources */,
 				5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */,

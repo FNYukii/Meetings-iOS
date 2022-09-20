@@ -38,6 +38,12 @@ struct SecondView: View {
             
             .navigationTitle("search")
             .navigationBarTitleDisplayMode(.inline)
+            
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    ProfileButtonOrNot()
+                }
+            }
         }
     }
 }

@@ -14,8 +14,6 @@ struct FirstView: View {
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
         
     // Navigations
-    @State private var isShowSignInView = false
-    @State private var isShowSignUpView = false
     @State private var isShowCreateThreadView = false
     
     var body: some View {
@@ -57,14 +55,6 @@ struct FirstView: View {
             }
             .listStyle(.plain)
             
-            .sheet(isPresented: $isShowSignInView) {
-                SignInView()
-            }
-            
-            .sheet(isPresented: $isShowSignUpView) {
-                SignUpView()
-            }
-            
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()
             }
@@ -73,32 +63,7 @@ struct FirstView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    // Profile Button
-                    if signInStateViewModel.isSignedIn {
-                        NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
-                            UserIconImage(userId: FireAuth.uid(), iconImageFamily: .small)
-                        }
-                    }
-                    
-                    // Sign In Menu
-                    if !signInStateViewModel.isSignedIn {
-                        Menu {
-                            Button(action: {
-                                isShowSignInView.toggle()
-                            }) {
-                                Label("sign_in", systemImage: "ipad.and.arrow.forward")
-                            }
-                            
-                            Button(action: {
-                                isShowSignUpView.toggle()
-                            }) {
-                                Label("sign_up", systemImage: "square.and.pencil")
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .font(.title3)
-                        }
-                    }
+                    ProfileButtonOrNot()
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
