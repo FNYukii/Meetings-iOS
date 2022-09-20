@@ -77,12 +77,12 @@ struct ProfileView: View {
             // Tab Body Row
             Group {
                 if selection == 0 {
-                    CommentRowsGroup(userId: userId, commentRowListFamily: .posts)
+                    CommentsByUserGroup(userId: userId, commentRowListFamily: .posts)
                         .listRowSeparator(.hidden)
                 }
                 
                 if selection == 1 {
-                    CommentRowsGroup(userId: userId, commentRowListFamily: .likes)
+                    CommentsByUserGroup(userId: userId, commentRowListFamily: .likes)
                         .listRowSeparator(.hidden)
                 }
             }

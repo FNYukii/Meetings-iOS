@@ -67,7 +67,7 @@
 		54CE7F7428921CB10064F2AF /* FireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F7328921CB10064F2AF /* FireImage.swift */; };
 		54D5B15228D9748D00C043DF /* ThreadsByKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */; };
 		54DC77A0288E4DDB00296419 /* FluentTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* FluentTabBar.swift */; };
-		54DC77A2288E512800296419 /* CommentRowsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentRowsGroup.swift */; };
+		54DC77A2288E512800296419 /* CommentsByUserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentsByUserGroup.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
 		54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D528D9AB8E00B88525 /* TagRow.swift */; };
 /* End PBXBuildFile section */
@@ -130,7 +130,7 @@
 		54CE7F7328921CB10064F2AF /* FireImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireImage.swift; sourceTree = "<group>"; };
 		54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsByKeywordViewModel.swift; sourceTree = "<group>"; };
 		54DC779F288E4DDB00296419 /* FluentTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluentTabBar.swift; sourceTree = "<group>"; };
-		54DC77A1288E512800296419 /* CommentRowsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRowsGroup.swift; sourceTree = "<group>"; };
+		54DC77A1288E512800296419 /* CommentsByUserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsByUserGroup.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		54FB73D528D9AB8E00B88525 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -253,7 +253,7 @@
 				54C41DF028936D1B007B5631 /* CommentImagesRow.swift */,
 				54C41DF228936DA7007B5631 /* CommentReactionRow.swift */,
 				54C41DF428936E9C007B5631 /* CommentThreadTitleRow.swift */,
-				54DC77A1288E512800296419 /* CommentRowsGroup.swift */,
+				54DC77A1288E512800296419 /* CommentsByUserGroup.swift */,
 				5441B58528DA201D00E545D5 /* SearchList.swift */,
 				5441B57F28DA0A7F00E545D5 /* RecommendTagsSection.swift */,
 				54FB73D528D9AB8E00B88525 /* TagRow.swift */,
@@ -385,7 +385,7 @@
 				5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */,
 				540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */,
 				542326CC2893A78400AC31BE /* ImageView.swift in Sources */,
-				54DC77A2288E512800296419 /* CommentRowsGroup.swift in Sources */,
+				54DC77A2288E512800296419 /* CommentsByUserGroup.swift in Sources */,
 				5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */,
 				5408F02128911EE8007D8EFB /* EditProfileView.swift in Sources */,
 				54C41DFB289375E1007B5631 /* UserIconButton.swift in Sources */,
