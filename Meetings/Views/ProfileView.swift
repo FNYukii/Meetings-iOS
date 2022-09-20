@@ -67,7 +67,6 @@ struct ProfileView: View {
                     Text(user!.introduction)
                 }
             }
-            .padding(.top)
             .listRowSeparator(.hidden)
             
             // Tab Bar Row
