@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecommendTagSection: View {
+struct RecommendTagsSection: View {
     
     private let recommendedTags = ["雑談", "天神祭", "ゲーム", "休日", "初心者"]
     
