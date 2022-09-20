@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(Color("TabBarBackground"))
+    }
+    
     var body: some View {
         TabView {
             FirstView()
