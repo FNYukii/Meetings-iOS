@@ -69,6 +69,7 @@ struct ThreadRow: View {
                 // First Comment Row
                 if firstComment != nil {
                     Text(firstComment!.text)
+                        .foregroundColor(.secondary)
                 }
                 
                 // No First Comment Row
