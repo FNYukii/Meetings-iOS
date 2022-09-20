@@ -25,16 +25,12 @@ struct SearchList: View {
             
             // Search History Section
             if isSearching && !isSubmited && keyword.isEmpty {
-                Section(header: Text("履歴")) {
-                    
-                }
+                SearchHistorySection()
             }
             
             // Search Suggestions Section
             if isSearching && !isSubmited && !keyword.isEmpty {
-                Section(header: Text("候補")) {
-                    
-                }
+                SearchSuggestionsSection()
             }
             
             // Search Results Section
