@@ -10,7 +10,7 @@ import SwiftUI
 struct SecondView: View {
     
     // Search Bar
-    @ObservedObject private var searchBar: SearchBar = SearchBar()
+    @State private var keyword = ""
     
     // States
     @ObservedObject private var threadsByKeywordViewModel = ThreadsByKeywordViewModel()
@@ -24,7 +24,7 @@ struct SecondView: View {
                 // Searched Threads Section
                 Section {
                     // Progress
-                    if !searchBar.text.isEmpty && !threadsByKeywordViewModel.isLoaded {
+                    if !keyword.isEmpty && !threadsByKeywordViewModel.isLoaded {
                         ProgressView()
                             .progressViewStyle(.circular)
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -58,7 +58,7 @@ struct SecondView: View {
                 }
                 
                 // Recommended Tags Section
-                if searchBar.text.isEmpty {
+                if keyword.isEmpty {
                     Section (header: Text("おすすめ")) {
                         ForEach(recommendedTags, id: \.self) { tag in
                             TagRow(name: tag)
@@ -70,9 +70,9 @@ struct SecondView: View {
             }
             .listStyle(.plain)
             
-            .add(searchBar)
-            .onChange(of: searchBar.text) { _ in
-                threadsByKeywordViewModel.read(keyword: searchBar.text)
+            .searchable(text: $keyword)
+            .onChange(of: keyword) { _ in
+                threadsByKeywordViewModel.read(keyword: keyword)
             }
             
             .navigationTitle("search")
