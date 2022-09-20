@@ -23,9 +23,36 @@ struct SecondView: View {
             List {
                 // Searched Threads Section
                 Section {
+                    // Progress
+                    if !searchBar.text.isEmpty && !threadsByKeywordViewModel.isLoaded {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .listRowSeparator(.hidden)
+                    }
+                    
+                    // Failed
+                    if threadsByKeywordViewModel.isLoaded && threadsByKeywordViewModel.threads == nil {
+                        Text("threads_reading_failed")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(.secondary)
+                            .listRowSeparator(.hidden)
+                    }
+                    
+                    // No content
+                    if threadsByKeywordViewModel.isLoaded && threadsByKeywordViewModel.threads != nil && threadsByKeywordViewModel.threads!.count == 0 {
+                        Text("no_threads")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(.secondary)
+                            .listRowSeparator(.hidden)
+                    }
+                    
+                    // Done
                     if threadsByKeywordViewModel.isLoaded && threadsByKeywordViewModel.threads != nil {
                         ForEach(threadsByKeywordViewModel.threads!) { thread in
                             ThreadRow(thread: thread)
+                                .listRowSeparator(.hidden, edges: .top)
+                                .listRowSeparator(.visible, edges: .bottom)
                         }
                     }
                 }
