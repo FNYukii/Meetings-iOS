@@ -20,7 +20,6 @@ struct FirstView: View {
     
     // SearchBar
     @ObservedObject var searchBar: SearchBar = SearchBar()
-    @State private var keyword = ""
     
     var body: some View {
         NavigationView {
@@ -65,8 +64,8 @@ struct FirstView: View {
             
             // SearchBar
             .add(self.searchBar)
-            .onChange(of: self.searchBar.text) { keyword in
-                self.keyword = keyword
+            .onChange(of: self.searchBar.text) { _ in
+                
             }
             
             .navigationTitle("threads")
