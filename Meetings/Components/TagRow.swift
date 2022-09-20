@@ -9,14 +9,14 @@ import SwiftUI
 
 struct TagRow: View {
     
-    let name: String
+    let word: String
     
     var body: some View {
         VStack(alignment: .leading) {
             // Header Row
             HStack {
                 // Name Column
-                Text(name)
+                Text(word)
                 
                 Spacer()
                 

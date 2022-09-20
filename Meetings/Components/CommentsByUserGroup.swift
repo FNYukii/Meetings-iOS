@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommentRowsGroup: View {
+struct CommentsByUserGroup: View {
     
     // User ID, Comments family
     let userId: String

@@ -11,39 +11,26 @@ struct SecondView: View {
     
     // States
     @State private var keyword = ""
-    @State private var isShowResultView = false
-        
+    @State private var isSubmited = false
+    
     var body: some View {
         NavigationView {
-            List {
-                
-                // Recommended Tags Section
-                if keyword.isEmpty {
-                    RecommendTagSection()
+            SearchList(keyword: keyword, isSubmited: $isSubmited)
+            
+                .searchable(text: $keyword, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("keyword"))
+                .onSubmit(of: .search) {
+                    isSubmited = true
                 }
-            }
-            .listStyle(.plain)
             
-            .background(
-                NavigationLink(destination: ResultView(keyword: keyword), isActive: $isShowResultView) {
-                    EmptyView()
+                .navigationTitle("search")
+                .navigationBarTitleDisplayMode(.inline)
+            
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+                        ProfileButtonOrNot()
+                    }
                 }
-                .hidden()
-            )
-            
-            .searchable(text: $keyword, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("keyword"))
-            .onSubmit(of: .search) {
-                isShowResultView.toggle()
-            }
-            
-            .navigationTitle("search")
-            .navigationBarTitleDisplayMode(.inline)
-            
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    ProfileButtonOrNot()
-                }
-            }
         }
+        .navigationViewStyle(.stack)
     }
 }
