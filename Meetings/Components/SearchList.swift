@@ -44,12 +44,16 @@ struct SearchList: View {
         }
         .listStyle(.plain)
         
+        // isSearchingがfalseになったら、isSubmitedもfalseにする
         .onChange(of: isSearching) { newValue in
-            print("isSearching: \(isSearching) to \(newValue)")
-            
             if !newValue {
                 isSubmited = false
             }
+        }
+        
+        // keywordが変更されたら、isSubmitedをfalseにする
+        .onChange(of: keyword) { _ in
+            isSubmited = false
         }
     }
 }
