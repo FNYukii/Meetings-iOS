@@ -10,8 +10,9 @@ import SwiftUI
 struct FirstView: View {
     
     // States
-    @ObservedObject private var threadsViewModel = ThreadsViewModel()
+//    @ObservedObject private var threadsViewModel = ThreadsViewModel()
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel(keyword: "")
         
     // Navigations
     @State private var isShowSignInView = false
@@ -33,8 +34,16 @@ struct FirstView: View {
                         .listRowSeparator(.hidden)
                 }
                 
+                // Failed text
+                if threadsViewModel.isLoaded && threadsViewModel.threads == nil {
+                    Text("threads_reading_failed")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(.secondary)
+                        .listRowSeparator(.hidden)
+                }
+                
                 // No content text
-                if threadsViewModel.isLoaded && threadsViewModel.threads.count == 0 {
+                if threadsViewModel.isLoaded && threadsViewModel.threads != nil && threadsViewModel.threads!.count == 0 {
                     Text("no_threads")
                         .frame(maxWidth: .infinity, alignment: .center)
                         .foregroundColor(.secondary)
@@ -42,11 +51,13 @@ struct FirstView: View {
                 }
                 
                 // ThreadRows
-                ForEach(threadsViewModel.threads) { thread in
-                    ThreadRow(thread: thread)
+                if threadsViewModel.threads != nil {
+                    ForEach(threadsViewModel.threads!) { thread in
+                        ThreadRow(thread: thread)
+                    }
+                    .listRowSeparator(.hidden, edges: .top)
+                    .listRowSeparator(.visible, edges: .bottom)
                 }
-                .listRowSeparator(.hidden, edges: .top)
-                .listRowSeparator(.visible, edges: .bottom)
             }
             .listStyle(.plain)
             
