@@ -9,12 +9,12 @@ import SwiftUI
 
 struct RecommendTagsSection: View {
     
-    private let recommendedTags = ["雑談", "天神祭", "ゲーム", "休日", "初心者"]
+    private let words = ["雑談", "天神祭", "ゲーム", "休日", "初心者"]
     
     var body: some View {
         Section (header: Text("おすすめ")) {
-            ForEach(recommendedTags, id: \.self) { tag in
-                TagRow(name: tag)
+            ForEach(words, id: \.self) { word in
+                TagRow(word: word)
                     .listRowSeparator(.hidden, edges: .top)
                     .listRowSeparator(.visible, edges: .bottom)
             }
