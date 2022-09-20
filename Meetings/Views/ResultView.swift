@@ -12,6 +12,7 @@ struct ResultView: View {
     // States
     @State private var keyword = ""
     @State private var selection = 0
+    @State private var isShowResultView = false
     
     @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel()
     
@@ -65,7 +66,17 @@ struct ResultView: View {
         }
         .listStyle(.plain)
         
+        .background(
+            NavigationLink(destination: ResultView(keyword: keyword), isActive: $isShowResultView) {
+                EmptyView()
+            }
+            .hidden()
+        )
+        
         .searchable(text: $keyword, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("keyword"))
+        .onSubmit(of: .search) {
+            isShowResultView.toggle()
+        }
         
         .navigationTitle("Result")
         .navigationBarTitleDisplayMode(.inline)
