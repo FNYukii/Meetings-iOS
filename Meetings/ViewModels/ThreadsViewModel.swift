@@ -11,7 +11,7 @@ import SwiftUI
 // No longer used
 class ThreadsViewModel: ObservableObject {
     
-    @Published var threads: [Thread] = []
+    @Published var threads: [Thread]? = []
     @Published var isLoaded = false
     
     init() {
@@ -19,14 +19,16 @@ class ThreadsViewModel: ObservableObject {
         db.collection("threads")
             .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
-                // エラー処理
+                // 失敗
                 guard let snapshot = snapshot else {
                     print("HELLO! Fail! Error fetching snapshots: \(error!)")
+                    self.threads = nil
+                    self.isLoaded = true
                     return
                 }
-                print("HELLO! Success! Read \(snapshot.documents.count) Threads.")
                 
-                // Threads
+                // 成功
+                print("HELLO! Success! Read \(snapshot.documents.count) Threads.")
                 var threads: [Thread] = []
                 snapshot.documents.forEach { document in
                     let thread = FireThread.toThread(document: document)
