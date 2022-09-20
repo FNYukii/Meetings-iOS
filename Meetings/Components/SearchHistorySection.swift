@@ -12,7 +12,7 @@ struct SearchHistorySection: View {
     private let words = ["雑談", "ゲーム", "PCパーツ"]
     
     var body: some View {
-        Section(header: Text("履歴")) {
+        Section(header: Text("検索履歴")) {
             ForEach(words, id: \.self) { word in
                 Text(word)
                     .listRowSeparator(.hidden, edges: .top)
