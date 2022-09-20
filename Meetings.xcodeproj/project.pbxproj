@@ -61,7 +61,7 @@
 		54D5B15028D9725D00C043DF /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5B14F28D9725D00C043DF /* SearchBar.swift */; };
 		54D5B15228D9748D00C043DF /* ThreadsByKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */; };
 		54DC77A0288E4DDB00296419 /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* MyTabBar.swift */; };
-		54DC77A2288E512800296419 /* CommentRowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentRowList.swift */; };
+		54DC77A2288E512800296419 /* CommentRowsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentRowsGroup.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
 		54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D528D9AB8E00B88525 /* TagRow.swift */; };
 /* End PBXBuildFile section */
@@ -118,7 +118,7 @@
 		54D5B14F28D9725D00C043DF /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsByKeywordViewModel.swift; sourceTree = "<group>"; };
 		54DC779F288E4DDB00296419 /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
-		54DC77A1288E512800296419 /* CommentRowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRowList.swift; sourceTree = "<group>"; };
+		54DC77A1288E512800296419 /* CommentRowsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRowsGroup.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		54FB73D528D9AB8E00B88525 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,7 +241,7 @@
 				54C41DF028936D1B007B5631 /* CommentImagesRow.swift */,
 				54C41DF228936DA7007B5631 /* CommentReactionRow.swift */,
 				54C41DF428936E9C007B5631 /* CommentThreadTitleRow.swift */,
-				54DC77A1288E512800296419 /* CommentRowList.swift */,
+				54DC77A1288E512800296419 /* CommentRowsGroup.swift */,
 				54FB73D528D9AB8E00B88525 /* TagRow.swift */,
 			);
 			path = Components;
@@ -366,7 +366,7 @@
 				5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */,
 				540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */,
 				542326CC2893A78400AC31BE /* ImageView.swift in Sources */,
-				54DC77A2288E512800296419 /* CommentRowList.swift in Sources */,
+				54DC77A2288E512800296419 /* CommentRowsGroup.swift in Sources */,
 				5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */,
 				5408F02128911EE8007D8EFB /* EditProfileView.swift in Sources */,
 				54C41DFB289375E1007B5631 /* UserIconButton.swift in Sources */,

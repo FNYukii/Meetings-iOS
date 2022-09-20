@@ -24,7 +24,8 @@ struct ProfileView: View {
     @State private var isShowCreateReportView = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        
+        List {
             // Header Row
             HStack(alignment: .top) {
                 
@@ -37,13 +38,14 @@ struct ProfileView: View {
                     UserUserTagText(userId: userId)
                 }
             }
-            .padding(.horizontal)
+            .listRowSeparator(.hidden)
             
             // User Reading Failed Row
             if isLoadedUser && user == nil {
                 Text("user_reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
+                    .listRowSeparator(.hidden)
             }
             
             // Introduction Row
@@ -65,25 +67,28 @@ struct ProfileView: View {
                     Text(user!.introduction)
                 }
             }
-            .padding(.horizontal)
-            .padding(.top)
+            .listRowSeparator(.hidden)
             
             // Tab Bar Row
             MyTabBar(tabBarItems: [Text("comments"), Text("likes")], selection: $selection)
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
             
             // Tab Body Row
-            TabView(selection: $selection) {
-                // Comments Page
-                CommentRowList(userId: userId, commentRowListFamily: .posts)
-                    .tag(0)
+            Group {
+                if selection == 0 {
+                    CommentRowsGroup(userId: userId, commentRowListFamily: .posts)
+                        .listRowSeparator(.hidden)
+                }
                 
-                // Likes Page
-                CommentRowList(userId: userId, commentRowListFamily: .likes)
-                    .tag(1)
+                if selection == 1 {
+                    CommentRowsGroup(userId: userId, commentRowListFamily: .likes)
+                        .listRowSeparator(.hidden)
+                }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .animation(.spring(), value: selection)
+            .animation(.default, value: selection)
         }
+        .listStyle(.plain)
         
         .sheet(isPresented: $isShowEditProfileView) {
             EditProfileView()
