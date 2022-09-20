@@ -26,7 +26,7 @@ struct CreateCommentView: View {
     @State private var isShowDialogError = false
     
     // Values
-    let commentTextMax = 300
+    private let commentTextMax = 300
     
     var body: some View {
         NavigationView {

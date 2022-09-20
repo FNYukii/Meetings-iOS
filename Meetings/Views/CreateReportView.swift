@@ -18,7 +18,7 @@ struct CreateReportView: View {
     let navTitle: String
     
     // Categories
-    let probremCategories = ["violent", "spam", "sensitive", "fake"]
+    private let probremCategories = ["violent", "spam", "sensitive", "fake"]
     
     // States
     @State private var probremCategorySelection = 0
