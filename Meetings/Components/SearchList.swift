@@ -18,9 +18,9 @@ struct SearchList: View {
         
     var body: some View {
         List {
-            // Recommend Tags Section
+            // Recommended Tags Section
             if !isSearching {
-                RecommendTagsSection()
+                RecommendedTagsSection()
             }
             
             // Search History Section
