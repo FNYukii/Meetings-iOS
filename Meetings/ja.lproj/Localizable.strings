@@ -101,6 +101,8 @@
 "search" = "検索";
 "keyword" = "キーワード";
 
-// ResultView
-"result" = "結果";
+// SearchResultsSection
 "users" = "ユーザー";
+
+// ThirdView
+"notifications" = "通知";

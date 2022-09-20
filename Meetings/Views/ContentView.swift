@@ -20,6 +20,11 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
+            
+            ThirdView()
+                .tabItem {
+                    Image(systemName: "bell")
+                }
         }
     }
 }

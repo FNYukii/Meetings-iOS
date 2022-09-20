@@ -31,5 +31,6 @@ struct SecondView: View {
                     }
                 }
         }
+        .navigationViewStyle(.stack)
     }
 }
