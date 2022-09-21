@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PopularThreadsSection: View {
+struct RecentlyCommentedThreadsSection: View {
     
     @State private var threads: [Thread]? = nil
     @State private var isLoadedThreads = false

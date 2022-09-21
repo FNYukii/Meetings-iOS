@@ -20,10 +20,10 @@ struct FirstView: View {
             
             List {
                 // Popular Threads
-                PopularThreadsSection()
+                RecentlyCommentedThreadsSection()
                 
                 // Recent Threads
-                RecentThreadsSection()
+                RecentlyCreatedThreadsSection()
             }
             .listStyle(.plain)
             

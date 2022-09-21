@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecentThreadsSection: View {
+struct RecentlyCreatedThreadsSection: View {
     
     @ObservedObject private var threadsViewModel = ThreadsViewModel()
     
