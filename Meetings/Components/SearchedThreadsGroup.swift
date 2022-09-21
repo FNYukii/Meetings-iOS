@@ -54,7 +54,7 @@ struct SearchedThreadsGroup: View {
     
     private func load() {
         if threads == nil {
-            FireThread.readThread(keyword: keyword) { threads in
+            FireThread.readThreads(keyword: keyword) { threads in
                 self.threads = threads
                 self.isLoadedThreads = true
             }

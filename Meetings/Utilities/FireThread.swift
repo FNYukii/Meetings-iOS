@@ -82,7 +82,7 @@ class FireThread {
             }
     }
     
-    static func readThread(keyword: String, completion: (([Thread]?) -> Void)?) {
+    static func readThreads(keyword: String, completion: (([Thread]?) -> Void)?) {
         let db = Firestore.firestore()
         
         // タイトルで検索
