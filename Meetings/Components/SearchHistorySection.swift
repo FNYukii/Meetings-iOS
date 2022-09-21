@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchHistorySection: View {
     
-    private let words = ["雑談", "ゲーム", "PCパーツ"]
+    private let words = UserDefaults.standard.stringArray(forKey: "searchedWords") ?? []
     
     var body: some View {
         Section(header: Text("検索履歴")) {
