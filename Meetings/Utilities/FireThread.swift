@@ -82,34 +82,6 @@ class FireThread {
             }
     }
     
-    static func readThreadsByCommentedAt(completion: (([Thread]?) -> Void)?) {
-        let db = Firestore.firestore()
-        db.collection("threads")
-            .order(by: "commentedAt", descending: true)
-            .limit(to: 3)
-            .getDocuments { (querySnapshot, err) in
-                // 失敗
-                if let err = err {
-                    print("HELLO! Fail! Error Reeding Threads. \(err)")
-                    completion?(nil)
-                    return
-                }
-                
-                // 成功
-                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
-                
-                // threadsに値を代入
-                var threads: [Thread] = []
-                querySnapshot!.documents.forEach { document in
-                    let thread = FireThread.toThread(document: document)
-                    threads.append(thread)
-                }
-                
-                // Return
-                completion?(threads)
-            }
-    }
-    
     static func readThreads(keyword: String, completion: (([Thread]?) -> Void)?) {
         let db = Firestore.firestore()
         

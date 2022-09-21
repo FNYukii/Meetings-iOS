@@ -9,13 +9,12 @@ import SwiftUI
 
 struct RecentlyCommentedThreadsSection: View {
     
-    @State private var threads: [Thread]? = nil
-    @State private var isLoadedThreads = false
+    @ObservedObject private var threadsViewModel = ThreadsByCommentedAtViewModel()
     
     var body: some View {
         Section(header: Text("人気")) {
             // Progress
-            if !isLoadedThreads {
+            if !threadsViewModel.isLoaded {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -23,7 +22,7 @@ struct RecentlyCommentedThreadsSection: View {
             }
             
             // Failed
-            if isLoadedThreads && threads == nil {
+            if threadsViewModel.isLoaded && threadsViewModel.threads == nil {
                 Text("threads_reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -31,7 +30,7 @@ struct RecentlyCommentedThreadsSection: View {
             }
             
             // No Results
-            if isLoadedThreads && threads != nil && threads!.count == 0 {
+            if threadsViewModel.isLoaded && threadsViewModel.threads != nil && threadsViewModel.threads!.count == 0 {
                 Text("no_threads")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -39,22 +38,12 @@ struct RecentlyCommentedThreadsSection: View {
             }
             
             // Done
-            if threads != nil {
-                ForEach(threads!) { thread in
+            if threadsViewModel.threads != nil {
+                ForEach(threadsViewModel.threads!) { thread in
                     ThreadRow(thread: thread)
                 }
                 .listRowSeparator(.hidden, edges: .top)
                 .listRowSeparator(.visible, edges: .bottom)
-            }
-        }
-        .onAppear(perform: load)
-    }
-    
-    private func load() {
-        if threads == nil {
-            FireThread.readThreadsByCommentedAt() {threads in
-                self.threads = threads
-                self.isLoadedThreads = true
             }
         }
     }

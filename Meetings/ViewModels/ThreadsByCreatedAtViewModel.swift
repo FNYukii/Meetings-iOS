@@ -8,7 +8,6 @@
 import Firebase
 import SwiftUI
 
-// No longer used
 class ThreadsByCreatedAtViewModel: ObservableObject {
     
     @Published var threads: [Thread]? = []
@@ -42,5 +41,4 @@ class ThreadsByCreatedAtViewModel: ObservableObject {
                 }
             }
     }
-    
 }
