@@ -49,13 +49,13 @@ struct FirstView: View {
                         Button(action: {
                             isSortByCreatedAt = true
                         }) {
-                            Label("作成順", systemImage: isSortByCreatedAt ? "checkmark" : "")
+                            Label("creation_order", systemImage: isSortByCreatedAt ? "checkmark" : "")
                         }
                         
                         Button(action: {
                             isSortByCreatedAt = false
                         }) {
-                            Label("コメントされた順", systemImage: isSortByCreatedAt ? "" : "checkmark")
+                            Label("recently_commented_order", systemImage: isSortByCreatedAt ? "" : "checkmark")
                         }
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
