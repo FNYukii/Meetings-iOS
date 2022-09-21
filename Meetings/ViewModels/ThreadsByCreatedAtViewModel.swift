@@ -1,40 +1,22 @@
 //
-//  ThreadsByKeywordViewModel.swift
+//  ThreadsViewModel.swift
 //  Meetings
 //
-//  Created by Yu on 2022/09/20.
+//  Created by Yu on 2022/07/21.
 //
 
 import Firebase
 import SwiftUI
 
-class ThreadsByKeywordViewModel: ObservableObject {
+class ThreadsByCreatedAtViewModel: ObservableObject {
     
     @Published var threads: [Thread]? = []
     @Published var isLoaded = false
     
-    private var listener: ListenerRegistration? = nil
-    
-    func read(keyword: String) {
-        
-        isLoaded = false
-        
-        // 前回のリスナーをデタッチ
-        if let listener = listener {
-            listener.remove()
-        }
-        
-        // keywordが空なら終了
-        if keyword.isEmpty {
-            threads = []
-            return
-        }
-        
+    init() {
         let db = Firestore.firestore()
-        listener = db.collection("threads")
-            .order(by: "title")
-            .start(at: [keyword])
-            .end(at: [keyword + "\u{f8ff}"])
+        db.collection("threads")
+            .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
                 // 失敗
                 guard let snapshot = snapshot else {

@@ -354,6 +354,11 @@ class FireComment {
                 // 成功
                 print("HELLO! Success! Added 1 Comment.")
                 completion?(ref!.documentID)
+                
+                // スレッドのcommentedAtを更新
+                FireThread.updateThreadCommentedAt(threadId: threadId) { _ in
+                    // Do nothing
+                }
             }
     }
     

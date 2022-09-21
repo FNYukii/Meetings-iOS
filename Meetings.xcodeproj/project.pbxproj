@@ -22,7 +22,7 @@
 		540D2E542889797F00DBB512 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 540D2E532889797F00DBB512 /* FirebaseStorage */; };
 		540D2E5628897DA500DBB512 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 540D2E5528897DA500DBB512 /* GoogleService-Info.plist */; };
 		540D2E592889811000DBB512 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E582889811000DBB512 /* Thread.swift */; };
-		540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */; };
+		540D2E5C2889830200DBB512 /* ThreadsByCreatedAtViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E5B2889830200DBB512 /* ThreadsByCreatedAtViewModel.swift */; };
 		540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2E60288985CB00DBB512 /* ThreadRow.swift */; };
 		5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA80288BBBC600F4A29B /* FireAuth.swift */; };
 		5410EA83288BBD5900F4A29B /* SignInStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410EA82288BBD5900F4A29B /* SignInStateViewModel.swift */; };
@@ -51,7 +51,9 @@
 		5441B59428DAFC8500E545D5 /* SearchedCommentsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59328DAFC8500E545D5 /* SearchedCommentsGroup.swift */; };
 		5441B59628DAFFCA00E545D5 /* SearchedUsersGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59528DAFFCA00E545D5 /* SearchedUsersGroup.swift */; };
 		5441B59828DB00EA00E545D5 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59728DB00EA00E545D5 /* UserRow.swift */; };
-		5441B59A28DB124200E545D5 /* RecentThreadsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59928DB124200E545D5 /* RecentThreadsSection.swift */; };
+		5441B59A28DB124200E545D5 /* RecentlyCreatedThreadsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59928DB124200E545D5 /* RecentlyCreatedThreadsSection.swift */; };
+		5441B59C28DB7A7000E545D5 /* RecentlyCommentedThreadsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59B28DB7A7000E545D5 /* RecentlyCommentedThreadsSection.swift */; };
+		5441B59E28DB7E5500E545D5 /* ThreadsByCommentedAtViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59D28DB7E5500E545D5 /* ThreadsByCommentedAtViewModel.swift */; };
 		54454E4528D5D6CD008B3B4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54454E4728D5D6CD008B3B4B /* Localizable.strings */; };
 		544D591C28922AA00056C244 /* CreateReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D591B28922AA00056C244 /* CreateReportView.swift */; };
 		544D591E289249690056C244 /* FireReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D591D289249690056C244 /* FireReport.swift */; };
@@ -71,7 +73,6 @@
 		54CE7F70289199A90064F2AF /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F6F289199A90064F2AF /* ImagePickerView.swift */; };
 		54CE7F72289199C90064F2AF /* EditImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F71289199C90064F2AF /* EditImage.swift */; };
 		54CE7F7428921CB10064F2AF /* FireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7F7328921CB10064F2AF /* FireImage.swift */; };
-		54D5B15228D9748D00C043DF /* ThreadsByKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */; };
 		54DC77A0288E4DDB00296419 /* FluentTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* FluentTabBar.swift */; };
 		54DC77A2288E512800296419 /* CommentsPostedByUserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentsPostedByUserGroup.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
@@ -92,7 +93,7 @@
 		540D2E4C2889775600DBB512 /* CreateCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentView.swift; sourceTree = "<group>"; };
 		540D2E5528897DA500DBB512 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		540D2E582889811000DBB512 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
-		540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsViewModel.swift; sourceTree = "<group>"; };
+		540D2E5B2889830200DBB512 /* ThreadsByCreatedAtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsByCreatedAtViewModel.swift; sourceTree = "<group>"; };
 		540D2E60288985CB00DBB512 /* ThreadRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadRow.swift; sourceTree = "<group>"; };
 		5410EA80288BBBC600F4A29B /* FireAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuth.swift; sourceTree = "<group>"; };
 		5410EA82288BBD5900F4A29B /* SignInStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStateViewModel.swift; sourceTree = "<group>"; };
@@ -121,7 +122,9 @@
 		5441B59328DAFC8500E545D5 /* SearchedCommentsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedCommentsGroup.swift; sourceTree = "<group>"; };
 		5441B59528DAFFCA00E545D5 /* SearchedUsersGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedUsersGroup.swift; sourceTree = "<group>"; };
 		5441B59728DB00EA00E545D5 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
-		5441B59928DB124200E545D5 /* RecentThreadsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentThreadsSection.swift; sourceTree = "<group>"; };
+		5441B59928DB124200E545D5 /* RecentlyCreatedThreadsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCreatedThreadsSection.swift; sourceTree = "<group>"; };
+		5441B59B28DB7A7000E545D5 /* RecentlyCommentedThreadsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCommentedThreadsSection.swift; sourceTree = "<group>"; };
+		5441B59D28DB7E5500E545D5 /* ThreadsByCommentedAtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsByCommentedAtViewModel.swift; sourceTree = "<group>"; };
 		54454E4628D5D6CD008B3B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		54454E4828D5D6D1008B3B4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		544D591B28922AA00056C244 /* CreateReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportView.swift; sourceTree = "<group>"; };
@@ -140,7 +143,6 @@
 		54CE7F6F289199A90064F2AF /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		54CE7F71289199C90064F2AF /* EditImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImage.swift; sourceTree = "<group>"; };
 		54CE7F7328921CB10064F2AF /* FireImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireImage.swift; sourceTree = "<group>"; };
-		54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsByKeywordViewModel.swift; sourceTree = "<group>"; };
 		54DC779F288E4DDB00296419 /* FluentTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluentTabBar.swift; sourceTree = "<group>"; };
 		54DC77A1288E512800296419 /* CommentsPostedByUserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsPostedByUserGroup.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
@@ -209,7 +211,8 @@
 			children = (
 				540D2E37288971AE00DBB512 /* ContentView.swift */,
 				540D2E432889731A00DBB512 /* FirstView.swift */,
-				5441B59928DB124200E545D5 /* RecentThreadsSection.swift */,
+				5441B59928DB124200E545D5 /* RecentlyCreatedThreadsSection.swift */,
+				5441B59B28DB7A7000E545D5 /* RecentlyCommentedThreadsSection.swift */,
 				5410EA84288BC00C00F4A29B /* SignUpView.swift */,
 				5410EA88288BCF7600F4A29B /* SignInView.swift */,
 				5410EA8A288BDF8B00F4A29B /* ProfileView.swift */,
@@ -243,8 +246,8 @@
 			isa = PBXGroup;
 			children = (
 				5410EA82288BBD5900F4A29B /* SignInStateViewModel.swift */,
-				540D2E5B2889830200DBB512 /* ThreadsViewModel.swift */,
-				54D5B15128D9748D00C043DF /* ThreadsByKeywordViewModel.swift */,
+				540D2E5B2889830200DBB512 /* ThreadsByCreatedAtViewModel.swift */,
+				5441B59D28DB7E5500E545D5 /* ThreadsByCommentedAtViewModel.swift */,
 				5410EA9C288C380300F4A29B /* CommentsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -384,8 +387,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				544D5920289272760056C244 /* ImagesPickerView.swift in Sources */,
-				54D5B15228D9748D00C043DF /* ThreadsByKeywordViewModel.swift in Sources */,
 				5441B58428DA110E00E545D5 /* SignInMenuOrProfileButton.swift in Sources */,
+				5441B59E28DB7E5500E545D5 /* ThreadsByCommentedAtViewModel.swift in Sources */,
 				540D2E4B288974B900DBB512 /* CreateThreadView.swift in Sources */,
 				5410EA9B288C379200F4A29B /* Comment.swift in Sources */,
 				5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */,
@@ -402,14 +405,15 @@
 				5410EAA1288C453200F4A29B /* EditDate.swift in Sources */,
 				5410EA95288C2E8E00F4A29B /* FireComment.swift in Sources */,
 				5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */,
-				540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */,
+				540D2E5C2889830200DBB512 /* ThreadsByCreatedAtViewModel.swift in Sources */,
 				5441B59628DAFFCA00E545D5 /* SearchedUsersGroup.swift in Sources */,
+				5441B59C28DB7A7000E545D5 /* RecentlyCommentedThreadsSection.swift in Sources */,
 				542326CC2893A78400AC31BE /* ImageView.swift in Sources */,
 				54DC77A2288E512800296419 /* CommentsPostedByUserGroup.swift in Sources */,
 				5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */,
 				5408F02128911EE8007D8EFB /* EditProfileView.swift in Sources */,
 				54C41DFB289375E1007B5631 /* UserIconButton.swift in Sources */,
-				5441B59A28DB124200E545D5 /* RecentThreadsSection.swift in Sources */,
+				5441B59A28DB124200E545D5 /* RecentlyCreatedThreadsSection.swift in Sources */,
 				5410EA8B288BDF8B00F4A29B /* ProfileView.swift in Sources */,
 				54C41DED28936252007B5631 /* CommentView.swift in Sources */,
 				54C41DEF28936C4C007B5631 /* CommentMenu.swift in Sources */,

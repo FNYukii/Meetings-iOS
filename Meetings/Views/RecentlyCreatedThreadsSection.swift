@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct RecentThreadsSection: View {
+struct RecentlyCreatedThreadsSection: View {
     
-    @ObservedObject private var threadsViewModel = ThreadsViewModel()
+    @ObservedObject private var threadsViewModel = ThreadsByCreatedAtViewModel()
     
     var body: some View {
-        Section {
+        Section(header: Text("作成された順")) {
             // Progress
             if !threadsViewModel.isLoaded {
                 ProgressView()

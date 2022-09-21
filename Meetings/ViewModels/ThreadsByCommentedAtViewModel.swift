@@ -1,15 +1,14 @@
 //
-//  ThreadsViewModel.swift
+//  ThreadsByCommentedAtViewModel.swift
 //  Meetings
 //
-//  Created by Yu on 2022/07/21.
+//  Created by Yu on 2022/09/22.
 //
 
 import Firebase
 import SwiftUI
 
-// No longer used
-class ThreadsViewModel: ObservableObject {
+class ThreadsByCommentedAtViewModel: ObservableObject {
     
     @Published var threads: [Thread]? = []
     @Published var isLoaded = false
@@ -17,7 +16,7 @@ class ThreadsViewModel: ObservableObject {
     init() {
         let db = Firestore.firestore()
         db.collection("threads")
-            .order(by: "createdAt", descending: true)
+            .order(by: "commentedAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
                 // 失敗
                 guard let snapshot = snapshot else {
@@ -42,5 +41,4 @@ class ThreadsViewModel: ObservableObject {
                 }
             }
     }
-    
 }
