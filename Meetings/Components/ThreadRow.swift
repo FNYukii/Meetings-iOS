@@ -95,7 +95,7 @@ struct ThreadRow: View {
                             if firstComment != nil {
                                 Text(firstComment!.text)
                                     .foregroundColor(.secondary)
-                                    .lineLimit(2)
+                                    .lineLimit(1)
                             }
                         }
                         
@@ -194,14 +194,14 @@ struct ThreadRow: View {
             timerCounter += 1
             
             // コメント数を読み取る
-            if firstComment == nil {
+            if commentCount == nil {
                 FireComment.readNumberOfCommentInThread(threadId: thread.id) { count in
                     self.commentCount = count
                 }
             }
                         
             // 読み取り完了orタイムアウトでタイマー停止
-            if firstComment != nil || timerCounter == 10 {
+            if commentCount != nil || timerCounter == 10 {
                 timer.invalidate()
                 self.isLoadedCommentCount = true
             }
