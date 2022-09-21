@@ -19,10 +19,7 @@ struct FirstView: View {
         NavigationView {
             
             List {
-                // Popular Threads
-                RecentlyCommentedThreadsSection()
-                
-                // Recent Threads
+                RecentlyCommentedThreadsSection()                
                 RecentlyCreatedThreadsSection()
             }
             .listStyle(.plain)
