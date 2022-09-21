@@ -72,6 +72,41 @@ class FireUser {
             }
     }
     
+    static func readUsers(keyword: String, completion: (([User]?) -> Void)?) {
+        // keywordが空なら終了
+        if keyword.isEmpty {
+            completion?(nil)
+            return
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("users")
+            .order(by: "displayName")
+            .start(at: [keyword])
+            .end(at: [keyword + "\u{f8ff}"])
+            .getDocuments { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Users. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Users.")
+                
+                // commentsに値を代入
+                var users: [User] = []
+                querySnapshot!.documents.forEach { document in
+                    let user = FireUser.toUser(document: document)
+                    users.append(user)
+                }
+                
+                // Return
+                completion?(users)
+            }
+    }
+    
     static func readLikedUserIds(commentId: String, completion: (([String]?) -> Void)?) {
         // キャッシュから読み取り
         let db = Firestore.firestore()
