@@ -28,5 +28,6 @@ struct UserRow: View {
                 Text(user.introduction)
             }
         }
+        .background(NavigationLink("", destination: ProfileView(userId: user.id)).opacity(0))
     }
 }
