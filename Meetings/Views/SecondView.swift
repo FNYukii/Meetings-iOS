@@ -23,7 +23,7 @@ struct SecondView: View {
                     
                     // 検索した単語を検索履歴に保存
                     var searchedWords = UserDefaults.standard.stringArray(forKey: "searchedWords") ?? []
-                    searchedWords.append(keyword)
+                    searchedWords.insert(keyword, at: 0)
                     searchedWords = NSOrderedSet(array: searchedWords).array as! [String]
                     UserDefaults.standard.set(searchedWords, forKey: "searchedWords")
                 }

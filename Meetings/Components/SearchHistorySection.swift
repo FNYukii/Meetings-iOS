@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchHistorySection: View {
     
     // States
-    @State private var searchedWords = UserDefaults.standard.stringArray(forKey: "searchedWords") ?? []
+    @State private var searchedWords: [String] = []
     @Binding var keyword: String
     
     var body: some View {
@@ -38,5 +38,10 @@ struct SearchHistorySection: View {
                 }
             }
         }
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        self.searchedWords = UserDefaults.standard.stringArray(forKey: "searchedWords") ?? []
     }
 }
