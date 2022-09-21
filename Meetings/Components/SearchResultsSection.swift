@@ -27,7 +27,7 @@ struct SearchResultsSection: View {
                 }
                 
                 if selection == 1 {
-                    
+                    SearchedCommentsGroup(keyword: keyword)
                 }
                 
                 if selection == 2 {
