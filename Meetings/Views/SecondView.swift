@@ -33,7 +33,7 @@ struct SecondView: View {
             
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
-                        ProfileButtonOrNot()
+                        SignInMenuOrProfileButton()
                     }
                 }
         }

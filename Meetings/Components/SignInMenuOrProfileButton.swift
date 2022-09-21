@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileButtonOrNot: View {
+struct SignInMenuOrProfileButton: View {
     
     // States
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
@@ -40,7 +40,7 @@ struct ProfileButtonOrNot: View {
                         Label("sign_up", systemImage: "square.and.pencil")
                     }
                 } label: {
-                    Image(systemName: "ellipsis")
+                    Image(systemName: "ellipsis.circle")
                         .font(.title3)
                 }
             }

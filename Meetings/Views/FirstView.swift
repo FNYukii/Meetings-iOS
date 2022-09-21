@@ -63,7 +63,7 @@ struct FirstView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    ProfileButtonOrNot()
+                    SignInMenuOrProfileButton()
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
