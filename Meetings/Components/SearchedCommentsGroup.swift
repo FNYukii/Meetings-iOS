@@ -26,15 +26,15 @@ struct SearchedCommentsGroup: View {
 
             // Failed
             if isLoadedComments && comments == nil {
-                Text("comments_reading_failed")
+                Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)
             }
 
-            // No content
+            // No Results
             if isLoadedComments && comments != nil && comments!.count == 0 {
-                Text("no_comments")
+                Text("no_results")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)

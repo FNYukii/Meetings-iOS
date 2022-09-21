@@ -26,15 +26,15 @@ struct SearchedUsersGroup: View {
 
             // Failed
             if isLoadedUser && users == nil {
-                Text("users_reading_failed")
+                Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)
             }
 
-            // No content
+            // No Results
             if isLoadedUser && users != nil && users!.count == 0 {
-                Text("no_users")
+                Text("no_results")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)

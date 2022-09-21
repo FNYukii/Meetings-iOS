@@ -26,15 +26,15 @@ struct SearchedThreadsGroup: View {
 
             // Failed
             if isLoadedThreads && threads == nil {
-                Text("threads_reading_failed")
+                Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)
             }
 
-            // No content
+            // No Results
             if isLoadedThreads && threads != nil && threads!.count == 0 {
-                Text("no_threads")
+                Text("no_results")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)

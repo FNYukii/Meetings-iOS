@@ -14,7 +14,7 @@ struct SearchHistorySection: View {
     @Binding var keyword: String
     
     var body: some View {
-        Section(header: Text("検索履歴")) {
+        Section(header: Text("search_history")) {
             ForEach(searchedWords, id: \.self) { word in
                 Button( action: {
                     keyword = word
