@@ -15,11 +15,17 @@ struct SecondView: View {
     
     var body: some View {
         NavigationView {
-            SearchList(keyword: keyword, isSubmited: $isSubmited)
+            SearchList(keyword: $keyword, isSubmited: $isSubmited)
             
                 .searchable(text: $keyword, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("keyword"))
                 .onSubmit(of: .search) {
                     isSubmited = true
+                    
+                    // 検索した単語を検索履歴に保存
+                    var searchedWords = UserDefaults.standard.stringArray(forKey: "searchedWords") ?? []
+                    searchedWords.append(keyword)
+                    searchedWords = NSOrderedSet(array: searchedWords).array as! [String]
+                    UserDefaults.standard.set(searchedWords, forKey: "searchedWords")
                 }
             
                 .navigationTitle("search")
