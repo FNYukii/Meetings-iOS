@@ -11,6 +11,9 @@ struct TagRow: View {
     
     let word: String
     
+    @State private var numberOfThread: Int? = nil
+    @State private var isLoaded = false
+    
     var body: some View {
         
         Button(action: {
@@ -40,10 +43,34 @@ struct TagRow: View {
                 
                 // Thread Count Row
                 HStack {
-                    Text("\(Int.random(in: 5...40))")
-                        .font(.subheadline)                    
+                    // Progress
+                    if !isLoaded {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
+                    
+                    // Failed
+                    if isLoaded && numberOfThread == nil {
+                        Image(systemName: "exclamationmark.triangle")
+                    }
+                    
+                    // Done
+                    if isLoaded && numberOfThread != nil {
+                        Text("\(numberOfThread!)")
+                            .foregroundColor(.secondary)
+                    }
                 }
                 .foregroundColor(.secondary)
+            }
+        }
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        if numberOfThread == nil {
+            FireThread.readNumberOfThreadByTag(tag: word) { number in
+                self.numberOfThread = number
+                self.isLoaded = true
             }
         }
     }
