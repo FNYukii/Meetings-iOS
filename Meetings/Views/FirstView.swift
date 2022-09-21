@@ -62,7 +62,7 @@ struct FirstView: View {
                 CreateThreadView()
             }
             
-            .navigationTitle("threads")
+            .navigationTitle("home")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {

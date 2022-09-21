@@ -9,7 +9,7 @@
 // FirstView
 "no_threads" = "スレッドはありません";
 "threads_reading_failed" = "スレッドの読み取りに失敗";
-"threads" = "スレッド";
+"home" = "ホーム";
 "sign_in" = "サインイン";
 "sign_up" = "サインアップ";
 
