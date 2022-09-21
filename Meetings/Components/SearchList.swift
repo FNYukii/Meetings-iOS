@@ -20,7 +20,7 @@ struct SearchList: View {
         List {
             // Recommended Tags Section
             if !isSearching {
-                RecommendedTagsSection()
+                RecommendedTagsSection(keyword: $keyword)
             }
             
             // Search History Section

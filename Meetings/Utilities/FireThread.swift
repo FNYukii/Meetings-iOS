@@ -137,6 +137,64 @@ class FireThread {
             }
     }
     
+    static func readRecentlyUsedTags(completion: (([String]?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .order(by: "createdAt", descending: true)
+            .limit(to: 50)
+            .getDocuments { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Threads by tag. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                
+                // threads
+                var threads: [Thread] = []
+                querySnapshot!.documents.forEach { document in
+                    let thread = FireThread.toThread(document: document)
+                    threads.append(thread)
+                }
+                
+                // recentlyUsedTags
+                var recentlyUsedTags: [String] = []
+                threads.forEach { thread in
+                    let tags = thread.tags
+                    recentlyUsedTags.append(contentsOf: tags)
+                }
+                
+                // recentlyUsedTagsから重複した要素を削除
+                recentlyUsedTags = NSOrderedSet(array: recentlyUsedTags).array as! [String]
+                
+                // Return
+                completion?(recentlyUsedTags)
+            }
+    }
+    
+    static func readNumberOfThreadByTag(tag: String, completion: ((Int?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .whereField("tags", arrayContains: tag)
+            .getDocuments { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Threads by tag. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                
+                // Return
+                completion?(querySnapshot!.count)
+            }
+    }
+    
     static func createThread(title: String, tags: [String], completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
