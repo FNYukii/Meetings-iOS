@@ -175,6 +175,26 @@ class FireThread {
             }
     }
     
+    static func readNumberOfThreadByTag(tag: String, completion: ((Int?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .whereField("tags", arrayContains: tag)
+            .getDocuments { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Threads by tag. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                
+                // Return
+                completion?(querySnapshot!.count)
+            }
+    }
+    
     static func createThread(title: String, tags: [String], completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
