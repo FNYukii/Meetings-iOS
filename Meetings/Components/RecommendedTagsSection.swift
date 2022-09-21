@@ -13,7 +13,7 @@ struct RecommendedTagsSection: View {
     @State private var isLoaded = false
     
     var body: some View {
-        Section (header: Text("recommendation")) {
+        Section (header: Text("recent")) {
             // Progress
             if !isLoaded {
                 ProgressView()

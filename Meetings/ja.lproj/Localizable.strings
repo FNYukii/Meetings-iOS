@@ -100,7 +100,7 @@
 "keyword" = "キーワード";
 
 // RecommendedTagsSection
-"recommendation" = "おすすめ";
+"recent" = "最近";
 
 // SearchHistorySection
 "search_history" = "検索履歴";
