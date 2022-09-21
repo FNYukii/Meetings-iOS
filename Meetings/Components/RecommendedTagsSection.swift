@@ -12,6 +12,8 @@ struct RecommendedTagsSection: View {
     @State private var recentlyUsedTags: [String]? = nil
     @State private var isLoaded = false
     
+    @Binding var keyword: String
+    
     var body: some View {
         Section (header: Text("recent")) {
             // Progress
@@ -41,7 +43,7 @@ struct RecommendedTagsSection: View {
             // Done
             if isLoaded && recentlyUsedTags != nil {
                 ForEach(recentlyUsedTags!, id: \.self) { tag in
-                    TagRow(word: tag)
+                    TagRow(word: tag, keyword: $keyword)
                         .listRowSeparator(.hidden, edges: .top)
                         .listRowSeparator(.visible, edges: .bottom)
                 }

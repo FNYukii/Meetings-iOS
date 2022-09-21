@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct TagRow: View {
-    
+        
+    // Word
     let word: String
     
+    // States
     @State private var numberOfThread: Int? = nil
     @State private var isLoaded = false
+    
+    @Binding var keyword: String
     
     var body: some View {
         
         Button(action: {
-            
+            keyword = word
         }) {
             VStack(alignment: .leading) {
                 // Header Row
