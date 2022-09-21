@@ -22,14 +22,6 @@ struct CommentRow: View {
     var body: some View {
         
         Group {
-            // コメントが削除された
-            if isCommentDeleted {
-                Text("comment_was_deleted")
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
-            
-            // コメントが削除されていない
             if !isCommentDeleted {
                 HStack(alignment: .top, spacing: 8) {
                     

@@ -82,6 +82,61 @@ class FireThread {
             }
     }
     
+    static func readThread(keyword: String, completion: (([Thread]?) -> Void)?) {
+        let db = Firestore.firestore()
+        
+        // タイトルで検索
+        db.collection("threads")
+            .order(by: "title")
+            .start(at: [keyword])
+            .end(at: [keyword + "\u{f8ff}"])
+            .getDocuments { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Threads by title. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                
+                // threadsに値を代入
+                var threads: [Thread] = []
+                querySnapshot!.documents.forEach { document in
+                    let thread = FireThread.toThread(document: document)
+                    threads.append(thread)
+                }
+                
+                // 次はタグで検索
+                db.collection("threads")
+                    .whereField("tags", arrayContains: keyword)
+                    .getDocuments { (querySnapshot, err) in
+                        // 失敗
+                        if let err = err {
+                            print("HELLO! Fail! Error Reeding Threads by tag. \(err)")
+                            completion?(nil)
+                            return
+                        }
+                        
+                        // 成功
+                        print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                        
+                        // threadsに値を追加
+                        querySnapshot!.documents.forEach { document in
+                            let thread = FireThread.toThread(document: document)
+                            threads.append(thread)
+                        }
+                        
+                        // threadsから重複したthreadを削除
+                        threads = NSOrderedSet(array: threads).array as! [Thread]
+                        
+                        // Return
+                        completion?(threads)
+                    }
+            }
+    }
+    
     static func createThread(title: String, tags: [String], completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {

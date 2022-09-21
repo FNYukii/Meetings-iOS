@@ -19,126 +19,132 @@ struct ThreadRow: View {
     @State private var commentCount: Int? = nil
     @State private var isLoadedCommentCount = false
     
+    @State private var isThreadDeleted = false
+    
     // Dialogs, Navigations
     @State private var isShowDialog = false
     @State private var isShowCreateReportView = false
     
     var body: some View {
         
-        HStack(alignment: .top) {
-            
-            // User Icon Column
-            UserIconButton(userId: thread.userId)
-            
-            // Contents Column
-            VStack(alignment: .leading, spacing: 1) {
-                
-                // Header Row
+        Group {
+            if !isThreadDeleted {
                 HStack(alignment: .top) {
                     
-                    // Title Column
-                    Text(thread.title)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.leading)
+                    // User Icon Column
+                    UserIconButton(userId: thread.userId)
                     
-                    Spacer()
-                    
-                    // Menu Column
-                    Menu {
-                        // 削除ボタン
-                        if FireAuth.uid() == thread.userId {
-                            Button(role: .destructive) {
-                                isShowDialog.toggle()
+                    // Contents Column
+                    VStack(alignment: .leading, spacing: 1) {
+                        
+                        // Header Row
+                        HStack(alignment: .top) {
+                            
+                            // Title Column
+                            Text(thread.title)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.leading)
+                            
+                            Spacer()
+                            
+                            // Menu Column
+                            Menu {
+                                // 削除ボタン
+                                if FireAuth.uid() == thread.userId {
+                                    Button(role: .destructive) {
+                                        isShowDialog.toggle()
+                                    } label: {
+                                        Label("delete_thread", systemImage: "trash")
+                                    }
+                                }
+                                
+                                // 報告ボタン
+                                if FireAuth.uid() != thread.userId {
+                                    Button(action: {
+                                        isShowCreateReportView.toggle()
+                                    }) {
+                                        Label("report_thread", systemImage: "flag")
+                                    }
+                                }
                             } label: {
-                                Label("delete_thread", systemImage: "trash")
+                                Image(systemName: "ellipsis")
+                                    .foregroundColor(.secondary)
+                                    .padding(.vertical, 6)
                             }
                         }
                         
-                        // 報告ボタン
-                        if FireAuth.uid() != thread.userId {
-                            Button(action: {
-                                isShowCreateReportView.toggle()
-                            }) {
-                                Label("report_thread", systemImage: "flag")
+                        // First Comment Row
+                        Group {
+                            // Progress
+                            if !isLoadedFirstComment {
+                                Color.secondary
+                                    .opacity(0.2)
+                                    .frame(width: 120, height: 16)
+                            }
+                            
+                            // No Content
+                            if isLoadedFirstComment && firstComment == nil {
+                                HStack {
+                                    Image(systemName: "exclamationmark.triangle")
+                                    Text("first_comment_reading_failed")
+                                }
+                                .foregroundColor(.secondary)
+                            }
+                            
+                            // Done
+                            if firstComment != nil {
+                                Text(firstComment!.text)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(2)
                             }
                         }
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(.secondary)
-                            .padding(.vertical, 6)
-                    }
-                }
-                
-                // First Comment Row
-                Group {
-                    // Progress
-                    if !isLoadedFirstComment {
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 120, height: 16)
-                    }
-                    
-                    // No Content
-                    if isLoadedFirstComment && firstComment == nil {
+                        
+                        // Tags Row
                         HStack {
-                            Image(systemName: "exclamationmark.triangle")
-                            Text("first_comment_reading_failed")
+                            UserUserTagText(userId: thread.userId)
+                            EditDate.howManyAgoText(from: thread.createdAt)
+                                .foregroundColor(.secondary)
+                            
+                            ForEach(thread.tags, id: \.self) { tag in
+                                Text(tag)
+                                    .foregroundColor(.secondary)
+                            }
                         }
-                        .foregroundColor(.secondary)
-                    }
-                    
-                    // Done
-                    if firstComment != nil {
-                        Text(firstComment!.text)
-                            .foregroundColor(.secondary)
-                            .lineLimit(2)
-                    }
-                }
-                
-                // Tags Row
-                HStack {
-                    UserUserTagText(userId: thread.userId)
-                    EditDate.howManyAgoText(from: thread.createdAt)
-                        .foregroundColor(.secondary)
-                    
-                    ForEach(thread.tags, id: \.self) { tag in
-                        Text(tag)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                
-                // Comment Count Row
-                Group {
-                    // Progress
-                    if !isLoadedCommentCount {
-                        Color.secondary
-                            .opacity(0.2)
-                            .frame(width: 20, height: 16)
-                    }
-                    
-                    // Failed
-                    if isLoadedCommentCount && commentCount == nil {
-                        Image(systemName: "exclamationmark.triangle")
-                    }
-                    
-                    // Done
-                    if isLoadedCommentCount && commentCount != nil {
-                        HStack {
-                            Image(systemName: "bubble.left")
-                                .font(.subheadline)
-                            Text("\(commentCount!)")
+                        
+                        // Comment Count Row
+                        Group {
+                            // Progress
+                            if !isLoadedCommentCount {
+                                Color.secondary
+                                    .opacity(0.2)
+                                    .frame(width: 20, height: 16)
+                            }
+                            
+                            // Failed
+                            if isLoadedCommentCount && commentCount == nil {
+                                Image(systemName: "exclamationmark.triangle")
+                            }
+                            
+                            // Done
+                            if isLoadedCommentCount && commentCount != nil {
+                                HStack {
+                                    Image(systemName: "bubble.left")
+                                        .font(.subheadline)
+                                    Text("\(commentCount!)")
+                                }
+                                .foregroundColor(.secondary)
+                            }
                         }
-                        .foregroundColor(.secondary)
                     }
                 }
+                .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
             }
         }
-        .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
             Button("delete_thread", role: .destructive) {
                 FireThread.deleteThread(threadId: thread.id) { _ in
-                    // Do nothing
+                    isThreadDeleted = true
                 }
             }
         } message: {

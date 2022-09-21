@@ -1,5 +1,5 @@
 //
-//  SearchedThreadsGroup.swift
+//  CommentsLikedByUserGroup.swift
 //  Meetings
 //
 //  Created by Yu on 2022/09/21.
@@ -7,57 +7,58 @@
 
 import SwiftUI
 
-struct SearchedThreadsGroup: View {
+struct CommentsLikedByUserGroup: View {
     
-    let keyword: String
+    // User ID, Comments family
+    let userId: String
     
-    @State private var threads: [Thread]? = nil
-    @State private var isLoadedThreads = false
+    // States
+    @State private var comments: [Comment]? = nil
+    @State private var isLoadedComments = false
     
     var body: some View {
         Group {
             // Progress
-            if !isLoadedThreads {
+            if !isLoadedComments {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .listRowSeparator(.hidden)
             }
-
-            // Failed
-            if isLoadedThreads && threads == nil {
-                Text("threads_reading_failed")
+            
+            // Reading
+            if isLoadedComments && comments == nil {
+                Text("comments_reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)
             }
-
-            // No content
-            if isLoadedThreads && threads != nil && threads!.count == 0 {
-                Text("no_threads")
+            
+            // No results
+            if isLoadedComments && comments?.count == 0 {
+                Text("no_comments")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
                     .listRowSeparator(.hidden)
             }
-
+            
             // Done
-            if isLoadedThreads && threads != nil {
-                ForEach(threads!) { thread in
-                    ThreadRow(thread: thread)
+            if isLoadedComments && comments != nil {
+                ForEach(comments!) { comment in
+                    CommentRow(comment: comment, isAbleShowingProfileView: userId != comment.userId, isShowThread: true)
                         .listRowSeparator(.hidden, edges: .top)
                         .listRowSeparator(.visible, edges: .bottom)
                 }
             }
         }
+        .listStyle(.plain)
         .onAppear(perform: load)
     }
     
     private func load() {
-        if threads == nil {
-            FireThread.readThread(keyword: keyword) { threads in
-                self.threads = threads
-                self.isLoadedThreads = true
-            }
+        FireComment.readLikedComments(userId: userId) { comment in
+            self.comments = comment
+            self.isLoadedComments = true
         }
     }
 }

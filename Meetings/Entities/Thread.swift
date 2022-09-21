@@ -7,7 +7,7 @@
 
 import Firebase
 
-struct Thread: Identifiable {
+struct Thread: Identifiable, Hashable {
     let id: String
     let createdAt: Date
     let userId: String
