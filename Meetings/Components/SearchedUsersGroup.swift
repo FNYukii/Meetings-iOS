@@ -43,7 +43,7 @@ struct SearchedUsersGroup: View {
             // Done
             if isLoadedUser && users != nil {
                 ForEach(users!) { user in
-                    Text("\(user.displayName)")
+                    UserRow(user: user)
                         .listRowSeparator(.hidden, edges: .top)
                         .listRowSeparator(.visible, edges: .bottom)
                 }
