@@ -20,6 +20,7 @@ struct FirstView: View {
             
             List {
                 // Popular Threads
+                PopularThreadsSection()
                 
                 // Recent Threads
                 RecentThreadsSection()

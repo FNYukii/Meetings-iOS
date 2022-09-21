@@ -1,20 +1,21 @@
 //
-//  RecentThreadsSection.swift
+//  PopularThreadsSection.swift
 //  Meetings
 //
-//  Created by Yu on 2022/09/21.
+//  Created by Yu on 2022/09/22.
 //
 
 import SwiftUI
 
-struct RecentThreadsSection: View {
+struct PopularThreadsSection: View {
     
-    @ObservedObject private var threadsViewModel = ThreadsViewModel()
+    @State private var threads: [Thread]? = nil
+    @State private var isLoadedThreads = false
     
     var body: some View {
-        Section(header: Text("最近")) {
+        Section(header: Text("人気")) {
             // Progress
-            if !threadsViewModel.isLoaded {
+            if !isLoadedThreads {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -22,7 +23,7 @@ struct RecentThreadsSection: View {
             }
             
             // Failed
-            if threadsViewModel.isLoaded && threadsViewModel.threads == nil {
+            if isLoadedThreads && threads == nil {
                 Text("threads_reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -30,7 +31,7 @@ struct RecentThreadsSection: View {
             }
             
             // No Results
-            if threadsViewModel.isLoaded && threadsViewModel.threads != nil && threadsViewModel.threads!.count == 0 {
+            if isLoadedThreads && threads != nil && threads!.count == 0 {
                 Text("no_threads")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -38,12 +39,22 @@ struct RecentThreadsSection: View {
             }
             
             // Done
-            if threadsViewModel.threads != nil {
-                ForEach(threadsViewModel.threads!) { thread in
+            if threads != nil {
+                ForEach(threads!) { thread in
                     ThreadRow(thread: thread)
                 }
                 .listRowSeparator(.hidden, edges: .top)
                 .listRowSeparator(.visible, edges: .bottom)
+            }
+        }
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        if threads == nil {
+            FireThread.readPopularThreads() {threads in
+                self.threads = threads
+                self.isLoadedThreads = true
             }
         }
     }
