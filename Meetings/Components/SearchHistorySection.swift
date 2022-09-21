@@ -14,9 +14,13 @@ struct SearchHistorySection: View {
     var body: some View {
         Section(header: Text("検索履歴")) {
             ForEach(words, id: \.self) { word in
-                Text(word)
-                    .listRowSeparator(.hidden, edges: .top)
-                    .listRowSeparator(.visible, edges: .bottom)
+                Button( action: {
+                    
+                }) {
+                    Text(word)
+                }
+                .listRowSeparator(.hidden, edges: .top)
+                .listRowSeparator(.visible, edges: .bottom)
             }
         }
     }
