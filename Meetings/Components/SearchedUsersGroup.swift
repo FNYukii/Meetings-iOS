@@ -12,7 +12,7 @@ struct SearchedUsersGroup: View {
     let keyword: String
     
     @State private var users: [User]? = nil
-    @State private var isLoadedUser = false
+    @State private var isLoaded = false
     
     var body: some View {
         Group {
@@ -25,7 +25,7 @@ struct SearchedUsersGroup: View {
             }
 
             // Failed
-            if isLoadedUser && users == nil {
+            if isLoaded && users == nil {
                 Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -33,7 +33,7 @@ struct SearchedUsersGroup: View {
             }
 
             // No Results
-            if isLoadedUser && users != nil && users!.count == 0 {
+            if isLoaded && users != nil && users!.count == 0 {
                 Text("no_results")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -41,7 +41,7 @@ struct SearchedUsersGroup: View {
             }
 
             // Done
-            if isLoadedUser && users != nil {
+            if isLoaded && users != nil {
                 ForEach(users!) { user in
                     UserRow(user: user)
                         .listRowSeparator(.hidden, edges: .top)
@@ -56,7 +56,7 @@ struct SearchedUsersGroup: View {
         if users == nil {
             FireUser.readUsers(keyword: keyword) { users in
                 self.users = users
-                self.isLoadedUser = true
+                self.isLoaded = true
             }
         }
     }

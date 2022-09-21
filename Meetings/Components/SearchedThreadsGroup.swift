@@ -12,7 +12,7 @@ struct SearchedThreadsGroup: View {
     let keyword: String
     
     @State private var threads: [Thread]? = nil
-    @State private var isLoadedThreads = false
+    @State private var isLoaded = false
     
     var body: some View {
         Group {
@@ -25,7 +25,7 @@ struct SearchedThreadsGroup: View {
             }
 
             // Failed
-            if isLoadedThreads && threads == nil {
+            if isLoaded && threads == nil {
                 Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -33,7 +33,7 @@ struct SearchedThreadsGroup: View {
             }
 
             // No Results
-            if isLoadedThreads && threads != nil && threads!.count == 0 {
+            if isLoaded && threads != nil && threads!.count == 0 {
                 Text("no_results")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -41,7 +41,7 @@ struct SearchedThreadsGroup: View {
             }
 
             // Done
-            if isLoadedThreads && threads != nil {
+            if isLoaded && threads != nil {
                 ForEach(threads!) { thread in
                     ThreadRow(thread: thread)
                         .listRowSeparator(.hidden, edges: .top)
@@ -56,7 +56,7 @@ struct SearchedThreadsGroup: View {
         if threads == nil {
             FireThread.readThreads(keyword: keyword) { threads in
                 self.threads = threads
-                self.isLoadedThreads = true
+                self.isLoaded = true
             }
         }
     }

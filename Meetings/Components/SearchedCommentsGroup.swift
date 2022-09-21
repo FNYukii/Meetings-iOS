@@ -12,7 +12,7 @@ struct SearchedCommentsGroup: View {
     let keyword: String
     
     @State private var comments: [Comment]? = nil
-    @State private var isLoadedComments = false
+    @State private var isLoaded = false
     
     var body: some View {
         Group {
@@ -25,7 +25,7 @@ struct SearchedCommentsGroup: View {
             }
 
             // Failed
-            if isLoadedComments && comments == nil {
+            if isLoaded && comments == nil {
                 Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -33,7 +33,7 @@ struct SearchedCommentsGroup: View {
             }
 
             // No Results
-            if isLoadedComments && comments != nil && comments!.count == 0 {
+            if isLoaded && comments != nil && comments!.count == 0 {
                 Text("no_results")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -41,7 +41,7 @@ struct SearchedCommentsGroup: View {
             }
 
             // Done
-            if isLoadedComments && comments != nil {
+            if isLoaded && comments != nil {
                 ForEach(comments!) { comment in
                     CommentRow(comment: comment, isAbleShowingProfileView: true, isShowThread: true)
                         .listRowSeparator(.hidden, edges: .top)
@@ -56,7 +56,7 @@ struct SearchedCommentsGroup: View {
         if comments == nil {
             FireComment.readComments(keyword: keyword) { comments in
                 self.comments = comments
-                self.isLoadedComments = true
+                self.isLoaded = true
             }
         }
     }
