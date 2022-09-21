@@ -21,6 +21,15 @@ struct SearchHistorySection: View {
                 }
                 .listRowSeparator(.hidden, edges: .top)
                 .listRowSeparator(.visible, edges: .bottom)
+                
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "trash")
+                    }
+                    .tint(.red)
+                }
             }
         }
     }
