@@ -41,13 +41,13 @@ struct FirstView: View {
                         Button(action: {
                             
                         }) {
-                            Label("作成された日時", systemImage: "square.and.pencil")
+                            Label("作成順", systemImage: "")
                         }
                         
                         Button(action: {
                             
                         }) {
-                            Label("コメントされた日時", systemImage: "bubble.right")
+                            Label("コメントされた順", systemImage: "")
                         }
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
