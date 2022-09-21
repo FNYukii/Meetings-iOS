@@ -33,6 +33,41 @@ class FireComment {
         return comment
     }
     
+    static func readComments(keyword: String, completion: (([Comment]?) -> Void)?) {
+        // keywordが空なら終了
+        if keyword.isEmpty {
+            completion?(nil)
+            return
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .order(by: "text")
+            .start(at: [keyword])
+            .end(at: [keyword + "\u{f8ff}"])
+            .getDocuments { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Comments. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments.")
+                
+                // commentsに値を代入
+                var comments: [Comment] = []
+                querySnapshot!.documents.forEach { document in
+                    let comment = FireComment.toComment(document: document)
+                    comments.append(comment)
+                }
+                
+                // Return
+                completion?(comments)
+            }
+    }
+    
     static func readFirstComment(threadId: String, completion: ((Comment?) -> Void)?) {
         // キャッシュからドキュメントを読み取り
         let db = Firestore.firestore()
