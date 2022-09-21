@@ -17,7 +17,7 @@ struct SearchedCommentsGroup: View {
     var body: some View {
         Group {
             // Progress
-            if !isLoadedComments {
+            if !isLoaded {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)

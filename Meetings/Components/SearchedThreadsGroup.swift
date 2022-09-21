@@ -17,7 +17,7 @@ struct SearchedThreadsGroup: View {
     var body: some View {
         Group {
             // Progress
-            if !isLoadedThreads {
+            if !isLoaded {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)

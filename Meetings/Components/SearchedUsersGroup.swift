@@ -17,7 +17,7 @@ struct SearchedUsersGroup: View {
     var body: some View {
         Group {
             // Progress
-            if !isLoadedUser {
+            if !isLoaded {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
