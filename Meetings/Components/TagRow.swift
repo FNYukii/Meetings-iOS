@@ -12,33 +12,39 @@ struct TagRow: View {
     let word: String
     
     var body: some View {
-        VStack(alignment: .leading) {
-            // Header Row
-            HStack {
-                // Name Column
-                Text(word)
-                
-                Spacer()
-                
-                // Menu Column
-                Menu {
-                    Button(action: {
-                        
-                    }) {
-                        Text("興味なし")
+        
+        Button(action: {
+            
+        }) {
+            VStack(alignment: .leading) {
+                // Header Row
+                HStack {
+                    // Name Column
+                    Text(word)
+                    
+                    Spacer()
+                    
+                    // Menu Column
+                    Menu {
+                        Button(action: {
+                            
+                        }) {
+                            Text("興味なし")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.secondary)
+                            .padding(.vertical, 6)
                     }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .foregroundColor(.secondary)
-                        .padding(.vertical, 6)
                 }
+                
+                // Thread Count Row
+                Text("\(Int.random(in: 5...40))件のスレッド")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
             }
-            
-            // Thread Count Row
-            Text("\(Int.random(in: 5...40))件のスレッド")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            
         }
+        
     }
 }
