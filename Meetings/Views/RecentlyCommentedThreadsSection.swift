@@ -12,7 +12,7 @@ struct RecentlyCommentedThreadsSection: View {
     @ObservedObject private var threadsViewModel = ThreadsByCommentedAtViewModel()
     
     var body: some View {
-        Section(header: Text("コメントが追加された順")) {
+        Section {
             // Progress
             if !threadsViewModel.isLoaded {
                 ProgressView()

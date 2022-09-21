@@ -11,6 +11,7 @@ struct FirstView: View {
     
     // States
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    @State private var isSortByCreatedAt = UserDefaults.standard.bool(forKey: "isSortByCreatedAt")
         
     // Navigations
     @State private var isShowCreateThreadView = false
@@ -19,8 +20,15 @@ struct FirstView: View {
         NavigationView {
             
             List {
-                RecentlyCommentedThreadsSection()                
-                RecentlyCreatedThreadsSection()
+                // Recently Created Threads
+                if isSortByCreatedAt {
+                    RecentlyCreatedThreadsSection()
+                }
+                
+                // Recently Commented Threads
+                if !isSortByCreatedAt {
+                    RecentlyCommentedThreadsSection()
+                }
             }
             .listStyle(.plain)
             
@@ -35,7 +43,26 @@ struct FirstView: View {
                     SignInMenuOrProfileButton()
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // Sort Menu
+                    Menu {
+                        Button(action: {
+                            isSortByCreatedAt = true
+                            UserDefaults.standard.set(true, forKey: "isSortByCreatedAt")
+                        }) {
+                            Label("creation_order", systemImage: isSortByCreatedAt ? "checkmark" : "")
+                        }
+                        
+                        Button(action: {
+                            isSortByCreatedAt = false
+                            UserDefaults.standard.set(false, forKey: "isSortByCreatedAt")
+                        }) {
+                            Label("recently_commented_order", systemImage: isSortByCreatedAt ? "" : "checkmark")
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                    
                     // Add Thread Button
                     Button(action: {
                         isShowCreateThreadView.toggle()

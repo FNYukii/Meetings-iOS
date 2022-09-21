@@ -12,7 +12,7 @@ struct RecentlyCreatedThreadsSection: View {
     @ObservedObject private var threadsViewModel = ThreadsByCreatedAtViewModel()
     
     var body: some View {
-        Section(header: Text("作成された順")) {
+        Section {
             // Progress
             if !threadsViewModel.isLoaded {
                 ProgressView()

@@ -12,7 +12,8 @@
 "home" = "ホーム";
 "sign_in" = "サインイン";
 "sign_up" = "サインアップ";
-
+"creation_order" = "作成順";
+"recently_commented_order" = "最近コメントされた順";
 // SignUpView
 "email" = "メールアドレス";
 "password" = "パスワード";

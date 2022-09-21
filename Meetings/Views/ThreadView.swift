@@ -61,7 +61,7 @@ struct ThreadView: View {
                 Button(action: {
                     isShowCreateCommentView.toggle()
                 }) {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "plus.bubble")
                 }
                 .disabled(!signInStateViewModel.isSignedIn)
             }
