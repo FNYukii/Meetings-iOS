@@ -31,7 +31,7 @@ struct SearchResultsSection: View {
                 }
                 
                 if selection == 2 {
-                    
+                    SearchedUsersGroup(keyword: keyword)
                 }
             }
             .listRowSeparator(.hidden)

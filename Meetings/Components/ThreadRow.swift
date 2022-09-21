@@ -107,7 +107,6 @@ struct ThreadRow: View {
                             
                             ForEach(thread.tags, id: \.self) { tag in
                                 Text(tag)
-//                                    .foregroundColor(.secondary)
                             }
                         }
                         

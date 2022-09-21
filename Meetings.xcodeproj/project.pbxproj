@@ -49,6 +49,8 @@
 		5441B59028DA309300E545D5 /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B58F28DA309300E545D5 /* ThirdView.swift */; };
 		5441B59228DAA58C00E545D5 /* CommentsLikedByUserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59128DAA58C00E545D5 /* CommentsLikedByUserGroup.swift */; };
 		5441B59428DAFC8500E545D5 /* SearchedCommentsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59328DAFC8500E545D5 /* SearchedCommentsGroup.swift */; };
+		5441B59628DAFFCA00E545D5 /* SearchedUsersGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59528DAFFCA00E545D5 /* SearchedUsersGroup.swift */; };
+		5441B59828DB00EA00E545D5 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441B59728DB00EA00E545D5 /* UserRow.swift */; };
 		54454E4528D5D6CD008B3B4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54454E4728D5D6CD008B3B4B /* Localizable.strings */; };
 		544D591C28922AA00056C244 /* CreateReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D591B28922AA00056C244 /* CreateReportView.swift */; };
 		544D591E289249690056C244 /* FireReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D591D289249690056C244 /* FireReport.swift */; };
@@ -116,6 +118,8 @@
 		5441B58F28DA309300E545D5 /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
 		5441B59128DAA58C00E545D5 /* CommentsLikedByUserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsLikedByUserGroup.swift; sourceTree = "<group>"; };
 		5441B59328DAFC8500E545D5 /* SearchedCommentsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedCommentsGroup.swift; sourceTree = "<group>"; };
+		5441B59528DAFFCA00E545D5 /* SearchedUsersGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedUsersGroup.swift; sourceTree = "<group>"; };
+		5441B59728DB00EA00E545D5 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		54454E4628D5D6CD008B3B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		54454E4828D5D6D1008B3B4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		544D591B28922AA00056C244 /* CreateReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportView.swift; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 				5441B58728DA240F00E545D5 /* SearchResultsSection.swift */,
 				5441B58D28DA298A00E545D5 /* SearchedThreadsGroup.swift */,
 				5441B59328DAFC8500E545D5 /* SearchedCommentsGroup.swift */,
+				5441B59528DAFFCA00E545D5 /* SearchedUsersGroup.swift */,
+				5441B59728DB00EA00E545D5 /* UserRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 				5410EA9B288C379200F4A29B /* Comment.swift in Sources */,
 				5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */,
 				540D2E472889733A00DBB512 /* AccountView.swift in Sources */,
+				5441B59828DB00EA00E545D5 /* UserRow.swift in Sources */,
 				54C5D66E2892D7EF005AE7D4 /* CommentImage.swift in Sources */,
 				5489709528D4552A0045DFAA /* UserDisplayNameText.swift in Sources */,
 				540D2E492889734800DBB512 /* ThreadView.swift in Sources */,
@@ -393,6 +400,7 @@
 				5410EA95288C2E8E00F4A29B /* FireComment.swift in Sources */,
 				5410EA9F288C3C6800F4A29B /* CommentRow.swift in Sources */,
 				540D2E5C2889830200DBB512 /* ThreadsViewModel.swift in Sources */,
+				5441B59628DAFFCA00E545D5 /* SearchedUsersGroup.swift in Sources */,
 				542326CC2893A78400AC31BE /* ImageView.swift in Sources */,
 				54DC77A2288E512800296419 /* CommentsPostedByUserGroup.swift in Sources */,
 				5410EA9D288C380300F4A29B /* CommentsViewModel.swift in Sources */,
