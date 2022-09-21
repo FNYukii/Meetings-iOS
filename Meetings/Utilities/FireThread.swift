@@ -192,6 +192,25 @@ class FireThread {
             }
     }
     
+    static func updateThread(threadId: String, commentAddedAt: Date, completion: ((String?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("thread")
+            .document(threadId)
+            .updateData([
+                "commentAddedAt": commentAddedAt
+            ]) { err in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error updating 1 Thread. \(err)")
+                    completion?(nil)
+                }
+                
+                // 成功
+                print("HELLO! Success! Updated 1 Thread.")
+                completion?(threadId)
+            }
+    }
+    
     static func deleteThread(threadId: String, completion: ((String?) -> Void)?) {
         // ドキュメント削除
         let db = Firestore.firestore()
