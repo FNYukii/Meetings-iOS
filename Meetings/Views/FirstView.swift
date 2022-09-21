@@ -11,7 +11,7 @@ struct FirstView: View {
     
     // States
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
-    @State private var isSortByCreatedAt = true
+    @State private var isSortByCreatedAt = UserDefaults.standard.bool(forKey: "isSortByCreatedAt")
         
     // Navigations
     @State private var isShowCreateThreadView = false
@@ -48,12 +48,14 @@ struct FirstView: View {
                     Menu {
                         Button(action: {
                             isSortByCreatedAt = true
+                            UserDefaults.standard.set(true, forKey: "isSortByCreatedAt")
                         }) {
                             Label("creation_order", systemImage: isSortByCreatedAt ? "checkmark" : "")
                         }
                         
                         Button(action: {
                             isSortByCreatedAt = false
+                            UserDefaults.standard.set(false, forKey: "isSortByCreatedAt")
                         }) {
                             Label("recently_commented_order", systemImage: isSortByCreatedAt ? "" : "checkmark")
                         }
