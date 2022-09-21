@@ -16,8 +16,8 @@ struct ThreadRow: View {
     @State private var firstComment: Comment? = nil
     @State private var isLoadedFirstComment = false
     
-    @State private var commentCount: Int? = nil
-    @State private var isLoadedCommentCount = false
+    @State private var numberOfComment: Int? = nil
+    @State private var isLoadedNumberOfComment = false
     
     @State private var isThreadDeleted = false
     
@@ -110,26 +110,26 @@ struct ThreadRow: View {
                             }
                         }
                         
-                        // Comment Count Row
+                        // Number Of Comment Row
                         Group {
                             // Progress
-                            if !isLoadedCommentCount {
+                            if !isLoadedNumberOfComment {
                                 Color.secondary
                                     .opacity(0.2)
                                     .frame(width: 20, height: 16)
                             }
                             
                             // Failed
-                            if isLoadedCommentCount && commentCount == nil {
+                            if isLoadedNumberOfComment && numberOfComment == nil {
                                 Image(systemName: "exclamationmark.triangle")
                             }
                             
                             // Done
-                            if isLoadedCommentCount && commentCount != nil {
+                            if isLoadedNumberOfComment && numberOfComment != nil {
                                 HStack {
                                     Image(systemName: "bubble.left")
                                         .font(.subheadline)
-                                    Text("\(commentCount!)")
+                                    Text("\(numberOfComment!)")
                                 }
                                 .foregroundColor(.secondary)
                             }
@@ -162,7 +162,7 @@ struct ThreadRow: View {
             loadFirstComment()
         }
         
-        if !isLoadedCommentCount {
+        if !isLoadedNumberOfComment {
             loadCommentCount()
         }
     }
@@ -193,16 +193,16 @@ struct ThreadRow: View {
             timerCounter += 1
             
             // コメント数を読み取る
-            if commentCount == nil {
-                FireComment.readNumberOfCommentInThread(threadId: thread.id) { count in
-                    self.commentCount = count
+            if numberOfComment == nil {
+                FireComment.readNumberOfCommentInThread(threadId: thread.id) { number in
+                    self.numberOfComment = number
                 }
             }
                         
             // 読み取り完了orタイムアウトでタイマー停止
-            if commentCount != nil || timerCounter == 10 {
+            if numberOfComment != nil || timerCounter == 10 {
                 timer.invalidate()
-                self.isLoadedCommentCount = true
+                self.isLoadedNumberOfComment = true
             }
         }
     }
