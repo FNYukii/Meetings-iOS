@@ -9,7 +9,7 @@ import Firebase
 import SwiftUI
 
 // No longer used
-class ThreadsViewModel: ObservableObject {
+class ThreadsByCreatedAtViewModel: ObservableObject {
     
     @Published var threads: [Thread]? = []
     @Published var isLoaded = false

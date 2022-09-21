@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecentlyCreatedThreadsSection: View {
     
-    @ObservedObject private var threadsViewModel = ThreadsViewModel()
+    @ObservedObject private var threadsViewModel = ThreadsByCreatedAtViewModel()
     
     var body: some View {
         Section(header: Text("最近")) {

@@ -52,7 +52,7 @@ struct RecentlyCommentedThreadsSection: View {
     
     private func load() {
         if threads == nil {
-            FireThread.readPopularThreads() {threads in
+            FireThread.readThreadsByCommentedAt() {threads in
                 self.threads = threads
                 self.isLoadedThreads = true
             }

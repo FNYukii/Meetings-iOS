@@ -82,10 +82,10 @@ class FireThread {
             }
     }
     
-    static func readPopularThreads(completion: (([Thread]?) -> Void)?) {
+    static func readThreadsByCommentedAt(completion: (([Thread]?) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("threads")
-            .order(by: "commentAddedAt", descending: true)
+            .order(by: "commentedAt", descending: true)
             .limit(to: 3)
             .getDocuments { (querySnapshot, err) in
                 // 失敗
