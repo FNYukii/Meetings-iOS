@@ -35,7 +35,24 @@ struct FirstView: View {
                     SignInMenuOrProfileButton()
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // Sort Menu
+                    Menu {
+                        Button(action: {
+                            
+                        }) {
+                            Label("作成された日時", systemImage: "square.and.pencil")
+                        }
+                        
+                        Button(action: {
+                            
+                        }) {
+                            Label("コメントされた日時", systemImage: "bubble.right")
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                    
                     // Add Thread Button
                     Button(action: {
                         isShowCreateThreadView.toggle()
