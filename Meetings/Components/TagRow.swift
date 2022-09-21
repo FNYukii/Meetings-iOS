@@ -35,7 +35,7 @@ struct TagRow: View {
             }
             
             // Thread Count Row
-            Text("\(Int.random(in: 0...10))件のスレッド")
+            Text("\(Int.random(in: 5...40))件のスレッド")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
