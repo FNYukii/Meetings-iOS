@@ -9,16 +9,15 @@ import SwiftUI
 
 struct SearchedThreadsGroup: View {
     
-    @ObservedObject private var threadsViewModel = ThreadsByKeywordViewModel()
+    let keyword: String
     
-    init(keyword: String) {
-        threadsViewModel.read(keyword: keyword)
-    }
+    @State private var threads: [Thread]? = nil
+    @State private var isLoadedThreads = false
     
     var body: some View {
         Group {
             // Progress
-            if !threadsViewModel.isLoaded {
+            if !isLoadedThreads {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -26,7 +25,7 @@ struct SearchedThreadsGroup: View {
             }
 
             // Failed
-            if threadsViewModel.isLoaded && threadsViewModel.threads == nil {
+            if isLoadedThreads && threads == nil {
                 Text("threads_reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -34,7 +33,7 @@ struct SearchedThreadsGroup: View {
             }
 
             // No content
-            if threadsViewModel.isLoaded && threadsViewModel.threads != nil && threadsViewModel.threads!.count == 0 {
+            if isLoadedThreads && threads != nil && threads!.count == 0 {
                 Text("no_threads")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -42,12 +41,22 @@ struct SearchedThreadsGroup: View {
             }
 
             // Done
-            if threadsViewModel.isLoaded && threadsViewModel.threads != nil {
-                ForEach(threadsViewModel.threads!) { thread in
+            if isLoadedThreads && threads != nil {
+                ForEach(threads!) { thread in
                     ThreadRow(thread: thread)
                         .listRowSeparator(.hidden, edges: .top)
                         .listRowSeparator(.visible, edges: .bottom)
                 }
+            }
+        }
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        if threads == nil {
+            FireThread.readThread(keyword: keyword) { threads in
+                self.threads = threads
+                self.isLoadedThreads = true
             }
         }
     }
