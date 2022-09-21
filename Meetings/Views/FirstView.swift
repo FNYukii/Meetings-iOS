@@ -11,6 +11,7 @@ struct FirstView: View {
     
     // States
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    @State private var isSortByCreatedAt = true
         
     // Navigations
     @State private var isShowCreateThreadView = false
@@ -19,8 +20,15 @@ struct FirstView: View {
         NavigationView {
             
             List {
-                RecentlyCommentedThreadsSection()                
-                RecentlyCreatedThreadsSection()
+                // Recently Created Threads
+                if isSortByCreatedAt {
+                    RecentlyCreatedThreadsSection()
+                }
+                
+                // Recently Commented Threads
+                if !isSortByCreatedAt {
+                    RecentlyCommentedThreadsSection()
+                }
             }
             .listStyle(.plain)
             
@@ -39,15 +47,15 @@ struct FirstView: View {
                     // Sort Menu
                     Menu {
                         Button(action: {
-                            
+                            isSortByCreatedAt = true
                         }) {
-                            Label("作成順", systemImage: "")
+                            Label("作成順", systemImage: isSortByCreatedAt ? "checkmark" : "")
                         }
                         
                         Button(action: {
-                            
+                            isSortByCreatedAt = false
                         }) {
-                            Label("コメントされた順", systemImage: "")
+                            Label("コメントされた順", systemImage: isSortByCreatedAt ? "" : "checkmark")
                         }
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
