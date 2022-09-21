@@ -192,12 +192,12 @@ class FireThread {
             }
     }
     
-    static func updateThread(threadId: String, commentAddedAt: Date, completion: ((String?) -> Void)?) {
+    static func updateThreadCommentAddedAt(threadId: String, completion: ((String?) -> Void)?) {
         let db = Firestore.firestore()
-        db.collection("thread")
+        db.collection("threads")
             .document(threadId)
             .updateData([
-                "commentAddedAt": commentAddedAt
+                "commentAddedAt": FieldValue.serverTimestamp()
             ]) { err in
                 // 失敗
                 if let err = err {
