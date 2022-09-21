@@ -28,12 +28,6 @@ struct ThreadRow: View {
     var body: some View {
         
         Group {
-            // スレッドが削除された
-            if isThreadDeleted {
-                
-            }
-            
-            // スレッドが削除されていない
             if !isThreadDeleted {
                 HStack(alignment: .top) {
                     
