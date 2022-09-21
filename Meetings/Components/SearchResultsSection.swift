@@ -33,10 +33,6 @@ struct SearchResultsSection: View {
                 if selection == 2 {
                     
                 }
-                
-                if selection == 3 {
-                    
-                }
             }
             .listRowSeparator(.hidden)
         }
