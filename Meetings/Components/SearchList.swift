@@ -13,7 +13,7 @@ struct SearchList: View {
     @Environment(\.isSearching) var isSearching
     
     // States
-    let keyword: String
+    @Binding var keyword: String
     @Binding var isSubmited: Bool
         
     var body: some View {
@@ -25,7 +25,7 @@ struct SearchList: View {
             
             // Search History Section
             else if isSearching && !isSubmited && keyword.isEmpty {
-                SearchHistorySection()
+                SearchHistorySection(keyword: $keyword)
             }
             
             // Search Suggestions Section

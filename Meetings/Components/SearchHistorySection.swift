@@ -9,13 +9,15 @@ import SwiftUI
 
 struct SearchHistorySection: View {
     
-    private let words = UserDefaults.standard.stringArray(forKey: "searchedWords") ?? []
+    // States
+    @State private var searchedWords = UserDefaults.standard.stringArray(forKey: "searchedWords") ?? []
+    @Binding var keyword: String
     
     var body: some View {
         Section(header: Text("検索履歴")) {
-            ForEach(words, id: \.self) { word in
+            ForEach(searchedWords, id: \.self) { word in
                 Button( action: {
-                    
+                    keyword = word
                 }) {
                     Text(word)
                 }
@@ -24,7 +26,9 @@ struct SearchHistorySection: View {
                 
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     Button(action: {
-                        
+                        // 単語を削除
+                        searchedWords.removeAll(where: {$0 == word})
+                        UserDefaults.standard.set(searchedWords, forKey: "searchedWords")
                     }) {
                         Image(systemName: "trash")
                     }

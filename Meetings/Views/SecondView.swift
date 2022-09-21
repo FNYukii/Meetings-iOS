@@ -15,7 +15,7 @@ struct SecondView: View {
     
     var body: some View {
         NavigationView {
-            SearchList(keyword: keyword, isSubmited: $isSubmited)
+            SearchList(keyword: $keyword, isSubmited: $isSubmited)
             
                 .searchable(text: $keyword, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("keyword"))
                 .onSubmit(of: .search) {
