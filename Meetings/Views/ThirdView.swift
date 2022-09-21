@@ -20,6 +20,12 @@ struct ThirdView: View {
             
             .navigationTitle("notifications")
             .navigationBarTitleDisplayMode(.inline)
+            
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    SignInMenuOrProfileButton()
+                }
+            }
         }
         .navigationViewStyle(.stack)
     }
