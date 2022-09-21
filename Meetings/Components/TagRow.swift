@@ -39,12 +39,12 @@ struct TagRow: View {
                 }
                 
                 // Thread Count Row
-                Text("\(Int.random(in: 5...40))件のスレッド")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
+                HStack {
+                    Text("\(Int.random(in: 5...40))")
+                        .font(.subheadline)                    
+                }
+                .foregroundColor(.secondary)
             }
         }
-        
     }
 }
