@@ -60,6 +60,7 @@
 		544D5920289272760056C244 /* ImagesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D591F289272760056C244 /* ImagesPickerView.swift */; };
 		5489709528D4552A0045DFAA /* UserDisplayNameText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489709428D4552A0045DFAA /* UserDisplayNameText.swift */; };
 		5489709728D455AB0045DFAA /* UserUserTagText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489709628D455AB0045DFAA /* UserUserTagText.swift */; };
+		548D4B5828DCA6E400677490 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548D4B5728DCA6E400677490 /* FloatingActionButton.swift */; };
 		54A1F1AA28D48C9A00CF05C3 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 54A1F1A928D48C9A00CF05C3 /* Introspect */; };
 		54C3441E288F944E00468A94 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 54C3441D288F944E00468A94 /* SDWebImageSwiftUI */; };
 		54C41DED28936252007B5631 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DEC28936252007B5631 /* CommentView.swift */; };
@@ -132,6 +133,7 @@
 		544D591F289272760056C244 /* ImagesPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPickerView.swift; sourceTree = "<group>"; };
 		5489709428D4552A0045DFAA /* UserDisplayNameText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDisplayNameText.swift; sourceTree = "<group>"; };
 		5489709628D455AB0045DFAA /* UserUserTagText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUserTagText.swift; sourceTree = "<group>"; };
+		548D4B5728DCA6E400677490 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		54C41DEC28936252007B5631 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		54C41DEE28936C4C007B5631 /* CommentMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMenu.swift; sourceTree = "<group>"; };
 		54C41DF028936D1B007B5631 /* CommentImagesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentImagesRow.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				5410EA96288C2FCC00F4A29B /* GuidedTextEditor.swift */,
 				54DC779F288E4DDB00296419 /* FluentTabBar.swift */,
+				548D4B5728DCA6E400677490 /* FloatingActionButton.swift */,
 				5441B58328DA110E00E545D5 /* SignInMenuOrProfileButton.swift */,
 				54C41DF628937059007B5631 /* UserIconImage.swift */,
 				54C41DFA289375E1007B5631 /* UserIconButton.swift */,
@@ -421,6 +424,7 @@
 				5410EA85288BC00C00F4A29B /* SignUpView.swift in Sources */,
 				5441B58E28DA298A00E545D5 /* SearchedThreadsGroup.swift in Sources */,
 				540D2E4D2889775600DBB512 /* CreateCommentView.swift in Sources */,
+				548D4B5828DCA6E400677490 /* FloatingActionButton.swift in Sources */,
 				540D2E61288985CB00DBB512 /* ThreadRow.swift in Sources */,
 				544D591E289249690056C244 /* FireReport.swift in Sources */,
 				54DC77A0288E4DDB00296419 /* FluentTabBar.swift in Sources */,
