@@ -105,7 +105,7 @@ class FireComment {
             .whereField("threadId", isEqualTo: threadId)
             .order(by: "createdAt")
             .limit(to: 1)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments(source: .server) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments from server. \(err)")
@@ -132,10 +132,27 @@ class FireComment {
     }
     
     static func readNumberOfCommentInThread(threadId: String, completion: ((Int?) -> Void)?) {
+        // キャッシュから
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
             .getDocuments(source: .cache) { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding Comments from cache. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read \(querySnapshot!.count) Comments from cache.")
+                completion?(querySnapshot!.count)
+            }
+        
+        // サーバーから
+        db.collection("comments")
+            .whereField("threadId", isEqualTo: threadId)
+            .getDocuments(source: .server) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Comments from server. \(err)")
