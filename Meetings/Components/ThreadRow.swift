@@ -162,9 +162,8 @@ struct ThreadRow: View {
             loadFirstComment()
         }
         
-        if !isLoadedNumberOfComment {
-            loadCommentCount()
-        }
+        numberOfComment = nil
+        loadNumberOfComment()
     }
     
     private func loadFirstComment() {
@@ -187,7 +186,7 @@ struct ThreadRow: View {
         }
     }
     
-    private func loadCommentCount() {
+    private func loadNumberOfComment() {
         var timerCounter = 0
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             timerCounter += 1
