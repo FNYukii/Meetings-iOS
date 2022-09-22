@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecommendedTagsSection: View {
+struct RecentlyUsedTagsSection: View {
         
     @State private var recentlyUsedTags: [String]? = nil
     @State private var isLoaded = false
