@@ -26,7 +26,12 @@ struct FloatingActionButton: View {
                         .font(.title2)
                         .foregroundColor(.white)
                         .padding()
-                        .background(Color.accentColor)
+                        .background {
+                            ZStack {
+                                Color.white
+                                Color.accentColor.opacity(0.8)
+                            }
+                        }
                         .cornerRadius(.infinity)
                 }
                 .padding(.trailing)
