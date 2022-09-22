@@ -60,7 +60,7 @@ class FireThread {
         // サーバーから読み取り
         db.collection("threads")
             .document(threadId)
-            .getDocument { (document, error) in
+            .getDocument(source: .server) { (document, error) in
                 // 失敗
                 if let error = error {
                     print("HELLO! Fail! Error reading Thread from server. \(error)")
@@ -152,7 +152,7 @@ class FireThread {
                 }
                 
                 // 成功
-                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads from cache.")
                 
                 // threads
                 var threads: [Thread] = []
@@ -179,7 +179,7 @@ class FireThread {
         db.collection("threads")
             .order(by: "createdAt", descending: true)
             .limit(to: 50)
-            .getDocuments { (querySnapshot, err) in
+            .getDocuments(source: .server) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Threads by tag. \(err)")
@@ -188,7 +188,7 @@ class FireThread {
                 }
                 
                 // 成功
-                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads from server.")
                 
                 // threads
                 var threads: [Thread] = []
@@ -226,7 +226,7 @@ class FireThread {
                 }
                 
                 // 成功
-                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads from cache.")
                 
                 // Return
                 completion?(querySnapshot!.count)
@@ -235,7 +235,7 @@ class FireThread {
         // サーバーから読み取り
         db.collection("threads")
             .whereField("tags", arrayContains: tag)
-            .getDocuments { (querySnapshot, err) in
+            .getDocuments(source: .server) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error Reeding Threads by tag. \(err)")
@@ -244,7 +244,7 @@ class FireThread {
                 }
                 
                 // 成功
-                print("HELLO! Success! Read \(querySnapshot!.count) Threads.")
+                print("HELLO! Success! Read \(querySnapshot!.count) Threads from server.")
                 
                 // Return
                 completion?(querySnapshot!.count)

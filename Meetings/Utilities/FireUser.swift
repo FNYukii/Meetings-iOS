@@ -50,7 +50,7 @@ class FireUser {
         // サーバーから読み取り
         db.collection("users")
             .document(userId)
-            .getDocument { (document, error) in
+            .getDocument(source: .server) { (document, error) in
                 // 失敗
                 if let error = error {
                     print("HELLO! Fail! Error reading User from server. \(error)")
@@ -144,7 +144,7 @@ class FireUser {
         // サーバーから読み取り
         db.collection("users")
             .whereField("likedCommentIds", arrayContains: commentId)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments(source: .server) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
                     print("HELLO! Fail! Error getting Users from server. \(err)")
@@ -181,14 +181,13 @@ class FireUser {
             return
         }
         
-        // サーバーから読み取り
         let db = Firestore.firestore()
         db.collection("users")
             .whereField("userTag", isEqualTo: userTag)
             .getDocuments() { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error getting Users from server. \(err)")
+                    print("HELLO! Fail! Error getting Users. \(err)")
                     completion?(nil)
                     return
                 }
