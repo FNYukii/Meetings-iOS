@@ -162,8 +162,9 @@ struct ThreadRow: View {
             loadFirstComment()
         }
         
-        numberOfComment = nil
-        loadNumberOfComment()
+        if !isLoadedNumberOfComment {
+            loadNumberOfComment()
+        }
     }
     
     private func loadFirstComment() {
