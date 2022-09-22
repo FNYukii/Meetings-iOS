@@ -28,7 +28,7 @@ struct FloatingActionButton: View {
                         .padding()
                         .background {
                             Color.white
-                            Color.accentColor.opacity(0.8)
+                            Color.accentColor.opacity(0.9)
                         }
                         .cornerRadius(.infinity)
                 }
