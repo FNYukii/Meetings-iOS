@@ -40,8 +40,8 @@ struct SignInMenuOrProfileButton: View {
                         Label("sign_up", systemImage: "square.and.pencil")
                     }
                 } label: {
-                    Image(systemName: "ellipsis.circle")
-                        .font(.title3)
+                    Image(systemName: "person.crop.circle")
+                        .font(.title2)
                 }
             }
         }

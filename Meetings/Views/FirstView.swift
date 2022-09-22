@@ -19,18 +19,28 @@ struct FirstView: View {
     var body: some View {
         NavigationView {
             
-            List {
-                // Recently Created Threads
-                if isSortByCreatedAt {
-                    RecentlyCreatedThreadsSection()
+            ZStack {
+                // List Layer
+                List {
+                    // Recently Created Threads
+                    if isSortByCreatedAt {
+                        RecentlyCreatedThreadsSection()
+                    }
+                    
+                    // Recently Commented Threads
+                    if !isSortByCreatedAt {
+                        RecentlyCommentedThreadsSection()
+                    }
                 }
+                .listStyle(.plain)
                 
-                // Recently Commented Threads
-                if !isSortByCreatedAt {
-                    RecentlyCommentedThreadsSection()
+                // FAB Layer
+                if signInStateViewModel.isSignedIn {
+                    FloatingActionButton(systemImage: "plus", action: {
+                        isShowCreateThreadView.toggle()
+                    })
                 }
             }
-            .listStyle(.plain)
             
             .sheet(isPresented: $isShowCreateThreadView) {
                 CreateThreadView()
@@ -39,11 +49,11 @@ struct FirstView: View {
             .navigationTitle("home")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     SignInMenuOrProfileButton()
                 }
                 
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     // Sort Menu
                     Menu {
                         Button(action: {
@@ -60,16 +70,10 @@ struct FirstView: View {
                             Label("recently_commented_order", systemImage: isSortByCreatedAt ? "" : "checkmark")
                         }
                     } label: {
-                        Image(systemName: "arrow.up.arrow.down")
+                        Image(systemName: "ellipsis")
+                            .font(.title2)
+                            .foregroundColor(.secondary)
                     }
-                    
-                    // Add Thread Button
-                    Button(action: {
-                        isShowCreateThreadView.toggle()
-                    }) {
-                        Image(systemName: "square.and.pencil")
-                    }
-                    .disabled(!signInStateViewModel.isSignedIn)
                 }
             }
         }
