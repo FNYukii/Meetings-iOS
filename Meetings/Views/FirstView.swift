@@ -70,7 +70,9 @@ struct FirstView: View {
                             Label("recently_commented_order", systemImage: isSortByCreatedAt ? "" : "checkmark")
                         }
                     } label: {
-                        Image(systemName: "arrow.up.arrow.down")
+                        Image(systemName: "ellipsis")
+                            .font(.title2)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
