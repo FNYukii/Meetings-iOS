@@ -39,6 +39,7 @@ struct SearchList: View {
             }
         }
         .listStyle(.plain)
+        .animation(.none, value: isSearching)
         
         // isSearchingがfalseになったら、isSubmitedもfalseにする
         .onChange(of: isSearching) { newValue in
