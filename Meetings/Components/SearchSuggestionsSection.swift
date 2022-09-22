@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchSuggestionsSection: View {
     
-    private let words = ["原神", "YouTube"]
+    private let words: [String] = []
     
     var body: some View {
         Section(header: Text("suggestions")) {
