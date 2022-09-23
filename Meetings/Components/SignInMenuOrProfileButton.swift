@@ -20,7 +20,7 @@ struct SignInMenuOrProfileButton: View {
         Group {
             // Profile Button
             if signInStateViewModel.isSignedIn {
-                NavigationLink(destination: ProfileView(userId: FireAuth.uid()!)) {
+                NavigationLink(destination: UserView(userId: FireAuth.uid()!)) {
                     UserIconImage(userId: FireAuth.uid(), iconImageFamily: .small)
                 }
             }

@@ -25,7 +25,7 @@ struct UserIconButton: View {
         .background(
             Group {
                 // NavigationLink to ProfileView
-                NavigationLink(destination: ProfileView(userId: userId), isActive: $isShowProfileView) {
+                NavigationLink(destination: UserView(userId: userId), isActive: $isShowProfileView) {
                     EmptyView()
                 }
                 .hidden()

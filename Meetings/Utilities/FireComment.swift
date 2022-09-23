@@ -343,6 +343,34 @@ class FireComment {
         }
     }
     
+    static func readCommentWithImage(completion: ((Comment?) -> Void)?) {
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .whereField("imageUrls", isNotEqualTo: [])
+            .limit(to: 1)
+            .getDocuments() { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding 1 Comment. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 結果なし
+                if querySnapshot!.documents.count == 0 {
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 Comment.")
+                
+                // Return
+                let comment = toComment(document: querySnapshot!.documents.first!)
+                completion?(comment)
+            }
+    }
+    
     static func createComment(threadId: String, text: String, imageUrls: [String], completion: ((String?) -> Void)?) {
         // UIDの有無を確認
         if FireAuth.uid() == nil {
