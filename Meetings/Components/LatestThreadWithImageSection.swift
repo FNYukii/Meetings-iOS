@@ -26,7 +26,7 @@ struct LatestThreadWithImageSection: View {
             isShowCommentView.toggle()
         }) {
             // Progress
-            if !isLoadedComment {
+            if !isLoadedComment || !isLoadedThread {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -34,7 +34,7 @@ struct LatestThreadWithImageSection: View {
             }
             
             // Failed
-            if isLoadedComment && comment == nil {
+            if isLoadedComment && comment == nil || isLoadedThread && thread == nil {
                 Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -42,7 +42,7 @@ struct LatestThreadWithImageSection: View {
             }
             
             // Done
-            if isLoadedComment && comment != nil {
+            if isLoadedComment && comment != nil && isLoadedThread && thread != nil {
                 ZStack(alignment: .bottom) {
                     // Image Layer
                     WebImage(url: URL(string: comment?.imageUrls.first ?? ""))
@@ -54,20 +54,20 @@ struct LatestThreadWithImageSection: View {
                         .frame(height: 250)
                         .scaledToFit()
                     
-                    // Text Layer
+                    // Thread Title Layer
                     ZStack(alignment: .bottomLeading) {
                         // Shadow Layer
                         LinearGradient(gradient: Gradient(colors: [.black.opacity(0.6), .clear]), startPoint: .bottom, endPoint: .top)
                         
                         // Foreground Layer
-                        Text(comment!.text)
+                        Text(thread!.title)
                             .foregroundColor(.white)
                             .padding()
                     }
                     .fixedSize(horizontal: false, vertical: true)
                 }
                 .background {
-                    NavigationLink(destination: CommentView(comment: comment!), isActive: $isShowCommentView) {
+                    NavigationLink(destination: ThreadView(threadId: thread!.id, threadTitle: thread!.title), isActive: $isShowCommentView) {
                         EmptyView()
                     }
                     .hidden()
@@ -81,10 +81,15 @@ struct LatestThreadWithImageSection: View {
     }
     
     private func load() {
-        if comment == nil {
+        if comment == nil || thread == nil {
             FireComment.readCommentWithImage() { comment in
                 self.comment = comment
                 self.isLoadedComment = true
+                
+                FireThread.readThread(threadId: comment?.threadId ?? "") { thread in
+                    self.thread = thread
+                    self.isLoadedThread = true
+                }
             }
         }
     }
