@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct LatestCommentWithImageSection: View {
+struct LatestThreadWithImageSection: View {
     
     // States
     @State private var comment: Comment? = nil
