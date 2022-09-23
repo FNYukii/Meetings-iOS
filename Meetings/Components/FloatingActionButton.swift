@@ -9,6 +9,10 @@ import SwiftUI
 
 struct FloatingActionButton: View {
     
+    // Environments
+    @Environment(\.colorScheme) var colorScheme
+    
+    // Values
     let systemImage: String
     let action: (() -> Void)
     
@@ -32,6 +36,8 @@ struct FloatingActionButton: View {
                         }
                         .cornerRadius(.infinity)
                 }
+                .background(colorScheme == .light ? .white : .black)
+                .cornerRadius(.infinity)
                 .padding(.trailing)
                 .padding(.bottom)
             }
