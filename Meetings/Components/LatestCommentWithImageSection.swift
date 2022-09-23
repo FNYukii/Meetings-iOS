@@ -53,6 +53,7 @@ struct LatestCommentWithImageSection: View {
                     
                     // Text Layer
                     Text(comment!.text)
+                        .foregroundColor(.white)
                         .padding()
                 }
                 .background {
