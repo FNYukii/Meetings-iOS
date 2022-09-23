@@ -30,10 +30,7 @@ struct FloatingActionButton: View {
                         .font(.title2)
                         .foregroundColor(.white)
                         .padding()
-                        .background {
-                            Color.white
-                            Color.accentColor.opacity(0.9)
-                        }
+                        .background(Color.accentColor.opacity(0.9))
                         .cornerRadius(.infinity)
                 }
                 .background(colorScheme == .light ? .white : .black)
