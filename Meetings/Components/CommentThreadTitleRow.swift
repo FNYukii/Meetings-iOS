@@ -53,7 +53,7 @@ struct CommentThreadTitleRow: View {
             Group {
                 // NavigationLink to ThreadView
                 if thread != nil {
-                    NavigationLink(destination: ThreadView(thread: thread!), isActive: $isShowThreadView) {
+                    NavigationLink(destination: ThreadView(threadId: thread!.id, threadTitle: thread!.title), isActive: $isShowThreadView) {
                         EmptyView()
                     }
                     .hidden()

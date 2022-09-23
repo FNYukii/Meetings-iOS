@@ -10,7 +10,8 @@ import SwiftUI
 struct ThreadView: View {
     
     // Thread to show
-    private let thread: Thread
+    private let threadId: String
+    private let threadTitle: String
     
     // States
     @ObservedObject private var commentsViewModel: CommentsViewModel
@@ -19,9 +20,10 @@ struct ThreadView: View {
     // Navigations
     @State private var isShowCreateCommentView = false
     
-    init(thread: Thread) {
-        self.thread = thread
-        self.commentsViewModel = CommentsViewModel(threadId: thread.id)
+    init(threadId: String, threadTitle: String) {
+        self.threadId = threadId
+        self.threadTitle = threadTitle
+        self.commentsViewModel = CommentsViewModel(threadId: threadId)
     }
 
     var body: some View {
@@ -63,10 +65,10 @@ struct ThreadView: View {
         }
         
         .sheet(isPresented: $isShowCreateCommentView) {
-            CreateCommentView(threadId: thread.id)
+            CreateCommentView(threadId: threadId)
         }
         
-        .navigationTitle(thread.title)
+        .navigationTitle(threadTitle)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

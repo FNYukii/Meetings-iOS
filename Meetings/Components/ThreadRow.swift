@@ -136,7 +136,7 @@ struct ThreadRow: View {
                         }
                     }
                 }
-                .background(NavigationLink("", destination: ThreadView(thread: thread)).opacity(0))
+                .background(NavigationLink("", destination: ThreadView(threadId: thread.id, threadTitle: thread.title)).opacity(0))
             }
         }
         

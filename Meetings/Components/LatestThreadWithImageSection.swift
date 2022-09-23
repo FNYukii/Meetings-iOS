@@ -8,11 +8,14 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct LatestCommentWithImageSection: View {
+struct LatestThreadWithImageSection: View {
     
     // States
     @State private var comment: Comment? = nil
-    @State private var isLoaded = false
+    @State private var isLoadedComment = false
+    
+    @State private var thread: Thread? = nil
+    @State private var isLoadedThread = false
     
     // Navigations
     @State private var isShowCommentView = false
@@ -23,7 +26,7 @@ struct LatestCommentWithImageSection: View {
             isShowCommentView.toggle()
         }) {
             // Progress
-            if !isLoaded {
+            if !isLoadedComment || !isLoadedThread {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -31,7 +34,7 @@ struct LatestCommentWithImageSection: View {
             }
             
             // Failed
-            if isLoaded && comment == nil {
+            if isLoadedComment && comment == nil || isLoadedThread && thread == nil {
                 Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -39,7 +42,7 @@ struct LatestCommentWithImageSection: View {
             }
             
             // Done
-            if isLoaded && comment != nil {
+            if isLoadedComment && comment != nil && isLoadedThread && thread != nil {
                 ZStack(alignment: .bottom) {
                     // Image Layer
                     WebImage(url: URL(string: comment?.imageUrls.first ?? ""))
@@ -48,23 +51,25 @@ struct LatestCommentWithImageSection: View {
                             Color.secondary
                                 .opacity(0.2)
                         }
+                        .scaledToFill()
                         .frame(height: 250)
-                        .scaledToFit()
+                        .clipped()
                     
-                    // Text Layer
+                    // Thread Title Layer
                     ZStack(alignment: .bottomLeading) {
                         // Shadow Layer
                         LinearGradient(gradient: Gradient(colors: [.black.opacity(0.6), .clear]), startPoint: .bottom, endPoint: .top)
                         
                         // Foreground Layer
-                        Text(comment!.text)
+                        Text(thread!.title)
+                            .lineLimit(1)
                             .foregroundColor(.white)
                             .padding()
                     }
                     .fixedSize(horizontal: false, vertical: true)
                 }
                 .background {
-                    NavigationLink(destination: CommentView(comment: comment!), isActive: $isShowCommentView) {
+                    NavigationLink(destination: ThreadView(threadId: thread!.id, threadTitle: thread!.title), isActive: $isShowCommentView) {
                         EmptyView()
                     }
                     .hidden()
@@ -78,10 +83,15 @@ struct LatestCommentWithImageSection: View {
     }
     
     private func load() {
-        if comment == nil {
+        if comment == nil || thread == nil {
             FireComment.readCommentWithImage() { comment in
                 self.comment = comment
-                self.isLoaded = true
+                self.isLoadedComment = true
+                
+                FireThread.readThread(threadId: comment?.threadId ?? "") { thread in
+                    self.thread = thread
+                    self.isLoadedThread = true
+                }
             }
         }
     }
