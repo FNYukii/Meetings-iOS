@@ -343,16 +343,15 @@ class FireComment {
         }
     }
     
-    static func readRecentlyCommentWithImage(completion: ((Comment?) -> Void)?) {
+    static func readCommentWithImage(completion: ((Comment?) -> Void)?) {
         let db = Firestore.firestore()
         db.collection("comments")
-            .whereField("images", isNotEqualTo: [])
-            .order(by: "createdAt", descending: true)
+            .whereField("imageUrls", isNotEqualTo: [])
             .limit(to: 1)
             .getDocuments() { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error Reeding Comments from server. \(err)")
+                    print("HELLO! Fail! Error Reeding 1 Comment. \(err)")
                     completion?(nil)
                     return
                 }
@@ -364,7 +363,7 @@ class FireComment {
                 }
                 
                 // 成功
-                print("HELLO! Success! Read 1 Comments from server.")
+                print("HELLO! Success! Read 1 Comment.")
                 
                 // Return
                 let comment = toComment(document: querySnapshot!.documents.first!)

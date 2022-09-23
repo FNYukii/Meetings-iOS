@@ -6,9 +6,64 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct RecentlyPostedImageSection: View {
+    
+    @State private var comment: Comment? = nil
+    @State private var isLoaded = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            // Progress
+            if !isLoaded {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .listRowSeparator(.hidden)
+            }
+            
+            // Failed
+            if isLoaded && comment == nil {
+                Text("reading_failed")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.secondary)
+                    .listRowSeparator(.hidden)
+            }
+            
+            // Done
+            if isLoaded && comment != nil {
+                ZStack {
+                    // Image Layer
+                    Button(action: {
+                        
+                    }) {
+                        WebImage(url: URL(string: comment?.imageUrls.first ?? ""))
+                            .resizable()
+                            .placeholder {
+                                Color.secondary
+                                    .opacity(0.2)
+                            }
+                            .scaledToFill()
+                    }
+                    .buttonStyle(.borderless)
+                    
+                    // Text Layer
+                    Text(comment!.text)
+                }
+            }
+        }
+        .listRowInsets(EdgeInsets())
+        .listRowSeparator(.hidden)
+        .onAppear(perform: load)
+    }
+    
+    private func load() {
+        if comment == nil {
+            FireComment.readCommentWithImage() { comment in
+                self.comment = comment
+                self.isLoaded = true
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ struct SearchList: View {
         List {
             // 非検索時
             if !isSearching {
+                RecentlyPostedImageSection()
                 RecentlyUsedTagsSection(keyword: $keyword)
             }
             
