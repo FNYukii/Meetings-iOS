@@ -11,8 +11,8 @@ struct FirstView: View {
     
     // States
     @ObservedObject private var signInStateViewModel = SignInStateViewModel()
-    @State private var isSortByCreatedAt = UserDefaults.standard.bool(forKey: "isSortByCreatedAt")
-        
+    @State private var sortSelection = UserDefaults.standard.integer(forKey: "sortSelection")
+    
     // Navigations
     @State private var isShowCreateThreadView = false
     
@@ -23,12 +23,12 @@ struct FirstView: View {
                 // List Layer
                 List {
                     // Recently Created Threads
-                    if isSortByCreatedAt {
+                    if sortSelection == 0 {
                         RecentlyCreatedThreadsSection()
                     }
                     
                     // Recently Commented Threads
-                    if !isSortByCreatedAt {
+                    if sortSelection == 1 {
                         RecentlyCommentedThreadsSection()
                     }
                 }
@@ -46,6 +46,10 @@ struct FirstView: View {
                 CreateThreadView()
             }
             
+            .onChange(of: sortSelection) { newValue in
+                UserDefaults.standard.set(newValue, forKey: "sortSelection")
+            }
+            
             .navigationTitle("home")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -56,18 +60,12 @@ struct FirstView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // Sort Menu
                     Menu {
-                        Button(action: {
-                            isSortByCreatedAt = true
-                            UserDefaults.standard.set(true, forKey: "isSortByCreatedAt")
-                        }) {
-                            Label("creation_order", systemImage: isSortByCreatedAt ? "checkmark" : "")
-                        }
-                        
-                        Button(action: {
-                            isSortByCreatedAt = false
-                            UserDefaults.standard.set(false, forKey: "isSortByCreatedAt")
-                        }) {
-                            Label("recently_commented_order", systemImage: isSortByCreatedAt ? "" : "checkmark")
+                        Picker(selection: $sortSelection, label: Text("")) {
+                            Text("creation_order")
+                                .tag(0)
+                            
+                            Text("recently_commented_order")
+                                .tag(1)
                         }
                     } label: {
                         Image(systemName: "ellipsis")
