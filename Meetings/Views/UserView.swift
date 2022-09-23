@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct UserView: View {
     
     // User ID to show
     let userId: String
