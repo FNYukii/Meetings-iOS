@@ -39,7 +39,7 @@ struct UserIconImage: View {
     
     private func load() {
         // Commentを追加したUserを読み取り
-        if user == nil && userId != nil {
+        if userId != nil {
             FireUser.readUser(userId: userId!) { user in
                 self.user = user
                 self.isLoadedUser = true
