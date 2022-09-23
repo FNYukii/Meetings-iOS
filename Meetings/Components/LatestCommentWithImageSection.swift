@@ -10,13 +10,17 @@ import SDWebImageSwiftUI
 
 struct LatestCommentWithImageSection: View {
     
+    // States
     @State private var comment: Comment? = nil
     @State private var isLoaded = false
+    
+    // Navigations
+    @State private var isShowCommentView = false
     
     var body: some View {
         
         Button(action: {
-            
+            isShowCommentView.toggle()
         }) {
             // Progress
             if !isLoaded {
@@ -50,6 +54,12 @@ struct LatestCommentWithImageSection: View {
                     // Text Layer
                     Text(comment!.text)
                         .padding()
+                }
+                .background {
+                    NavigationLink(destination: CommentView(comment: comment!), isActive: $isShowCommentView) {
+                        EmptyView()
+                    }
+                    .hidden()
                 }
             }
         }
