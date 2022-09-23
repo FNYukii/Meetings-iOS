@@ -349,14 +349,15 @@ class FireComment {
     }
     
     static func readCommentWithImage(completion: ((Comment?) -> Void)?) {
+        // キャッシュから
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("imageUrls", isNotEqualTo: [])
             .limit(to: 1)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments(source: .cache) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error Reeding 1 Comment. \(err)")
+                    print("HELLO! Fail! Error Reeding 1 Comment from cache. \(err)")
                     completion?(nil)
                     return
                 }
@@ -368,7 +369,33 @@ class FireComment {
                 }
                 
                 // 成功
-                print("HELLO! Success! Read 1 Comment.")
+                print("HELLO! Success! Read 1 Comment from cache.")
+                
+                // Return
+                let comment = toComment(document: querySnapshot!.documents.first!)
+                completion?(comment)
+            }
+        
+        // サーバーから
+        db.collection("comments")
+            .whereField("imageUrls", isNotEqualTo: [])
+            .limit(to: 1)
+            .getDocuments(source: .server) { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding 1 Comment from server. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 結果なし
+                if querySnapshot!.documents.count == 0 {
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 Comment from server.")
                 
                 // Return
                 let comment = toComment(document: querySnapshot!.documents.first!)
