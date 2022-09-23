@@ -53,6 +53,7 @@ struct LatestThreadWithImageSection: View {
                         }
                         .scaledToFill()
                         .frame(height: 250)
+                        .clipped()
                     
                     // Thread Title Layer
                     ZStack(alignment: .bottomLeading) {
