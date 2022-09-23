@@ -33,7 +33,7 @@ struct RecentlyPostedImageSection: View {
             
             // Done
             if isLoaded && comment != nil {
-                ZStack {
+                ZStack(alignment: .bottomLeading) {
                     // Image Layer
                     Button(action: {
                         
@@ -50,6 +50,7 @@ struct RecentlyPostedImageSection: View {
                     
                     // Text Layer
                     Text(comment!.text)
+                        .padding()
                 }
             }
         }
