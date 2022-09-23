@@ -42,5 +42,6 @@ struct FloatingActionButton: View {
                 .padding(.bottom)
             }
         }
+        .ignoresSafeArea(.keyboard)
     }
 }
