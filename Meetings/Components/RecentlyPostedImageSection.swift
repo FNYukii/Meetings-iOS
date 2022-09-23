@@ -14,7 +14,10 @@ struct RecentlyPostedImageSection: View {
     @State private var isLoaded = false
     
     var body: some View {
-        Group {
+        
+        Button(action: {
+            
+        }) {
             // Progress
             if !isLoaded {
                 ProgressView()
@@ -35,18 +38,13 @@ struct RecentlyPostedImageSection: View {
             if isLoaded && comment != nil {
                 ZStack(alignment: .bottomLeading) {
                     // Image Layer
-                    Button(action: {
-                        
-                    }) {
-                        WebImage(url: URL(string: comment?.imageUrls.first ?? ""))
-                            .resizable()
-                            .placeholder {
-                                Color.secondary
-                                    .opacity(0.2)
-                            }
-                            .scaledToFill()
-                    }
-                    .buttonStyle(.borderless)
+                    WebImage(url: URL(string: comment?.imageUrls.first ?? ""))
+                        .resizable()
+                        .placeholder {
+                            Color.secondary
+                                .opacity(0.2)
+                        }
+                        .scaledToFill()
                     
                     // Text Layer
                     Text(comment!.text)
@@ -54,6 +52,7 @@ struct RecentlyPostedImageSection: View {
                 }
             }
         }
+        .buttonStyle(.plain)
         .listRowInsets(EdgeInsets())
         .listRowSeparator(.hidden)
         .onAppear(perform: load)
