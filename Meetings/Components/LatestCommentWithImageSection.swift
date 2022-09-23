@@ -44,7 +44,8 @@ struct LatestCommentWithImageSection: View {
                             Color.secondary
                                 .opacity(0.2)
                         }
-                        .scaledToFill()
+                        .frame(height: 250)
+                        .scaledToFit()
                     
                     // Text Layer
                     Text(comment!.text)
