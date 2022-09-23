@@ -12,7 +12,10 @@ struct LatestThreadWithImageSection: View {
     
     // States
     @State private var comment: Comment? = nil
-    @State private var isLoaded = false
+    @State private var isLoadedComment = false
+    
+    @State private var thread: Thread? = nil
+    @State private var isLoadedThread = false
     
     // Navigations
     @State private var isShowCommentView = false
@@ -23,7 +26,7 @@ struct LatestThreadWithImageSection: View {
             isShowCommentView.toggle()
         }) {
             // Progress
-            if !isLoaded {
+            if !isLoadedComment {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -31,7 +34,7 @@ struct LatestThreadWithImageSection: View {
             }
             
             // Failed
-            if isLoaded && comment == nil {
+            if isLoadedComment && comment == nil {
                 Text("reading_failed")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.secondary)
@@ -39,7 +42,7 @@ struct LatestThreadWithImageSection: View {
             }
             
             // Done
-            if isLoaded && comment != nil {
+            if isLoadedComment && comment != nil {
                 ZStack(alignment: .bottom) {
                     // Image Layer
                     WebImage(url: URL(string: comment?.imageUrls.first ?? ""))
@@ -81,7 +84,7 @@ struct LatestThreadWithImageSection: View {
         if comment == nil {
             FireComment.readCommentWithImage() { comment in
                 self.comment = comment
-                self.isLoaded = true
+                self.isLoadedComment = true
             }
         }
     }
