@@ -86,7 +86,7 @@ struct ProfileView: View {
                         .listRowSeparator(.hidden)
                 }
             }
-            .animation(.default, value: selection)
+            .animation(.none, value: selection)
         }
         .listStyle(.plain)
         
