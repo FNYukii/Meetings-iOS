@@ -28,6 +28,7 @@ struct TagRow: View {
                 HStack {
                     // Name Column
                     Text(word)
+                        .lineLimit(1)
                     
                     Spacer()
                     
