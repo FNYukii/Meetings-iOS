@@ -102,6 +102,9 @@ struct SignUpView: View {
                                     
                                     // 成功
                                     dismiss()
+                                    
+                                    // TODO: dismissされないバグを解決
+                                    isLoading = false
                                 }
                             }
                         }) {
