@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct RecentlyPostedImageSection: View {
+struct LatestCommentWithImageSection: View {
     
     @State private var comment: Comment? = nil
     @State private var isLoaded = false
