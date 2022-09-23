@@ -51,8 +51,8 @@ struct LatestThreadWithImageSection: View {
                             Color.secondary
                                 .opacity(0.2)
                         }
+                        .scaledToFill()
                         .frame(height: 250)
-                        .scaledToFit()
                     
                     // Thread Title Layer
                     ZStack(alignment: .bottomLeading) {
