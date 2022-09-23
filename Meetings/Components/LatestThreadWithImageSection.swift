@@ -62,7 +62,6 @@ struct LatestThreadWithImageSection: View {
                         
                         // Foreground Layer
                         Text(thread!.title)
-                            .lineLimit(1)
                             .foregroundColor(.white)
                             .padding()
                     }
