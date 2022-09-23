@@ -18,22 +18,22 @@ struct SearchList: View {
         
     var body: some View {
         List {
-            // Recommended Tags Section
+            // 非検索時
             if !isSearching {
                 RecentlyUsedTagsSection(keyword: $keyword)
             }
             
-            // Search History Section
+            // 検索途中キーワードなし
             else if isSearching && !isSubmited && keyword.isEmpty {
                 SearchHistorySection(keyword: $keyword)
             }
             
-            // Search Suggestions Section
+            // 検索途中キーワードあり
             else if isSearching && !isSubmited && !keyword.isEmpty {
                 SearchSuggestionsSection()
             }
             
-            // Search Results Section
+            // 検索キーワード送信後
             else if isSearching && isSubmited {
                 SearchResultsSection(keyword: keyword)
             }
