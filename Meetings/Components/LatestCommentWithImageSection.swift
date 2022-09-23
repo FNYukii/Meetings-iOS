@@ -40,7 +40,7 @@ struct LatestCommentWithImageSection: View {
             
             // Done
             if isLoaded && comment != nil {
-                ZStack(alignment: .bottomLeading) {
+                ZStack(alignment: .bottom) {
                     // Image Layer
                     WebImage(url: URL(string: comment?.imageUrls.first ?? ""))
                         .resizable()
@@ -52,9 +52,16 @@ struct LatestCommentWithImageSection: View {
                         .scaledToFit()
                     
                     // Text Layer
-                    Text(comment!.text)
-                        .foregroundColor(.white)
-                        .padding()
+                    ZStack(alignment: .bottomLeading) {
+                        // Shadow Layer
+                        LinearGradient(gradient: Gradient(colors: [.black.opacity(0.6), .clear]), startPoint: .bottom, endPoint: .top)
+                        
+                        // Foreground Layer
+                        Text(comment!.text)
+                            .foregroundColor(.white)
+                            .padding()
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
                 }
                 .background {
                     NavigationLink(destination: CommentView(comment: comment!), isActive: $isShowCommentView) {
