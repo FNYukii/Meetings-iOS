@@ -70,7 +70,7 @@ struct ProfileView: View {
             .listRowSeparator(.hidden)
             
             // Tab Bar Row
-            FluentTabBar(tabBarItems: [Text("comments"), Text("likes")], selection: $selection)
+            SimpleTabBar(tabBarItems: [Text("comments"), Text("likes")], selection: $selection)
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
             

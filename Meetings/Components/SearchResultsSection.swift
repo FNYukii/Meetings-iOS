@@ -16,7 +16,7 @@ struct SearchResultsSection: View {
     var body: some View {
         Section {
             // Tab Bar Row
-            FluentTabBar(tabBarItems: [Text("threads"), Text("comments"), Text("users")], selection: $selection)
+            SimpleTabBar(tabBarItems: [Text("threads"), Text("comments"), Text("users")], selection: $selection)
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
             

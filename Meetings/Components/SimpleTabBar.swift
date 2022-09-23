@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FluentTabBar: View {
+struct SimpleTabBar: View {
     
     // TabBar items
     let tabBarItems: [Text]
@@ -40,7 +40,6 @@ struct FluentTabBar: View {
                                 Color.accentColor
                                     .frame(height: 2)
                                     .padding(.horizontal)
-                                    .matchedGeometryEffect(id: "underline", in: namespace)
                             }
                             
                             // Clear underline
@@ -51,7 +50,6 @@ struct FluentTabBar: View {
                             }
                         }
                         .background(colorScheme == .dark ? Color.black : Color.white)
-                        .animation(.spring(), value: selection)
                     }
                     .buttonStyle(.plain)
                 }
