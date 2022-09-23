@@ -90,6 +90,7 @@ class FireThread {
             .order(by: "title")
             .start(at: [keyword])
             .end(at: [keyword + "\u{f8ff}"])
+            .limit(to: 100)
             .getDocuments { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
@@ -111,6 +112,7 @@ class FireThread {
                 // 次はタグで検索
                 db.collection("threads")
                     .whereField("tags", arrayContains: keyword)
+                    .limit(to: 100)
                     .getDocuments { (querySnapshot, err) in
                         // 失敗
                         if let err = err {

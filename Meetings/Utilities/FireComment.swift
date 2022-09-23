@@ -45,6 +45,7 @@ class FireComment {
             .order(by: "text")
             .start(at: [keyword])
             .end(at: [keyword + "\u{f8ff}"])
+            .limit(to: 100)
             .getDocuments { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
@@ -136,6 +137,7 @@ class FireComment {
         let db = Firestore.firestore()
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
+            .limit(to: 1000)
             .getDocuments(source: .cache) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
@@ -152,6 +154,7 @@ class FireComment {
         // サーバーから
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
+            .limit(to: 1000)
             .getDocuments(source: .server) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
@@ -172,6 +175,7 @@ class FireComment {
         db.collection("comments")
             .whereField("userId", isEqualTo: userId)
             .order(by: "createdAt", descending: true)
+            .limit(to: 100)
             .getDocuments(source: .cache) { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
@@ -198,6 +202,7 @@ class FireComment {
         db.collection("comments")
             .whereField("userId", isEqualTo: userId)
             .order(by: "createdAt", descending: true)
+            .limit(to: 100)
             .getDocuments() { (querySnapshot, err) in
                 // 失敗
                 if let err = err {

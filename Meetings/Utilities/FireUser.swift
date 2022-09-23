@@ -84,6 +84,7 @@ class FireUser {
             .order(by: "displayName")
             .start(at: [keyword])
             .end(at: [keyword + "\u{f8ff}"])
+            .limit(to: 100)
             .getDocuments { (querySnapshot, err) in
                 // 失敗
                 if let err = err {
@@ -184,6 +185,7 @@ class FireUser {
         let db = Firestore.firestore()
         db.collection("users")
             .whereField("userTag", isEqualTo: userTag)
+            .limit(to: 1)
             .getDocuments() { (querySnapshot, err) in
                 // 失敗
                 if let err = err {

@@ -17,6 +17,7 @@ class ThreadsByCreatedAtViewModel: ObservableObject {
         let db = Firestore.firestore()
         db.collection("threads")
             .order(by: "createdAt", descending: true)
+            .limit(to: 50)
             .addSnapshotListener {(snapshot, error) in
                 // 失敗
                 guard let snapshot = snapshot else {

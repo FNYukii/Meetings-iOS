@@ -20,6 +20,7 @@ class CommentsViewModel: ObservableObject {
         db.collection("comments")
             .whereField("threadId", isEqualTo: threadId)
             .order(by: "createdAt")
+            .limit(to: 1000)
             .addSnapshotListener {(snapshot, error) in
                 // エラー処理
                 guard let snapshot = snapshot else {
