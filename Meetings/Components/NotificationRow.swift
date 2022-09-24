@@ -34,7 +34,11 @@ struct NotificationRow: View {
                 // Detail Row
                 Text("\(user?.displayName ?? "---")さんがあなたのコメントをいいねしました")
                     .fixedSize(horizontal: false, vertical: true)
+                
                 // Comment Row
+                Text(comment?.text ?? "---")
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .onAppear(perform: load)
@@ -49,7 +53,10 @@ struct NotificationRow: View {
         }
         
         if comment == nil {
-            // TODO: コメントを読み取る
+            FireComment.readComment(commentId: commentId) { comment in
+                self.comment = comment
+                self.isLoadedComment = true
+            }
         }
     }
 }

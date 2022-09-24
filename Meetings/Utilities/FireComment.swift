@@ -33,6 +33,57 @@ class FireComment {
         return comment
     }
     
+    static func readComment(commentId: String, completion: ((Comment?) -> Void)?) {
+        // キャッシュから読み取り
+        let db = Firestore.firestore()
+        db.collection("comments")
+            .document(commentId)
+            .getDocument(source: .cache) { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading Comment from cashe. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! Comment not found in cashe.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 Comment from cashe.")
+                let comment = toComment(document: document!)
+                completion?(comment)
+            }
+        
+        // サーバーから読み取り
+        db.collection("comments")
+            .document(commentId)
+            .getDocument(source: .server) { (document, error) in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error reading Comment from cashe. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // ドキュメントが無い
+                if !document!.exists {
+                    print("HELLO! Fail! Comment not found in cashe.")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 Comment from cashe.")
+                let comment = toComment(document: document!)
+                completion?(comment)
+            }
+    }
+    
     static func readComments(keyword: String, completion: (([Comment]?) -> Void)?) {
         // keywordが空なら終了
         if keyword.isEmpty {
