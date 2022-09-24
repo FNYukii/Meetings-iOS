@@ -28,6 +28,9 @@ struct CreateReportView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    // Values
+    let detailMax = 300
+    
     init(targetId: String, targetFamily: ReportTargetFamily) {
         self.targetId = targetId
         self.targetFamily = targetFamily
@@ -102,7 +105,7 @@ struct CreateReportView: View {
                             Text("submit")
                                 .fontWeight(.bold)
                         }
-                        .disabled(isLoading)
+                        .disabled(isLoading || detail.count > detailMax)
                     }
                     
                     // ProgressView
