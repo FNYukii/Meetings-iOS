@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditProfileView: View {
+struct EditUserView: View {
     
     // Environments
     @Environment(\.dismiss) private var dismiss
@@ -28,6 +28,11 @@ struct EditProfileView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     @State private var isShowDialogDuplicate = false
+    
+    // Values
+    let displayNameMax = 30
+    let userTagMax = 30
+    let introductionMax = 300
     
     var body: some View {
         NavigationView {
@@ -183,6 +188,7 @@ struct EditProfileView: View {
                             Text("done")
                                 .fontWeight(.bold)
                         }
+                        .disabled(displayName.isEmpty || displayName.count > displayNameMax || userTag.isEmpty || userTag.count > userTagMax || introduction.isEmpty || introduction.count > introductionMax)
                     }
                     
                     // ProgressView

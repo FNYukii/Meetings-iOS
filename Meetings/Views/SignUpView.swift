@@ -24,6 +24,11 @@ struct SignUpView: View {
     @State private var isLoading = false
     @State private var isShowDialogError = false
     
+    // Values
+    let displayNameMax = 30
+    let userTagMax = 30
+    let introductionMax = 300
+    
     var body: some View {
         NavigationView {
             
@@ -111,7 +116,7 @@ struct SignUpView: View {
                             Text("create")
                                 .fontWeight(.bold)
                         }
-                        .disabled(email.isEmpty || password1.isEmpty || password1 != password2 || displayName.isEmpty || userTag.isEmpty)
+                        .disabled(email.isEmpty || password1.isEmpty || password1 != password2 || displayName.isEmpty || displayName.count > displayNameMax || userTag.isEmpty || userTag.count > userTagMax || introduction.isEmpty || introduction.count > introductionMax)
                     }
                     
                     // ProgressView
