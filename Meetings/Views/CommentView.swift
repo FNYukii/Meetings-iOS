@@ -34,6 +34,11 @@ struct CommentView: View {
                         UserDisplayNameText(userId: comment.userId)
                         UserUserTagText(userId: comment.userId)
                     }
+                    
+                    Spacer()
+                    
+                    // Menu Column
+                    CommentMenu(comment: comment, isCommentDeleted: $isCommentDeleted)
                 }
                 
                 // Text Row
@@ -67,11 +72,5 @@ struct CommentView: View {
         
         .navigationTitle("comment")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                // Menu Column
-                CommentMenu(comment: comment, isCommentDeleted: $isCommentDeleted)
-            }
-        }
     }
 }

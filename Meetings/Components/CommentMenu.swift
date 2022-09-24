@@ -47,6 +47,7 @@ struct CommentMenu: View {
             }
         } label: {
             Image(systemName: "ellipsis")
+                .foregroundColor(.secondary)
                 .padding(.vertical, 6)
         }
         
