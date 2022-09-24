@@ -11,10 +11,16 @@ struct ThirdView: View {
     var body: some View {
         NavigationView {
             List {
-                Text("no_notifications")
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(.secondary)
-                    .listRowSeparator(.hidden)
+//                // No Results
+//                Text("no_notifications")
+//                    .frame(maxWidth: .infinity, alignment: .center)
+//                    .foregroundColor(.secondary)
+//                    .listRowSeparator(.hidden)
+                
+                // Done
+                NotificationRow()
+                    .listRowSeparator(.hidden, edges: .top)
+                    .listRowSeparator(.visible, edges: .bottom)
             }
             .listStyle(.plain)
             
