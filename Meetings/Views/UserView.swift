@@ -112,7 +112,7 @@ struct UserView: View {
                         Button(action: {
                             isShowEditProfileView.toggle()
                         }) {
-                            Label("edit_profile", systemImage: "person")
+                            Label("edit_profile", systemImage: "square.and.pencil")
                         }
                     }
                     
