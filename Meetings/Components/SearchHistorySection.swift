@@ -24,7 +24,7 @@ struct SearchHistorySection: View {
                 .listRowSeparator(.hidden, edges: .top)
                 .listRowSeparator(.visible, edges: .bottom)
                 
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(action: {
                         // 単語を削除
                         withAnimation {
