@@ -32,6 +32,7 @@ struct NotificationRow: View {
                 // Header Column
                 Image(systemName: "heart.fill")
                     .foregroundColor(.red)
+                    .font(.title)
                 
                 // Content Column
                 VStack(alignment: .leading) {
