@@ -33,16 +33,16 @@ struct SimpleTabBar: View {
                             
                             // Label
                             tabBarItems[index]
-                                .foregroundColor(self.selection == index ? .accentColor : .primary)
+                                .foregroundColor(self.selection == index ? .blue : .primary)
                             
-                            // Color underline
+                            // Underline when selected
                             if self.selection == index {
-                                Color.accentColor
+                                Color.blue
                                     .frame(height: 2)
                                     .padding(.horizontal)
                             }
                             
-                            // Clear underline
+                            // Underline when unselected
                             if self.selection != index {
                                 Color.clear
                                     .frame(height: 2)
