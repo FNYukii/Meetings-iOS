@@ -20,27 +20,45 @@ struct NotificationRow: View {
     @State private var comment: Comment? = nil
     @State private var isLoadedComment = false
     
+    // Navigations
+    @State private var isShowCommentView = false
+    
     var body: some View {
-        HStack(alignment: .top) {
-            // Header Column
-            Image(systemName: "heart.fill")
-                .foregroundColor(.red)
-            
-            // Content Column
-            VStack(alignment: .leading) {
-                // User Icon Row
-                UserIconImage(userId: userId, iconImageFamily: .small)
+        
+        Button(action: {
+            isShowCommentView.toggle()
+        }) {
+            HStack(alignment: .top) {
+                // Header Column
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.red)
                 
-                // Detail Row
-                Text("\(user?.displayName ?? "---")さんがあなたのコメントをいいねしました")
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                // Comment Row
-                Text(comment?.text ?? "---")
-                    .foregroundColor(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                // Content Column
+                VStack(alignment: .leading) {
+                    // User Icon Row
+                    UserIconImage(userId: userId, iconImageFamily: .small)
+                    
+                    // Detail Row
+                    Text("\(user?.displayName ?? "---")さんがあなたのコメントをいいねしました")
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    // Comment Row
+                    Text(comment?.text ?? "---")
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
         }
+        .background(
+            Group {
+                if comment != nil {
+                    NavigationLink(destination: CommentView(comment: comment!), isActive: $isShowCommentView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                }
+            }
+        )
         .onAppear(perform: load)
     }
     
