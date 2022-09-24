@@ -91,7 +91,7 @@ struct UserView: View {
         .listStyle(.plain)
         
         .sheet(isPresented: $isShowEditProfileView) {
-            EditProfileView()
+            EditUserView()
         }
         
         .sheet(isPresented: $isShowAccountView) {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditProfileView: View {
+struct EditUserView: View {
     
     // Environments
     @Environment(\.dismiss) private var dismiss
