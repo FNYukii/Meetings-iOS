@@ -14,6 +14,7 @@
 "sign_up" = "サインアップ";
 "creation_order" = "作成順";
 "recently_commented_order" = "最近コメントされた順";
+
 // SignUpView
 "email" = "メールアドレス";
 "password" = "パスワード";
@@ -66,6 +67,10 @@
 "report_thread" = "スレッドを報告";
 "report_comment" = "コメントを報告";
 "submit" = "送信";
+"violent" = "暴力的";
+"spam" = "スパム";
+"sensitive" = "センシティブ";
+"fake" = "虚偽";
 
 // ThreadView
 "no_comments" = "コメントはありません";

@@ -53,7 +53,7 @@ struct CreateReportView: View {
                         
                         Picker("category", selection: $probremCategorySelection) {
                             ForEach(0 ..< probremCategories.count, id: \.self) { index in
-                                Text(probremCategories[index])
+                                Text(NSLocalizedString(probremCategories[index], comment: ""))
                                     .tag(index)
                             }
                         }
