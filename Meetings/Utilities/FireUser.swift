@@ -280,7 +280,7 @@ class FireUser {
                     }
                     
                     // 成功
-                    FireNotification.createLikeNotification(userId: comment!.userId, likedUserId: FireAuth.uid()!, likedCommentId: commentId) { notificationId in
+                    FireNotification.createLikeNotification(userId: comment!.userId, likedCommentId: commentId) { notificationId in
                         // 失敗
                         if notificationId == nil {
                             completion?(nil)

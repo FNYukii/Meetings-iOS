@@ -21,7 +21,7 @@ class FireNotification {
         return notification
     }
     
-    static func createLikeNotification(userId: String, likedUserId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
+    static func createLikeNotification(userId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
         // 非ログイン状態なら終了
         if FireAuth.uid() == nil {
             completion?(nil)
