@@ -272,24 +272,15 @@ class FireUser {
                 
                 // TODO: Notificationドキュメントの追加はCloud Functionsで行う
                 // Notificationドキュメントを追加
-                FireComment.readCommentFromServer(commentId: commentId) { comment in
+                FireNotification.createLikeNotification(likedCommentId: commentId) { notificationId in
                     // 失敗
-                    if comment == nil {
+                    if notificationId == nil {
                         completion?(nil)
                         return
                     }
                     
                     // 成功
-                    FireNotification.createLikeNotification(userId: comment!.userId, likedCommentId: commentId) { notificationId in
-                        // 失敗
-                        if notificationId == nil {
-                            completion?(nil)
-                            return
-                        }
-                        
-                        // 成功
-                        completion?(FireAuth.uid()!)
-                    }
+                    completion?(FireAuth.uid()!)
                 }
             }
     }

@@ -21,34 +21,44 @@ class FireNotification {
         return notification
     }
     
-    static func createLikeNotification(userId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
+    static func createLikeNotification(likedCommentId: String, completion: ((String?) -> Void)?) {
         // 非ログイン状態なら終了
         if FireAuth.uid() == nil {
             completion?(nil)
             return
         }
         
-        // ドキュメント追加
-        let db = Firestore.firestore()
-        var ref: DocumentReference? = nil
-        ref = db.collection("notifications")
-            .addDocument(data: [
-                "createdAt": FieldValue.serverTimestamp(),
-                "userId": userId,
-                "likedUserId": FireAuth.uid()!,
-                "likedCommentId": likedCommentId
-            ]) { error in
-                // 失敗
-                if let error = error {
-                    print("HELLO! Fail! Error adding new Notification. \(error)")
-                    completion?(nil)
-                    return
-                }
-                
-                // 成功
-                print("HELLO! Success! Added 1 Notification.")
-                completion?(ref!.documentID)
+        // Commentを取得
+        FireComment.readCommentFromCashe(commentId: likedCommentId) { comment in
+            // 失敗
+            if comment == nil {
+                completion?(nil)
+                return
             }
+            
+            // 成功
+            // Notificationドキュメント追加
+            let db = Firestore.firestore()
+            var ref: DocumentReference? = nil
+            ref = db.collection("notifications")
+                .addDocument(data: [
+                    "createdAt": FieldValue.serverTimestamp(),
+                    "userId": comment!.userId,
+                    "likedUserId": FireAuth.uid()!,
+                    "likedCommentId": likedCommentId
+                ]) { error in
+                    // 失敗
+                    if let error = error {
+                        print("HELLO! Fail! Error adding new Notification. \(error)")
+                        completion?(nil)
+                        return
+                    }
+                    
+                    // 成功
+                    print("HELLO! Success! Added 1 Notification.")
+                    completion?(ref!.documentID)
+                }
+        }
     }
     
     static func deleteNotification(userId: String, likedUserId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
