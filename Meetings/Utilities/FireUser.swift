@@ -246,9 +246,10 @@ class FireUser {
             }
     }
     
-    static func likeComment(commentId: String) {
+    static func likeComment(commentId: String, completion: ((String?) -> Void)?) {
         // UIDを確認
         if FireAuth.uid() == nil {
+            completion?(nil)
             return
         }
         
@@ -259,17 +260,44 @@ class FireUser {
             .updateData([
                 "likedCommentIds": FieldValue.arrayUnion([commentId])
             ]) { err in
+                // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. \(err)")
-                } else {
-                    print("HELLO! Success! Updated 1 User.")
+                    print("HELLO! Fail! Error updating 1 User. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Updated 1 User.")
+                
+                // TODO: Notificationドキュメントの追加はCloud Functionsで行う
+                // Notificationドキュメントを追加
+                FireComment.readCommentFromServer(commentId: commentId) { comment in
+                    // 失敗
+                    if comment == nil {
+                        completion?(nil)
+                        return
+                    }
+                    
+                    // 成功
+                    FireNotification.createLikeNotification(userId: comment!.userId, likedUserId: FireAuth.uid()!, likedCommentId: commentId) { notificationId in
+                        // 失敗
+                        if notificationId == nil {
+                            completion?(nil)
+                            return
+                        }
+                        
+                        // 成功
+                        completion?(FireAuth.uid()!)
+                    }
                 }
             }
     }
     
-    static func unlikeComment(commentId: String) {
+    static func unlikeComment(commentId: String, completion: ((String?) -> Void)?) {
         // UIDを確認
         if FireAuth.uid() == nil {
+            completion?(nil)
             return
         }
         
@@ -280,11 +308,16 @@ class FireUser {
             .updateData([
                 "likedCommentIds": FieldValue.arrayRemove([commentId])
             ]) { err in
+                // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. \(err)")
-                } else {
-                    print("HELLO! Success! Updated 1 User.")
+                    print("HELLO! Fail! Error updating 1 User. \(err)")
+                    completion?(nil)
+                    return
                 }
+                
+                // 成功
+                print("HELLO! Success! Updated 1 User.")
+                completion?(FireAuth.uid()!)
             }
     }
     
