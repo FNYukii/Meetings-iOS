@@ -11,6 +11,7 @@ struct UserIconButton: View {
     
     // Comment to show
     let userId: String
+    let iconImageFamily: IconImageFamily
     
     // Navigations
     @State private var isShowProfileView = false
@@ -19,7 +20,7 @@ struct UserIconButton: View {
         Button (action: {
             isShowProfileView.toggle()
         }) {
-            UserIconImage(userId: userId, iconImageFamily: .medium)
+            UserIconImage(userId: userId, iconImageFamily: iconImageFamily)
         }
         .buttonStyle(.borderless)
         .background(

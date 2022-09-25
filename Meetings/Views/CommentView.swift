@@ -27,7 +27,7 @@ struct CommentView: View {
                 // Header Row
                 HStack(alignment: .top) {
                     // Icon Column
-                    UserIconButton(userId: comment.userId)
+                    UserIconButton(userId: comment.userId, iconImageFamily: .medium)
                     
                     // Display name & User tag Column
                     VStack(alignment: .leading) {

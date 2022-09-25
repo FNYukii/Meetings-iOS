@@ -26,7 +26,7 @@ struct CommentRow: View {
                 HStack(alignment: .top, spacing: 8) {
                     
                     // Icon Column
-                    UserIconButton(userId: comment.userId)
+                    UserIconButton(userId: comment.userId, iconImageFamily: .medium)
                         .disabled(!isAbleShowingProfileView)
                     
                     // Content Column
