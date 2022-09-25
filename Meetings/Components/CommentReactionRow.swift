@@ -47,7 +47,7 @@ struct CommentReactionRow: View {
                     .foregroundColor(.secondary)
                 }
                 .buttonStyle(.borderless)
-                .disabled(!FireAuth.isSignedIn())
+                .disabled(!FireAuth.isSignedIn() || comment.userId == FireAuth.uid())
             }
             
             // Like button when liked
@@ -66,7 +66,7 @@ struct CommentReactionRow: View {
                     .foregroundColor(.red)
                 }
                 .buttonStyle(.borderless)
-                .disabled(!FireAuth.isSignedIn())
+                .disabled(!FireAuth.isSignedIn() || comment.userId == FireAuth.uid())
             }
         }
         .frame(height: 16)
