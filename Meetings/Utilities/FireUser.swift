@@ -269,7 +269,28 @@ class FireUser {
                 
                 // 成功
                 print("HELLO! Success! Updated 1 User.")
-                completion?(FireAuth.uid()!)
+                
+                // TODO: Notificationドキュメントの追加はCloud Functionsで行う
+                // Notificationドキュメントを追加
+                FireComment.readCommentFromServer(commentId: commentId) { comment in
+                    // 失敗
+                    if comment == nil {
+                        completion?(nil)
+                        return
+                    }
+                    
+                    // 成功
+                    FireNotification.createLikeNotification(userId: comment!.userId, likedUserId: FireAuth.uid()!, likedCommentId: commentId) { notificationId in
+                        // 失敗
+                        if notificationId == nil {
+                            completion?(nil)
+                            return
+                        }
+                        
+                        // 成功
+                        completion?(FireAuth.uid()!)
+                    }
+                }
             }
     }
     

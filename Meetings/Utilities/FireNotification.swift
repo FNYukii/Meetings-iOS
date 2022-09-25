@@ -21,7 +21,7 @@ class FireNotification {
         return notification
     }
     
-    static func createNotification(userId: String, likedUserId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
+    static func createLikeNotification(userId: String, likedUserId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
         // 非ログイン状態なら終了
         if FireAuth.uid() == nil {
             completion?(nil)
@@ -31,7 +31,7 @@ class FireNotification {
         // ドキュメント追加
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
-        ref = db.collection("reports")
+        ref = db.collection("notifications")
             .addDocument(data: [
                 "createdAt": FieldValue.serverTimestamp(),
                 "userId": userId,
