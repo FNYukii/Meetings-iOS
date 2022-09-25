@@ -308,7 +308,19 @@ class FireUser {
                 
                 // 成功
                 print("HELLO! Success! Updated 1 User.")
-                completion?(FireAuth.uid()!)
+                
+                // TODO: Notificationドキュメントの削除はCloud Functionsで行う
+                // Notificationドキュメントを削除
+                FireNotification.deleteNotification(likedCommentId: commentId) { notificationId in
+                    // 失敗
+                    if notificationId == nil {
+                        completion?(nil)
+                        return
+                    }
+                    
+                    // 成功
+                    completion?(FireAuth.uid()!)
+                }
             }
     }
     
