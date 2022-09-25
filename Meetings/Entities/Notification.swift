@@ -12,6 +12,6 @@ struct Notification: Identifiable {
     let createdAt: Date
     let userId: String
     
-    let likedUserId: String
-    let likedCommentId: String
+    let likedUserId: String?
+    let likedCommentId: String?
 }
