@@ -36,7 +36,7 @@ struct LikeNotificationRow: View {
                 // Content Column
                 VStack(alignment: .leading) {
                     // User Icon Row
-                    UserIconImage(userId: likedUser?.id, iconImageFamily: .small)
+                    UserIconButton(userId: likedUser?.id, iconSizeFamily: .small)
                     
                     // Detail Row
                     Text("\(likedUser?.displayName ?? "---")さんがあなたのコメントをいいねしました")
