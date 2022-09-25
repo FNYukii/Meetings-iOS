@@ -259,11 +259,13 @@ class FireUser {
             .updateData([
                 "likedCommentIds": FieldValue.arrayUnion([commentId])
             ]) { err in
+                // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. \(err)")
-                } else {
-                    print("HELLO! Success! Updated 1 User.")
+                    print("HELLO! Fail! Error updating 1 User. \(err)")
                 }
+                
+                // 成功
+                print("HELLO! Success! Updated 1 User.")
             }
     }
     
@@ -280,11 +282,13 @@ class FireUser {
             .updateData([
                 "likedCommentIds": FieldValue.arrayRemove([commentId])
             ]) { err in
+                // 失敗
                 if let err = err {
-                    print("HELLO! Fail! Error updating User. \(err)")
-                } else {
-                    print("HELLO! Success! Updated 1 User.")
+                    print("HELLO! Fail! Error updating 1 User. \(err)")
                 }
+                
+                // 成功
+                print("HELLO! Success! Updated 1 User.")
             }
     }
     
