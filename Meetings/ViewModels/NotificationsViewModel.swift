@@ -23,6 +23,7 @@ class NotificationsViewModel: ObservableObject {
         
         let db = Firestore.firestore()
         db.collection("notifications")
+            .whereField("userId", isEqualTo: FireAuth.uid()!)
             .order(by: "createdAt", descending: true)
             .limit(to: 50)
             .addSnapshotListener {(snapshot, error) in
