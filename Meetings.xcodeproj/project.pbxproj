@@ -79,6 +79,7 @@
 		54E84B9D28DF5025002C9D83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54E84B9C28DF5025002C9D83 /* GoogleService-Info.plist */; };
 		54F501BB28DF7C82003282DB /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501BA28DF7C82003282DB /* NotificationRow.swift */; };
 		54F501BD28E08FB1003282DB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501BC28E08FB1003282DB /* Notification.swift */; };
+		54F501BF28E0907B003282DB /* FireNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501BE28E0907B003282DB /* FireNotification.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
 		54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D528D9AB8E00B88525 /* TagRow.swift */; };
 /* End PBXBuildFile section */
@@ -153,6 +154,7 @@
 		54E84B9C28DF5025002C9D83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54F501BA28DF7C82003282DB /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
 		54F501BC28E08FB1003282DB /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		54F501BE28E0907B003282DB /* FireNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireNotification.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		54FB73D528D9AB8E00B88525 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -306,6 +308,7 @@
 				5410EA92288C280F00F4A29B /* FireThread.swift */,
 				5410EA94288C2E8E00F4A29B /* FireComment.swift */,
 				544D591D289249690056C244 /* FireReport.swift */,
+				54F501BE28E0907B003282DB /* FireNotification.swift */,
 				54CE7F7328921CB10064F2AF /* FireImage.swift */,
 				5410EAA0288C453200F4A29B /* EditDate.swift */,
 				54CE7F71289199C90064F2AF /* EditImage.swift */,
@@ -456,6 +459,7 @@
 				5441B59228DAA58C00E545D5 /* CommentsLikedByUserGroup.swift in Sources */,
 				5441B58A28DA287500E545D5 /* SearchHistorySection.swift in Sources */,
 				54FB73D428D989E400B88525 /* SecondView.swift in Sources */,
+				54F501BF28E0907B003282DB /* FireNotification.swift in Sources */,
 				54C41DF528936E9C007B5631 /* CommentThreadTitleRow.swift in Sources */,
 				5441B59428DAFC8500E545D5 /* SearchedCommentsGroup.swift in Sources */,
 				5441B58028DA0A7F00E545D5 /* RecentlyUsedTagsSection.swift in Sources */,
