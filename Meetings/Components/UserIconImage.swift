@@ -35,10 +35,18 @@ struct UserIconImage: View {
                     .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
             )
             .onAppear(perform: load)
+        
+            .onChange(of: userId) { newUserId in
+                if newUserId != nil {
+                    FireUser.readUser(userId: newUserId!) { user in
+                        self.user = user
+                        self.isLoadedUser = true
+                    }
+                }
+            }
     }
     
     private func load() {
-        // Commentを追加したUserを読み取り
         if userId != nil {
             FireUser.readUser(userId: userId!) { user in
                 self.user = user
