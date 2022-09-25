@@ -34,8 +34,11 @@ struct CommentReactionRow: View {
             // Like button when not liked
             if isLoadedLikedUserIds && likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
                 Button(action: {
-                    FireUser.likeComment(commentId: comment.id)
-                    loadLikedUserIds()
+                    FireUser.likeComment(commentId: comment.id) { userId in
+                        if userId != nil {
+                            loadLikedUserIds()
+                        }
+                    }
                 }) {
                     HStack(spacing: 2) {
                         Image(systemName: "heart")
@@ -50,8 +53,11 @@ struct CommentReactionRow: View {
             // Like button when liked
             if isLoadedLikedUserIds && likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
                 Button(action: {
-                    FireUser.unlikeComment(commentId: comment.id)
-                    loadLikedUserIds()
+                    FireUser.unlikeComment(commentId: comment.id) { userId in
+                        if userId != nil {
+                            loadLikedUserIds()
+                        }
+                    }
                 }) {
                     HStack(spacing: 2) {
                         Image(systemName: "heart.fill")
