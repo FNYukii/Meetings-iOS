@@ -34,6 +34,7 @@ struct CommentReactionRow: View {
             // Like button when not liked
             if isLoadedLikedUserIds && likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
                 Button(action: {
+                    loadLikedUserIds()
                     FireUser.likeComment(commentId: comment.id) { userId in
                         if userId != nil {
                             loadLikedUserIds()
@@ -47,12 +48,13 @@ struct CommentReactionRow: View {
                     .foregroundColor(.secondary)
                 }
                 .buttonStyle(.borderless)
-                .disabled(!FireAuth.isSignedIn())
+                .disabled(!FireAuth.isSignedIn() || comment.userId == FireAuth.uid())
             }
             
             // Like button when liked
             if isLoadedLikedUserIds && likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
                 Button(action: {
+                    loadLikedUserIds()
                     FireUser.unlikeComment(commentId: comment.id) { userId in
                         if userId != nil {
                             loadLikedUserIds()
@@ -66,7 +68,7 @@ struct CommentReactionRow: View {
                     .foregroundColor(.red)
                 }
                 .buttonStyle(.borderless)
-                .disabled(!FireAuth.isSignedIn())
+                .disabled(!FireAuth.isSignedIn() || comment.userId == FireAuth.uid())
             }
         }
         .frame(height: 16)

@@ -29,7 +29,7 @@ class FireNotification {
         }
         
         // Commentを取得
-        FireComment.readCommentFromCashe(commentId: likedCommentId) { comment in
+        FireComment.readCommentFromServer(commentId: likedCommentId) { comment in
             // 失敗
             if comment == nil {
                 completion?(nil)
@@ -61,7 +61,52 @@ class FireNotification {
         }
     }
     
-    static func deleteNotification(userId: String, likedUserId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
-        // TODO: notificationsコレクションからドキュメントを削除
+    static func deleteNotification(likedCommentId: String, completion: ((String?) -> Void)?) {
+        // 非ログイン状態なら終了
+        if FireAuth.uid() == nil {
+            completion?(nil)
+            return
+        }
+        
+        // Notificationドキュメントを取得
+        let db = Firestore.firestore()
+        db.collection("notifications")
+            .whereField("likedUserId", isEqualTo: FireAuth.uid()!)
+            .whereField("likedCommentId", isEqualTo: likedCommentId)
+            .limit(to: 1)
+            .getDocuments(source: .server) { (querySnapshot, err) in
+                // 失敗
+                if let err = err {
+                    print("HELLO! Fail! Error Reeding 1 Notification from server. \(err)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 結果なし
+                if querySnapshot!.documents.count == 0 {
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Read 1 Notification from server.")
+                let notificationId = querySnapshot!.documents.first!.documentID
+                
+                // Notificationドキュメントを削除
+                db.collection("notifications")
+                    .document(notificationId)
+                    .delete() { err in
+                        // 失敗
+                        if let err = err {
+                            print("HELLO! Fail! Error removing Notification. \(err)")
+                            completion?(nil)
+                            return
+                        }
+                        
+                        // 成功
+                        print("HELLO! Success! Deleted 1 Notification.")
+                        completion?(notificationId)
+                    }
+            }
     }
 }
