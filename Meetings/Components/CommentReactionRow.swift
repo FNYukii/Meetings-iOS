@@ -34,6 +34,7 @@ struct CommentReactionRow: View {
             // Like button when not liked
             if isLoadedLikedUserIds && likedUserIds != nil && !likedUserIds!.contains(FireAuth.uid() ?? "") {
                 Button(action: {
+                    loadLikedUserIds()
                     FireUser.likeComment(commentId: comment.id) { userId in
                         if userId != nil {
                             loadLikedUserIds()
@@ -53,6 +54,7 @@ struct CommentReactionRow: View {
             // Like button when liked
             if isLoadedLikedUserIds && likedUserIds != nil && likedUserIds!.contains(FireAuth.uid() ?? "") {
                 Button(action: {
+                    loadLikedUserIds()
                     FireUser.unlikeComment(commentId: comment.id) { userId in
                         if userId != nil {
                             loadLikedUserIds()
