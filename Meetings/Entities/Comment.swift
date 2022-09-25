@@ -12,6 +12,7 @@ struct Comment: Identifiable {
     let id: String
     let createdAt: Date
     let userId: String
+    
     let threadId: String
     let text: String
     let imageUrls: [String]
