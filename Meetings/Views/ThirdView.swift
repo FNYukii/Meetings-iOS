@@ -8,22 +8,25 @@
 import SwiftUI
 
 struct ThirdView: View {
+    
+    @ObservedObject private var signInStateViewModel = SignInStateViewModel()
+    
     var body: some View {
         NavigationView {
-            List {
-//                // No Results
-//                Text("no_notifications")
-//                    .frame(maxWidth: .infinity, alignment: .center)
-//                    .foregroundColor(.secondary)
-//                    .listRowSeparator(.hidden)
-                
-                // Done
-                NotificationRow()
-                    .listRowSeparator(.hidden, edges: .top)
-                    .listRowSeparator(.visible, edges: .bottom)
-            }
-            .listStyle(.plain)
             
+            Group {
+                if !signInStateViewModel.isSignedIn {
+                    List {
+                        Text("no_notifications")
+                        Text("please_sign_in")
+                    }
+                    .listStyle(.plain)
+                }
+                
+                if signInStateViewModel.isSignedIn {
+                    NotificationsList()
+                }
+            }
             .navigationTitle("notifications")
             .navigationBarTitleDisplayMode(.inline)
             

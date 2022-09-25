@@ -7,18 +7,17 @@
 
 import SwiftUI
 
-struct NotificationRow: View {
+struct LikeNotificationRow: View {
     
     // Values
-    private let userId = "CRaPxHYz7yUQmltZq6LKw8jXt1u2"
-    private let commentId = "0muQhlQs33xVg0FVaPUw"
+    let notification: Notification
     
     // States
-    @State private var user: User? = nil
-    @State private var isLoadedUser = false
+    @State private var likedUser: User? = nil
+    @State private var isLoadedLikedUser = false
     
-    @State private var comment: Comment? = nil
-    @State private var isLoadedComment = false
+    @State private var likedComment: Comment? = nil
+    @State private var isLoadedLikedComment = false
     
     // Navigations
     @State private var isShowCommentView = false
@@ -37,14 +36,14 @@ struct NotificationRow: View {
                 // Content Column
                 VStack(alignment: .leading) {
                     // User Icon Row
-                    UserIconImage(userId: userId, iconImageFamily: .small)
+                    UserIconImage(userId: likedUser?.id, iconImageFamily: .small)
                     
                     // Detail Row
-                    Text("\(user?.displayName ?? "---")さんがあなたのコメントをいいねしました")
+                    Text("\(likedUser?.displayName ?? "---")さんがあなたのコメントをいいねしました")
                         .fixedSize(horizontal: false, vertical: true)
                     
                     // Comment Row
-                    Text(comment?.text ?? "---")
+                    Text(likedComment?.text ?? "---")
                         .foregroundColor(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -52,8 +51,8 @@ struct NotificationRow: View {
         }
         .background(
             Group {
-                if comment != nil {
-                    NavigationLink(destination: CommentView(comment: comment!), isActive: $isShowCommentView) {
+                if likedComment != nil {
+                    NavigationLink(destination: CommentView(comment: likedComment!), isActive: $isShowCommentView) {
                         EmptyView()
                     }
                     .hidden()
@@ -64,17 +63,17 @@ struct NotificationRow: View {
     }
     
     private func load() {
-        if user == nil {
-            FireUser.readUser(userId: userId) { user in
-                self.user = user
-                self.isLoadedUser = true
+        if likedUser == nil {
+            FireUser.readUser(userId: notification.likedUserId!) { user in
+                self.likedUser = user
+                self.isLoadedLikedUser = true
             }
         }
         
-        if comment == nil {
-            FireComment.readComment(commentId: commentId) { comment in
-                self.comment = comment
-                self.isLoadedComment = true
+        if likedComment == nil {
+            FireComment.readComment(commentId: notification.likedCommentId!) { comment in
+                self.likedComment = comment
+                self.isLoadedLikedComment = true
             }
         }
     }
