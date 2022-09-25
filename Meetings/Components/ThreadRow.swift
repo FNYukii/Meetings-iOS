@@ -32,7 +32,7 @@ struct ThreadRow: View {
                 HStack(alignment: .top) {
                     
                     // User Icon Column
-                    UserIconButton(userId: thread.userId, iconImageFamily: .medium)
+                    UserIconButton(userId: thread.userId, iconSizeFamily: .medium)
                     
                     // Contents Column
                     VStack(alignment: .leading, spacing: 1) {
