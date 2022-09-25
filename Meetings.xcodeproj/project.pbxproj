@@ -77,7 +77,11 @@
 		54DC77A0288E4DDB00296419 /* SimpleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC779F288E4DDB00296419 /* SimpleTabBar.swift */; };
 		54DC77A2288E512800296419 /* CommentsPostedByUserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC77A1288E512800296419 /* CommentsPostedByUserGroup.swift */; };
 		54E84B9D28DF5025002C9D83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54E84B9C28DF5025002C9D83 /* GoogleService-Info.plist */; };
-		54F501BB28DF7C82003282DB /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501BA28DF7C82003282DB /* NotificationRow.swift */; };
+		54F501BB28DF7C82003282DB /* LikeNotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501BA28DF7C82003282DB /* LikeNotificationRow.swift */; };
+		54F501BD28E08FB1003282DB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501BC28E08FB1003282DB /* Notification.swift */; };
+		54F501BF28E0907B003282DB /* FireNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501BE28E0907B003282DB /* FireNotification.swift */; };
+		54F501C128E09119003282DB /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501C028E09119003282DB /* NotificationsViewModel.swift */; };
+		54F501C328E0942B003282DB /* NotificationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F501C228E0942B003282DB /* NotificationsList.swift */; };
 		54FB73D428D989E400B88525 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D328D989E400B88525 /* SecondView.swift */; };
 		54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB73D528D9AB8E00B88525 /* TagRow.swift */; };
 /* End PBXBuildFile section */
@@ -150,7 +154,11 @@
 		54DC779F288E4DDB00296419 /* SimpleTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTabBar.swift; sourceTree = "<group>"; };
 		54DC77A1288E512800296419 /* CommentsPostedByUserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsPostedByUserGroup.swift; sourceTree = "<group>"; };
 		54E84B9C28DF5025002C9D83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		54F501BA28DF7C82003282DB /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
+		54F501BA28DF7C82003282DB /* LikeNotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNotificationRow.swift; sourceTree = "<group>"; };
+		54F501BC28E08FB1003282DB /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		54F501BE28E0907B003282DB /* FireNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireNotification.swift; sourceTree = "<group>"; };
+		54F501C028E09119003282DB /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		54F501C228E0942B003282DB /* NotificationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsList.swift; sourceTree = "<group>"; };
 		54FB73D328D989E400B88525 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		54FB73D528D9AB8E00B88525 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +252,7 @@
 				5410EA90288BEA3900F4A29B /* User.swift */,
 				540D2E582889811000DBB512 /* Thread.swift */,
 				5410EA9A288C379200F4A29B /* Comment.swift */,
+				54F501BC28E08FB1003282DB /* Notification.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -255,6 +264,7 @@
 				540D2E5B2889830200DBB512 /* ThreadsByCreatedAtViewModel.swift */,
 				5441B59D28DB7E5500E545D5 /* ThreadsByCommentedAtViewModel.swift */,
 				5410EA9C288C380300F4A29B /* CommentsViewModel.swift */,
+				54F501C028E09119003282DB /* NotificationsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -290,7 +300,8 @@
 				5441B59328DAFC8500E545D5 /* SearchedCommentsGroup.swift */,
 				5441B59528DAFFCA00E545D5 /* SearchedUsersGroup.swift */,
 				5441B59728DB00EA00E545D5 /* UserRow.swift */,
-				54F501BA28DF7C82003282DB /* NotificationRow.swift */,
+				54F501C228E0942B003282DB /* NotificationsList.swift */,
+				54F501BA28DF7C82003282DB /* LikeNotificationRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -303,6 +314,7 @@
 				5410EA92288C280F00F4A29B /* FireThread.swift */,
 				5410EA94288C2E8E00F4A29B /* FireComment.swift */,
 				544D591D289249690056C244 /* FireReport.swift */,
+				54F501BE28E0907B003282DB /* FireNotification.swift */,
 				54CE7F7328921CB10064F2AF /* FireImage.swift */,
 				5410EAA0288C453200F4A29B /* EditDate.swift */,
 				54CE7F71289199C90064F2AF /* EditImage.swift */,
@@ -403,6 +415,7 @@
 				5410EA81288BBBC600F4A29B /* FireAuth.swift in Sources */,
 				540D2E472889733A00DBB512 /* AccountView.swift in Sources */,
 				5441B59828DB00EA00E545D5 /* UserRow.swift in Sources */,
+				54F501C128E09119003282DB /* NotificationsViewModel.swift in Sources */,
 				54C5D66E2892D7EF005AE7D4 /* CommentImage.swift in Sources */,
 				5489709528D4552A0045DFAA /* UserDisplayNameText.swift in Sources */,
 				540D2E492889734800DBB512 /* ThreadView.swift in Sources */,
@@ -410,7 +423,7 @@
 				5489709728D455AB0045DFAA /* UserUserTagText.swift in Sources */,
 				54FB73D628D9AB8E00B88525 /* TagRow.swift in Sources */,
 				540D2E442889731A00DBB512 /* FirstView.swift in Sources */,
-				54F501BB28DF7C82003282DB /* NotificationRow.swift in Sources */,
+				54F501BB28DF7C82003282DB /* LikeNotificationRow.swift in Sources */,
 				540D2E36288971AE00DBB512 /* MeetingsApp.swift in Sources */,
 				5410EAA1288C453200F4A29B /* EditDate.swift in Sources */,
 				5410EA95288C2E8E00F4A29B /* FireComment.swift in Sources */,
@@ -441,6 +454,7 @@
 				5410EA83288BBD5900F4A29B /* SignInStateViewModel.swift in Sources */,
 				54C41DF128936D1B007B5631 /* CommentImagesRow.swift in Sources */,
 				54CE7F70289199A90064F2AF /* ImagePickerView.swift in Sources */,
+				54F501BD28E08FB1003282DB /* Notification.swift in Sources */,
 				540D2E592889811000DBB512 /* Thread.swift in Sources */,
 				54CE7F72289199C90064F2AF /* EditImage.swift in Sources */,
 				5441B59028DA309300E545D5 /* ThirdView.swift in Sources */,
@@ -452,6 +466,8 @@
 				5441B59228DAA58C00E545D5 /* CommentsLikedByUserGroup.swift in Sources */,
 				5441B58A28DA287500E545D5 /* SearchHistorySection.swift in Sources */,
 				54FB73D428D989E400B88525 /* SecondView.swift in Sources */,
+				54F501BF28E0907B003282DB /* FireNotification.swift in Sources */,
+				54F501C328E0942B003282DB /* NotificationsList.swift in Sources */,
 				54C41DF528936E9C007B5631 /* CommentThreadTitleRow.swift in Sources */,
 				5441B59428DAFC8500E545D5 /* SearchedCommentsGroup.swift in Sources */,
 				5441B58028DA0A7F00E545D5 /* RecentlyUsedTagsSection.swift in Sources */,
