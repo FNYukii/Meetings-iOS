@@ -21,11 +21,37 @@ class FireNotification {
         return notification
     }
     
-    static func createNotification() {
-        // TODO: notificationsコレクションに新しいドキュメントを追加
+    static func createNotification(userId: String, likedUserId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
+        // 非ログイン状態なら終了
+        if FireAuth.uid() == nil {
+            completion?(nil)
+            return
+        }
+        
+        // ドキュメント追加
+        let db = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        ref = db.collection("reports")
+            .addDocument(data: [
+                "createdAt": FieldValue.serverTimestamp(),
+                "userId": userId,
+                "likedUserId": FireAuth.uid()!,
+                "likedCommentId": likedCommentId
+            ]) { error in
+                // 失敗
+                if let error = error {
+                    print("HELLO! Fail! Error adding new Notification. \(error)")
+                    completion?(nil)
+                    return
+                }
+                
+                // 成功
+                print("HELLO! Success! Added 1 Notification.")
+                completion?(ref!.documentID)
+            }
     }
     
-    static func deleteNotification(notificationId: String) {
+    static func deleteNotification(userId: String, likedUserId: String, likedCommentId: String, completion: ((String?) -> Void)?) {
         // TODO: notificationsコレクションからドキュメントを削除
     }
 }
