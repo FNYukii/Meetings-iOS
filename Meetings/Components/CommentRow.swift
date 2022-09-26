@@ -18,6 +18,10 @@ struct CommentRow: View {
     // Navigations
     let isAbleShowingProfileView: Bool
     let isShowThread: Bool
+    
+    // Navigations
+    @State private var isShowDialogDelete = false
+    @State private var isShowCreateReportView = false
                 
     var body: some View {
         
@@ -67,7 +71,28 @@ struct CommentRow: View {
                     }
                 }
                 .background(NavigationLink("", destination: CommentView(comment: comment)).opacity(0))
+                
+                .contextMenu {
+                    CommentMenuButtonsGroup(comment: comment, isShowDialogDelete: $isShowDialogDelete, isShowCreateReportView: $isShowCreateReportView)
+                }
             }
+        }
+        
+        .confirmationDialog("", isPresented: $isShowDialogDelete, titleVisibility: .hidden) {
+            Button("delete_comment", role: .destructive) {
+                FireComment.deleteComment(commentId: comment.id) { commentId in
+                    // 成功
+                    withAnimation {
+                        isCommentDeleted = true
+                    }
+                }
+            }
+        } message: {
+            Text("are_you_sure_you_want_to_delete_this_comment")
+        }
+        
+        .sheet(isPresented: $isShowCreateReportView) {
+            CreateReportView(targetId: comment.id, targetFamily: .comment)
         }
     }
 }
