@@ -140,6 +140,26 @@ struct ThreadRow: View {
             }
         }
         
+        .contextMenu {
+            // 削除ボタン
+            if FireAuth.uid() == thread.userId {
+                Button(role: .destructive) {
+                    isShowDialog.toggle()
+                } label: {
+                    Label("delete_thread", systemImage: "trash")
+                }
+            }
+            
+            // 報告ボタン
+            if FireAuth.uid() != thread.userId {
+                Button(action: {
+                    isShowCreateReportView.toggle()
+                }) {
+                    Label("report_thread", systemImage: "flag")
+                }
+            }
+        }
+        
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
             Button("delete_thread", role: .destructive) {
                 FireThread.deleteThread(threadId: thread.id) { _ in
