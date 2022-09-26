@@ -62,6 +62,8 @@
 		548D4B5828DCA6E400677490 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548D4B5728DCA6E400677490 /* FloatingActionButton.swift */; };
 		548D4B5A28DD7A7700677490 /* LatestThreadWithImageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548D4B5928DD7A7700677490 /* LatestThreadWithImageSection.swift */; };
 		54A1F1AA28D48C9A00CF05C3 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 54A1F1A928D48C9A00CF05C3 /* Introspect */; };
+		54A2876428E14812003D081C /* ThreadMenuButtonsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A2876328E14812003D081C /* ThreadMenuButtonsGroup.swift */; };
+		54A2876628E14990003D081C /* CommentMenuButtonsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A2876528E14990003D081C /* CommentMenuButtonsGroup.swift */; };
 		54C3441E288F944E00468A94 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 54C3441D288F944E00468A94 /* SDWebImageSwiftUI */; };
 		54C41DED28936252007B5631 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DEC28936252007B5631 /* CommentView.swift */; };
 		54C41DEF28936C4C007B5631 /* CommentMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C41DEE28936C4C007B5631 /* CommentMenu.swift */; };
@@ -140,6 +142,8 @@
 		5489709628D455AB0045DFAA /* UserUserTagText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUserTagText.swift; sourceTree = "<group>"; };
 		548D4B5728DCA6E400677490 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		548D4B5928DD7A7700677490 /* LatestThreadWithImageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestThreadWithImageSection.swift; sourceTree = "<group>"; };
+		54A2876328E14812003D081C /* ThreadMenuButtonsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadMenuButtonsGroup.swift; sourceTree = "<group>"; };
+		54A2876528E14990003D081C /* CommentMenuButtonsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMenuButtonsGroup.swift; sourceTree = "<group>"; };
 		54C41DEC28936252007B5631 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		54C41DEE28936C4C007B5631 /* CommentMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMenu.swift; sourceTree = "<group>"; };
 		54C41DF028936D1B007B5631 /* CommentImagesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentImagesRow.swift; sourceTree = "<group>"; };
@@ -281,7 +285,9 @@
 				5489709428D4552A0045DFAA /* UserDisplayNameText.swift */,
 				5489709628D455AB0045DFAA /* UserUserTagText.swift */,
 				540D2E60288985CB00DBB512 /* ThreadRow.swift */,
+				54A2876328E14812003D081C /* ThreadMenuButtonsGroup.swift */,
 				5410EA9E288C3C6800F4A29B /* CommentRow.swift */,
+				54A2876528E14990003D081C /* CommentMenuButtonsGroup.swift */,
 				54C5D66D2892D7EF005AE7D4 /* CommentImage.swift */,
 				54C41DEE28936C4C007B5631 /* CommentMenu.swift */,
 				54C41DF028936D1B007B5631 /* CommentImagesRow.swift */,
@@ -409,6 +415,7 @@
 			files = (
 				544D5920289272760056C244 /* ImagesPickerView.swift in Sources */,
 				5441B58428DA110E00E545D5 /* SignInMenuOrProfileButton.swift in Sources */,
+				54A2876628E14990003D081C /* CommentMenuButtonsGroup.swift in Sources */,
 				5441B59E28DB7E5500E545D5 /* ThreadsByCommentedAtViewModel.swift in Sources */,
 				540D2E4B288974B900DBB512 /* CreateThreadView.swift in Sources */,
 				5410EA9B288C379200F4A29B /* Comment.swift in Sources */,
@@ -473,6 +480,7 @@
 				5441B58028DA0A7F00E545D5 /* RecentlyUsedTagsSection.swift in Sources */,
 				544D591C28922AA00056C244 /* CreateReportView.swift in Sources */,
 				54CE7F7428921CB10064F2AF /* FireImage.swift in Sources */,
+				54A2876428E14812003D081C /* ThreadMenuButtonsGroup.swift in Sources */,
 				5410EA89288BCF7600F4A29B /* SignInView.swift in Sources */,
 				5410EA91288BEA3900F4A29B /* User.swift in Sources */,
 			);
