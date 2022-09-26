@@ -19,32 +19,7 @@ struct CommentMenu: View {
     
     var body: some View {
         Menu {
-            // 削除ボタン
-            if FireAuth.uid() == comment.userId {
-                Button(role: .destructive) {
-                    isShowDialogDelete.toggle()
-                } label: {
-                    Label("delete_comment", systemImage: "trash")
-                }
-            }
-            
-            // 報告ボタン
-            if FireAuth.uid() != comment.userId {
-                Button(action: {
-                    isShowCreateReportView.toggle()
-                }) {
-                    Label("report_comment", systemImage: "flag")
-                }
-            }
-            
-            // Mute Button
-            if FireAuth.uid() != comment.userId {
-                Button(action: {
-                    
-                }) {
-                    Label("mute_user", systemImage: "speaker.slash")
-                }
-            }
+            CommentMenuButtonsGroup(comment: comment, isShowDialogDelete: $isShowDialogDelete, isShowCreateReportView: $isShowCreateReportView)
         } label: {
             Image(systemName: "ellipsis")
                 .foregroundColor(.secondary)
