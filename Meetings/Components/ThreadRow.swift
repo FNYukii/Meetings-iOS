@@ -49,7 +49,7 @@ struct ThreadRow: View {
                             
                             // Menu Column
                             Menu {
-                                ThreadMenuButtonsGroup(thread: thread, isThreadDeleted: $isThreadDeleted, isShowDialog: $isShowDialog, isShowCreateReportView: $isShowCreateReportView)
+                                ThreadMenuButtonsGroup(thread: thread, isShowDialog: $isShowDialog, isShowCreateReportView: $isShowCreateReportView)
                             } label: {
                                 Image(systemName: "ellipsis")
                                     .foregroundColor(.secondary)
@@ -125,7 +125,7 @@ struct ThreadRow: View {
         }
         
         .contextMenu {
-            ThreadMenuButtonsGroup(thread: thread, isThreadDeleted: $isThreadDeleted, isShowDialog: $isShowDialog, isShowCreateReportView: $isShowCreateReportView)
+            ThreadMenuButtonsGroup(thread: thread, isShowDialog: $isShowDialog, isShowCreateReportView: $isShowCreateReportView)
         }
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {

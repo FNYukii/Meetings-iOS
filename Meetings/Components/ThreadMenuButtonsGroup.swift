@@ -10,7 +10,6 @@ import SwiftUI
 struct ThreadMenuButtonsGroup: View {
     
     let thread: Thread
-    @Binding var isThreadDeleted: Bool
     
     // Dialogs, Navigations
     @Binding var isShowDialog: Bool
