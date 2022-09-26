@@ -49,23 +49,7 @@ struct ThreadRow: View {
                             
                             // Menu Column
                             Menu {
-                                // 削除ボタン
-                                if FireAuth.uid() == thread.userId {
-                                    Button(role: .destructive) {
-                                        isShowDialog.toggle()
-                                    } label: {
-                                        Label("delete_thread", systemImage: "trash")
-                                    }
-                                }
-                                
-                                // 報告ボタン
-                                if FireAuth.uid() != thread.userId {
-                                    Button(action: {
-                                        isShowCreateReportView.toggle()
-                                    }) {
-                                        Label("report_thread", systemImage: "flag")
-                                    }
-                                }
+                                ThreadMenuButtonsGroup(thread: thread, isThreadDeleted: $isThreadDeleted, isShowDialog: $isShowDialog, isShowCreateReportView: $isShowCreateReportView)
                             } label: {
                                 Image(systemName: "ellipsis")
                                     .foregroundColor(.secondary)
@@ -141,23 +125,7 @@ struct ThreadRow: View {
         }
         
         .contextMenu {
-            // 削除ボタン
-            if FireAuth.uid() == thread.userId {
-                Button(role: .destructive) {
-                    isShowDialog.toggle()
-                } label: {
-                    Label("delete_thread", systemImage: "trash")
-                }
-            }
-            
-            // 報告ボタン
-            if FireAuth.uid() != thread.userId {
-                Button(action: {
-                    isShowCreateReportView.toggle()
-                }) {
-                    Label("report_thread", systemImage: "flag")
-                }
-            }
+            ThreadMenuButtonsGroup(thread: thread, isThreadDeleted: $isThreadDeleted, isShowDialog: $isShowDialog, isShowCreateReportView: $isShowCreateReportView)
         }
         
         .confirmationDialog("", isPresented: $isShowDialog, titleVisibility: .hidden) {
